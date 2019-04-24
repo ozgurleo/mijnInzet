@@ -268,13 +268,13 @@ MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 # For Cygwin, switch paths to Windows format before running java
 if $cygwin; then
   [ -n "$M2_HOME" ] &&
-    M2_HOME=`cygpath --path --windows "$M2_HOME"`
+    M2_HOME=`cygpath --path --webPages "$M2_HOME"`
   [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
+    JAVA_HOME=`cygpath --path --webPages "$JAVA_HOME"`
   [ -n "$CLASSPATH" ] &&
-    CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
+    CLASSPATH=`cygpath --path --webPages "$CLASSPATH"`
   [ -n "$MAVEN_PROJECTBASEDIR" ] &&
-    MAVEN_PROJECTBASEDIR=`cygpath --path --windows "$MAVEN_PROJECTBASEDIR"`
+    MAVEN_PROJECTBASEDIR=`cygpath --path --webPages "$MAVEN_PROJECTBASEDIR"`
 fi
 
 WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain

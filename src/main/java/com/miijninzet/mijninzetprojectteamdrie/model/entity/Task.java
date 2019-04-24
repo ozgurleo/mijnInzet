@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model;
+package com.miijninzet.mijninzetprojectteamdrie.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +12,7 @@ public class Task {
     private String taskName;
     private int estimatedHours;
     private int yearsToExpiryDate;
+
     public Task() {
         this(0, "", 0, 0);
     }

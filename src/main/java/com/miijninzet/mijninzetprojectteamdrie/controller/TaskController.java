@@ -1,12 +1,10 @@
 package com.miijninzet.mijninzetprojectteamdrie.controller;
 
-import com.miijninzet.mijninzetprojectteamdrie.model.Task;
 import com.miijninzet.mijninzetprojectteamdrie.model.dao.TaskDAO;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.ArrayList;
 
 
 @Controller
