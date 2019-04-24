@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model;
+package com.miijninzet.mijninzetprojectteamdrie.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

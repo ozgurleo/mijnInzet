@@ -1,7 +1,7 @@
 package com.miijninzet.mijninzetprojectteamdrie.model.dao;
 
 
-import com.miijninzet.mijninzetprojectteamdrie.model.Task;
+import com.miijninzet.mijninzetprojectteamdrie.model.entity.Task;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
