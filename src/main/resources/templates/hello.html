@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http:/www.thymleaf.org">
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thymeleaf Test</title>
+    <title>Welkomstscherm</title>
+    <link rel="stylesheet" type="text/css" th:href="mystyle.css">
 </head>
+
 <body>
-<h1> Dit is het startscherm</h1>
-<a href="//localhost:8081/showTasks/">Ga naar vactureoverzicht</a>
+<!-- Hoofdtekst -->
+<h1>MijnInzet de roosteraar applicatie</h1>
+<h2>Team 3 NoPressure</h2>
+<h3>Esther, Brahim, Semih, Ozgur, Hans</h3>
+
+<!-- Navigatie-menu -->
+<ul class="navbar">
+    <a href="//localhost:8081/showTasks/">Ga naar vactureoverzicht</a>
+</ul>
+
+    <!-- Onderteken en dateer de pagina, wees beleefd! -->
+<address>Gemaakt 25 april 2019<br>...</address>
 
 </body>
 </html>

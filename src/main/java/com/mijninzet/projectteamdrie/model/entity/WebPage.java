@@ -1,6 +1,8 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
 public enum WebPage {
+    //Dit is een overzicht van mogelijke schermen binnen de applicatie. Hier kan naar worden verwezen in de rest van de app.
+    //Deze lijst is slechts een voorbeeld. Wordt nog aangepast.
     CREATE_USER( "Create New User"),
     MANAGE_USER("Change User"),
     CREATE_TASKS("Create Tasks"),

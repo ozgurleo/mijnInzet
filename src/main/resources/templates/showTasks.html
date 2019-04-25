@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Vacature Overzicht</title>
+    <link rel="stylesheet" type="text/css" th:href="mystyle.css">
 </head>
 
 <body>
@@ -24,7 +25,6 @@
         <td th:text="${task.estimatedHours}">estimatedHours</td>
         <td th:text="${task.yearsToExpiryDate}">yearsToExpiryDate</td>
     </tr>
-
 
 </table>
 </div>
