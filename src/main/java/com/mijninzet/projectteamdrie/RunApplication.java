@@ -1,12 +1,12 @@
-package com.miijninzet.mijninzetprojectteamdrie;
+package com.mijninzet.projectteamdrie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MijninzetprojectteamdrieApplication {
+public class RunApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MijninzetprojectteamdrieApplication.class, args);
+        SpringApplication.run(RunApplication.class, args);
     }
 
 }

@@ -1,2 +1,8 @@
 directory at which the site runs
 http://localhost:8081/hello
+
+MainClassNotFoundException oplossen na refractoren package name na 'java':
+Menublak --> Run --> Edit Configurations
+Vul het volgende in achter 'Main class:': com.mijninzet.projectteamdrie.RunApplication
+Druk op Apply
+Nu is het path aangepast

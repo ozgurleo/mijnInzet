@@ -1,8 +1,8 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.entity;
+package com.mijninzet.projectteamdrie.model.entity;
 
 
 
-import com.miijninzet.mijninzetprojectteamdrie.model.entity.user.User;
+import com.mijninzet.projectteamdrie.model.entity.user.User;
 
 import java.util.InputMismatchException;
 

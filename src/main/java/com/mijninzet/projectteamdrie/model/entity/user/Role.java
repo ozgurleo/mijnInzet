@@ -1,7 +1,7 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.entity.user;
+package com.mijninzet.projectteamdrie.model.entity.user;
 
 
-import com.miijninzet.mijninzetprojectteamdrie.model.entity.WebPage;
+import com.mijninzet.projectteamdrie.model.entity.WebPage;
 
 public enum Role {
     DEFAULT("Unknown", null),

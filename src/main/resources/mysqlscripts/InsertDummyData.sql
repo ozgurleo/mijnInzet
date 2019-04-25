@@ -1,3 +1,4 @@
+-- Data Task
 INSERT INTO Task (taskId,taskName,estimatedHours,yearsToExpiryDate) VALUES (1,'java programming',32,3);
 INSERT INTO Task (taskId,taskName,estimatedHours,yearsToExpiryDate) VALUES (2,'C++ programming',16,3);
 INSERT INTO Task (taskId,taskName,estimatedHours,yearsToExpiryDate) VALUES (3,'AI analyse',8,3);

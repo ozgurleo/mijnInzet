@@ -1,6 +1,6 @@
-package com.miijninzet.mijninzetprojectteamdrie.controller;
+package com.mijninzet.projectteamdrie.controller;
 
-import com.miijninzet.mijninzetprojectteamdrie.model.dao.TaskDAO;
+import com.mijninzet.projectteamdrie.model.dao.TaskDAO;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

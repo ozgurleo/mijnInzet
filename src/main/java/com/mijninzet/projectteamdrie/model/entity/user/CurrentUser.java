@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.entity.user;
+package com.mijninzet.projectteamdrie.model.entity.user;
 
 public class CurrentUser {
     private static int userID = -1;

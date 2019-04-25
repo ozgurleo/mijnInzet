@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.entity;
+package com.mijninzet.projectteamdrie.model.entity;
 
 public enum WebPage {
     CREATE_USER( "Create New User"),
