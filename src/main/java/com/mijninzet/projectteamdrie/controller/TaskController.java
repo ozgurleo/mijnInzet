@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 public class TaskController {
     private SessionFactory sessionFactory;
@@ -20,9 +19,7 @@ public class TaskController {
     @RequestMapping(value = "/showTasks")
     public String makeVacancyList(Model model) {
         model.addAttribute("showTasks", taskDao.findAllTasks());
-        System.out.println(model);
         return "showTasks";
-
     }
 
     public void applyToVacancy() {
