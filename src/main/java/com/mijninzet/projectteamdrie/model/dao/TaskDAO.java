@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TaskDAO {
     private SessionFactory sessionFactory;
-    Configuration configuration = new Configuration();
+    private Configuration configuration = new Configuration();
 
     public TaskDAO(SessionFactory factory) {
         super();
