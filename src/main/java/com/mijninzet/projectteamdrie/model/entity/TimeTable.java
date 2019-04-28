@@ -1,6 +1,13 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "tijdtabel")
 public class TimeTable {
+    @Id
     private int id;
     private int year;
     private int semester;
