@@ -5,17 +5,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "tijdtabel")
+@Table(name = "tijdtabel")
 public class TimeTable {
     @Id
     private int id;
-    private int year;
+    private int jaar;
     private int semester;
     private int bloknr;
 
-    public TimeTable(int id, int year, int semester, int bloknr) {
+    public TimeTable(int id, int jaar, int semester, int bloknr) {
         this.id = id;
-        this.year = year;
+        this.jaar = jaar;
         this.semester = semester;
         this.bloknr = bloknr;
     }
@@ -32,11 +32,11 @@ public class TimeTable {
     }
 
     public int getYear() {
-        return year;
+        return jaar;
     }
 
     public void setYear(int year) {
-        this.year = year;
+        this.jaar = jaar;
     }
 
     public int getSemester() {
@@ -59,7 +59,7 @@ public class TimeTable {
     public String toString() {
         return "TimeTable{" +
                 "id=" + id +
-                ", year=" + year +
+                ", year=" + jaar +
                 ", semester=" + semester +
                 ", bloknr=" + bloknr +
                 '}';
