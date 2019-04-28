@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Rooster</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" th:href="mystyle.css">
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 
 </head>
 <body>
 <h1> Dit is het rooster</h1>
+
+<p th:text = " 'Hello, ' +  ${name} "> </p>
 
 </body>
 </html>
