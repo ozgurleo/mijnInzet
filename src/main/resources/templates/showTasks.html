@@ -8,21 +8,21 @@
 <body>
 <div class="container">
 
-<h1> Vacature Overzicht</h1>
+<h1> TaakOverzicht</h1>
 
 <table class="table table-striped">
     <tr>
-        <th>Vacature_ID </th>
-        <th>Vacature-titel </th>
-        <th>Begrootte Uren </th>
-        <th>Geldigheidsduur </th>
+        <th>Taak_nr</th>
+        <th>Taak</th>
+        <th>Begrootte Uren</th>
+        <th>Geldigheidsduur</th>
     </tr>
 
     <tr th:each="task:${showTasks}">
-        <td th:text="${task.taskId}">taskId</td>
-        <td th:text="${task.taskName}">taskName</td>
-        <td th:text="${task.estimatedHours}">estimatedHours</td>
-        <td th:text="${task.yearsToExpiryDate}">yearsToExpiryDate</td>
+        <td th:text="${task.task_id}">Taak_nr</td>
+        <td th:text="${task.task_name}">Taak</td>
+        <td th:text="${task.estimated_hours}">Begrootte Uren</td>
+        <td th:text="${task.years_to_expiry_date}">Geldigheidsduur</td>
     </tr>
 
 

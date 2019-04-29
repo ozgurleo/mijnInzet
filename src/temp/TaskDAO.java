@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.dao;
+package com.miijninzet.mijninzetprojectteamdrie.model.repository;
 
 
 import com.miijninzet.mijninzetprojectteamdrie.model.entity.Task;

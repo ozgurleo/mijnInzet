@@ -1,16 +1,17 @@
 package com.miijninzet.mijninzetprojectteamdrie.controller;
 
-import com.miijninzet.mijninzetprojectteamdrie.model.dao.TaskDAO;
-import org.hibernate.SessionFactory;
+
+import com.miijninzet.mijninzetprojectteamdrie.model.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class TaskController {
-    private SessionFactory sessionFactory;
-    private TaskDAO taskDao = new TaskDAO(sessionFactory);
+public class TaskService {
+    @Autowired
+    private TaskRepository taskRepository;
 
     @RequestMapping(value = "/hello")
     public String hello() {
@@ -19,14 +20,11 @@ public class TaskController {
 
     @RequestMapping(value = "/showTasks")
     public String makeVacancyList(Model model) {
-        model.addAttribute("showTasks", taskDao.findAllTasks());
+        model.addAttribute("showTasks", taskRepository.findAll());
         System.out.println(model);
         return "showTasks";
-
     }
 
-    public void applyToVacancy() {
-        // hier komt de methode om op een taak te solliciteren
-    }
+
 
 }

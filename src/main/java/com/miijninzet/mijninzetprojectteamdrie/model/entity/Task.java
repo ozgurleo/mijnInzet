@@ -1,59 +1,59 @@
 package com.miijninzet.mijninzetprojectteamdrie.model.entity;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "Task")
 public class Task {
-    @Id
-    private int taskId;
-    private String taskName;
-    private int estimatedHours;
-    private int yearsToExpiryDate;
+
+       @Id
+    private int task_id;
+    private String task_name;
+    private int estimated_hours;
+    private int years_to_expiry_date;
 
     public Task() {
         this(0, "", 0, 0);
     }
 
-    public Task(int taskId, String taskName, int estimatedHours, int yearsToExpiryDate) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.estimatedHours = estimatedHours;
-        this.yearsToExpiryDate = yearsToExpiryDate;
+    public Task(int task_id, String task_name, int estimated_hours, int years_to_expiry_date) {
+        this.task_id = task_id;
+        this.task_name = task_name;
+        this.estimated_hours = estimated_hours;
+        this.years_to_expiry_date = years_to_expiry_date;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public int getTask_id() {
+        return task_id;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setTask_id(int task_id) {
+        this.task_id = task_id;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getTask_name() {
+        return task_name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setTask_name(String task_name) {
+        this.task_name = task_name;
     }
 
-    public int getEstimatedHours() {
-        return estimatedHours;
+    public int getEstimated_hours() {
+        return estimated_hours;
     }
 
-    public void setEstimatedHours(int estimatedHours) {
-        this.estimatedHours = estimatedHours;
+    public void setEstimated_hours(int estimated_hours) {
+        this.estimated_hours = estimated_hours;
     }
 
-    public int getYearsToExpiryDate() {
-        return yearsToExpiryDate;
+    public int getYears_to_expiry_date() {
+        return years_to_expiry_date;
     }
 
-    public void setYearsToExpiryDate(int yearsToExpiryDate) {
-        this.yearsToExpiryDate = yearsToExpiryDate;
+    public void setYears_to_expiry_date(int years_to_expiry_date) {
+        this.years_to_expiry_date = years_to_expiry_date;
     }
-
 }
