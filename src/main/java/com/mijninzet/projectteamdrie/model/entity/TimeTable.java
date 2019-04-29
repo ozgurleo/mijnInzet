@@ -1,5 +1,7 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
