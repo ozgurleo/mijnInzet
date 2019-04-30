@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.controller;
 
+import com.mijninzet.projectteamdrie.model.dao.TimeTableDAO;
 import com.mijninzet.projectteamdrie.model.entity.TimeTable;
 import com.mijninzet.projectteamdrie.repository.TimeTableRepository;
 import org.hibernate.SessionFactory;
@@ -15,13 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 @Controller
 public class TimeTableController {
     SessionFactory sessionFactory;
-    EntityManager entityManager;
-    TimeTableRepository timeTableRepository;
+    TimeTableDAO timeTableDAO = new TimeTableDAO(sessionFactory);
 
     @RequestMapping("timeTable")
     public String timeTable(HttpServletRequest request, Model model) {
@@ -30,22 +31,10 @@ public class TimeTableController {
         return "timeTable";
     }
 
-    @RequestMapping(value = "/showTableWithValues", method = RequestMethod.GET)
-    public String showTableWithValues(Model model)
-    {
-        //list with timeTables
-        ArrayList<TimeTable> timeTables=
-                new ArrayList<TimeTable>();
-
-        Iterable<TimeTable> iterable = timeTableRepository.findAll();
-        for (TimeTable tt: timeTables
-             ) {
-            timeTables.add(tt);
-
-        }
-        model.addAttribute("list", timeTables);
-
-        return "showTableWithValues";
+    @RequestMapping(value={"/showTimeTables"}, method = RequestMethod.GET)
+    public String makeList(Model model) {
+       model.addAttribute("showTimeTables", timeTableDAO.findAllTimeTables());
+        return "showTimeTables";
     }
 
 

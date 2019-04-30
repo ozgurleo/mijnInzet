@@ -1,13 +1,9 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
-import org.springframework.context.annotation.Bean;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "tijdtabel")
+@Table (name = "TimeTable")
 public class TimeTable {
     @Id
     private int id;
@@ -33,11 +29,11 @@ public class TimeTable {
         this.id = id;
     }
 
-    public int getYear() {
+    public int getJaar() {
         return jaar;
     }
 
-    public void setYear(int year) {
+    public void setJaar(int jaar) {
         this.jaar = jaar;
     }
 
@@ -61,7 +57,7 @@ public class TimeTable {
     public String toString() {
         return "TimeTable{" +
                 "id=" + id +
-                ", year=" + jaar +
+                ", jaar=" + jaar +
                 ", semester=" + semester +
                 ", bloknr=" + bloknr +
                 '}';

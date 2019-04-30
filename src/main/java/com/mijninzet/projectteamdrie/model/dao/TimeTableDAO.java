@@ -22,11 +22,11 @@ public class TimeTableDAO {
         configuration.configure();
         sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
-        String hql = "FROM tijdtabel";
+        String hql = "FROM TimeTable";
         Query query = session.createQuery(hql);
         List<TimeTable> results = query.list();
+        System.out.println("Uit mijn timetable komt" + results);
         session.close();
-        //System.out.println("dit is wat er opgehaald is uit de database" + results);
         return results;
     }
 }
