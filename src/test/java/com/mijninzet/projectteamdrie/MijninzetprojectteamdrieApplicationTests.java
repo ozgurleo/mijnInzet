@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie;
+package com.mijninzet.projectteamdrie;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

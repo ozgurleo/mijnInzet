@@ -17,7 +17,11 @@
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
-        <mapping class="com.miijninzet.mijninzetprojectteamdrie.model.entity.Task" />
+        <mapping class="com.mijninzet.projectteamdrie.model.entity.Task" />
+        <mapping class="com.mijninzet.projectteamdrie.model.entity.TimeTable" />
+
+
 
     </session-factory>
 </hibernate-configuration>
+

@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.entity.user;
+package com.mijninzet.projectteamdrie.model.entity.user;
 
 public abstract class User implements Comparable<User>{
 
