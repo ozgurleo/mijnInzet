@@ -1,4 +1,4 @@
-package com.miijninzet.mijninzetprojectteamdrie.model.repository;
+package com.mijninzet.projectteamdrie.model.repository;
 
 
 public interface TechSupportRepository {
