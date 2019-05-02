@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
+    <title>Roosters</title>
+</head>
+<body>
+
+<div class="container">
+
+    <h1> Tijdtabel</h1>
+
+    <!-- Navigatie-menu -->
+    <ul class="navbar">
+        <a href="//localhost:8081/hello/">Ga naar hoofdmenu</a>
+    </ul>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Jaar</th>
+            <th>Semester </th>
+            <th>Bloknr</th>
+        </tr>
+
+        <tr th:each="timetable:${showTimeTables}">
+            <td th:text="${timetable.jaar}">2000</td>
+            <td th:text="${timetable.semester}">1</td>
+            <td th:text="${timetable.bloknr}">1</td>
+
+
+        </tr>
+
+    </table>
+</div>
+
+</body>
+</html>

@@ -6,14 +6,18 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mijn_inzet?serverTimezone=UTC</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">betto=74</property>
+        <property name="hibernate.connection.username">nopressure</property>
+        <property name="hibernate.connection.password">nopressure</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- property name="current_session_context_class">thread</property -->
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="com.mijninzet.projectteamdrie.model.entity.Task" />
+        <mapping class="com.mijninzet.projectteamdrie.model.entity.TimeTable" />
+
+
 
     </session-factory>
 </hibernate-configuration>
+
