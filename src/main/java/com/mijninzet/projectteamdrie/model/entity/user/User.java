@@ -1,7 +1,11 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
-public abstract class User implements Comparable<User>{
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public abstract class User implements Comparable<User>{
+    @Id
     private int userID;
     private String username;
     private String password;
