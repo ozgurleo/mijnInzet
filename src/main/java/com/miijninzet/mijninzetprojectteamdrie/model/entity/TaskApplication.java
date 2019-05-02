@@ -2,7 +2,6 @@ package com.miijninzet.mijninzetprojectteamdrie.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.util.Date;
 @Entity
 public class TaskApplication {
@@ -12,11 +11,13 @@ public class TaskApplication {
     private Date unsubcribeDate;
     private int availableHours;
     private String role;
-    @ManyToOne
-    private Task task;
+ //    @ManyToOne
+//    @JoinColumn(name="task_task_id")
+//    private Task task;
 
     public TaskApplication() {
-        this.task = new Task();
+        super();
+        //this.task = new Task();
         this.userId = userId;
         this.applicationDate = applicationDate;
         this.unsubcribeDate = unsubcribeDate;
@@ -24,14 +25,16 @@ public class TaskApplication {
         this.role = role;
     }
 
-    public TaskApplication(int taskId, int userId, Date applicationDate, Date unsubcribeDate, int availableHours, String role) {
-        this.task=new Task();
+    public TaskApplication(int userId, Date applicationDate, Date unsubcribeDate, int availableHours, String role) {
+       // this.task=new Task();
         this.userId = userId;
         this.applicationDate = applicationDate;
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
+
     }
+
 
 
     public int getUserId() {

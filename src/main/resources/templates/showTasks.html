@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Vacature Overzicht</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 </head>
 
 <body>
-<div class="container">
-
-<h1> TaakOverzicht</h1>
-
-<table class="table table-striped">
+<h2> TaakOverzicht</h2>
+<h3> Klik op taak als je wilt solliciteren</h3>
+<table id="TaskTable">
     <tr>
         <th>Taak_nr</th>
         <th>Taak</th>
@@ -19,14 +18,14 @@
     </tr>
 
     <tr th:each="task:${showTasks}">
-        <td th:text="${task.task_id}">Taak_nr</td>
-        <td th:text="${task.task_name}">Taak</td>
-        <td th:text="${task.estimated_hours}">Begrootte Uren</td>
-        <td th:text="${task.years_to_expiry_date}">Geldigheidsduur</td>
+        <td th:text="${task.taskId}">Taak_nr</td>
+        <td th:text="${task.taskName}">Taak</td>
+        <td th:text="${task.estimatedHours}">Begrootte Uren</td>
+        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
     </tr>
 
 
 </table>
-</div>
+
 </body>
 </html>

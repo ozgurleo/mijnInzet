@@ -1,7 +1,9 @@
 package com.miijninzet.mijninzetprojectteamdrie.model.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 
 @Entity
@@ -9,51 +11,53 @@ import javax.persistence.Table;
 public class Task {
 
        @Id
-    private int task_id;
-    private String task_name;
-    private int estimated_hours;
-    private int years_to_expiry_date;
+    private int taskId;
+    private String taskName;
+    private int estimatedHours;
+    private int yearsToExpiryDate;
+//    @OneToMany(mappedBy = "task")
+//    private List<TaskApplication> taskApplication;
 
     public Task() {
         this(0, "", 0, 0);
     }
 
-    public Task(int task_id, String task_name, int estimated_hours, int years_to_expiry_date) {
-        this.task_id = task_id;
-        this.task_name = task_name;
-        this.estimated_hours = estimated_hours;
-        this.years_to_expiry_date = years_to_expiry_date;
+    public Task(int taskId, String taskName, int estimatedHours, int yearsToExpiryDate) {
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.estimatedHours = estimatedHours;
+        this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
-    public int getTask_id() {
-        return task_id;
+    public int getTaskId() {
+        return taskId;
     }
 
-    public void setTask_id(int task_id) {
-        this.task_id = task_id;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
-    public String getTask_name() {
-        return task_name;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public void setTask_name(String task_name) {
-        this.task_name = task_name;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
-    public int getEstimated_hours() {
-        return estimated_hours;
+    public int getEstimatedHours() {
+        return estimatedHours;
     }
 
-    public void setEstimated_hours(int estimated_hours) {
-        this.estimated_hours = estimated_hours;
+    public void setEstimatedHours(int estimatedHours) {
+        this.estimatedHours = estimatedHours;
     }
 
-    public int getYears_to_expiry_date() {
-        return years_to_expiry_date;
+    public int getYearsToExpiryDate() {
+        return yearsToExpiryDate;
     }
 
-    public void setYears_to_expiry_date(int years_to_expiry_date) {
-        this.years_to_expiry_date = years_to_expiry_date;
+    public void setYearsToExpiryDate(int yearsToExpiryDate) {
+        this.yearsToExpiryDate = yearsToExpiryDate;
     }
 }
