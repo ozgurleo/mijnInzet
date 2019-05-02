@@ -1,4 +1,4 @@
-package com.mijninzet.projectteamdrie.model.repository;
+package com.mijninzet.projectteamdrie.repository;
 import com.mijninzet.projectteamdrie.model.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
