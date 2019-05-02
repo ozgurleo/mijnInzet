@@ -20,7 +20,7 @@ public class TaskController {
 
     @RequestMapping(value = "/showTasks")
     public String makeVacancyList(Model model) {
-        model.addAttribute("showTasks", taskRepository.findAll());
+        model.addAttribute("showTasks", taskRepository.getVacancies());
 
         return "showTasks";
     }
