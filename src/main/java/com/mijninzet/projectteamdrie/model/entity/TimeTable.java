@@ -3,17 +3,17 @@ package com.mijninzet.projectteamdrie.model.entity;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "TimeTable")
+@Table
 public class TimeTable {
     @Id
     private int id;
-    private int jaar;
+    private int year;
     private int semester;
     private int bloknr;
 
-    public TimeTable(int id, int jaar, int semester, int bloknr) {
+    public TimeTable(int id, int year, int semester, int bloknr) {
         this.id = id;
-        this.jaar = jaar;
+        this.year = year;
         this.semester = semester;
         this.bloknr = bloknr;
     }
@@ -29,12 +29,12 @@ public class TimeTable {
         this.id = id;
     }
 
-    public int getJaar() {
-        return jaar;
+    public int getYear() {
+        return year;
     }
 
-    public void setJaar(int jaar) {
-        this.jaar = jaar;
+    public void setYear(int jaar) {
+        this.year = year;
     }
 
     public int getSemester() {
@@ -57,7 +57,7 @@ public class TimeTable {
     public String toString() {
         return "TimeTable{" +
                 "id=" + id +
-                ", jaar=" + jaar +
+                ", year=" + year +
                 ", semester=" + semester +
                 ", bloknr=" + bloknr +
                 '}';
