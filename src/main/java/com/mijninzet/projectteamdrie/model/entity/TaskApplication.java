@@ -13,7 +13,6 @@ public class TaskApplication {
     private Date unsubcribeDate;
     private int availableHours;
     private String role;
-
     @ManyToOne
     @JoinColumn(name="task_task_id")
     private Task task;
