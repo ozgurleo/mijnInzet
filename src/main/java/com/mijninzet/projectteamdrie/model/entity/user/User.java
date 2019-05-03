@@ -1,19 +1,28 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
+import javax.persistence.*;
+
+@Entity(name = "user")
+@DiscriminatorColumn(name = "role",
+    discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements Comparable<User>{
     @Id
     private int userID;
     private String username;
     private String password;
-    private Role role;
+    //@ozgur
+    // dit variable is verwijderd omdat in de role van elke user wordt gegeven via discriminator value zoals Teacher.
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
 private static final String DEFAULT = "unknown";
     public User() {
         this(DEFAULT, DEFAULT);
+    }
+
+    public User(int userID) {
+        this.userID = userID;
     }
 
     public User(String username, String password) {
@@ -24,7 +33,7 @@ private static final String DEFAULT = "unknown";
     public User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
-        this.role = role;
+//        this.role = role;
     }
 
     @Override
@@ -39,14 +48,14 @@ private static final String DEFAULT = "unknown";
     public String getPassword() {
         return password;
     }
+//
+//    public Role getRole() {
+//        return role;
+//    }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
     public int getUserID() {
         return userID;
     }
