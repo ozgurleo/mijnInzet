@@ -2,9 +2,14 @@ package com.mijninzet.projectteamdrie.repository;
 
 import com.mijninzet.projectteamdrie.model.entity.TimeTable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
+@Repository
 public interface TimeTableRepository extends CrudRepository<TimeTable, Integer>  {
+
+    public List findAllByYear(int year);
 
 
 }
