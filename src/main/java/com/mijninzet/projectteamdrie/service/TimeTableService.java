@@ -21,12 +21,12 @@ public class TimeTableService {
         timeTableRepository.findAll().forEach(timeTables::add);
         return timeTables;
     }
+//
+//    public List<TimeTable> findAllByYear(int year) {
+//        List<TimeTable> listByYear = timeTableRepository.findAllByYear(year);
+//        System.out.println("find all by year" + listByYear);
+//        return listByYear;
+//    }
 
-    public List<Year> findAllByYear(int year) {
-        List<Year> listByYear = new ArrayList<>();
-        listByYear = timeTableRepository.findAllByYear(year);
-        System.out.println("find all by year" + listByYear);
-        return listByYear;
-    }
 
 }

@@ -1,15 +1,23 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
+import com.mijninzet.projectteamdrie.model.entity.user.User;
+
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
 public class TimeTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int year;
     private int semester;
     private int bloknr;
+
 
     public TimeTable(int id, int year, int semester, int bloknr) {
         this.id = id;

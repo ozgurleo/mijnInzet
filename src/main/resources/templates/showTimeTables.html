@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
@@ -20,6 +21,20 @@
         <a href="//localhost:8081/hello/">Ga naar hoofdmenu</a>
     </ul>
 
+
+    <div class = "list-year" th:each = "TimeTable : ${TimeTables}">
+        <p th:href="@{/showTimeTables(year={$year})}" >
+        <p th:text="${TimeTable}"> jaar </p>
+        </a>
+    </div>
+
+
+    <form action ="#" th:action="@{/searchByYear}" method="get">
+        <input type = "text" name = "searchTerm"/>
+        <button type = "submit" name = "submit" value="0">Zoek</button>
+
+    </form>
+
     <table class="table table-striped">
         <tr>
             <th>Jaar</th>
@@ -27,16 +42,21 @@
             <th>Bloknr</th>
         </tr>
 
-        <tr th:each="timetable:${showTimeTables}">
-            <td th:text="${timetable.year}">2000</td>
-            <td th:text="${timetable.semester}">1</td>
-            <td th:text="${timetable.bloknr}">1</td>
 
+        <tr th:each="timetable:${timetables}">
+            <td th:text="${timetable.year}"> </td>
+            <td th:text="${timetable.semester}"></td>
+            <td th:text="${timetable.bloknr}"></td>
 
         </tr>
 
     </table>
 </div>
 
+<footer class="footer mt-auto py-3">
+    <div class = container >
+<span class = "text-muted" th:text="${datetime}"> Datetime = today</span>
+    </div>
+</footer>
 </body>
 </html>
