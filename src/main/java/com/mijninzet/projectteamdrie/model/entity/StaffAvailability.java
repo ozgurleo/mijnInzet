@@ -1,6 +1,7 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
 import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
+import com.mijninzet.projectteamdrie.model.entity.TimeTable;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
 import javax.persistence.*;
