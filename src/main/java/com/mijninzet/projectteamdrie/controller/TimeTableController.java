@@ -35,9 +35,13 @@ public class TimeTableController {
     public String makeList(Model model) {
         model.addAttribute("timetables", timeTableRepository.findAll());
         model.addAttribute("datetime", new Date());
+//        model.addAttribute("user_id", timeTableRepository.findAllById(user_id));
+//        model.addAttribute("user_id", staffAvailibilityRepository.findStaffAvailabilityByUser(user_id));
         return "showTimeTables";
 
     }
+
+
 
 
 //    @RequestMapping(value = "/showTimeTables")
