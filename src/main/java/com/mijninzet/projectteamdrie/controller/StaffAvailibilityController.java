@@ -18,11 +18,15 @@ public class StaffAvailibilityController {
         return staffAvailibilityService.getAllStaffAvailibility(id);
     }
 
+    @RequestMapping(value="hello/schedule")
+    public String showSchedule (){
+        return "schedule";
+    }
+
     @PostMapping("hello/schedule/{userId}/new")
     public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId){
         sa.setUser(new Teacher(userId));
         staffAvailibilityService.addStaffAvailibility(sa);
-
 
     }
 }
