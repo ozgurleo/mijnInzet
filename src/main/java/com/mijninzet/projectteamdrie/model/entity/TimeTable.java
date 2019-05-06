@@ -1,6 +1,9 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
+import com.mijninzet.projectteamdrie.model.entity.user.User;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "TimeTable")
@@ -10,6 +13,15 @@ public class TimeTable {
     private int jaar;
     private int semester;
     private int bloknr;
+
+    @ManyToMany
+    @JoinTable(
+            name = "StaffAvailibility",
+            joinColumns = @JoinColumn(name = "time_table_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+
+    )
+    private List<User> users;
 
     public TimeTable(int id, int jaar, int semester, int bloknr) {
         this.id = id;
