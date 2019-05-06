@@ -18,8 +18,8 @@ public class TaskApplication {
 //    private Task task;
 
     public TaskApplication() {
-
-      //  this.task = new Task();
+        super();
+       // this.task = new Task();
         this.userId = userId;
         this.applicationDate = applicationDate;
         this.unsubcribeDate = unsubcribeDate;
@@ -28,7 +28,7 @@ public class TaskApplication {
     }
 
     public TaskApplication(int userId, Date applicationDate, Date unsubcribeDate, int availableHours, String role) {
-       // this.task=new Task();
+        //this.task=new Task();
         this.userId = userId;
         this.applicationDate = applicationDate;
         this.unsubcribeDate = unsubcribeDate;
