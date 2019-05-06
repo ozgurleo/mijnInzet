@@ -1,5 +1,7 @@
 package com.mijninzet.projectteamdrie.repository;
 
 
-public interface TeacherRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface TeacherRepository  {
 }
