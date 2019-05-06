@@ -6,10 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" type="text/css" th:href="mystyle.css">
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 <body>
@@ -27,7 +26,7 @@
 
 <div class="dropdown">
     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Jaar
+        Semester
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="#">Action</a>
@@ -35,23 +34,6 @@
         <a class="dropdown-item" href="#">Something else here</a>
     </div>
 </div>
-
-    <container>
-        <form>
-            docent id  <input type ="number" th:name="docent-id" th:placeholder="docent id">
-            <button type = submit> vind </button>
-        </form>
-
-    </container>
-
-    U bent docent:
-    <p th:text="${user_id}">
-
-    <form action ="#" th:action="@{/timeTable}" method="get">
-        <input type = "text" name = "searchTerm"/>
-        <button type = "submit" name = "submit" value="0">Zoek</button>
-
-    </form>
 
 <table class="table">
     <thead>
