@@ -4,7 +4,6 @@ import com.mijninzet.projectteamdrie.model.dao.TimeTableDAO;
 import com.mijninzet.projectteamdrie.model.entity.TimeTable;
 import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
-import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
 import com.mijninzet.projectteamdrie.repository.TimeTableRepository;
 import com.mijninzet.projectteamdrie.service.TimeTableService;
 import org.hibernate.SessionFactory;
@@ -27,8 +26,6 @@ public class TimeTableController {
     TimeTableService timeTableService;
     @Autowired
     TimeTableRepository timeTableRepository;
-    @Autowired
-    StaffAvailibilityRepository staffAvailibilityRepository;
 
 
     @RequestMapping(value={"/showTimeTables"}, method = RequestMethod.GET)
