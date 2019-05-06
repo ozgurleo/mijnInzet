@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
 
-    public List<TimeTable> findAllByYear(int year);
-
-    public List<TimeTable> findAllById(int id);
 
 
 }
