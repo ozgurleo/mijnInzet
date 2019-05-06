@@ -3,25 +3,29 @@ package com.mijninzet.projectteamdrie.model.entity;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table
+@Table (name = "TimeTable")
 public class TimeTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int year;
+    private int jaar;
     private int semester;
     private int bloknr;
 
+    @ManyToMany
+    @JoinTable(
+            name = "StaffAvailibility",
+            joinColumns = @JoinColumn(name = "time_table_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
 
-    public TimeTable(int id, int year, int semester, int bloknr) {
+    )
+    private List<User> users;
+
+    public TimeTable(int id, int jaar, int semester, int bloknr) {
         this.id = id;
-        this.year = year;
+        this.jaar = jaar;
         this.semester = semester;
         this.bloknr = bloknr;
     }
@@ -37,12 +41,12 @@ public class TimeTable {
         this.id = id;
     }
 
-    public int getYear() {
-        return year;
+    public int getJaar() {
+        return jaar;
     }
 
-    public void setYear(int jaar) {
-        this.year = year;
+    public void setJaar(int jaar) {
+        this.jaar = jaar;
     }
 
     public int getSemester() {
@@ -65,7 +69,7 @@ public class TimeTable {
     public String toString() {
         return "TimeTable{" +
                 "id=" + id +
-                ", year=" + year +
+                ", jaar=" + jaar +
                 ", semester=" + semester +
                 ", bloknr=" + bloknr +
                 '}';

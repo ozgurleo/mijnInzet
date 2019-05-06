@@ -1,6 +1,7 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
-import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
+
+import com.mijninzet.projectteamdrie.model.entity.TimeTable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,9 +9,13 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("teacher")
 public class Teacher extends User{
-    @OneToMany
-    @JoinColumn(name="user_id")
-    private List<StaffAvailability>staffAvailabilities;
+    @ManyToMany
+    @JoinTable(
+            name = "StaffAvailibility",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "time_table_id")
+    )
+    private List<TimeTable>timeTables;
     public Teacher() {
     }
 
