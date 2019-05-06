@@ -30,7 +30,7 @@ public class TimeTableController {
 
     @RequestMapping(value={"/showTimeTables"}, method = RequestMethod.GET)
     public String makeList(Model model) {
-        model.addAttribute("timetables", timeTableRepository.findAll());
+        //model.addAttribute("timetables", timeTableRepository.findAll());
         model.addAttribute("datetime", new Date());
 //        model.addAttribute("user_id", timeTableRepository.findAllById(user_id));
 //        model.addAttribute("user_id", staffAvailibilityRepository.findStaffAvailabilityByUser(user_id));
@@ -38,21 +38,18 @@ public class TimeTableController {
 
     }
 
-
-
-
 //    @RequestMapping(value = "/showTimeTables")
 //    public String showByYear(@RequestParam("year") int year) {
 //       List<TimeTable> timetablesbyyear = timeTableService.findAllByYear(year);
 //        return "ShowTimeTables";
 //    }
-
-    @RequestMapping(value="/showTimeTables/{year}")
-    public String searchByYear(Model model, @PathVariable int year, @RequestParam(value="searchTerm", required=false)String searchTerm){
-        List<TimeTable> getTimeTablesByYear = timeTableRepository.findAllByYear(year);
-        model.addAllAttributes(getTimeTablesByYear);
-        return "showTimeTables";
-    }
+//
+//    @RequestMapping(value="/showTimeTables/{year}")
+//    public String searchByYear(Model model, @PathVariable int year, @RequestParam(value="searchTerm", required=false)String searchTerm){
+//        List<TimeTable> getTimeTablesByYear = timeTableRepository.findAllByYear(year);
+//        model.addAllAttributes(getTimeTablesByYear);
+//        return "showTimeTables";
+//    }
 
 
 

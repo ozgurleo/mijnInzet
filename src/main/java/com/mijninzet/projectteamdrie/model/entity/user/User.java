@@ -1,7 +1,10 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
 
+import com.mijninzet.projectteamdrie.model.entity.TimeTable;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "user")
 @DiscriminatorColumn(name = "role",
@@ -16,7 +19,17 @@ public abstract class User implements Comparable<User>{
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
-private static final String DEFAULT = "unknown";
+    @ManyToMany
+    @JoinTable(
+            name="staff_availability",
+            joinColumns = @JoinColumn (name="userID"),
+            inverseJoinColumns = @JoinColumn (name="id")
+    )
+    Set<TimeTable> timetables;
+
+
+
+    private static final String DEFAULT = "unknown";
     public User() {
         this(DEFAULT, DEFAULT);
     }
