@@ -36,7 +36,22 @@
     </div>
 </div>
 
+    <container>
+        <form>
+            docent id  <input type ="number" th:name="docent-id" th:placeholder="docent id">
+            <button type = submit> vind </button>
+        </form>
 
+    </container>
+
+    U bent docent:
+    <p th:text="${user_id}">
+
+    <form action ="#" th:action="@{/timeTable}" method="get">
+        <input type = "text" name = "searchTerm"/>
+        <button type = "submit" name = "submit" value="0">Zoek</button>
+
+    </form>
 
 <table class="table">
     <thead>
