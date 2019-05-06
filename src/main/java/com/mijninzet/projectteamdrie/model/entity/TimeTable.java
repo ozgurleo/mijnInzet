@@ -14,14 +14,6 @@ public class TimeTable {
     private int semester;
     private int bloknr;
 
-    @ManyToMany
-    @JoinTable(
-            name = "StaffAvailibility",
-            joinColumns = @JoinColumn(name = "time_table_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-
-    )
-    private List<User> users;
 
     public TimeTable(int id, int jaar, int semester, int bloknr) {
         this.id = id;
