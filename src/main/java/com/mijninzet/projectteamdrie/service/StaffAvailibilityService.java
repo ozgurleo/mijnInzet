@@ -15,12 +15,14 @@ public class StaffAvailibilityService {
 
     public List<StaffAvailability> getAllStaffAvailibility(int userId){
         ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
-        staffAvailibilityRepository.findAll()
+        staffAvailibilityRepository.findByUserId(userId)
                 .forEach(staffAvailabilities::add);
         return staffAvailabilities;
+
     }
 
     public void addStaffAvailibility(StaffAvailability sa){
         staffAvailibilityRepository.save(sa);
     }
 }
+
