@@ -15,7 +15,7 @@ public class StaffAvailability {
     private String colorOption;
     private String cohort;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id")
     private User user;
 

@@ -8,7 +8,7 @@ import javax.persistence.*;
     discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements Comparable<User>{
     @Id
-    private int userID;
+    private int id;
     private String username;
     private String password;
     //@ozgur
@@ -21,8 +21,8 @@ private static final String DEFAULT = "unknown";
         this(DEFAULT, DEFAULT);
     }
 
-    public User(int userID) {
-        this.userID = userID;
+    public User(int id) {
+        this.id = id;
     }
 
     public User(String username, String password) {
@@ -56,12 +56,12 @@ private static final String DEFAULT = "unknown";
 //    public void setRole(Role role) {
 //        this.role = role;
 //    }
-    public int getUserID() {
-        return userID;
+    public int getId() {
+        return id;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setId(int userID) {
+        this.id = userID;
     }
 
     public void setUsername(String username) {
@@ -75,7 +75,7 @@ private static final String DEFAULT = "unknown";
 
     public String toString() {
 
-        return String.format("User %s with ID: %d", username, userID);
+        return String.format("User %s with ID: %d", username, id);
     }
 
 }
