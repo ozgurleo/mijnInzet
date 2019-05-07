@@ -4,11 +4,13 @@ import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
+@ResponseBody
 public class StaffAvailibilityController {
     @Autowired
     private StaffAvailibilityService staffAvailibilityService;
@@ -26,4 +28,3 @@ public class StaffAvailibilityController {
 
     }
 }
-
