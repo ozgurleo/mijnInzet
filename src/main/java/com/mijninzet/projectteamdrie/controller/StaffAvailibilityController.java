@@ -19,22 +19,21 @@ public class StaffAvailibilityController {
     StaffAvailibilityRepository availibilityRepository;
 
 
-    @RequestMapping(value="/schedule")
-    public String showSchedule(Model model){
+    @RequestMapping(value = "/schedule")
+    public String showSchedule(Model model) {
         model.addAttribute("test", new StaffAvailability());
         return "schedule";
     }
 
     @RequestMapping("schedule/{id}")
-    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id){
+    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
         return staffAvailibilityService.getAllStaffAvailibility(id);
     }
 
     @PostMapping("schedule/{userId}/new")
-    public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId){
+    public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId) {
         sa.setUser(new Teacher(userId));
         staffAvailibilityService.addStaffAvailibility(sa);
 
     }
 }
-
