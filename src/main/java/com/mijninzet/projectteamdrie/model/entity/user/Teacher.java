@@ -1,21 +1,20 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
 
-import com.mijninzet.projectteamdrie.model.entity.TimeTable;
+import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("teacher")
 public class Teacher extends User{
-    @ManyToMany
-    @JoinTable(
-            name = "StaffAvailibility",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "time_table_id")
-    )
-    private List<TimeTable>timeTables;
+    @OneToMany(mappedBy = "user")
+    private Set<StaffAvailability>staffAvailabilities=new HashSet<>();
+
+
     public Teacher() {
     }
 
