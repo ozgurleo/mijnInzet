@@ -15,6 +15,17 @@ public class TaskApplicationController {
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
-      
+    // deze methode wordt aangeropen bij een POST-request op url "showTasks"
+    // hiermee kun je een sollicatatie in de mysql-tabel task_application opslaan
+    @RequestMapping(method= RequestMethod.POST, value = "/showTasks")
+    public void addTaskApplication(@RequestBody TaskApplication taskApplication) {
+        taskApplicationRepo.save(taskApplication);
+    }
+
+    // hiermee kun je meerdere sollicataties (in een lijst)  in de mysql-tabel task_application opslaan
+    @RequestMapping(method= RequestMethod.POST, value = "/showTasks")
+    public void addTaskApplicationList(@RequestBody List<TaskApplication> taskAppList) {
+        taskApplicationRepo.saveAll(taskAppList);
+    }
 
 }
