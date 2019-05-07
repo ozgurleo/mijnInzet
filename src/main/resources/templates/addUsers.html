@@ -11,6 +11,11 @@
 <div class="container">
 
     <h1 id="intro">Hello Administrator</h1>
+    <p id="description"></p>
+    <p id="namedisplay"></p>
+    <p id="maildisplay"></p>
+    <p id="roledisplay"></p>
+
 
     <a href="hello">Ga naar hoofdmenu</a>
 
@@ -31,10 +36,10 @@
             var newUserRole = document.getElementById("role").value;
             var newUserMailadress = document.getElementById("mailadress").value;
 
-            document.getElementById("intro").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
-            document.getElementById("intro").innerHTML = newUserName;
-            document.getElementById("intro").innerHTML = newUserRole;
-            document.getElementById("intro").innerHTML = newUserMailadress;
+            document.getElementById("description").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
+            document.getElementById("namedisplay").innerHTML = newUserName;
+            document.getElementById("maildisplay").innerHTML = newUserMailadress;
+            document.getElementById("roledisplay").innerHTML = newUserRole;
         }
         document.getElementById("buttonAddUser").onclick = printUserInfo;
 

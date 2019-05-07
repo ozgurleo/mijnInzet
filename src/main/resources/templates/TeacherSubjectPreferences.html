@@ -10,35 +10,29 @@
 <body>
 <div class="container">
 
-    <h1 id="intro">Hello Administrator</h1>
+    <h1 id="intro">Voorkeur voor beschikbaarheid per vak opgeven</h1>
 
     <a href="hello">Ga naar hoofdmenu</a>
 
-    <p>Enter new Username</p>
-    <input type="text" id="name">
-    <p>Enter new user mailadress</p>
-    <input type="text" id="mailadress">
-    <p>Enter role of new User</p>
-    <input type="text" id="role">
-    <button id="buttonAddUser">Set</button>
+
+    <h3> Klik op het vak om je voorkeur op te geven</h3>
+    <table id="SubjectTable">
+        <tr>
+            <th>Vaknummer</th>
+            <th>Vak</th>
+            <th>Begrootte Uren</th>
+            <th>Geldigheidsduur</th>
+        </tr>
+
+        <tr th:each="subject:${showSubjects}">
+            <td th:text="${subject.subjectId}">Vaknummer</td>
+            <td th:text="${subject.taskName}">Vak</td>
+            <td th:text="${subject.estimatedHours}">Begrootte Uren</td>
+            <td th:text="${subject.yearsToExpiryDate}">Geldigheidsduur</td>
+        </tr>
+
+    </table>
+
 </div>
 </body>
-<!--<script src="/static/js/addUser.js">-->
-<script>
-    function app() {
-        function printUserInfo() {
-            var newUserName = document.getElementById("name").value;
-            var newUserRole = document.getElementById("role").value;
-            var newUserMailadress = document.getElementById("mailadress").value;
-
-            document.getElementById("intro").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
-            document.getElementById("intro").innerHTML = newUserName;
-            document.getElementById("intro").innerHTML = newUserRole;
-            document.getElementById("intro").innerHTML = newUserMailadress;
-        }
-        document.getElementById("buttonAddUser").onclick = printUserInfo;
-
-    }
-    window.onload = app;
-</script>
 </html>
