@@ -6,11 +6,11 @@ import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @Controller
 public class StaffAvailibilityController {
     @Autowired
@@ -20,7 +20,8 @@ public class StaffAvailibilityController {
 
 
     @RequestMapping(value="/schedule")
-    public String showSchedule (){
+    public String showSchedule(Model model){
+        model.addAttribute("test", new StaffAvailability());
         return "schedule";
     }
 

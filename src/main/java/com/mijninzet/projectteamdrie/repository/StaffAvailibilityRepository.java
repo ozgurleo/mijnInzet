@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StaffAvailibilityRepository extends JpaRepository<StaffAvailability,Integer> {
+
 }
