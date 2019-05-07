@@ -6,37 +6,38 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 @Entity
 public class TaskApplication {
     @Id
     private int userId;
-    private Date applicationDate;
+    private DateFormat applicationDate;
     private Date unsubcribeDate;
     private int availableHours;
     private String role;
-    @ManyToOne
-    @JoinColumn(name="task_task_id")
-    private Task task;
+//    @ManyToOne
+//    @JoinColumn(name="task_task_id")
+//    private Task task;
 
     public TaskApplication() {
         super();
-        this.task = new Task();
+        //this.task = new Task();
         this.userId = userId;
-        this.applicationDate = applicationDate;
+        this.applicationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
     }
 
-    public TaskApplication(int userId, Date applicationDate, Date unsubcribeDate, int availableHours, String role) {
-        this.task=new Task();
+    public TaskApplication(int userId, DateFormat applicationDate, Date unsubcribeDate, int availableHours, String role) {
+       // this.task=new Task();
         this.userId = userId;
         this.applicationDate = applicationDate;
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
-
     }
 
 
@@ -49,11 +50,11 @@ public class TaskApplication {
         this.userId = userId;
     }
 
-    public Date getApplicationDate() {
+    public DateFormat getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(Date applicationDate) {
+    public void setApplicationDate(DateFormat applicationDate) {
         this.applicationDate = applicationDate;
     }
 
