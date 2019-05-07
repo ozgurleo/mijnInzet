@@ -38,7 +38,6 @@ public class TaskApplication {
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
-
     }
 
 
