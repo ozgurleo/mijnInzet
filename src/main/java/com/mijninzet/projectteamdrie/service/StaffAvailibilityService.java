@@ -15,7 +15,7 @@ public class StaffAvailibilityService {
 
     public List<StaffAvailability> getAllStaffAvailibility(int userId){
         ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
-        staffAvailibilityRepository.findByUserId(userId)
+        staffAvailibilityRepository.findAll()
                 .forEach(staffAvailabilities::add);
         return staffAvailabilities;
 
