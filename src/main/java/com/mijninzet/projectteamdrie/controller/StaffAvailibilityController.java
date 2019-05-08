@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -28,11 +29,11 @@ public class StaffAvailibilityController {
         return "schedule";
     }
 
-    @RequestMapping("schedule/{id}")
-    @ResponseBody
-    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
-        return staffAvailibilityService.getAllStaffAvailibility(id);
-    }
+    //@RequestMapping("schedule/{id}")
+  //  @ResponseBody
+//    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
+//        return staffAvailibilityService.getAllStaffAvailibility(id);
+//    }
 
     @PostMapping("schedule/{userId}/new")
     @ResponseBody
@@ -41,9 +42,18 @@ public class StaffAvailibilityController {
         //staffAvailibilityService.addStaffAvailibility(sa);
 
     }
-    @RequestMapping(value = "schedule", method = RequestMethod.POST)
-    public void addNewSchedule() {
-        staffAvailibilityService.addStaffAvailibility("2","Maandag", "rood",  "middag");
+//    @RequestMapping(value = "schedule", method = RequestMethod.POST)
+//    public void addNewSchedule() {
+//        staffAvailibilityService.addStaffAvailibility("2","Maandag", "rood",  "middag");
+//    }
+
+    @RequestMapping(value ="schedule", method = RequestMethod.PUT)
+    public List<StaffAvailability> createNewListStaffAvailability(){
+        return Arrays.asList(
+            new StaffAvailability(3, "maandag", "middag", "rood", "2", 2),
+        new StaffAvailability(4, "maandag", "middag", "rood", "2", 2)
+
+        );
     }
 
 
