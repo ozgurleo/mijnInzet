@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity(name = "user")
 @DiscriminatorColumn(name = "role",
-    discriminatorType = DiscriminatorType.STRING)
+        discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements Comparable<User>{
     @Id
     private int id;
@@ -56,7 +56,7 @@ public abstract class User implements Comparable<User>{
 //        return role;
 //    }
 
-//    public void setRole(Role role) {
+    //    public void setRole(Role role) {
 //        this.role = role;
 //    }
     public int getId() {
