@@ -2,6 +2,7 @@ package com.mijninzet.projectteamdrie.model.entity.user;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "user")
 @DiscriminatorColumn(name = "role",
@@ -16,7 +17,9 @@ public abstract class User implements Comparable<User>{
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
-private static final String DEFAULT = "unknown";
+
+
+    private static final String DEFAULT = "unknown";
     public User() {
         this(DEFAULT, DEFAULT);
     }
