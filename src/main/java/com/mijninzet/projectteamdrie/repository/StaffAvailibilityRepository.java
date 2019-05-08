@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface StaffAvailibilityRepository extends JpaRepository<StaffAvailability,Integer> {
+    List<StaffAvailability> findByUserId(int id);
 
 }
