@@ -43,12 +43,12 @@ public class StaffAvailibilityController {
     }
     @RequestMapping(value = "schedule", method = RequestMethod.POST)
     public void addNewSchedule() {
-        staffAvailibilityService.addStaffAvailibility("2","Maandag", "rood",  "middag");
+        staffAvailibilityService.addStaffAvailibility(2,"1", "maandag",  "rood", "middag");
     }
 
     @RequestMapping(value = "schedule", method=RequestMethod.GET)
     public void getSchedule(){
-        staffAvailibilityService.getAllStaffAvailibility(1);
+        new StaffAvailability(4, "maandag", "middag", "red", "1", 2);
     }
 
 

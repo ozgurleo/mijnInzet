@@ -21,8 +21,9 @@ public class StaffAvailibilityService {
 
     }
 
-    public void addStaffAvailibility( String cohort, String day, String color_option, String day_part){
+    public void addStaffAvailibility(int id, String cohort, String day, String color_option, String day_part){
         StaffAvailability sa = new StaffAvailability();
+        sa.setId(id);
         sa.setCohort(cohort);
         sa.setDay(day);
         sa.setColorOption(color_option);
