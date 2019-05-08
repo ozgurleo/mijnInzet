@@ -48,10 +48,10 @@ private UserService userService;
         userService.deleteUser(id);
     }
 
-//    @RequestMapping("/login")
-//    public String getLoginForm(){
-//        return "login";
-//    }
+    @RequestMapping("/login")
+    public String getLoginForm(){
+        return "login";
+    }
 //    @RequestMapping(value = "/login",method = RequestMethod.POST)
 //    public String login( Model model,@ModelAttribute("newUser") User newUser) {
 //        List<User> users=userService.getAllUsers();
