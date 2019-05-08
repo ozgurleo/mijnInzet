@@ -46,5 +46,10 @@ public class StaffAvailibilityController {
         staffAvailibilityService.addStaffAvailibility("2","Maandag", "rood",  "middag");
     }
 
+    @RequestMapping(value = "schedule", method=RequestMethod.GET)
+    public void getSchedule(){
+        staffAvailibilityService.getAllStaffAvailibility(1);
+    }
+
 
 }
