@@ -8,31 +8,26 @@
     <title>AddUsers</title>
 </head>
 <body>
-<div class="container">
+<h2>Voorkeur voor beschikbaarheid per vak opgeven</h2>
 
-    <h1 id="intro">Voorkeur voor beschikbaarheid per vak opgeven</h1>
+<a href="hello">Ga naar hoofdmenu</a>
 
-    <a href="hello">Ga naar hoofdmenu</a>
+<h3> Klik op het vak om je voorkeur op te geven</h3>
+<table id="SubjectTable">
+    <tr>
+        <th>Vaknummer</th>
+        <th>Vak</th>
+        <th>Begrootte Uren</th>
+        <th>Geldigheidsduur</th>
+    </tr>
 
+    <tr th:each="subject:${showSubjects}">
+        <td th:text="${subject.subjectId}">Vaknummer</td>
+        <td th:text="${subject.subjectName}">Vak</td>
+        <td th:text="${subject.estimatedHours}">Begrootte Uren</td>
+        <td th:text="${subject.yearsToExpiryDate}">Geldigheidsduur</td>
+    </tr>
 
-    <h3> Klik op het vak om je voorkeur op te geven</h3>
-    <table id="SubjectTable">
-        <tr>
-            <th>Vaknummer</th>
-            <th>Vak</th>
-            <th>Begrootte Uren</th>
-            <th>Geldigheidsduur</th>
-        </tr>
-
-        <tr th:each="subject:${showSubjects}">
-            <td th:text="${subject.subjectId}">Vaknummer</td>
-            <td th:text="${subject.taskName}">Vak</td>
-            <td th:text="${subject.estimatedHours}">Begrootte Uren</td>
-            <td th:text="${subject.yearsToExpiryDate}">Geldigheidsduur</td>
-        </tr>
-
-    </table>
-
-</div>
+</table>
 </body>
 </html>
