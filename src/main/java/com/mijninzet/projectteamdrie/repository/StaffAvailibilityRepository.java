@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StaffAvailibilityRepository extends JpaRepository<StaffAvailability,Integer> {
 
+    public void findByUserId(int userId);
+    public void getByUser(int userId);
+
 }

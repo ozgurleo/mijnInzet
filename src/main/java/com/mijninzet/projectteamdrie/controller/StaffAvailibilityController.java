@@ -5,6 +5,8 @@ import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
 import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +35,13 @@ public class StaffAvailibilityController {
     @PostMapping("schedule/{userId}/new")
     public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId) {
         sa.setUser(new Teacher(userId));
-        staffAvailibilityService.addStaffAvailibility(sa);
+        //staffAvailibilityService.addStaffAvailibility(sa);
 
     }
+    @RequestMapping(value = "schedule", method = RequestMethod.POST)
+    public void addNewSchedule() {
+        staffAvailibilityService.addStaffAvailibility("2","Maandag", "rood",  "middag");
+    }
+
+
 }
