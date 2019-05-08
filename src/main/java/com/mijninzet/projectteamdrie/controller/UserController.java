@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.controller;
 
+import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,6 @@ import java.util.Optional;
 
 @Controller
 public class UserController {
-//    private SessionFactory sessionFactory;
-//    private AdministratorDAO administratorDAO = new AdministratorDAO(sessionFactory);
 
     @Autowired
 private UserService userService;
@@ -34,7 +33,8 @@ private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST,value = "/users")
     public void addUser(User user){
-     userService.addUser(user);
+
+        userService.addUser(user);
     }
 
     @RequestMapping(method = RequestMethod.PUT,value = "/users/{id}")
@@ -44,28 +44,29 @@ private UserService userService;
 
     @RequestMapping(method = RequestMethod.DELETE,value = "/users/{id}")
     public void deleteUser(int id){
-    userService.deleteUser(id);
+
+        userService.deleteUser(id);
     }
 
-    @RequestMapping("/login")
-    public String getLoginForm(){
-        return "login";
-    }
+//    @RequestMapping("/login")
+//    public String getLoginForm(){
+//        return "login";
+//    }
 //    @RequestMapping(value = "/login",method = RequestMethod.POST)
-//    public String login( Model model) {
+//    public String login( Model model,@ModelAttribute("newUser") User newUser) {
 //        List<User> users=userService.getAllUsers();
 //        model.addAttribute("users",users);
 //        for(int i=0; i<users.size();i++){
 //            String username=users.get(i).getUsername();
 //            String password=users.get(i).getPassword();
 //
-//            if("admin".equals(username)&&"admin".equals(password)){
+//            if(newUser.getUsername().equals(username)&& newUser.getPassword().equals(password)){
 //                return "hello";
 //            }
 //            model.addAttribute("invalidCredentials",true);
 //            return "login";
 //
 //    }
-//        return
+//        return "login";
 //}
 }
