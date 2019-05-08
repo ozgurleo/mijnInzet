@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>AddUsers</title>
+</head>
+<body>
+<h2>Voorkeur voor beschikbaarheid per vak opgeven</h2>
+
+<a href="hello">Ga naar hoofdmenu</a>
+
+<h3> Klik op het vak om je voorkeur op te geven</h3>
+<table id="SubjectTable">
+    <tr>
+        <th>Vaknummer</th>
+        <th>Vak</th>
+        <th>Begrootte Uren</th>
+        <th>Geldigheidsduur</th>
+    </tr>
+
+    <tr th:each="subject:${showSubjects}">
+        <td th:text="${subject.subjectId}">Vaknummer</td>
+        <td th:text="${subject.subjectName}">Vak</td>
+        <td th:text="${subject.estimatedHours}">Begrootte Uren</td>
+        <td th:text="${subject.yearsToExpiryDate}">Geldigheidsduur</td>
+    </tr>
+
+</table>
+</body>
+</html>

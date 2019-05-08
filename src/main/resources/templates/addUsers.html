@@ -21,6 +21,12 @@
     <p>Enter role of new User</p>
     <input type="text" id="role">
     <button id="buttonAddUser">Set</button>
+
+    <p id="description"></p>
+    <p id="namedisplay"></p>
+    <p id="maildisplay"></p>
+    <p id="roledisplay"></p>
+
 </div>
 </body>
 <!--<script src="/static/js/addUser.js">-->
@@ -31,10 +37,10 @@
             var newUserRole = document.getElementById("role").value;
             var newUserMailadress = document.getElementById("mailadress").value;
 
-            document.getElementById("intro").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
-            document.getElementById("intro").innerHTML = newUserName;
-            document.getElementById("intro").innerHTML = newUserRole;
-            document.getElementById("intro").innerHTML = newUserMailadress;
+            document.getElementById("description").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
+            document.getElementById("namedisplay").innerHTML = newUserName;
+            document.getElementById("maildisplay").innerHTML = newUserMailadress;
+            document.getElementById("roledisplay").innerHTML = newUserRole;
         }
         document.getElementById("buttonAddUser").onclick = printUserInfo;
 
