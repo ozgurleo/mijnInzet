@@ -6,7 +6,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "subject")
 public class Subject {
-
        @Id
     private int subjectId;
     private String subjectName;

@@ -19,6 +19,7 @@
         <th>Taak</th>
         <th>Begrootte Uren</th>
         <th>Geldigheidsduur</th>
+        <th>Solliciteer</th>
     </tr>
 
     <tr th:each="task:${showTasks}">
@@ -26,6 +27,14 @@
         <td th:text="${task.taskName}">Taak</td>
         <td th:text="${task.estimatedHours}">Begrootte Uren</td>
         <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+        <td>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="${task.taskId}">
+                <label class="custom-control-label" for="${task.taskId}"></label>
+            </div>
+
+        </td>
+
     </tr>
 
 
