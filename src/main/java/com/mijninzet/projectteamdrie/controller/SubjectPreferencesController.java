@@ -15,8 +15,8 @@ public class SubjectPreferencesController {
 
     @RequestMapping(value = "/showSubjects")
     public String makeSubjectList(Model model) {
-        model.addAttribute("showSubjects", subjectRepository.getSubjects());
-        return "showSubjects";
+        model.addAttribute("showSubjects", subjectRepository.findAll());
+        return "teacherSubjectPreferences";
     }
 }
 

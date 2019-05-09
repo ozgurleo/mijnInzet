@@ -11,6 +11,5 @@ import java.util.List;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
- @Query(value="SELECT * from subject;", nativeQuery = true)
- List<Subject> getSubjects();
+
 }
