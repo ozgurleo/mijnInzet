@@ -1,4 +1,5 @@
 package com.mijninzet.projectteamdrie.model.entity;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -10,7 +11,7 @@ import java.util.List;
 @Table(name = "Task")
 public class Task {
 
-       @Id
+    @Id
     private int taskId;
     private String taskName;
     private int estimatedHours;

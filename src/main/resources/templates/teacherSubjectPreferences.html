@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Vacature Overzicht</title>
+    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>AddUsers</title>
 </head>
-
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
@@ -41,26 +41,25 @@
     </div>
 </nav>
 
-<h2> TaakOverzicht</h2>
+<h2>Voorkeur voor beschikbaarheid per vak opgeven</h2>
 
 <a href="hello">Ga naar hoofdmenu</a>
 
-<h3> Klik op taak als je wilt solliciteren</h3>
-<table id="TaskTable">
+<h3> Klik op het vak om je voorkeur op te geven</h3>
+<table id="SubjectTable">
     <tr>
-        <th>Taak_nr</th>
-        <th>Taak</th>
+        <th>Vaknummer</th>
+        <th>Vak</th>
         <th>Begrootte Uren</th>
         <th>Geldigheidsduur</th>
     </tr>
 
-    <tr th:each="task:${showTasks}">
-        <td th:text="${task.taskId}">Taak_nr</td>
-        <td th:text="${task.taskName}">Taak</td>
-        <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+    <tr th:each="subject:${showSubjects}">
+        <td th:text="${subject.subjectId}">-1</td>
+        <td th:text="${subject.subjectName}">-1</td>
+        <td th:text="${subject.estimatedTimeInHours}">-1</td>
+        <td th:text="${subject.yearsTillExpiry}">-1</td>
     </tr>
-
 
 </table>
 </body>
