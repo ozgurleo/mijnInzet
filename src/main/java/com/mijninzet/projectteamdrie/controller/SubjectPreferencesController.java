@@ -11,10 +11,7 @@ public class SubjectPreferencesController {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    @RequestMapping(value = "/hello")
-    public String hello() {
-        return "hello";
-    }
+
 
     @RequestMapping(value = "/showSubjects")
     public String makeSubjectList(Model model) {
