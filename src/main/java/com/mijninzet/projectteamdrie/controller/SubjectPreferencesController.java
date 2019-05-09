@@ -11,10 +11,15 @@ public class SubjectPreferencesController {
     @Autowired
     private SubjectRepository subjectRepository;
 
+    @RequestMapping(value = "/hello")
+    public String hello() {
+        return "hello";
+    }
+
     @RequestMapping(value = "/showSubjects")
     public String makeSubjectList(Model model) {
-        model.addAttribute("showSubjects", subjectRepository.findAll());
-        return "teacherSubjectPreferences";
+        model.addAttribute("showSubjects", subjectRepository.getSubjects());
+        return "showSubjects";
     }
 }
 
