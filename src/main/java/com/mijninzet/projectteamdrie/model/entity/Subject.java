@@ -1,28 +1,26 @@
 package com.mijninzet.projectteamdrie.model.entity;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Subject")
+@Table(name = "subject")
 public class Subject {
-
-    @Id
+       @Id
     private int subjectId;
     private String subjectName;
-    private int estimatedTimeInHours;
-    private int yearsTillExpiry;
+    private int estimatedHours;
+    private int yearsToExpiryDate;
 
     public Subject() {
         this(0, "", 0, 0);
     }
 
-    public Subject(int subjectId, String subjectName, int estimatedTimeInHours, int yearsTillExpiry) {
+    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
-        this.estimatedTimeInHours = estimatedTimeInHours;
-        this.yearsTillExpiry = yearsTillExpiry;
+        this.estimatedHours = estimatedHours;
+        this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
     public int getSubjectId() {
@@ -41,19 +39,19 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-    public int getEstimatedTimeInHours() {
-        return estimatedTimeInHours;
+    public int getEstimatedHours() {
+        return estimatedHours;
     }
 
-    public void setEstimatedTimeInHours(int estimatedTimeInHours) {
-        this.estimatedTimeInHours = estimatedTimeInHours;
+    public void setEstimatedHours(int estimatedHours) {
+        this.estimatedHours = estimatedHours;
     }
 
-    public int getYearsTillExpiry() {
-        return yearsTillExpiry;
+    public int getYearsToExpiryDate() {
+        return yearsToExpiryDate;
     }
 
-    public void setYearsTillExpiry(int yearsTillExpiry) {
-        this.yearsTillExpiry = yearsTillExpiry;
+    public void setYearsToExpiryDate(int yearsToExpiryDate) {
+        this.yearsToExpiryDate = yearsToExpiryDate;
     }
 }

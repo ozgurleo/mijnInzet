@@ -57,8 +57,8 @@
     <tr th:each="subject:${showSubjects}">
         <td th:text="${subject.subjectId}">-1</td>
         <td th:text="${subject.subjectName}">-1</td>
-        <td th:text="${subject.estimatedTimeInHours}">-1</td>
-        <td th:text="${subject.yearsTillExpiry}">-1</td>
+        <td th:text="${subject.estimatedHours}">-1</td>
+        <td th:text="${subject.yearsToExpiryDate}">-1</td>
     </tr>
 
 </table>
