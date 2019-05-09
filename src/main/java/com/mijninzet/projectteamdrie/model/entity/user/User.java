@@ -51,12 +51,12 @@ public abstract class User implements Comparable<User>{
     public String getPassword() {
         return password;
     }
-//
+
 //    public Role getRole() {
 //        return role;
 //    }
-
-    //    public void setRole(Role role) {
+//
+//        public void setRole(Role role) {
 //        this.role = role;
 //    }
     public int getId() {

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,30 +23,30 @@ public class StaffAvailibilityController {
     StaffAvailibilityRepository availibilityRepository;
 
 
-    @RequestMapping(value = "/schedule")
-
-    public String showSchedule(Model model) {
-        model.addAttribute("test", new StaffAvailability());
-        return "schedule";
+    @RequestMapping(value = "schedule", method = RequestMethod.GET)
+    public ModelAndView schedules() {
+        ModelAndView mav = new ModelAndView("schedule");
+        mav.addObject("staffavailability", availibilityRepository.findAll());
+        return mav;
     }
 
-    //@RequestMapping("schedule/{id}")
-  //  @ResponseBody
-//    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
-//        return staffAvailibilityService.getAllStaffAvailibility(id);
-//    }
+    @RequestMapping("schedule/{id}")
+    @ResponseBody
+    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
+        return staffAvailibilityService.getAllStaffAvailibility(id);
+    }
 
     @PostMapping("schedule/{userId}/new")
     @ResponseBody
     public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId) {
         sa.setUser(new Teacher(userId));
-        //staffAvailibilityService.addStaffAvailibility(sa);
+   //     staffAvailibilityService.addStaffAvailibility(sa);
 
     }
-//    @RequestMapping(value = "schedule", method = RequestMethod.POST)
-//    public void addNewSchedule() {
-//        staffAvailibilityService.addStaffAvailibility("2","Maandag", "rood",  "middag");
-//    }
+    @RequestMapping(value = "schedule", method = RequestMethod.POST)
+    public void addNewSchedule() {
+        staffAvailibilityService.addStaffAvailibility(2,"2", "maandag",  "rood", "middag");
+    }
 
     @RequestMapping(value ="schedule", method = RequestMethod.PUT)
     public List<StaffAvailability> createNewListStaffAvailability(){

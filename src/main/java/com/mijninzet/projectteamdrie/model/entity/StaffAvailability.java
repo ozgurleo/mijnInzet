@@ -30,7 +30,7 @@ public class StaffAvailability {
         this.dayPart = dayPart;
         this.colorOption = colorOption;
         this.cohort = cohort;
-        this.user = new Teacher(userID);
+       this.user = new Teacher(userID);
     }
 
     public String getCohort() {

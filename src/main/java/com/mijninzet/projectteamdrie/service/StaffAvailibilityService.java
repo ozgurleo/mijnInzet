@@ -14,12 +14,12 @@ public class StaffAvailibilityService {
     @Autowired
     private StaffAvailibilityRepository staffAvailibilityRepository;
 
-   // public List<StaffAvailability> getAllStaffAvailibility(int userId){
-//        ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
-//        staffAvailibilityRepository.findByUserId(userId);
-//        return staffAvailabilities;
+    public List<StaffAvailability> getAllStaffAvailibility(int userId){
+        ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
+        staffAvailibilityRepository.findByUserId(userId);
+        return staffAvailabilities;
 
-   // }
+    }
 
     public void addStaffAvailibility(int id, String cohort, String day, String color_option, String day_part){
         StaffAvailability sa = new StaffAvailability();
