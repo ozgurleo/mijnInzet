@@ -23,11 +23,10 @@ public class StaffAvailibilityController {
     StaffAvailibilityRepository availibilityRepository;
 
 
-    @RequestMapping(value = "schedule", method = RequestMethod.GET)
-    public ModelAndView schedules() {
-        ModelAndView mav = new ModelAndView("schedule");
-        mav.addObject("staffavailability", availibilityRepository.findAll());
-        return mav;
+    @RequestMapping(value = "schedule")
+    public String schedulesFromCohort(Model model) {
+        model.addAttribute("staffavailibility", new StaffAvailability());
+        return "schedule";
     }
 
     @RequestMapping("schedule/{id}")
@@ -35,6 +34,12 @@ public class StaffAvailibilityController {
     public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
         return staffAvailibilityService.getAllStaffAvailibility(id);
     }
+//
+//    @PostMapping("schedule")
+//    public String selectCohort(@ModelAttribute StaffAvailability staffavailibility) {
+//        staffavailibility.getCohort();
+//        return "schedule";
+//    }
 
     @PostMapping("schedule/{userId}/new")
     @ResponseBody
@@ -42,19 +47,19 @@ public class StaffAvailibilityController {
         sa.setUser(new Teacher(userId));
    //     staffAvailibilityService.addStaffAvailibility(sa);
 
-    }
-    @RequestMapping(value = "schedule", method = RequestMethod.POST)
-    public void addNewSchedule() {
-        staffAvailibilityService.addStaffAvailibility(2,"2", "maandag",  "rood", "middag");
-    }
-
-    @RequestMapping(value ="schedule", method = RequestMethod.PUT)
-    public List<StaffAvailability> createNewListStaffAvailability(){
-        return Arrays.asList(
-            new StaffAvailability(3, "maandag", "middag", "rood", "2", 2),
-        new StaffAvailability(4, "maandag", "middag", "rood", "2", 2)
-
-        );
+//    }
+//    @RequestMapping(value = "schedule", method = RequestMethod.POST)
+//    public void addNewSchedule() {
+//        staffAvailibilityService.addStaffAvailibility(2,"2", "maandag",  "rood", "middag");
+//    }
+//
+//    @RequestMapping(value ="schedule", method = RequestMethod.PUT)
+//    public List<StaffAvailability> createNewListStaffAvailability(){
+//        return Arrays.asList(
+//            new StaffAvailability(3, "maandag", "middag", "rood", "2", 2),
+//        new StaffAvailability(4, "maandag", "middag", "rood", "2", 2)
+//
+//        );
     }
 
 

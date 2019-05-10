@@ -44,23 +44,15 @@
 
 <p th:text="test"></p>
 
-<h3> hoewerktditeigenlijk?</h3>
-<table id="TaskTable">
-    <tr>
-        <th>dag</th>
-        <th>dagdeel</th>
-        <th></th>
-        <th></th>
-    </tr>
+
 
     <tr th:each="staffavailability:${schedules}">
-        <td th:text="${staffavailability.day}">dag</td>
-        <td th:text="${staffavailability.daypart}">dagdeel</td>
+        <td th:text="${staffavailability.cohort}">dag</td>
 
     </tr>
 
 
-<div class="container">
+<p class="container">
 
     <div class="dropdown">
         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,11 +70,24 @@
         </div>
     </div>
 
+<!--<h1>Form</h1>-->
+<!--<form action="#" th:action="@{/schedule}" th:object="${staffavailability}" method="post">-->
+    <!--<p>Cohort <input type="text" th:field="*{cohort}" /></p>-->
+    <!--<p>Message: <input type="text" th:field="*{content}" /></p>-->
+    <!--<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>-->
+<!--</form>-->
 
-    <table class="table">
+
+    <tr th:each="schedule : ${staffavailability}">
+        <td th:text="${schedule.id}"> </td>
+        <td><a href="#" th:text="${schedule.day}"> ...</a></td>
+        <td th:text="${schedule.cohort}"> ...</td>
+    </tr>
+
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">maandag</th>
+            <th scope="col">maandag </th>
             <th scope="col">dinsdag</th>
             <th scope="col">woensdag</th>
             <th scope ="col">donderdag</th>
@@ -92,20 +97,21 @@
         </tr>
         </thead>
         <tbody>
+
+
+        <tr th:each= "schedule : ${staffavailability}">
+        <td th:text="${schedule.colorOption}">  </td>
+            <td th:text="${schedule.colorOption}">  </td>
+            <td th:text="${schedule.colorOption}">  </td>
+
+        </td>
+        </tr>
         <tr>
-            <th scope="row">1</th>
             <td>niet beschikbaar</td>
             <td>niet beschikbaar</td>
             <td>niet beschikbaar</td>
         </tr>
         <tr>
-            <th scope="row">2</th>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
             <td>niet beschikbaar</td>
             <td>niet beschikbaar</td>
             <td>niet beschikbaar</td>
