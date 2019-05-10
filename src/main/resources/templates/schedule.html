@@ -47,6 +47,14 @@
 </ul>
 <div class="container">
 
+<!--    <tr th:each="staffavailability:${schedules}">-->
+<!--        <td th:text="${staffavailability.cohort}">dag</td>-->
+
+<!--    </tr>-->
+
+
+<p class="container">
+
     <div class="dropdown">
         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -64,8 +72,13 @@
         </div>
     </div>
 
+<!--    <tr th:each="schedule : ${staffavailability}">-->
+<!--        <td th:text="${schedule.id}"> </td>-->
+<!--        <td><a href="#" th:text="${schedule.day}"> ...</a></td>-->
+<!--        <td th:text="${schedule.cohort}"> ...</td>-->
+<!--    </tr>-->
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">dagdeel</th>
@@ -86,7 +99,15 @@
             <td>Programmeren</td>
             <td>Advanced Programming</td>
             <td>Advanced Programming</td>
-        </tr>
+
+
+<!--        <tr th:each= "schedule : ${staffavailability}">-->
+<!--        <td th:text="${schedule.colorOption}">  </td>-->
+<!--            <td th:text="${schedule.colorOption}">  </td>-->
+<!--            <td th:text="${schedule.colorOption}">  </td>-->
+
+<!--        </td>-->
+<!--        </tr>-->
         <tr>
             <th scope="row">begin middag</th>
             <td>Databases</td>

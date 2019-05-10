@@ -16,19 +16,25 @@ public class StaffAvailibilityService {
 
     public List<StaffAvailability> getAllStaffAvailibility(int userId){
         ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
-        staffAvailibilityRepository.findByUserId(userId);
+        staffAvailibilityRepository.findByUserId(userId)
+                .forEach(staffAvailabilities::add);
         return staffAvailabilities;
 
     }
 
-    public void addStaffAvailibility( String cohort, String day, String color_option, String day_part){
-        StaffAvailability sa = new StaffAvailability();
-        sa.setCohort(cohort);
-        sa.setDay(day);
-        sa.setColorOption(color_option);
-        sa.setDayPart(day_part);
+    public void addStaffAvailibility(StaffAvailability sa){
         staffAvailibilityRepository.save(sa);
-
     }
+
+//    public void addStaffAvailibility(int id, String cohort, String day, String color_option, String day_part){
+//        StaffAvailability sa = new StaffAvailability();
+//        sa.setId(id);
+//        sa.setCohort(cohort);
+//        sa.setDay(day);
+//        sa.setColorOption(color_option);
+//        sa.setDayPart(day_part);
+//        staffAvailibilityRepository.save(sa);
+//
+//    }
 }
 
