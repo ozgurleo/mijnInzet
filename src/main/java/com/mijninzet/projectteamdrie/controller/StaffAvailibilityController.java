@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class StaffAvailibilityController {
@@ -26,12 +28,34 @@ public class StaffAvailibilityController {
         return "schedule";
     }
 
-    @RequestMapping("schedule/{id}")
-    @ResponseBody
-    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
-        return staffAvailibilityService.getAllStaffAvailibility(id);
-    }
 
+    @RequestMapping("schedule/{id}")
+    public String getAllschedule(Model model,@PathVariable Integer id ){
+        List<StaffAvailability> sa = staffAvailibilityService.getAllStaffAvailibility(id);
+        List<StaffAvailability>maandag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>disndag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>woensdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Woensdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>donderdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Donderdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>vrijdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
+                .collect(Collectors.toList());
+
+        model.addAttribute("maandag",maandag);
+        model.addAttribute("dinsdag",disndag);
+        model.addAttribute("woensdag",woensdag);
+        model.addAttribute("donderdag",donderdag);
+        model.addAttribute("vrijdag",vrijdag);
+
+        return "newschedule";
+    }
     @PostMapping("schedule/{userId}/new")
     @ResponseBody
     public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId) {
