@@ -23,7 +23,7 @@ public class TaskApplication {
 
     public TaskApplication() {
         super();
-        //this.task = new Task();
+       // this.task = new Task();
         this.userId = userId;
         this.applicationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.unsubcribeDate = unsubcribeDate;
@@ -32,7 +32,7 @@ public class TaskApplication {
     }
 
     public TaskApplication(int userId, DateFormat applicationDate, Date unsubcribeDate, int availableHours, String role) {
-       // this.task=new Task();
+      //  this.task=new Task();
         this.userId = userId;
         this.applicationDate = applicationDate;
         this.unsubcribeDate = unsubcribeDate;

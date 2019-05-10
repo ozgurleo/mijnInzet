@@ -12,12 +12,6 @@ public class TaskController {
     private TaskRepository taskRepository;
 
 
-    @RequestMapping(value = "/hello")
-    public String hello() {
-        return "hello";
-    }
-
-
     @RequestMapping(value = "/showTasks")
     public String makeVacancyList(Model model) {
         model.addAttribute("showTasks", taskRepository.getVacancies());
