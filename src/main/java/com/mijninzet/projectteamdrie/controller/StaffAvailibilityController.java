@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class StaffAvailibilityController {
@@ -28,11 +29,32 @@ public class StaffAvailibilityController {
         model.addAttribute("staffavailibility", new StaffAvailability());
         return "schedule";
     }
-
     @RequestMapping("schedule/{id}")
-    @ResponseBody
-    public List<StaffAvailability> getAllSchedule(@PathVariable Integer id) {
-        return staffAvailibilityService.getAllStaffAvailibility(id);
+    public String getAllschedule(Model model,@PathVariable Integer id ){
+        List<StaffAvailability> sa = staffAvailibilityService.getAllStaffAvailibility(id);
+        List<StaffAvailability>maandag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>disndag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>woensdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Woensdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>donderdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Donderdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>vrijdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
+                .collect(Collectors.toList());
+
+        model.addAttribute("maandag",maandag);
+        model.addAttribute("dinsdag",disndag);
+        model.addAttribute("woensdag",woensdag);
+        model.addAttribute("donderdag",donderdag);
+        model.addAttribute("vrijdag",vrijdag);
+
+        return "newschedule";
     }
 
     @PostMapping("schedule/{userId}/new")
