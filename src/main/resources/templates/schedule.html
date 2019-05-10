@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Rooster</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 </head>
 <body>
 
 <!-- Navigatie-menu -->
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-target="#navbarNavDropdown" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -27,11 +28,11 @@
                 <a class="nav-link" href="#">Pricing</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                   href="#" id="navbarDropdownMenuLink">
                     Dropdown link
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
@@ -46,84 +47,99 @@
     <li><a href="hello">Ga naar hoofdmenu</a></li>
 </ul>
 
-<p th:text="test"></p>
 
+<div class="dropdown">
+    <button aria-expanded="false" aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+            id="dropdownMenuButton" type="button">
+        Cohort
+    </button>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <table class="table table-hover" id="TaskTable7">
+                <thead>
+                <tr>
+                    <th scope="col">Dagdeel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Ochtend</th>
+                </tr>
+                <tr>
+                    <th scope="row">Middag</th>
+                </tr>
+                <tr>
+                    <th scope="row">Avond</th>
+                </tr>
 
-    <tr th:each="staffavailability:${schedules}">
-        <td th:text="${staffavailability.cohort}">dag</td>
+                </tbody>
 
-    </tr>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <table class="table table-hover" id="TaskTable">
+                <tr>
 
+                    <th scope="col">Maandag</th>
+                </tr>
 
-<p class="container">
+                <tr th:each="maandag:${maandag}">
 
-    <div class="dropdown">
-        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            Cohort
-        </button>
+                    <td th:text="${maandag.colorOption}">Maandag</td>
+                </tr>
+            </table>
+        </div>
 
-        <form action="/schedule" method="POST">
-            <button type="submit">Create new schedule</button>
-        </form>
+        <div class="col-md-2">
+            <table class="table table-hover" id="TaskTable2">
+                <tr>
+                    <th scope="col">Dinsdag</th>
+                </tr>
+                <tr th:each="dinsdag:${dinsdag}">
+                    <td th:text="${dinsdag.colorOption}">Dinsdag</td>
+                </tr>
+            </table>
+        </div>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+        <div class="col-md-2">
+            <table class="table table-hover" id="TaskTable3">
+                <tr>
+                    <th scope="col">Woensdag</th>
+                </tr>
+                <tr th:each="woensdag:${woensdag}">
+                    <td th:text="${woensdag.colorOption}">Woensdag</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-md-2">
+            <table class="table table-hover" id="TaskTable4">
+                <tr>
+                    <th scope="col">Donderdag</th>
+                </tr>
+                <tr th:each="donderdag:${donderdag}">
+                    <td th:text="${donderdag.colorOption}">Donderdag</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-2">
+            <table class="table table-hover" id="TaskTable5">
+                <tr>
+                    <th scope="col">Vrijdag</th>
+                </tr>
+                <tr th:each="vrijdag:${vrijdag}">
+                    <td th:text="${vrijdag.colorOption}">vrijdag</td>
+                </tr>
+
+            </table>
+
         </div>
     </div>
 
-<!--<h1>Form</h1>-->
-<!--<form action="#" th:action="@{/schedule}" th:object="${staffavailability}" method="post">-->
-    <!--<p>Cohort <input type="text" th:field="*{cohort}" /></p>-->
-    <!--<p>Message: <input type="text" th:field="*{content}" /></p>-->
-    <!--<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>-->
-<!--</form>-->
-
-
-    <tr th:each="schedule : ${staffavailability}">
-        <td th:text="${schedule.id}"> </td>
-        <td><a href="#" th:text="${schedule.day}"> ...</a></td>
-        <td th:text="${schedule.cohort}"> ...</td>
-    </tr>
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">maandag </th>
-            <th scope="col">dinsdag</th>
-            <th scope="col">woensdag</th>
-            <th scope="col">donderdag</th>
-            <th scope="col">vrijdag</th>
-            <th scope="col">zaterdag</th>
-            <th scope="col">zondag</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        <tr th:each= "schedule : ${staffavailability}">
-        <td th:text="${schedule.colorOption}">  </td>
-            <td th:text="${schedule.colorOption}">  </td>
-            <td th:text="${schedule.colorOption}">  </td>
-
-        </td>
-        </tr>
-        <tr>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-        </tr>
-        <tr>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 </body>
 </html>

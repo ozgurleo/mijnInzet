@@ -35,7 +35,7 @@ public class StaffAvailibilityController {
         List<StaffAvailability>maandag=sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
                 .collect(Collectors.toList());
-        List<StaffAvailability>disndag=sa.stream()
+        List<StaffAvailability>dinsdag=sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
                 .collect(Collectors.toList());
         List<StaffAvailability>woensdag=sa.stream()
@@ -49,12 +49,13 @@ public class StaffAvailibilityController {
                 .collect(Collectors.toList());
 
         model.addAttribute("maandag",maandag);
-        model.addAttribute("dinsdag",disndag);
+        model.addAttribute("dinsdag",dinsdag);
         model.addAttribute("woensdag",woensdag);
         model.addAttribute("donderdag",donderdag);
         model.addAttribute("vrijdag",vrijdag);
 
-        return "newschedule";
+
+        return "schedule";
     }
 
     @PostMapping("schedule/{userId}/new")
