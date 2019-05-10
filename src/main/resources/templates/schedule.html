@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Rooster</title>
@@ -45,10 +45,6 @@
     <li><a href="//localhost:8081/schedule/"> Ga naar weekrooster</a></li>
     <li><a href="hello">Ga naar hoofdmenu</a></li>
 </ul>
-
-<p th:text="test"></p>
-
-
 <div class="container">
 
     <div class="dropdown">
@@ -72,6 +68,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th scope="col">dagdeel</th>
             <th scope="col">maandag</th>
             <th scope="col">dinsdag</th>
             <th scope="col">woensdag</th>
@@ -83,22 +80,28 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row">1</th>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
+            <th scope="row">ochtend</th>
+            <td>Wiskunde</td>
+            <td>Programmeren</td>
+            <td>Programmeren</td>
+            <td>Advanced Programming</td>
+            <td>Advanced Programming</td>
         </tr>
         <tr>
-            <th scope="row">2</th>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
+            <th scope="row">begin middag</th>
+            <td>Databases</td>
+            <td>Databases</td>
+            <td>OOP</td>
+            <td>Advanced Programming</td>
+            <td>Advanced Programming</td>
         </tr>
         <tr>
-            <th scope="row">3</th>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
-            <td>niet beschikbaar</td>
+            <th scope="row">eind middag</th>
+            <td>Vrij</td>
+            <td>OOP</td>
+            <td>Advanced Programming</td>
+            <td>Advanced Programming</td>
+            <td>Vrij</td>
         </tr>
         </tbody>
     </table>
