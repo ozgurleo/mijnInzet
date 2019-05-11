@@ -17,8 +17,8 @@ public class TaskApplicationController {
     // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
     // hiermee kun je een sollicatatie in de mysql-tabel task_application opslaan
     @PostMapping(value = "/showTasks")
-    public void addTaskApplication(@RequestBody TaskApplication taskApplication) {
-        taskApplicationRepo.save(taskApplication);
+    public void addTaskApplication(@RequestBody TaskApplication taskAppList) {
+        taskApplicationRepo.save(taskAppList);
     }
 
     // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
@@ -27,7 +27,6 @@ public class TaskApplicationController {
     public void addTaskApplicationList(@RequestBody List<TaskApplication> taskAppList) {
         taskApplicationRepo.saveAll(taskAppList);
     }
-
 
 
     // deze methode komt van Huub"

@@ -5,7 +5,6 @@
     <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -32,68 +31,48 @@
                    aria-haspopup="true" aria-expanded="false">
                     Dropdown link
                 </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
             </li>
         </ul>
     </div>
 </nav>
 
-
+<h2> Vacatureoverzicht</h2>
 
 <a href="hello">Ga naar hoofdmenu</a>
-<form>
 
-    <div class="col-xs-6">
-        <h2 class="Vacatures">VACATURES</h2>
-        <div class="table-responsive">
-<table class="table table-striped">
-    <tablehead>
+<h3> Klik op taak als je wilt solliciteren</h3>
+<table id="TaskTable">
     <tr>
-        <th>Vacature_nr</th>
-        <th> VacatureOmschrijving</th>
+        <th>Taak_nr</th>
+        <th>Taak</th>
         <th>Begrootte Uren</th>
         <th>Geldigheidsduur</th>
-        <th>Plaats in mand</th>
+        <th>Solliciteer</th>
+
     </tr>
-    </tablehead>
-    <tablebody>
+
     <tr th:each="task:${showTasks}">
         <td th:text="${task.taskId}">Taak_nr</td>
         <td th:text="${task.taskName}">Taak</td>
         <td th:text="${task.estimatedHours}">Begrootte Uren</td>
         <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+
         <td>
-         <div class="custom-control custom-checkbox">
-           <td> <input type="checkbox" selectionMode="" class="custom-control-input" id="${task.taskId}">
-           <label class="custom-control-label" for="${task.taskId}"></label></td>
-         </div>
+            <div class="custom-control custom-checkbox">
+               <td> <input type="checkbox" class="custom-control-input" id="${task.taskId}">
+                <label class="custom-control-label" for="${task.taskId}"></label></td>
+            </div>
 
         </td>
+
     </tr>
-        </tablebody>
+
 
 </table>
-    </div>
-    </div>
-
-    <div class="col-xs-6">
-        <h2 class="VacatureMand">VACATUREMAND</h2>
-        <div class="table-responsive">
-    <table class="table table-striped">
-        <tablehead>
-        <tr>
-            <th>Vacature_nr</th>
-            <th>VacatureOmschrijving</th>
-            <th>Beschikbare uren</th>
-        </tr>
-        </tablehead>
-
-         <tablebody>
-        </tablebody>
-
-    </table>
-    </div>
-    </div>
-
-</form>
 </body>
 </html>

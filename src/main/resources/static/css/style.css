@@ -17,9 +17,32 @@
     padding: 4px;
 }
 
+#TaskTable{
+    width:100%;
+    border-collapse:collapse;
+}
+#TaskTable td{
+    padding:7px; border:#4e95f4 1px solid;
+}
+/* Define the default color for all the table rows */
+#TaskTable tr{
+    background: #b8d1f3;
+}
+/* Define the hover highlight color for the table row */
+#TaskTable tr:hover {
+    background-color: #ffff99;
+}
+
+
 #TaskTable tr:nth-child(even){background-color: #f2f2f2;}
 
-#TaskTable tr:hover {background-color: #ddd;}
+
+
+
+
+/*#TaskTable tr:hover {background-color: #ddd;}
 #sollicitatieButton {background-color: #5c4d84;
     text-align: -moz-center;
     color: white;}
+
+ */
