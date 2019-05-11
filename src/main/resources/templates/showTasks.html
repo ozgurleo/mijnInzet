@@ -11,7 +11,11 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">VACATUREBEHEER</a>
+    <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
+    <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
+    <a class="nav-link" href="/hello">terug naar HOOFDMENU</a>
+    <a class="nav-link" href="/hello">LOGOUT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,14 +23,18 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">terug naar HOOFDMENU</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">BEHEER ROOSTER</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">BEHEER VAKKEN</a>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -39,14 +47,15 @@
 
 
 
-<a href="hello">Ga naar hoofdmenu</a>
-<form>
 
-    <div class="col-xs-6">
-        <h2 class="Vacatures">VACATURES</h2>
-        <div class="table-responsive">
-<table class="table table-striped">
+
+<div class="row">
+
+        <div class="table-responsive col-sm-6">
+<table class="table table-hover">
+
     <tablehead>
+        <h6 class="Vacatures">VACATURES</h6>
     <tr>
         <th>Vacature_nr</th>
         <th> VacatureOmschrijving</th>
@@ -55,31 +64,33 @@
         <th>Plaats in mand</th>
     </tr>
     </tablehead>
+
     <tablebody>
     <tr th:each="task:${showTasks}">
         <td th:text="${task.taskId}">Taak_nr</td>
         <td th:text="${task.taskName}">Taak</td>
         <td th:text="${task.estimatedHours}">Begrootte Uren</td>
         <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
-        <td>
-         <div class="custom-control custom-checkbox">
-           <td> <input type="checkbox" selectionMode="" class="custom-control-input" id="${task.taskId}">
-           <label class="custom-control-label" for="${task.taskId}"></label></td>
-         </div>
 
+        <td>
+            <div class="custom-control custom-checkbox">
+            <input type="checkbox" value="hello" />
+            </div>
         </td>
+
     </tr>
-        </tablebody>
+    </tablebody>
 
 </table>
     </div>
-    </div>
 
-    <div class="col-xs-6">
-        <h2 class="VacatureMand">VACATUREMAND</h2>
-        <div class="table-responsive">
+
+
+
+        <div class="table-responsive col-sm-6">
     <table class="table table-striped">
         <tablehead>
+            <h6 class="VacatureMand">VACATUREMAND</h6>
         <tr>
             <th>Vacature_nr</th>
             <th>VacatureOmschrijving</th>
@@ -92,8 +103,9 @@
 
     </table>
     </div>
-    </div>
+</div>
 
-</form>
+
+
 </body>
 </html>
