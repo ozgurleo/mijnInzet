@@ -58,6 +58,34 @@ public class StaffAvailibilityController {
         return "schedule";
     }
 
+    @RequestMapping("schedule/{id}/{cohort}")
+    public String GetAllSchedulesByIdAndCohort(Model model, @PathVariable Integer id, @PathVariable String cohort){
+        List<StaffAvailability> sa = staffAvailibilityService.getAllStaffAvailibilityByIdAndCohort(id,cohort);
+        List<StaffAvailability>maandag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>dinsdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>woensdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Woensdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>donderdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Donderdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability>vrijdag=sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
+                .collect(Collectors.toList());
+
+        model.addAttribute("maandag",maandag);
+        model.addAttribute("dinsdag",dinsdag);
+        model.addAttribute("woensdag",woensdag);
+        model.addAttribute("donderdag",donderdag);
+        model.addAttribute("vrijdag",vrijdag);
+
+        return "schedule";
+    }
+
     @PostMapping("schedule/{userId}/new")
     @ResponseBody
     public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId) {

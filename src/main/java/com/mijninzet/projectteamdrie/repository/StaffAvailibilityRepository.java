@@ -15,5 +15,7 @@ public interface StaffAvailibilityRepository extends JpaRepository<StaffAvailabi
 
     List<StaffAvailability> findAllByCohort(String cohort);
 
+    List<StaffAvailability> findAllByUserIdAndCohort(int id, String cohort);
+
 }
 
