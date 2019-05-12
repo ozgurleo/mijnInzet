@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welkomstscherm</title>
-<!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>AddUsers</title>
 </head>
-
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
@@ -42,21 +41,26 @@
     </div>
 </nav>
 
-<!-- Hoofdtekst -->
-<h1>MijnInzet de roosteraar applicatie</h1>
-<h2>Team 3 NoPressure</h2>
-<p>Esther, Brahim, Semih, Ozgur, Hans</p>
+<h2>Voorkeur voor beschikbaarheid per vak opgeven</h2>
 
-<!-- Navigatie-menu -->
-<ul class="navbar">
-    <li><a href="showTasks">Ga naar vactureoverzicht</a></li>
-    <li><a href="showSubjects">Ga naar vakkenvoorkeur</a></li>
-    <li><a href="addUsers">Voeg gebruiker toe</a></li>
-    <li><a href="schedule"> Ga naar weekrooster</a></li>
-</ul>
+<a href="hello">Ga naar hoofdmenu</a>
 
-<!-- Onderteken en dateer de pagina, wees beleefd! -->
-<address>voorjaar 2019<br></address>
+<h3> Klik op het vak om je voorkeur op te geven</h3>
+<table id="SubjectTable">
+    <tr>
+        <th>Vaknummer</th>
+        <th>Vak</th>
+        <th>Begrootte Uren</th>
+        <th>Geldigheidsduur</th>
+    </tr>
 
+    <tr th:each="subject:${showSubjects}">
+        <td th:text="${subject.subjectId}">-1</td>
+        <td th:text="${subject.subjectName}">-1</td>
+        <td th:text="${subject.estimatedHours}">-1</td>
+        <td th:text="${subject.yearsToExpiryDate}">-1</td>
+    </tr>
+
+</table>
 </body>
 </html>

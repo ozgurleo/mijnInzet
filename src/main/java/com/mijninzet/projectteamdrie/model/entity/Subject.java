@@ -1,49 +1,42 @@
 package com.mijninzet.projectteamdrie.model.entity;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
-
 
 @Entity
-@Table(name = "Task")
-public class Task {
-
-    @Id
-    private int taskId;
-    private String taskName;
+@Table(name = "subject")
+public class Subject {
+       @Id
+    private int subjectId;
+    private String subjectName;
     private int estimatedHours;
     private int yearsToExpiryDate;
-//    @OneToMany(mappedBy = "task")
-//    private List<TaskApplication> taskApplication;
 
-    public Task() {
+    public Subject() {
         this(0, "", 0, 0);
     }
 
-    public Task(int taskId, String taskName, int estimatedHours, int yearsToExpiryDate) {
-        this.taskId = taskId;
-        this.taskName = taskName;
+    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate) {
+        this.subjectId = subjectId;
+        this.subjectName = subjectName;
         this.estimatedHours = estimatedHours;
         this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
     public int getEstimatedHours() {

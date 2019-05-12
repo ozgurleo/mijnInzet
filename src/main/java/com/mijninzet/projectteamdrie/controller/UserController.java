@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -50,23 +51,26 @@ private UserService userService;
 
     @RequestMapping("/login")
     public String getLoginForm(){
+
         return "login";
     }
-//    @RequestMapping(value = "/login",method = RequestMethod.POST)
-//    public String login( Model model,@ModelAttribute("newUser") User newUser) {
-//        List<User> users=userService.getAllUsers();
-//        model.addAttribute("users",users);
-//        for(int i=0; i<users.size();i++){
-//            String username=users.get(i).getUsername();
-//            String password=users.get(i).getPassword();
-//
-//            if(newUser.getUsername().equals(username)&& newUser.getPassword().equals(password)){
-//                return "hello";
-//            }
-//            model.addAttribute("invalidCredentials",true);
-//            return "login";
-//
-//    }
-//        return "login";
-//}
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login( Model model,
+                         @ModelAttribute("user") User user ) {
+
+
+        List<User> users = userService.getAllUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+
+            String username = users.get(i).getUsername();
+            String password = users.get(i).getPassword();
+
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return "hello";
+            }
+            model.addAttribute("invalidCredentials", true);
+        }
+        return "login";
+    }
 }

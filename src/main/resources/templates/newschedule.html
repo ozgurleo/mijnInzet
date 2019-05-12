@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http:/www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rooster</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <table id="TaskTable7" class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Ochtend</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Middag</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Avond</th>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <table id="TaskTable" class="table table-dark" >
+                        <tr>
+
+                            <th scope="col">Maandag</th>
+                        </tr>
+
+                        <tr th:each="maandag:${maandag}">
+
+                            <td th:text="${maandag.colorOption}">Maandag</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-2">
+                    <table id="TaskTable2" class="table table-dark" >
+                        <tr>
+
+                            <th scope="col">Dinsdag</th>
+                        </tr>
+
+                        <tr th:each="dinsdag:${dinsdag}">
+
+                            <td th:text="${dinsdag.colorOption}">Dinsdag</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <table id="TaskTable3" class="table table-dark" >
+                        <tr>
+
+                            <th scope="col">Woensdag</th>
+                        </tr>
+
+                        <tr th:each="woensdag:${woensdag}">
+
+                            <td th:text="${woensdag.colorOption}">Woensdag</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <table id="TaskTable4" class="table table-dark" >
+                        <tr>
+
+                            <th scope="col">Donderdag</th>
+                        </tr>
+
+                        <tr th:each="donderdag:${donderdag}">
+
+                            <td th:text="${donderdag.colorOption}">Donderdag</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <table id="TaskTable5" class="table table-dark" >
+                        <tr>
+
+                            <th scope="col">Vrijdag</th>
+                        </tr>
+
+                        <tr th:each="vrijdag:${vrijdag}">
+
+                            <td th:text="${vrijdag.colorOption}">vrijdag</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

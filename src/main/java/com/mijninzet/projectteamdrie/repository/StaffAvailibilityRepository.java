@@ -11,4 +11,9 @@ import java.util.List;
 public interface StaffAvailibilityRepository extends JpaRepository<StaffAvailability,Integer> {
     List<StaffAvailability> findByUserId(int id);
 
+    List<StaffAvailability> findAll();
+
+    List<StaffAvailability> findAllByCohort(String cohort);
+
 }
+

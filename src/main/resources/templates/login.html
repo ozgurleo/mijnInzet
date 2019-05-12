@@ -11,9 +11,9 @@
 <form th:action="@{/login}" th:object="${user}" method="post">
     <p th:if="${invalidCredentials}" class="error" >Username or Password is wrong.</p>
     <label for="username">Username</label>
-    <input type="text" id="username" name="username">
+    <input type="text" id="username" th:field="*{username}">
     <label for="password" >Password</label>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" th:field="*{password}">
 <br>
     <input type="submit" value="Log in">
 
