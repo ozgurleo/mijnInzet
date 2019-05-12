@@ -11,8 +11,8 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">SOLLICITATIEMAND</a>
+    <a class="navbar-brand" href="#">SOLLICITATIEMAND</a>
+    <a class="nav-link" href="/showTasks">VAKATUREBEHEER</a>
     <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
     <a class="nav-link" href="/hello"><h6>HOOFDMENU</h6></a>
@@ -51,45 +51,38 @@
 
 
 <div class="row">
+
         <div class="table-responsive col-sm-6">
 <table class="table table-hover">
 
-    <tablehead>
-        <h6 class="Vacatures">VACATURES</h6>
-    <tr>
-        <th>Vacature_nr</th>
-        <th> VacatureOmschrijving</th>
-        <th>Begrootte Uren</th>
-        <th>Geldigheidsduur</th>
-        <th>SOLLICITATIEMAND</th>
-    </tr>
-    </tablehead>
+         <div class="table-responsive col-sm-6">
+    <table class="table table-striped">
+        <tablehead>
+            <h6 class="VacatureMand">SOLLICITATIEMAND</h6>
+        <tr>
+            <th>Vacature_nr</th>
+            <th>VacatureOmschrijving</th>
+            <th>Beschikbare uren</th>
+            <th>Verwijder</th>
+        </tr>
+        </tablehead>
 
-    <tablebody>
-    <tr th:each="task:${showTasks}">
-        <td th:text="${task.taskId}">Taak_nr</td>
-        <td th:text="${task.taskName}">Taak</td>
-        <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+         <tablebody>
+             <tr>
+                 <td>Vacature_nr</td>
+                 <td>VacatureOmschrijving</td>
+                 <td>Beschikbare uren</td>
+                 <td>
+                     <div>
+                         <button type="button" class="btn btn-warning">Verwijder</button>
+                     </div>
+                 </td>
+             </tr>
+        </tablebody>
 
-        <td>
-            <div>
-                <input type="submit" value="        " name="subscribe" id="mc-embedded-subscribe"
-                       class="btn btn-info" onclick="this.value='toegevoegd';
-                       this.style.backgroundColor='green';">
-
-                </input>
-            </div>
-        </td>
-
-    </tr>
-    </tablebody>
-
-</table>
+    </table>
     </div>
 </div>
-
-
 
 </body>
 </html>
