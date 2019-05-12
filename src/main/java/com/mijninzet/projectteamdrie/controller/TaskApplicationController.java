@@ -12,7 +12,6 @@ import java.util.List;
 
 @Controller
 public class TaskApplicationController {
-
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
