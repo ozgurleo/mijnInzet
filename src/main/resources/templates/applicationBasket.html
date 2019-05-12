@@ -11,7 +11,7 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">SOLLICITATIEMAND</a>
+    <a class="navbar-brand" href="#">Mijn inzet: SOLLICITATIEMAND</a>
     <a class="nav-link" href="/showTasks">VAKATUREBEHEER</a>
     <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
@@ -59,25 +59,23 @@
                 <h6 class="Vacatures">VACATURES</h6>
                 <tr>
                     <th>Vacature_nr</th>
-                    <th> VacatureOmschrijving</th>
-                    <th>Begrootte Uren</th>
-                    <th>Geldigheidsduur</th>
-                    <th>SOLLICITATIEMAND</th>
+                    <th>Vacaturenaam</th>
+                    <th>Beschikbare uren</th>
+
                 </tr>
             </tablehead>
 
             <tablebody>
-                <tr th:each="task:${showTasks}">
-                    <td th:text="${task.taskId}">Taak_nr</td>
-                    <td th:text="${task.taskName}">Taak</td>
-                    <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-                    <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+                <tr >
+                    <td th:text="Vacature_nr">Taak_nr</td>
+                    <td th:text="Vacaturenaam">Taak</td>
+                    <td th:text="Beschikbare uren">Begrootte Uren</td>
 
                     <td>
                         <div>
-                            <input type="submit" value="   voeg toe   " name="subscribe" id="mc-embedded-subscribe"
-                                   class="btn btn-info" onclick="this.value='toegevoegd';
-                       this.style.backgroundColor='green';">
+                            <input type="submit" value=" verwijder " name="subscribe" id="mc-embedded-subscribe"
+                                   class="btn btn-info" onclick="this.value='verwijderd';
+                       this.style.backgroundColor='red';">
 
                             </input>
                         </div>

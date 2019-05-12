@@ -11,3 +11,4 @@ in de variable "applicationBasketTableData" gestopt
  */
 var applicationBasketTableData  = sessionStorage.getItem( "showTaskTable" );
 $("#taskTable").html( showTaskTable );
+
