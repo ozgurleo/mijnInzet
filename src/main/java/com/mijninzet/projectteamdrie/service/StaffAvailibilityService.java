@@ -22,6 +22,13 @@ public class StaffAvailibilityService {
 
     }
 
+    public List<StaffAvailability> getAllStaffAvailibilityByIdAndCohort(int userId, String cohort){
+        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
+        staffAvailibilityRepository.findAllByUserIdAndCohort(userId, cohort)
+                .forEach(staffAvailabilities::add);
+        return staffAvailabilities;
+    }
+
     public void addStaffAvailibility(StaffAvailability sa){
         staffAvailibilityRepository.save(sa);
     }
