@@ -51,8 +51,8 @@
 
 
 <div class="row">
-        <div class="table-responsive col-sm-6">
-<table id="taskTable" class="table table-striped">
+        <div class="table-responsive col-sm-10">
+<table id="taskTable" class="table table-striped w-auto">
 
     <tablehead>
         <h6 class="Vacatures">VACATURES</h6>
@@ -71,11 +71,10 @@
         <td th:text="${task.taskName}">Taak</td>
         <td th:text="${task.estimatedHours}">Begrootte Uren</td>
         <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
-
         <td>
             <div>
                 <input type="submit" value="klik om te solliciteren" name="subscribe" id="mc-embedded-subscribe"
-                       class="btn btn-info" onclick="this.value='Je hebt gesolliciteerd';
+                       class="btn btn-info" onclick="this.value='sollicitatie is verzonden';
                        this.style.backgroundColor='green';">
 
                 </input>
@@ -90,6 +89,6 @@
 </div>
 
 
-<script src = brahimTask.js ></script>
+
 </body>
 </html>
