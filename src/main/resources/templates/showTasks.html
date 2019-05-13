@@ -47,48 +47,45 @@
 </nav>
 
 
-
-
-
 <div class="row">
-        <div class="table-responsive col-sm-6">
-<table id="taskTable" class="table table-striped">
+    <div class="table-responsive col-sm-6">
+        <table id="taskTable" class="table table-striped">
 
-    <tablehead>
-        <h6 class="Vacatures">VACATURES</h6>
-    <tr>
-        <th>Vacature_nr</th>
-        <th> VacatureOmschrijving</th>
-        <th>Begrootte Uren</th>
-        <th>Geldigheidsduur</th>
-        <th>SOLLICITATIEMAND</th>
-    </tr>
-    </tablehead>
+            <tablehead>
+                <h6 class="Vacatures">VACATURES</h6>
+                <tr>
+                    <th>Vacature_nr</th>
+                    <th> VacatureOmschrijving</th>
+                    <th>Begrootte Uren</th>
+                    <th>Geldigheidsduur</th>
+                    <th>SOLLICITATIEMAND</th>
+                </tr>
+            </tablehead>
 
-    <tablebody>
-    <tr th:each="task:${showTasks}">
-        <td th:text="${task.taskId}">Taak_nr</td>
-        <td th:text="${task.taskName}">Taak</td>
-        <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+            <tablebody>
+                <tr th:each="task:${showTasks}">
+                    <td th:text="${task.taskId}">Taak_nr</td>
+                    <td th:text="${task.taskName}">Taak</td>
+                    <td th:text="${task.estimatedHours}">Begrootte Uren</td>
+                    <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
 
-        <td>
-            <div>
-                <input type="submit" value="   voeg toe   " name="subscribe" id="mc-embedded-subscribe"
-                       class="btn btn-info" onclick="this.value='toegevoegd';
+                    <td>
+                        <div>
+                            <input type="submit" value="   voeg toe   " name="subscribe" id="mc-embedded-subscribe"
+                                   class="btn btn-info" onclick="this.value='toegevoegd';
                        this.style.backgroundColor='green';">
 
-                </input>
-            </div>
-        </td>
-    </tr>
-    </tablebody>
+                            </input>
+                        </div>
+                    </td>
+                </tr>
+            </tablebody>
 
-</table>
+        </table>
     </div>
 </div>
 
 
-<script src = brahimTask.js ></script>
+<script src=brahimTask.js></script>
 </body>
 </html>
