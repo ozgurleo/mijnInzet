@@ -5,7 +5,7 @@
     <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src = brahimTask.js ></script>
+
 </head>
 
 <body>
@@ -54,41 +54,42 @@
 <div class="row">
     <div class="table-responsive col-sm-6">
         <table id = showTaskTable class="table table-striped">
+            <h6 class="SOLLICITATIES">SOLLICITATIES</h6>
+
+
 
             <tablehead>
-                <h6 class="Vacatures">VACATURES</h6>
-                <tr>
-                    <th>Vacature_nr</th>
-                    <th>Vacaturenaam</th>
-                    <th>Beschikbare uren</th>
-
+                <h id="IDS"></h>
+               <tr>
+                    <th> Vacaturenr </th>
+                    <th> Vacaturetitel </th>
+                    <th>              </th>
                 </tr>
             </tablehead>
 
             <tablebody>
-                <tr >
-                    <td th:text="Vacature_nr">Taak_nr</td>
-                    <td th:text="Vacaturenaam">Taak</td>
-                    <td th:text="Beschikbare uren">Begrootte Uren</td>
-
+                <tr>
+                    <td text="">Vacaturenr</td>
+                    <td text="">Vacaturetitel</td>
                     <td>
                         <div>
                             <input type="submit" value=" verwijder " name="subscribe" id="mc-embedded-subscribe"
-                                   class="btn btn-info" onclick="this.value='verwijderd';
+                                   class="btn btn-info" onclick="this.value='verwijderd!';
                        this.style.backgroundColor='red';">
 
                             </input>
                         </div>
                     </td>
-
                 </tr>
             </tablebody>
+
+
 
         </table>
     </div>
 </div>
 
 
-
+<script src = brahimTask.js ></script>
 </body>
 </html>
