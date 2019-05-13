@@ -30,6 +30,10 @@ public class Task {
         this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
+    public Task(int taskId) {
+        this.taskId=taskId;
+    }
+
     public int getTaskId() {
         return taskId;
     }

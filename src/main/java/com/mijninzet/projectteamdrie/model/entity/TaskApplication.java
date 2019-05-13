@@ -8,36 +8,39 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 public class TaskApplication {
     @Id
     private int userId;
-    private DateFormat applicationDate;
-    private Date unsubcribeDate;
+    private LocalDate applicationDate;
+    private LocalDate unsubcribeDate;
     private int availableHours;
     private String role;
-//    @ManyToOne
-//    @JoinColumn(name="task_task_id")
-//    private Task task;
+    @ManyToOne
+    @JoinColumn(name="task_task_id")
+    private Task task;
 
     public TaskApplication() {
-        super();
-       // this.task = new Task();
+      // this.task = new Task();
+        task.setTaskId(0);
         this.userId = userId;
-        this.applicationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.applicationDate = LocalDate.now();
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
     }
 
-    public TaskApplication(int userId, DateFormat applicationDate, Date unsubcribeDate, int availableHours, String role) {
-      //  this.task=new Task();
+    public TaskApplication(int userId, LocalDate applicationDate, LocalDate unsubcribeDate, int availableHours, String role, int taskId) {
+      // this.task=new Task();
+
         this.userId = userId;
-        this.applicationDate = applicationDate;
+        this.applicationDate = LocalDate.now();
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
+        this.task=new Task(taskId);
     }
 
 
@@ -50,19 +53,19 @@ public class TaskApplication {
         this.userId = userId;
     }
 
-    public DateFormat getApplicationDate() {
+    public LocalDate getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(DateFormat applicationDate) {
+    public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }
 
-    public Date getUnsubcribeDate() {
+    public LocalDate getUnsubcribeDate() {
         return unsubcribeDate;
     }
 
-    public void setUnsubcribeDate(Date unsubcribeDate) {
+    public void setUnsubcribeDate(LocalDate unsubcribeDate) {
         this.unsubcribeDate = unsubcribeDate;
     }
 

@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
@@ -22,27 +26,23 @@ public class TaskApplicationController {
 
     // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
     // hiermee kun je een sollicatatie in de mysql-tabel task_application opslaan
-    @PostMapping(value = "/applicationBasket")
-    public void addTaskApplication(@RequestBody TaskApplication taskAppList) {
-        taskApplicationRepo.save(taskAppList);
+    @PostMapping(value="/showTasks")
+    public String storeTaskApplication(@ModelAttribute TaskApplication taskApplication, Model model) {
+
+        String role="Default_Docent";
+        LocalDate todaysDate= LocalDate.now();
+
+//        model.addAttribute("naam1", taskApplication.getUserId());
+//        model.addAttribute("naam1", taskApplication.getUserId());
+//        model.addAttribute("naam1", taskApplication.getUserId());
+//        model.addAttribute("naam1", taskApplication.getUserId());
+//        model.addAttribute("naam1", taskApplication.getUserId());
+
+        taskApplication= new TaskApplication(1,todaysDate,null,16,role,1000000);
+
+
+        return "/showTasks";
     }
 
-//    // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
-//    // hiermee kun je meerdere sollicataties (in een lijst)  in de mysql-tabel task_application opslaan
-//    @PostMapping(value = "/applicationBasket")
-//    public void addTaskApplicationList(@RequestBody List<TaskApplication> taskAppList) {
-//        taskApplicationRepo.saveAll(taskAppList);
-//    }
-//
-//
-//    // deze methode komt van Huub"
-//    // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
-//    // hiermee kun je meerdere sollicataties (in een lijst)  in de mysql-tabel task_application opslaan
-//    @PostMapping(value = "/applicationBasket")
-//    public String addTaskApplicationList(@ModelAttribute TaskApplication taskAppList, Model model) {
-//        taskApplicationRepo.save(taskAppList);
-//        //na de save ga dan terug naar webpage /showTasks
-//        return "applicationBasket";
-//    }
 
 }
