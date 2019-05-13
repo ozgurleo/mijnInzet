@@ -3,6 +3,7 @@ package com.mijninzet.projectteamdrie.repository;
 
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface StaffAvailibilityRepository extends JpaRepository<StaffAvailabi
     List<StaffAvailability> findAll();
 
     List<StaffAvailability> findAllByCohort(String cohort);
+
+    List<StaffAvailability> findAllByUserIdAndCohort(int id, String cohort);
 
 }
 
