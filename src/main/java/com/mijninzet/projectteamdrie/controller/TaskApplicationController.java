@@ -29,11 +29,15 @@ public class TaskApplicationController {
 
 
     @PostMapping(value = "/taskApplications/{availableHours}/{taskID}")
-    public String insertTaskAppl(@PathVariable("availableHours") int hours,@PathVariable("taskId") int taskID){
-       //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
-        int userId=1;
+    @ResponseBody
+    public String insertTaskAppl(@RequestParam("availableHours") int hours,@RequestParam("taskId") int taskID){
+
+        System.out.println("methode is aangeroepen!");
         System.out.println("de ingelezen taskid waarde is: " + taskID );
         System.out.println("de ingelezen availableHours waarde is: " + hours );
+
+        //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
+        int userId=1;
         LocalDate todaysDate=LocalDate.now();
         taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",taskID);
 

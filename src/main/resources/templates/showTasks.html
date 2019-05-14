@@ -43,19 +43,22 @@
                 <tr th:each="task:${showTasks}">
 
                     <form>
-                        <td th:text="${task.taskId}">Taak_nr</td>
+                        <td>
+                            <input style="background-color: transparent;border: #FF1C19" type="${task.taskId}" th:value="${task.taskId}"  readonly/>
+
+                        </td>
                     </form>
                     <td th:text="${task.taskName}">Taak</td>
                     <td th:text="${task.estimatedHours}">Begrootte Uren</td>
                     <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
                     <form>
                        <td>
-                    <INPUT TYPE="text" NAME ="availableHours" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11" form = "my_form"/>
+                    <input style="background-color: transparent;border-color: brown;border-style:solid" TYPE="text" NAME ="numbers" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11" form = "my_form" />
                        </td>
 
                         <td>
                             <div>
-                        <input type="submit" value="klik om te solliciteren" name="submit" id="mc-embedded-subscribe" form="my_form"
+                        <input  type="submit" value="klik om te solliciteren" name="submit" id="mc-embedded-subscribe" form="my_form"
                             class="btn btn-info" onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
                         </input>
                             </div>
