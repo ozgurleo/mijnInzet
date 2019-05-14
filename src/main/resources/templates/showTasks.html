@@ -35,7 +35,7 @@
                     <th>Begrootte Uren</th>
                     <th>Geldigheidsduur</th>
                     <th>Geef jouw uren op</th>
-                    <th>SOLLICITATIEMAND</th>
+                    <th>SOLLICITEER</th>
                 </tr>
             </tablehead>
 
@@ -44,7 +44,7 @@
 
                     <form>
                         <td>
-                            <input style="background-color: transparent;border: #FF1C19" type="${task.taskId}" th:value="${task.taskId}"  readonly/>
+                            <input style="background-color: transparent;border: #FF1C19" type="${task.taskId}" th:value="${task.taskId}" size="4" readonly/>
 
                         </td>
                     </form>
@@ -53,7 +53,7 @@
                     <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
                     <form>
                        <td>
-                    <input style="background-color: transparent;border-color: brown;border-style:solid" TYPE="text" NAME ="numbers" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11" form = "my_form" />
+                    <input TYPE="text" NAME ="numbers" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11" form = "my_form" style="background-color: transparent;border-color: brown;border-style:solid;text-align: center"  />
                        </td>
 
                         <td>
