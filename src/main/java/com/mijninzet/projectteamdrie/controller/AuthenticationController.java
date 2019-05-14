@@ -58,7 +58,7 @@ public class AuthenticationController {
             modelMap.addAttribute("bindingResult", bindingResult);
         }
         else if(userService.isUserAlreadyPresent(user)){
-            modelAndView.addObject("successMessage", "user already exists!");
+            modelAndView.addObject("successMessage", "User already exists!");
         }
         // we will save the user if, no binding errors
         else {
