@@ -22,19 +22,7 @@ public class TaskApplicationController {
         return "applicationBasket";
     }
 
-    // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
-    // hiermee kun je een sollicatatie in de mysql-tabel task_application opslaan
-    @PostMapping(value = "/applicationBasket")
-    public void addTaskApplication(@RequestBody TaskApplication taskAppList) {
-        taskApplicationRepo.save(taskAppList);
-    }
-
-    @PostMapping(value = "/showTasks/{userId}/{applicationDate}/{unsubcribeDate}/{availableHours}/{role,taskID}")
-    public void insertTaskApplication(@RequestBody TaskApplication taskAppList) {
-        LocalDate applicationDate= LocalDate.now();
-                taskApplicationRepo.insertTaskapplication(userId, applicationDate, null, availableHours, role,taskID);
-    }
-
+    
 
 
 
