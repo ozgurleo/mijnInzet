@@ -23,6 +23,6 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
     @Query(value="INSERT INTO task_application (userId, applicationDate, unsubcribeDate, availableHours, role,taskID);", nativeQuery = true)
     @Transactional
     void insertTaskapplication(@Param("userId")Integer userId, @Param("applicationDate") LocalDate applicationDate , @Param("unsubcribeDate") LocalDate unsubcribeDate,
-                              @Param("availableHours") Date availableHours, @Param("role") String role, @Param("taskID") String taskID);
+                              @Param("availableHours") Integer availableHours, @Param("role") String role, @Param("taskID") Integer taskID);
 
 }

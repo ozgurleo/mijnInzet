@@ -20,42 +20,21 @@ public class TaskApplicationController {
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
-    @GetMapping(value = "/applicationBasket")
-    public String applicationBasket() {
-        return "applicationBasket";
-    }
+    @PostMapping(value = "/showtasks/{availableHours}/{userId}/{taskID}")
+    public String insertTaskAppl(@PathVariable("availableHours") int hours,@PathVariable("userId") int userId,@PathVariable("taskId") int taskID){
 
-    // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
-    // hiermee kun je een sollicatatie in de mysql-tabel task_application opslaan
+        LocalDate todaysDate=LocalDate.now();
+        taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",taskID);
 
-    @PostMapping(value ="/showTasks/{userId}/{applicationDate}/{unsubcribeDate}/{availableHours}/{role}/{taskID}")
-    public String insertTaskAppl(){
 
-        taskApplicationRepo.insertTaskapplication(userId, applicationDate, unsubcribeDate, availableHours, role,taskID);
-
-        return"/showTasks";
+        return "/showtasks/";
     }
 
 
 
 
-    @PostMapping(value="/showTasks___")
-    public String storeTaskApplication(@ModelAttribute Task task, Model model) {
-
-        String role="Default_Docent";
-        LocalDate todaysDate= LocalDate.now();
-
-       model.addAttribute("taskId",task.getTaskId() );
-        model.addAttribute("task.estimatedHours", task.getEstimatedHours());
-//        model.addAttribute("naam1", taskApplication.getUserId());
-//        model.addAttribute("naam1", taskApplication.getUserId());
-//        model.addAttribute("naam1", taskApplication.getUserId());
-
-        TaskApplication taskApplication= new TaskApplication(1,todaysDate,null,16,role,1000000);
 
 
-        return "/showTasks";
-    }
 
 
 }
