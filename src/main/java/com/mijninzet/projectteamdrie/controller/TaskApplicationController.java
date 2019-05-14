@@ -28,7 +28,7 @@ public class TaskApplicationController {
 
 
 
-    @PostMapping(value = "/showtasks/{availableHours}/{userId}/{taskID}")
+    @PostMapping(value = "/taskApplications/{availableHours}/{taskID}")
     public String insertTaskAppl(@PathVariable("availableHours") int hours,@PathVariable("userId") int userId,@PathVariable("taskId") int taskID){
 
         LocalDate todaysDate=LocalDate.now();

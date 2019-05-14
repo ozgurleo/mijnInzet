@@ -22,7 +22,7 @@
     </form>
 </nav>
 
-<form>
+<form id="my_form" th:action="@{/taskApplications}" method="post">
 <div class="row">
     <div class="table-responsive col-sm-10">
         <table id="taskTable" class="table table-striped">
@@ -34,26 +34,32 @@
                     <th> VacatureOmschrijving</th>
                     <th>Begrootte Uren</th>
                     <th>Geldigheidsduur</th>
-                    <th>Beschikbaar(uren)</th>
+                    <th>Geef jouw uren op</th>
                     <th>SOLLICITATIEMAND</th>
                 </tr>
             </tablehead>
 
             <tablebody>
                 <tr th:each="task:${showTasks}">
-                    <td th:text="${task.taskId}">Taak_nr</td>
+
+                    <form>
+                        <td th:text="${task.taskId}">Taak_nr</td>
+                    </form>
                     <td th:text="${task.taskName}">Taak</td>
                     <td th:text="${task.estimatedHours}">Begrootte Uren</td>
                     <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
                     <form>
-                    <td INPUT TYPE="text" NAME ="vul uren in ">XXX</td>
-                    <td>
-                        <div>
-                        <input type="submit" value="   voeg toe   " name="subscribe" id="mc-embedded-subscribe"
-                            class="btn btn-info" onclick="this.value='toegevoegd';
-                            this.style.backgroundColor='green';">
+                       <td>
+                    <INPUT TYPE="text" NAME ="availableHours" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11" form = "my_form"/>
+                       </td>
+
+                        <td>
+                            <div>
+                        <input type="submit" value="klik om te solliciteren" name="submit" id="mc-embedded-subscribe" form="my_form"
+                            class="btn btn-info" onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
                         </input>
-                        </div>
+                            </div>
+
                     </td>
                     </form>
                 </tr>
@@ -64,6 +70,6 @@
 </div>
 </form>
 
-<script src=brahimTask.js></script>
+
 </body>
 </html>
