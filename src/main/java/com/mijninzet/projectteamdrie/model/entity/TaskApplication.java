@@ -18,13 +18,12 @@ public class TaskApplication {
     private LocalDate unsubcribeDate;
     private int availableHours;
     private String role;
+
     @ManyToOne
     @JoinColumn(name="task_task_id")
     private Task task;
 
     public TaskApplication() {
-      // this.task = new Task();
-        task.setTaskId(0);
         this.userId = userId;
         this.applicationDate = LocalDate.now();
         this.unsubcribeDate = unsubcribeDate;
@@ -32,17 +31,15 @@ public class TaskApplication {
         this.role = role;
     }
 
-    public TaskApplication(int userId, LocalDate applicationDate, LocalDate unsubcribeDate, int availableHours, String role, int taskId) {
-      // this.task=new Task();
+    public TaskApplication(int userId, LocalDate applicationDate, LocalDate unsubcribeDate, int availableHours, String role, int iD) {
 
         this.userId = userId;
         this.applicationDate = LocalDate.now();
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
-        this.task=new Task(taskId);
-    }
 
+    }
 
 
     public int getUserId() {
