@@ -59,6 +59,6 @@ public class Location implements Comparable<Location> {
 
     @Override
     public String toString () {
-        return String.format("%s, %d, %s",getDescription(), getCourseId(), getCoordinator().getUsername());
+        return String.format("%s, %d, %s",getDescription(), getCourseId(), getCoordinator().getLastName()); //getCoordinator().getUserName();
     }
 }
