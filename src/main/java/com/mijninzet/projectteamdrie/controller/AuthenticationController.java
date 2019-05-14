@@ -38,14 +38,18 @@ public class AuthenticationController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home"); // resources/template/home.html
+        modelAndView.setViewName("helloTeacher");
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("admin");
+
+        modelAndView.setViewName("register"); // resources/template/admin.html
+
         return modelAndView;
     }
 

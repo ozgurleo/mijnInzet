@@ -26,12 +26,7 @@ public class UserServiceImp implements UserService {
     public void saveUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus("VERIFIED");
-<<<<<<< HEAD
-        Role userRole = roleRepository.findByRole("TEACHER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-=======
         user.setRoles(new HashSet<Role>(Arrays.asList(selectRole())));
->>>>>>> ed77a066698c4273439763abdb5328a667684135
         userRepository.save(user);
     }
 
@@ -77,12 +72,7 @@ public class UserServiceImp implements UserService {
         }
         return isUserAlreadyExists;
     }
-<<<<<<< HEAD
 
-
-    public List<User> getAllUsers(){
-=======
->>>>>>> ed77a066698c4273439763abdb5328a667684135
 
     public List<User> getAllUsers() {
 
