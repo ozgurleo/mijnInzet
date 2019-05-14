@@ -27,7 +27,19 @@ public class TaskApplicationController {
 
     // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
     // hiermee kun je een sollicatatie in de mysql-tabel task_application opslaan
-    @PostMapping(value="/showTasks")
+
+    @PostMapping(value ="/showTasks/{userId}/{applicationDate}/{unsubcribeDate}/{availableHours}/{role}/{taskID}")
+    public String insertTaskAppl(){
+
+        taskApplicationRepo.insertTaskapplication(userId, applicationDate, unsubcribeDate, availableHours, role,taskID);
+
+        return"/showTasks";
+    }
+
+
+
+
+    @PostMapping(value="/showTasks___")
     public String storeTaskApplication(@ModelAttribute Task task, Model model) {
 
         String role="Default_Docent";

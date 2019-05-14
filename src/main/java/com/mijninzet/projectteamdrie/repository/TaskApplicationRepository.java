@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -19,9 +20,9 @@ import java.util.Date;
 public interface TaskApplicationRepository extends JpaRepository<TaskApplication, Integer> {
 
     @Modifying
-    @Query(value="INSERT INTO task_application (userId, applicationDate, unsubcribeDate, availableHours, role,taskID)", nativeQuery = true)
+    @Query(value="INSERT INTO task_application (userId, applicationDate, unsubcribeDate, availableHours, role,taskID);", nativeQuery = true)
     @Transactional
-   void insertTaskapplication(@Param("userId")Integer userId, @Param("applicationDate") DateFormat applicationDate , @Param("unsubcribeDate") Date unsubcribeDate,
-                                     @Param("availableHours") Date availableHours, @Param("role") String role, @Param("taskID") String taskID);
+    void insertTaskapplication(@Param("userId")Integer userId, @Param("applicationDate") LocalDate applicationDate , @Param("unsubcribeDate") LocalDate unsubcribeDate,
+                              @Param("availableHours") Date availableHours, @Param("role") String role, @Param("taskID") String taskID);
 
 }
