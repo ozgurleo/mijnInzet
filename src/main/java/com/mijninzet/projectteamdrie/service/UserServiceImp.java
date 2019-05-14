@@ -25,18 +25,29 @@ public class UserServiceImp implements UserService {
     public void saveUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus("VERIFIED");
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByRole("TEACHER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
 
     }
 
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     @Override
     public boolean isUserAlreadyPresent(User user) {
 
-
-        return false;
+        boolean isUserAlreadyExists = false;
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        // If user is found in database, then then user already exists.
+        if(existingUser != null){
+            isUserAlreadyExists = true;
+        }
+        return isUserAlreadyExists;
     }
+
+
     public List<User> getAllUsers(){
 
         List<User> users=new ArrayList<>();

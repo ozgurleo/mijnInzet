@@ -45,7 +45,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin"); // resources/template/admin.html
+        modelAndView.setViewName("admin");
         return modelAndView;
     }
 
