@@ -11,7 +11,7 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">SOLLICITATIEMAND</a>
+    <a class="navbar-brand" href="#">Mijn inzet: SOLLICITATIEMAND</a>
     <a class="nav-link" href="/showTasks">VAKATUREBEHEER</a>
     <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
@@ -50,44 +50,46 @@
 
 
 
+
 <div class="row">
+    <div class="table-responsive col-sm-6">
+        <table id = showTaskTable class="table table-striped">
+            <h6 class="SOLLICITATIES">SOLLICITATIES</h6>
 
-        <div class="table-responsive col-sm-6">
-<table class="table table-hover">
 
-         <div class="table-responsive col-sm-6">
-    <table class="table table-striped">
-        <tablehead>
-            <h6 class="VacatureMand">SOLLICITATIEMAND</h6>
-        <tr>
-            <th>Vacature_nr</th>
-            <th>VacatureOmschrijving</th>
-            <th>Beschikbare uren</th>
-            <th>               </th>
-        </tr>
-        </tablehead>
 
-         <tablebody>
-             <tr>
-                 <td>Vacature_nr</td>
-                 <td>VacatureOmschrijving</td>
-                 <td>Beschikbare uren</td>
-                 <td>
-                     <div>
-                         <input type="submit" value="  verwijder  " name="subscribe" id="mc-embedded-subscribe"
-                                class="btn btn-info" onclick="this.value='verwijderd';
+            <tablehead>
+                <h id="IDS"></h>
+               <tr>
+                    <th> Vacaturenr </th>
+                    <th> Vacaturetitel </th>
+                    <th>              </th>
+                </tr>
+            </tablehead>
+
+            <tablebody>
+                <tr>
+                    <td text="">Vacaturenr</td>
+                    <td text="">Vacaturetitel</td>
+                    <td>
+                        <div>
+                            <input type="submit" value=" verwijder " name="subscribe" id="mc-embedded-subscribe"
+                                   class="btn btn-info" onclick="this.value='verwijderd!';
                        this.style.backgroundColor='red';">
 
-                         </input>
-                     </div>
-                 </td>
+                            </input>
+                        </div>
+                    </td>
+                </tr>
+            </tablebody>
 
-             </tr>
-        </tablebody>
 
-    </table>
+
+        </table>
     </div>
 </div>
 
+
+<script src = brahimTask.js ></script>
 </body>
 </html>
