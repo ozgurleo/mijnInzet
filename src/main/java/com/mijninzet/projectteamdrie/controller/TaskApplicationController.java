@@ -20,6 +20,14 @@ public class TaskApplicationController {
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
+
+    @RequestMapping(value = "/applicationBasket")
+    public String applBasket(){
+        return "applicationBasket";
+    }
+
+
+
     @PostMapping(value = "/showtasks/{availableHours}/{userId}/{taskID}")
     public String insertTaskAppl(@PathVariable("availableHours") int hours,@PathVariable("userId") int userId,@PathVariable("taskId") int taskID){
 
