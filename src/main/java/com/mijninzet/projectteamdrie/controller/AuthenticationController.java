@@ -45,11 +45,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("admin");
-
         modelAndView.setViewName("register"); // resources/template/admin.html
-
         return modelAndView;
     }
 
@@ -62,7 +58,7 @@ public class AuthenticationController {
             modelMap.addAttribute("bindingResult", bindingResult);
         }
         else if(userService.isUserAlreadyPresent(user)){
-            modelAndView.addObject("successMessage", "User already exists!");
+            modelAndView.addObject("successMessage", "user already exists!");
         }
         // we will save the user if, no binding errors
         else {
