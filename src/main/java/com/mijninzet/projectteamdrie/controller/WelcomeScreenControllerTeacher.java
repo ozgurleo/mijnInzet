@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class WelcomeScreenController {
+public class WelcomeScreenControllerTeacher {
 
-    @RequestMapping(value = "/hello")
+    @RequestMapping(value = "/helloTeacher")
     public String hello() {
-        return "hello";
+        return "helloTeacher";
     }
 }
