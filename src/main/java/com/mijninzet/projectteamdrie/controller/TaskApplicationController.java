@@ -30,7 +30,7 @@ public class TaskApplicationController {
     }
 
     @PostMapping(value = "/showTasks/{userId}/{applicationDate}/{unsubcribeDate}/{availableHours}/{role,taskID}")
-    public void addTaskApplication(@RequestBody TaskApplication taskAppList) {
+    public void insertTaskApplication(@RequestBody TaskApplication taskAppList) {
         LocalDate applicationDate= LocalDate.now();
                 taskApplicationRepo.insertTaskapplication(userId, applicationDate, null, availableHours, role,taskID);
     }
