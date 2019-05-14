@@ -1,8 +1,7 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
-import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
+//import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
-
 import javax.persistence.*;
 
 @Entity
@@ -30,7 +29,7 @@ public class StaffAvailability {
         this.dayPart = dayPart;
         this.colorOption = colorOption;
         this.cohort = cohort;
-       this.user = new Teacher(userID);
+       this.user = new User(userID);
     }
 
     public String getCohort() {
