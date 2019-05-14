@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>AddUsers</title>
+    <title>Manage Subject</title>
 </head>
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="nav-link" href="/hello">MIJN INZET</a>
+    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
+    <a class="nav-link" href="/applicationBasket">SOLLICITATIEMAND</a>
+    <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
+    <a class="navbar-brand" href="#">VAKKENBEHEER</a>
+    <a class="nav-link" href="/hello">HOOFDMENU</a>
+    <a class="nav-link" href="/hello">UITLOGGEN</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,49 +24,59 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">terug naar HOOFDMENU</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">BEHEER ROOSTER</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">BEHEER VAKKEN</a>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Dropdown link
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
             </li>
         </ul>
     </div>
 </nav>
 
-<h2>Voorkeur voor beschikbaarheid per vak opgeven</h2>
+<h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
 
-<a href="hello">Ga naar hoofdmenu</a>
+<div class="row">
+    <div class="table-responsive col-sm-6">
+        <table id="SubjectTable" class="table table-striped">
 
-<h3> Klik op het vak om je voorkeur op te geven</h3>
-<table id="SubjectTable">
-    <tr>
-        <th>Vaknummer</th>
-        <th>Vak</th>
-        <th>Begrootte Uren</th>
-        <th>Geldigheidsduur</th>
-    </tr>
+                <tr>
+                    <th>Vaknummer</th>
+                    <th>Vak</th>
+                    <th>Begrootte Uren</th>
+                    <th>Geldigheidsduur</th>
+                    <th>Geef Voorkeur op</th>
+                </tr>
 
-    <tr th:each="subject:${showSubjects}">
-        <td th:text="${subject.subjectId}">-1</td>
-        <td th:text="${subject.subjectName}">-1</td>
-        <td th:text="${subject.estimatedHours}">-1</td>
-        <td th:text="${subject.yearsToExpiryDate}">-1</td>
-    </tr>
+                <tr th:each="subject:${showSubjects}">
+                    <td th:text="${subject.subjectId}">-1</td>
+                    <td th:text="${subject.subjectName}">-1</td>
+                    <td th:text="${subject.estimatedHours}">-1</td>
+                    <td th:text="${subject.yearsToExpiryDate}">-1</td>
+                    <td>
+                        <div>
+                            <input type="submit" value="Geef je voorkeur op" name="addPref" id="mc-embedded-subscribe"
+                                   class="btn btn-info" onclick="this.value='Voorkeur is opgegeven';
+                       this.style.backgroundColor='green';">
+                            </input>
+                        </div>
+                    </td>
+                </tr>
 
-</table>
+        </table>
+    </div>
+</div>
 </body>
 </html>
