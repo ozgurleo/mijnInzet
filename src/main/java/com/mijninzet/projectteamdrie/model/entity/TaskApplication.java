@@ -6,13 +6,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 public class TaskApplication {
     @Id
     private int userId;
-    private DateFormat applicationDate;
+    private LocalDate applicationDate;
     private Date unsubcribeDate;
     private int availableHours;
     private String role;
@@ -24,16 +25,16 @@ public class TaskApplication {
         super();
         this.task = new Task();
         this.userId = userId;
-        this.applicationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.applicationDate = LocalDate.now();
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
     }
 
-    public TaskApplication(int userId, DateFormat applicationDate, Date unsubcribeDate, int availableHours, String role) {
+    public TaskApplication(int userId, LocalDate applicationDate, Date unsubcribeDate, int availableHours, String role) {
         this.task=new Task();
         this.userId = userId;
-        this.applicationDate = applicationDate;
+        this.applicationDate = LocalDate.now();
         this.unsubcribeDate = unsubcribeDate;
         this.availableHours = availableHours;
         this.role = role;
@@ -49,11 +50,11 @@ public class TaskApplication {
         this.userId = userId;
     }
 
-    public DateFormat getApplicationDate() {
+    public LocalDate getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(DateFormat applicationDate) {
+    public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,16 @@ public class TaskApplicationController {
         taskApplicationRepo.save(taskAppList);
     }
 
-//    // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
+    @PostMapping(value = "/showTasks/{userId}/{applicationDate}/{unsubcribeDate}/{availableHours}/{role,taskID}")
+    public void addTaskApplication(@RequestBody TaskApplication taskAppList) {
+        LocalDate applicationDate= LocalDate.now();
+                taskApplicationRepo.insertTaskapplication(userId, applicationDate, null, availableHours, role,taskID);
+    }
+
+
+
+
+    //    // deze methode wordt aangeroepen bij een POST-request op url "showTasks"
 //    // hiermee kun je meerdere sollicataties (in een lijst)  in de mysql-tabel task_application opslaan
 //    @PostMapping(value = "/applicationBasket")
 //    public void addTaskApplicationList(@RequestBody List<TaskApplication> taskAppList) {
