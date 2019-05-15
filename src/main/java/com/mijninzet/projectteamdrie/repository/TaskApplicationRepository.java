@@ -20,9 +20,15 @@ import java.util.Date;
 public interface TaskApplicationRepository extends JpaRepository<TaskApplication, Integer> {
 
     @Modifying
-    @Query(value="INSERT INTO task_application (userId, applicationDate, unsubcribeDate, availableHours, role,taskID);", nativeQuery = true)
+    @Query(value = "insert into task_application (userId, applicationDate, unsubcribeDate, availableHours, role,taskID) VALUES (:userId,:applicationDate, :unsubcribeDate, :availableHours, :role,:taskID)", nativeQuery = true)
     @Transactional
-    void insertTaskapplication(@Param("userId")Integer userId, @Param("applicationDate") LocalDate applicationDate , @Param("unsubcribeDate") LocalDate unsubcribeDate,
-                              @Param("availableHours") Integer availableHours, @Param("role") String role, @Param("taskID") Integer taskID);
+    void insertTaskapplication(@Param("userId") Integer userId, @Param("applicationDate") LocalDate applicationDate , @Param("unsubcribeDate") LocalDate unsubcribeDate,
+                             @Param("availableHours") Integer availableHours, @Param("role") String role, @Param("taskID") Integer taskID);
+
+//    @Modifying
+//    @Query(value="INSERT INTO task_application (userId, applicationDate, unsubcribeDate, availableHours, role,taskID);", nativeQuery = true)
+//    @Transactional
+//    void insertTaskapplication(@Param("userId")Integer userId, @Param("applicationDate") LocalDate applicationDate , @Param("unsubcribeDate") LocalDate unsubcribeDate,
+//                              @Param("availableHours") Integer availableHours, @Param("role") String role, @Param("taskID") Integer taskID);
 
 }

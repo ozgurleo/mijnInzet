@@ -45,22 +45,20 @@
                         <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color: transparent;border: #FF1C19"
                                    th:value="${task.taskId}" size="4" readonly/>
                         </td>
-                    <td th:text="${task.taskName}">Taak</td>
-                    <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-                    <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
-                    <td>
-                    <input TYPE="text" NAME ="availableHours" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11"
+                        <td th:text="${task.taskName}">Taak</td>
+                        <td th:text="${task.estimatedHours}">Begrootte Uren</td>
+                        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+                        <td>
+                        <input TYPE="text" NAME ="availableHours" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11"
                            form = "my_form" style="background-color: transparent;
                            border-color: brown;border-style:solid;text-align: center"  />
-                       </td>
+                        </td>
 
                         <td>
-                            <div>
-                        <input  type="submit" value="klik om te solliciteren" name="submit" id="mc-embedded-subscribe" form="my_form"
+                        <input  type="submit" value="klik om te solliciteren" name=${task.taskId}" id=${task.taskId}" form="my_form"
                             class="btn btn-info" onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
                         </input>
-                            </div>
-                    </td>
+                        </td>
 
                 </tr>
             </tablebody>

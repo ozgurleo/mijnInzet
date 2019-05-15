@@ -27,9 +27,14 @@ public class TaskApplicationController {
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
         System.out.println("methode is aangeroepen!");
+        //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
+        int userId=1;
+        LocalDate todaysDate=LocalDate.now();
+
         //get the data from httpservletRequest and put in variable
         String tempId=request.getParameter("taskId");
         String tempHours=request.getParameter("availableHours");
+
         //Convert to Strings
         int iD=Integer.parseInt(tempId);
         int hours=Integer.parseInt(tempHours);
@@ -37,12 +42,9 @@ public class TaskApplicationController {
         System.out.println("de ingelezen taskid waarde is: " + iD );
         System.out.println("de ingelezen availableHours waarde is: " + hours );
 
+        taskApplicationRepo.save(new TaskApplication(userId, todaysDate, null, hours, "Docent",iD));
 
-
-        //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
-        int userId=1;
-        LocalDate todaysDate=LocalDate.now();
-        taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
+      //  taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
 
 
         return "redirect:/showtasks";
