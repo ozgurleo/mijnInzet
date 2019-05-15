@@ -12,17 +12,19 @@
 <form>
 
 <!-- Navigatie-menu -->
-<nav class="navbar navbar-fixed-top navbar-dark bg-dark">
-    <div class="container">
-
-        <a class="navbar-brand" href="#">Mijn Inzet</a>
-
-        <ul class="nav">
-            <li class="navbar-link"><a class="nav-link" href="//localhost:8081/showTasks/">Ga naar vactureoverzicht</a>
-            </li>
-            <li class="navbar-link"><a class="nav-link" href="//localhost:8081/schedule/"> Ga naar weekrooster</a></li>
-            <li class="navbar-link"><a class="nav-link" href="//localhost:8081/hello">Ga naar hoofdmenu</a></li>
-        </ul>
+    <!-- Navigatie-menu -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="nav-link" href="/helloTeacher">MIJN INZET HOME</a>
+        <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
+        <a class="nav-link" href="/applicationBasket">SOLLICITATIEMAND</a>
+        <a class="nav-link" href="/scheduleVakken">ROOSTERBEHEER-VAKKEN</a>
+        <a class="nav-link" href="/schedule">ROOSTERBEHEER-TIJD</a>
+        <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+        </form>
+    </nav>
 
 
         <!--<table>-->
