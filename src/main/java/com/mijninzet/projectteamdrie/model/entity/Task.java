@@ -13,8 +13,8 @@ public class Task {
     private String taskName;
     private int estimatedHours;
     private int yearsToExpiryDate;
-//    @OneToMany(mappedBy = "task")
-//    private TaskApplication taskApplication;
+ //   @OneToMany(mappedBy = "taskId")
+//   private TaskApplication taskApplication;
 //    private List<TaskApplication> taskApplication;
 
     public Task() {

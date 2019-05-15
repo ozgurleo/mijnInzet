@@ -22,6 +22,12 @@ public class TaskApplicationController {
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
+    @GetMapping(value = "/applicationBasket")
+    public String makeVacancyList(Model model) {
+        model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
+        return "applicationBasket";
+    }
+
 
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
@@ -42,35 +48,12 @@ public class TaskApplicationController {
         System.out.println("de ingelezen taskid waarde is: " + iD );
         System.out.println("de ingelezen availableHours waarde is: " + hours );
 
-        taskApplicationRepo.save(new TaskApplication(userId, todaysDate, null, hours, "Docent",iD));
+        // insert the data into database
+         taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
 
-      //  taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
 
-
-        return "redirect:/showtasks";
+        return "showtasks";
     }
-
-//    @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
-//    @ResponseBody
-//    public String insertTaskAppl(@PathVariable String taskId, @PathVariable  String availableHours){
-//        System.out.println("methode is aangeroepen!");
-//
-//        int iD=Integer.parseInt(taskId);
-//        int hours=Integer.parseInt(availableHours);
-//
-//        System.out.println("de ingelezen taskid waarde is: " + taskId );
-//        System.out.println("de ingelezen availableHours waarde is: " + availableHours );
-//
-//
-//
-//        //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
-//        int userId=1;
-//        LocalDate todaysDate=LocalDate.now();
-//        taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
-//
-//
-//        return "redirect:/showtasks";
-//    }
 
 
 
