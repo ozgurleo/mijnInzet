@@ -4,18 +4,14 @@ import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
 import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
+import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.management.modelmbean.ModelMBeanAttributeInfo;
-import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,21 +92,27 @@ public class StaffAvailibilityController {
         staffAvailibilityService.addStaffAvailibility(sa);
     }
 
-    @GetMapping("updateSchedule/{id}")
-        public String showUpdateScheduleForm(@PathVariable("id") int id, Model model){
-        StaffAvailability sa = availibilityRepository.findById(id).orElseThrow(()-> new IllegalArgumentException(("Ongeldige id" +  id)));
+    @RequestMapping("updateSchedule/{id}")
+    public String showUpdateScheduleForm(@PathVariable("id") int id, Model model) {
+        StaffAvailability sa = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
         model.addAttribute("staffavailibility", sa);
         return "updateSchedule";
-        }
-
-
-    @PostMapping("updateSchedule/{id}")
-    public String updateScheduleFromId(@Valid StaffAvailability sa , @PathVariable int id, Model model){
-        availibilityRepository.save(sa);
-        model.addAttribute("staffavailibility", availibilityRepository.findAll());
-
-        return "schedule";
-
     }
 
+
+//    @PostMapping("updateSchedule/{id}")
+//    public String updateStaffAvailibilityById(@PathVariable("id")int id, @RequestParam StaffAvailability sa, Model model){
+//    staffAvailibilityService.updateStaffAvailibility(id, sa);
+//    model.addAttribute("staffavailibitlity", sa) ;
+//    return "updateSchedule";
+//        }
+
+
+
+//    @RequestMapping(value="updateSchedule",  method=RequestMethod.GET)
+//    public String updateScheduleFromId(Model model){
+//       StaffAvailability sa = this.availibilityRepository.findById();
+//       model.addAttribute("staffavailibility", sa);
+//        return "updateSchedule";
+//    }
 }

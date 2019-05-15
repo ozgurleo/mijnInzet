@@ -9,48 +9,49 @@
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 
 </head>
-<body>
+<form>
 
 <!-- Navigatie-menu -->
 <nav class="navbar navbar-fixed-top navbar-dark bg-dark">
-    <div class ="container">
+    <div class="container">
 
-    <a class="navbar-brand" href="#">Mijn Inzet</a>
+        <a class="navbar-brand" href="#">Mijn Inzet</a>
 
-    <ul class="nav">
-        <li class ="navbar-link"><a class ="nav-link" href="//localhost:8081/showTasks/">Ga naar vactureoverzicht</a></li>
-        <li class="navbar-link"><a class="nav-link" href="//localhost:8081/schedule/"> Ga naar weekrooster</a></li>
-        <li class="navbar-link"><a class="nav-link" href="//localhost:8081/hello">Ga naar hoofdmenu</a></li>
-    </ul>
+        <ul class="nav">
+            <li class="navbar-link"><a class="nav-link" href="//localhost:8081/showTasks/">Ga naar vactureoverzicht</a>
+            </li>
+            <li class="navbar-link"><a class="nav-link" href="//localhost:8081/schedule/"> Ga naar weekrooster</a></li>
+            <li class="navbar-link"><a class="nav-link" href="//localhost:8081/hello">Ga naar hoofdmenu</a></li>
+        </ul>
 
 
-            <!--<table>-->
-                <!--<tr>-->
-                    <!--<td>Select Cohort:</td>-->
-                    <!--<td>-->
-                        <!--<select th:field="{cohort}" name="cohort">-->
-                            <!--<option value=""> &#45;&#45; </option>-->
-                            <!--<option th:each="cohort : ${staffavailability}"-->
-                                    <!--th:value="${cohort.cohort}"-->
-                            <!--th:text="${cohort.cohort}"></option>-->
-                        <!--</select>-->
+        <!--<table>-->
+        <!--<tr>-->
+        <!--<td>Select Cohort:</td>-->
+        <!--<td>-->
+        <!--<select th:field="{cohort}" name="cohort">-->
+        <!--<option value=""> &#45;&#45; </option>-->
+        <!--<option th:each="cohort : ${staffavailability}"-->
+        <!--th:value="${cohort.cohort}"-->
+        <!--th:text="${cohort.cohort}"></option>-->
+        <!--</select>-->
 
-                    <!--</td>-->
-                <!--</tr>-->
+        <!--</td>-->
+        <!--</tr>-->
 
-                <!--<tr>-->
-                    <!--<td><input name="submit" type="submit" value="submit" />submit</td>-->
-                <!--</tr>-->
-            <!--</table>-->
+        <!--<tr>-->
+        <!--<td><input name="submit" type="submit" value="submit" />submit</td>-->
+        <!--</tr>-->
+        <!--</table>-->
         <!--</form>-->
-
 
 
     </div>
 </nav>
 
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
         Dropdown button
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -61,7 +62,7 @@
     </button>
 </div>
 
-<div class="container">
+    <div class = "container">
     <div class="row">
         <div class="col-md-2">
             <table class="table table-hover" id="TaskTable7">
@@ -85,16 +86,17 @@
 
             </table>
         </div>
+
+
         <div class="col-md-2">
             <table class="table table-hover" id="TaskTable">
                 <tr>
-
                     <th scope="col">Maandag</th>
                 </tr>
-
                 <tr th:each="maandag:${maandag}">
-
                     <td th:text="${maandag.colorOption}">Maandag</td>
+                    <td> <a href ="//localhost:8081/updateSchedule">wijzig</a></td>
+
                 </tr>
             </table>
         </div>
@@ -106,6 +108,7 @@
                 </tr>
                 <tr th:each="dinsdag:${dinsdag}">
                     <td th:text="${dinsdag.colorOption}">Dinsdag</td>
+
                 </tr>
             </table>
         </div>
@@ -146,6 +149,38 @@
         </div>
     </div>
 
-</div>
+        <!--<form action="#" th:action="@{schedule/updated/{id}id=${staffavailibility.id})}" th:object="${sa}" method="post">-->
+
+        <!--<div class="row">-->
+            <!--<div class="col">-->
+                <!--<input type="text" class="form-control" placeholder="kleur" th:field="*{colorOption}"}>-->
+            <!--</div>-->
+            <!--<div class="col">-->
+                <!--<input type="text" class="form-control" placeholder="dag" th:field="*{day}">-->
+            <!--</div>-->
+            <!--<div class="col">-->
+                <!--<input type="text" class="form-control" placeholder="First name">-->
+            <!--</div>-->
+            <!--<div class="col">-->
+                <!--<input type="text" class="form-control" placeholder="First name">-->
+            <!--</div>-->
+            <!--<div class="col">-->
+                <!--<input type="text" class="form-control" placeholder="First name">-->
+            <!--</div>-->
+            <!--<div class="col">-->
+                <!--<input type="text" class="form-control" placeholder="First name">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--</form>-->
+
+        <!--<p>De wijzigingen zijn:-->
+        <!--<span th:text="${dag}">dag</span>-->
+        <!--<span th:text="${gebruiker}">gebruiker</span>-->
+        <!--<span th:text="${kleur}">kleur</span></p>-->
+
+    </div>
+    </form>
+
+
 </body>
 </html>
