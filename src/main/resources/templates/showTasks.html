@@ -22,7 +22,7 @@
     </form>
 </nav>
 
-<form id="my_form" th:action="@{/taskApplications}" method="post">
+<form id="my_form" th:action="@{/taskApplications/taskId/availableHours}" method="post">
 <div class="row">
     <div class="table-responsive col-sm-10">
         <table id="taskTable" class="table table-striped">
@@ -41,19 +41,17 @@
 
             <tablebody>
                 <tr th:each="task:${showTasks}">
-
-                    <form>
                         <td>
-                            <input style="background-color: transparent;border: #FF1C19" type="${task.taskId}" th:value="${task.taskId}" size="4" readonly/>
-
+                        <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color: transparent;border: #FF1C19"
+                                   th:value="${task.taskId}" size="4" readonly/>
                         </td>
-                    </form>
                     <td th:text="${task.taskName}">Taak</td>
                     <td th:text="${task.estimatedHours}">Begrootte Uren</td>
                     <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
-                    <form>
-                       <td>
-                    <input TYPE="text" NAME ="numbers" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11" form = "my_form" style="background-color: transparent;border-color: brown;border-style:solid;text-align: center"  />
+                    <td>
+                    <input TYPE="text" NAME ="availableHours" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11"
+                           form = "my_form" style="background-color: transparent;
+                           border-color: brown;border-style:solid;text-align: center"  />
                        </td>
 
                         <td>
@@ -62,9 +60,8 @@
                             class="btn btn-info" onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
                         </input>
                             </div>
-
                     </td>
-                    </form>
+
                 </tr>
             </tablebody>
 

@@ -1,6 +1,8 @@
 
 document.getElementById("IDS").innerHTML = "Hello JavaScript!";
 
+
+
 /*
 hier wordt de table mee opgeslagen in de sessionstorage met key=showTaskTable en
 met value = de tabel met id="taskTable"in de showTasks.html:

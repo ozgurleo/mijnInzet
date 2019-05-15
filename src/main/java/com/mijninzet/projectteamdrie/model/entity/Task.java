@@ -9,15 +9,12 @@ import java.util.List;
 public class Task {
 
     @Id
-
     private int taskId;
-
     private String taskName;
-
     private int estimatedHours;
-
     private int yearsToExpiryDate;
 //    @OneToMany(mappedBy = "task")
+//    private TaskApplication taskApplication;
 //    private List<TaskApplication> taskApplication;
 
     public Task() {
