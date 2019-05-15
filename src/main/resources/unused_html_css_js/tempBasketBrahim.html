@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <script src = ../templates/brahimTask.js ></script>
 </head>
 
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">SOLLICITATIEMAND</a>
+    <a class="nav-link" href="/helloTeacher">MIJN INZET</a>
+    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
+    <a class="navbar-brand" href="/applicationBasket">SOLLICITATIEMAND</a>
     <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
-    <a class="nav-link" href="/hello"><h6>HOOFDMENU</h6></a>
-    <a class="nav-link" href="/hello"><h6>UITLOGGEN</h6></a>
+    <a class="nav-link" href="/helloTeacher">HOOFDMENU</a>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    </form>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,70 +54,38 @@
 
 
 
-<div class="row">
 
+<div class="row">
     <div class="table-responsive col-sm-6">
-        <table class="table table-hover">
+        <table id = showTaskTable class="table table-striped">
 
             <tablehead>
                 <h6 class="Vacatures">VACATURES</h6>
                 <tr>
                     <th>Vacature_nr</th>
-                    <th> VacatureOmschrijving</th>
-                    <th>Begrootte Uren</th>
-                    <th>Geldigheidsduur</th>
-                    <th>SOLLICITATIEMAND</th>
+                    <th>Vacaturenaam</th>
+                    <th>Beschikbare uren</th>
+                    <th>             </th>
+
                 </tr>
             </tablehead>
 
             <tablebody>
-                <tr th:each="task:${showTasks}">
-                    <td th:text="${task.taskId}">Taak_nr</td>
-                    <td th:text="${task.taskName}">Taak</td>
-                    <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-                    <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+                <tr >
+                    <td text="Vacature_nr">Vacature_nr</td>
+                    <td text="Vacaturenaam">Vacaturenaam</td>
+                    <td text="Beschikbare uren">Beschikbare uren</td>
 
                     <td>
                         <div>
-                            <input type="submit" value="        " name="subscribe" id="mc-embedded-subscribe"
-                                   class="btn btn-info" onclick="this.value='toegevoegd';
-                       this.style.backgroundColor='green';">
+                            <input type="submit" value=" verwijder " name="subscribe" id="mc-embedded-subscribe"
+                                   class="btn btn-info" onclick="this.value='verwijderd';
+                       this.style.backgroundColor='red';">
 
                             </input>
                         </div>
                     </td>
 
-                </tr>
-            </tablebody>
-
-        </table>
-    </div>
-
-
-
-
-    <div class="table-responsive col-sm-6">
-        <table class="table table-striped">
-            <tablehead>
-                <h6 class="VacatureMand">SOLLICITATIEMAND</h6>
-                <tr>
-                    <th>Vacature_nr</th>
-                    <th>VacatureOmschrijving</th>
-                    <th>Beschikbare uren</th>
-                    <th>Verwijder</th>
-                </tr>
-            </tablehead>
-
-            <tablebody>
-                <tr>
-                    <td>Vacature_nr</td>
-                    <td>VacatureOmschrijving</td>
-                    <td>Beschikbare uren</td>
-                    <td>
-                        <div>
-                            <button type="button" class="btn btn-warning">Verwijder</button>
-                        </div>
-                    </td>
                 </tr>
             </tablebody>
 

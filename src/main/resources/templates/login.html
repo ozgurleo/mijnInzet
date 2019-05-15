@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Login Page </title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body>
-<h1>Login Form</h1>
-<form th:action="@{/login}" th:object="${user}" method="post">
-    <p th:if="${invalidCredentials}" class="error" >Username or Password is wrong.</p>
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username">
-    <label for="password" >Password</label>
-    <input type="password" id="password" name="password">
-<br>
-    <input type="submit" value="Log in">
 
-</form>
+<body>
+<!--<body style="background-color:#ededed;">-->
+<nav class="navbar navbar-dark bg-dark"></nav>
+<!--<div style="background-color:#337ab7;height:50px;"></div>-->
+<div class="container-fluid">
+    <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 80px;background-color:#fff;padding:20px;border:solid 1px #ddd;">
+        <!-- <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" /> -->
+        <form th:action="@{/login}" method="POST" class="form-signin">
+            <h3 class="form-signin-heading" th:text="Login"></h3>
+            <br /> <input type="text" id="email" name="email" th:placeholder="Email" class="form-control" /> <br /> <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br />
+
+            <div align="center" th:if="${param.error}">
+                <p style="font-size: 20; color: #FF1C19;">Email or Password is invalid.</p>
+            </div>
+            <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit" th:text="Login" style="margin-right:10px;"></button>
+            <a href="/recover-password">Forgot password?</a>
+            <br>
+            <p>
+                <input  type="checkbox" name="remember-me" id="remember-me" />
+                <label>Remember me?</label>
+
+            </p>
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

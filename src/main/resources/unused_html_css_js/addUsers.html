@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welkomstscherm</title>
-<!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>AddUsers</title>
 </head>
-
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
@@ -42,21 +41,43 @@
     </div>
 </nav>
 
-<!-- Hoofdtekst -->
-<h1>MijnInzet de roosteraar applicatie</h1>
-<h2>Team 3 NoPressure</h2>
-<p>Esther, Brahim, Semih, Ozgur, Hans</p>
+<div class="container">
 
-<!-- Navigatie-menu -->
-<ul class="navbar">
-    <li><a href="showTasks">Ga naar vactureoverzicht</a></li>
-    <li><a href="showSubjects">Ga naar vakkenvoorkeur</a></li>
-    <li><a href="addUsers">Voeg gebruiker toe</a></li>
-    <li><a href="schedule"> Ga naar weekrooster</a></li>
-</ul>
+    <h1 id="intro">Hello Administrator</h1>
 
-<!-- Onderteken en dateer de pagina, wees beleefd! -->
-<address>voorjaar 2019<br></address>
+    <a href="hello">Ga naar hoofdmenu</a>
 
+    <p>Enter new Username</p>
+    <input type="text" id="name">
+    <p>Enter new user mailadress</p>
+    <input type="text" id="mailadress">
+    <p>Enter role of new User</p>
+    <input type="text" id="role">
+    <button id="buttonAddUser">Set</button>
+
+    <p id="description"></p>
+    <p id="namedisplay"></p>
+    <p id="maildisplay"></p>
+    <p id="roledisplay"></p>
+
+</div>
 </body>
+<!--<script src="/static/js/addUser.js">-->
+<script>
+    function app() {
+        function printUserInfo() {
+            var newUserName = document.getElementById("name").value;
+            var newUserRole = document.getElementById("role").value;
+            var newUserMailadress = document.getElementById("mailadress").value;
+
+            document.getElementById("description").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
+            document.getElementById("namedisplay").innerHTML = newUserName;
+            document.getElementById("maildisplay").innerHTML = newUserMailadress;
+            document.getElementById("roledisplay").innerHTML = newUserRole;
+        }
+        document.getElementById("buttonAddUser").onclick = printUserInfo;
+
+    }
+    window.onload = app;
+</script>
 </html>

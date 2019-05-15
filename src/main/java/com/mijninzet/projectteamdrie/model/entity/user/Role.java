@@ -1,60 +1,139 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
 
-import com.mijninzet.projectteamdrie.model.entity.WebPage;
 
-public enum Role {
-    DEFAULT("Unknown", null),
-    TEACHER("Teacher", WebPage.getWindowsTeacher()),
-    ADMINISTRATOR("Administrator", WebPage.getWindowsAdministrator()),
-    //eigenaar onderwijseenheid is coordinator
-    COORDINATOR("Coordinator", WebPage.getWindowsCoordinator()),
-    SCHEDULER("Scheduler", WebPage.getWindowsScheduler()),
-    MANAGER("Manager", WebPage.getWindowsManager());
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-    private String roleDescriptor;
-    private WebPage[] webPages;
+@Entity
+@Table(name = "role")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "role_id")
+    private int id;
 
-    Role(String roleDescriptor, WebPage[] webPages) {
-        this.roleDescriptor = roleDescriptor;
-        this.webPages = webPages;
+    @Column(name = "role_name")
+    private String role;
+
+    @Column(name = "role_desc")
+    private String desc;
+
+    public int getId() {
+        return id;
     }
 
-    public static Role[] getRoles() {
-         Role[] roles = {TEACHER, ADMINISTRATOR, COORDINATOR, SCHEDULER, MANAGER};
-        return roles;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static Role getRoleByDescription(String description) {
-        switch (description) {
-            case "Teacher":
-                return TEACHER;
-            case "Administrator":
-                return ADMINISTRATOR;
-            case "COORDINATOR":
-                return COORDINATOR;
-            case "Scheduler":
-                return SCHEDULER;
-            case "Manager":
-                return MANAGER;
-            default:
-                System.err.println("Deze rol bestaat niet");
-                return null;
-        }
+    public String getRole() {
+        return role;
     }
 
-    // getters
-    public String getRoleDescriptor() {
-        return roleDescriptor;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public WebPage[] getWebPages() {
-        return webPages;
+    public String getDesc() {
+        return desc;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Role: %s", roleDescriptor);
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
+
+
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//import com.mijninzet.projectteamdrie.model.entity.WebPage;
+//
+//public enum Role {
+//    DEFAULT("Unknown", null),
+//    TEACHER("Teacher", WebPage.getWindowsTeacher()),
+//    ADMINISTRATOR("Administrator", WebPage.getWindowsAdministrator()),
+//    //eigenaar onderwijseenheid is coordinator
+//    COORDINATOR("Coordinator", WebPage.getWindowsCoordinator()),
+//    SCHEDULER("Scheduler", WebPage.getWindowsScheduler()),
+//    MANAGER("Manager", WebPage.getWindowsManager());
+//
+//    private String roleDescriptor;
+//    private WebPage[] webPages;
+//
+//    Role(String roleDescriptor, WebPage[] webPages) {
+//        this.roleDescriptor = roleDescriptor;
+//        this.webPages = webPages;
+//    }
+//
+//    public static Role[] getRoles() {
+//         Role[] roles = {TEACHER, ADMINISTRATOR, COORDINATOR, SCHEDULER, MANAGER};
+//        return roles;
+//    }
+//
+//    public static Role getRoleByDescription(String description) {
+//        switch (description) {
+//            case "Teacher":
+//                return TEACHER;
+//            case "Administrator":
+//                return ADMINISTRATOR;
+//            case "COORDINATOR":
+//                return COORDINATOR;
+//            case "Scheduler":
+//                return SCHEDULER;
+//            case "Manager":
+//                return MANAGER;
+//            default:
+//                System.err.println("Deze rol bestaat niet");
+//                return null;
+//        }
+//    }
+//
+//    // getters
+//    public String getRoleDescriptor() {
+//        return roleDescriptor;
+//    }
+//
+//    public WebPage[] getWebPages() {
+//        return webPages;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return String.format("Role: %s", roleDescriptor);
+//    }
+//}
+//
