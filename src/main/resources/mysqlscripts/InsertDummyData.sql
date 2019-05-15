@@ -14,3 +14,29 @@ INSERT INTO role (role_id, role_name, role_desc) VALUES (5,'MANAGER','This user 
 
 insert into user (user_id,first_name,last_name,email,password,status) values (1,'hans','zuidervaart','admin@gmail.com','$2a$10$DD/FQ0hTIprg3fGarZl1reK1f7tzgM4RuFKjAKyun0Si60w6g3v5i','VERIFIED');
 insert into user_role (user_id, role_id) values ('1','1');
+
+insert into user(role,id,password,username) values ("teacher",2,"1","twee");
+insert into staff_availability(cohort,color_option,day,day_part,user_id) values ("15","ROOD","Maandag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GEEL","Maandag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Maandag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Dinsdag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Dinsdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GEEL","Dinsdag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Woensdag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Woensdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GEEL","Woensdag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Donderdag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Donderdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Donderdag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Vrijdag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Vrijdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Vrijdag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Woensdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GEEL","Woensdag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GROEN","Donderdag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GROEN","Donderdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GROEN","Donderdag","Avond",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Ochtend",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Middag",1);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Avond",1);
+

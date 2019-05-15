@@ -33,15 +33,10 @@ public class StaffAvailibilityService {
         staffAvailibilityRepository.save(sa);
     }
 
-//    public void addStaffAvailibility(int id, String cohort, String day, String color_option, String day_part){
-//        StaffAvailability sa = new StaffAvailability();
-//        sa.setId(id);
-//        sa.setCohort(cohort);
-//        sa.setDay(day);
-//        sa.setColorOption(color_option);
-//        sa.setDayPart(day_part);
-//        staffAvailibilityRepository.save(sa);
-//
-//    }
+
+    public StaffAvailability updateStaffAvailibility(int id, StaffAvailability sa) {
+        sa.setId(id);
+        return staffAvailibilityRepository.save(sa);
+    }
 }
 
