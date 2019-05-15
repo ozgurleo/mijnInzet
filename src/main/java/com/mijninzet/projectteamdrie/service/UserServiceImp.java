@@ -57,12 +57,22 @@ public class UserServiceImp implements UserService {
         return userRole;
     }
 
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     @Override
     public boolean isUserAlreadyPresent(User user) {
 
-
-        return false;
+        boolean isUserAlreadyExists = false;
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        // If user is found in database, then then user already exists.
+        if(existingUser != null){
+            isUserAlreadyExists = true;
+        }
+        return isUserAlreadyExists;
     }
+
 
     public List<User> getAllUsers() {
 
