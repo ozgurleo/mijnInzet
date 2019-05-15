@@ -1,10 +1,10 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
-import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
+import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
+import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -88,7 +88,7 @@ public class StaffAvailibilityController {
     @PostMapping("schedule/{userId}/new")
     @ResponseBody
     public void addStaffAvailiblity(@RequestBody StaffAvailability sa, @PathVariable int userId) {
-        sa.setUser(new Teacher(userId));
+        sa.setUser(new User(userId));
         staffAvailibilityService.addStaffAvailibility(sa);
     }
 
