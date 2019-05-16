@@ -43,9 +43,10 @@
 
             <tablebody>
                 <tr th:each="appl:${applicationBasket}">
-                    <td th:text="${appl.id}">TaskID</td>
+                    <td th:text="${appl.tId}">TaskID</td>
                     <td th:text="${appl.tName}">TaskName</td>
-                    <td th:text="${appl.estimHours}">estimhours</td>
+                    <td th:text="${appl.estHours}">estimhours</td>
+                    <td th:text="${appl.date}">estimhours</td>
                     <td th:text="${appl.fName}">FullName</td>
                     <td th:text="${appl.availHours}">availHours</td>
                 </tr>

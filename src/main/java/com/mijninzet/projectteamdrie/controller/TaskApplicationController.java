@@ -22,13 +22,13 @@ public class TaskApplicationController {
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
-    @GetMapping(value = "/applicationBasket")
-    public String makeVacancyList(Model model) {
-        model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
-        return "applicationBasket";
-    }
+//    @RequestMapping(value = "/applicationBasket")
+//    public String makeVacancyList(Model model) {
+//        model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
+//        return "applicationBasket";
+//    }
 
-
+    
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
    public String insertTaskAppl(HttpServletRequest request, ModelMap model){

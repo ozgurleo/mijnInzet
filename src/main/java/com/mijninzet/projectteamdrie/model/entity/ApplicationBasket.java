@@ -1,8 +1,12 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.*;
 // this class is needed to have Model for opbatining data from multiple tables within mysqlDB
+@Entity
 public class ApplicationBasket {
-   private int tId;
+    @Id
+    private int tId;
     private String tName;
     private int estHours;
     private String fName;
@@ -10,12 +14,12 @@ public class ApplicationBasket {
     private int availHours;
 
     public ApplicationBasket() {
-        this.tId = tId;
-        this.tName = tName;
-        this.estHours = estHours;
-        this.fName = fName;
-        this.date = date;
-        this.availHours = availHours;
+        this.tId = 0;
+        this.tName = "";
+        this.estHours = 0;
+        this.fName = "";
+        this.date = "";
+        this.availHours = 0;
     }
 
     public ApplicationBasket(int tId, String tName, int estHours, String fName, String date, int availHours) {

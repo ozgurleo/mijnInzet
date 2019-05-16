@@ -42,8 +42,8 @@
             <tablebody>
                 <tr th:each="task:${showTasks}">
                         <td>
-                        <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color: transparent;border: #FF1C19"
-                                   th:value="${task.taskId}" size="4" readonly/>
+                        <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color:
+                        transparent;border: #FF1C19" th:value="${task.taskId}" size="4" readonly/>
                         </td>
                         <td th:text="${task.taskName}">Taak</td>
                         <td th:text="${task.estimatedHours}">Begrootte Uren</td>
@@ -54,12 +54,12 @@
                            border-color: brown;border-style:solid;text-align: center"  />
                         </td>
 
-                        <td>
-                        <input  type="submit" value="klik om te solliciteren" name=${task.taskId}" id=${task.taskId}" form="my_form"
-                            class="btn btn-info" onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
-                        </input>
-                        </td>
 
+                            <td>
+                                <input  th:class="${task.taskId}" type="submit" value="klik om te solliciteren" th:name="${task.taskId}" th:id="${task.taskId}" form="my_form"
+                             onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
+                                </input>
+                            </td>
                 </tr>
             </tablebody>
 
