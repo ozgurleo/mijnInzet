@@ -22,7 +22,7 @@
     </form>
 </nav>
 
-<form id="my_form" th:action="@{/taskApplications/taskId/availableHours}" method="post">
+
 <div class="row">
     <div class="table-responsive col-sm-10">
         <table id="taskTable" class="table table-striped">
@@ -41,6 +41,7 @@
 
             <tablebody>
                 <tr th:each="task:${showTasks}">
+                    <form id="my_form" th:action="@{/taskApplications/taskId/availableHours}" method="post">
                         <td>
                         <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color:
                         transparent;border: #FF1C19" th:value="${task.taskId}" size="4" readonly/>
@@ -49,24 +50,25 @@
                         <td th:text="${task.estimatedHours}">Begrootte Uren</td>
                         <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
                         <td>
-                        <input TYPE="text" NAME ="availableHours" id= "availableHours" th:value="${task.estimatedHours}" SIZE="11"
-                           form = "my_form" style="background-color: transparent;
+                        <input TYPE="text" NAME ="availableHours" id= "availableHours"
+                               th:value="${task.estimatedHours}" SIZE="11" form = "my_form" style="background-color: transparent;
                            border-color: brown;border-style:solid;text-align: center"  />
                         </td>
 
+                        <td>
+                         <input th:class="${task.taskId}" type="submit" class="btn btn-info" th:id= "${task.taskId}" value="Klik om te solliciteren"
+                               th:name="${task.taskId}"  form="my_form"
+                                onclick="this.value='toegevoegd';this.style.backgroundColor='green';"/>
+                        </td>
 
-                            <td>
-                                <input  th:class="${task.taskId}" type="submit" value="klik om te solliciteren" th:name="${task.taskId}" th:id="${task.taskId}" form="my_form"
-                             onclick="this.value='toegevoegd';this.style.backgroundColor='green';">
-                                </input>
-                            </td>
+                    </form>
                 </tr>
             </tablebody>
 
         </table>
     </div>
 </div>
-</form>
+
 
 
 </body>
