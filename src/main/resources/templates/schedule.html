@@ -97,7 +97,7 @@
                 </tr>
                 <tr th:each="maandag:${maandag}">
                     <td th:text="${maandag.colorOption}">Maandag</td>
-                    <td> <a href ="//localhost:8081/updateSchedule">wijzig</a></td>
+                    <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${maandag.id})}">wijzig</a></td>
 
                 </tr>
             </table>
@@ -110,6 +110,9 @@
                 </tr>
                 <tr th:each="dinsdag:${dinsdag}">
                     <td th:text="${dinsdag.colorOption}">Dinsdag</td>
+                    <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${dinsdag.id})}">wijzig</a></td>
+
+
 
                 </tr>
             </table>
@@ -122,6 +125,8 @@
                 </tr>
                 <tr th:each="woensdag:${woensdag}">
                     <td th:text="${woensdag.colorOption}">Woensdag</td>
+                    <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${woensdag.id})}">wijzig</a></td>
+
                 </tr>
             </table>
 
@@ -133,6 +138,8 @@
                 </tr>
                 <tr th:each="donderdag:${donderdag}">
                     <td th:text="${donderdag.colorOption}">Donderdag</td>
+                    <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${donderdag.id})}">wijzig</a></td>
+
                 </tr>
             </table>
         </div>
@@ -144,6 +151,8 @@
                 </tr>
                 <tr th:each="vrijdag:${vrijdag}">
                     <td th:text="${vrijdag.colorOption}">vrijdag</td>
+                    <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${vrijdag.id})}">wijzig</a></td>
+
                 </tr>
 
             </table>

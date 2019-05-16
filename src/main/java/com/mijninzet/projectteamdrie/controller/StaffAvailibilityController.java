@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -21,6 +23,7 @@ public class StaffAvailibilityController {
     private StaffAvailibilityService staffAvailibilityService;
     @Autowired
     StaffAvailibilityRepository availibilityRepository;
+    StaffAvailability sa = new StaffAvailability();
 
 
     @RequestMapping(value = "schedule")
@@ -47,12 +50,14 @@ public class StaffAvailibilityController {
         List<StaffAvailability> vrijdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
                 .collect(Collectors.toList());
+        StaffAvailability staffavailabilityId = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
 
         model.addAttribute("maandag", maandag);
         model.addAttribute("dinsdag", dinsdag);
         model.addAttribute("woensdag", woensdag);
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
+        model.addAttribute("staffavailabilityId",staffavailabilityId.getId() );
 
         return "schedule";
     }
@@ -92,19 +97,29 @@ public class StaffAvailibilityController {
         staffAvailibilityService.addStaffAvailibility(sa);
     }
 
-    @RequestMapping("updateSchedule/{id}")
-    public String showUpdateScheduleForm(@PathVariable("id") int id, Model model) {
-        StaffAvailability sa = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
-        model.addAttribute("staffavailibility", sa);
+    @RequestMapping(value = "updateSchedule/{id}", method = RequestMethod.GET)
+    public String showUpdateScheduleForm(@PathVariable Integer id, Model model) {
+        StaffAvailability sa1 = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
+        model.addAttribute("staffavailibility", sa1);
         return "updateSchedule";
     }
 
+    @PostMapping(value="updateSchedule/update")
+    public String updateStaffAvailability (@ModelAttribute StaffAvailability sa, @PathVariable int id) {
+        staffAvailibilityService.addStaffAvailibility(sa);
+        availibilityRepository.save(sa);
+        return "schedule";
+    }
 
-//    @PostMapping("updateSchedule/{id}")
-//    public String updateStaffAvailibilityById(@PathVariable("id")int id, @RequestParam StaffAvailability sa, Model model){
-//    staffAvailibilityService.updateStaffAvailibility(id, sa);
-//    model.addAttribute("staffavailibitlity", sa) ;
-//    return "updateSchedule";
+//    @PostMapping("/updateSchedule")
+//    public void updateStaffAvailibilityById(@RequestBody StaffAvailability sa, Model model, @PathVariable int id){
+//        model.addAttribute("staffavailability", sa);
+//        model.addAttribute("cohort", sa.getCohort());
+//        model.addAttribute("day", sa.getDay());
+//        model.addAttribute("dayPart", sa.getDayPart());
+//        model.addAttribute("colorOption", sa.getColorOption());
+//        availibilityRepository.save(sa);
+//        System.out.println("updateschedule" + sa.toString());
 //        }
 
 
