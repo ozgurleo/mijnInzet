@@ -9,15 +9,12 @@ import java.util.List;
 public class Task {
 
     @Id
-
     private int taskId;
-
     private String taskName;
-
     private int estimatedHours;
-
     private int yearsToExpiryDate;
-//    @OneToMany(mappedBy = "task")
+ //   @OneToMany(mappedBy = "taskId")
+//   private TaskApplication taskApplication;
 //    private List<TaskApplication> taskApplication;
 
     public Task() {
@@ -29,6 +26,10 @@ public class Task {
         this.taskName = taskName;
         this.estimatedHours = estimatedHours;
         this.yearsToExpiryDate = yearsToExpiryDate;
+    }
+
+    public Task(int taskId) {
+        this.taskId=taskId;
     }
 
     public int getTaskId() {
