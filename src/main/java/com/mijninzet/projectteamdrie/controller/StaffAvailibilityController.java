@@ -58,6 +58,7 @@ public class StaffAvailibilityController {
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailabilityId",staffavailabilityId.getId() );
+        model.addAttribute("staffavailibility", sa);
 
         return "schedule";
     }
@@ -86,6 +87,7 @@ public class StaffAvailibilityController {
         model.addAttribute("woensdag", woensdag);
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
+        model.addAttribute("staffavailibility", sa);
 
         return "schedule";
     }
@@ -104,8 +106,9 @@ public class StaffAvailibilityController {
         return "updateSchedule";
     }
 
-    @PostMapping(value="updateSchedule/update")
+    @PostMapping(value="updateSchedule")
     public String updateStaffAvailability (@ModelAttribute StaffAvailability sa, @PathVariable int id) {
+        System.out.println("mijn methode is aangeroepen");
         staffAvailibilityService.addStaffAvailibility(sa);
         availibilityRepository.save(sa);
         return "schedule";

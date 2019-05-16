@@ -26,10 +26,10 @@
 
 
 
-<form action="#" th:action="@{/updateSchedule/update}" th:object="${staffavailibility}" method="post">
+<form action="#" id="scheduleform" th:action="@{/updateSchedule/}" th:object="${staffavailibility}" method="post">
 
     <label for="cohort">cohort</label>
-    <input type="text" th:field="*{cohort}" id="cohort" placeholder="Cohort">
+    <input type="text" th:field="*{cohort}" th:value="${cohort}" id="cohort" name="cohort" placeholder="Cohort">
     <label for="dag">dag</label>
     <input type="text" th:field="*{day}" id="dag" placeholder="Dag">
     <label for="dagdeel">dagdeel</label>
@@ -37,7 +37,7 @@
     <label for="kleur">kleur</label>
     <input type="text" th:field="*{colorOption}" id="kleur" placeholder="kleur" name="kleur">
 
-    <input type="submit" value="Update schedule">
+    <input type="submit" value="Update schedule"  form="scheduleform">
 </form>
 
 
