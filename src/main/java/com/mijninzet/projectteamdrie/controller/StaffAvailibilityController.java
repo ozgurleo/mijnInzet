@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -106,13 +108,34 @@ public class StaffAvailibilityController {
         return "updateSchedule";
     }
 
-    @PostMapping(value="updateSchedule")
-    public String updateStaffAvailability (@ModelAttribute StaffAvailability sa, @PathVariable int id) {
+    @RequestMapping(value="/update/timeschedule", method=RequestMethod.POST)
+    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, StaffAvailability sa1, Model model) {
         System.out.println("mijn methode is aangeroepen");
+        model.addAttribute("id", sa.getId());
+        model.addAttribute("cohort", sa.getCohort());
+        model.addAttribute("day", sa.getDay());
+        model.addAttribute("dayPart", sa.getDayPart());
+        model.addAttribute("colorOption", sa.getColorOption());
+        System.out.println("en geeft mee " + sa.getId() + " " + sa.getColorOption());
         staffAvailibilityService.addStaffAvailibility(sa);
         availibilityRepository.save(sa);
         return "schedule";
     }
+
+//    @PostMapping(value = "/updateSchedule/{cohort}/{day}/{dayPart}/{colorOption}")
+//    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
+//        System.out.println("methode is aangeroepen!");
+//        //get the data from httpservletRequest and put in variable
+//        String id = request.getParameter("id");
+//        String cohort=request.getParameter("cohort");
+//        String day=request.getParameter("day");
+//        String colorOption=request.getParameter("colorOption");
+//        String dayPart = request.getParameter("dayPart");
+//        //gebruik repository om de nieuwe object naar db weg te schrijven
+//        availibilityRepository.save(new StaffAvailability(1, "day", "dayPart", "colorOption", "cohort",1));
+//        return "/updateSchedule";
+   //}
+
 
 //    @PostMapping("/updateSchedule")
 //    public void updateStaffAvailibilityById(@RequestBody StaffAvailability sa, Model model, @PathVariable int id){
