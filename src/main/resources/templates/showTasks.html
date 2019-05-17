@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
 </head>
 
@@ -13,7 +15,7 @@
 <nav class="navbar navbar-dark bg-dark">
     <a class="nav-link" href="/helloTeacher">MIJN INZET HOME</a>
     <a class="navbar-brand" href="/showTasks">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">SOLLICITATIEMAND</a>
+    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
     <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
     <form th:action="@{/logout}" method="post">
