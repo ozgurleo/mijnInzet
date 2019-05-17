@@ -56,11 +56,15 @@ public class TaskApplicationController {
          taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
 
         model.addAttribute("showTasks", taskRepository.getVacancies());
-
-
         return "showtasks";
     }
 
+
+    @GetMapping(value = "/applicationBasket")
+    public String fillApplicationBasket(){
+
+        return"/applicationBasket";
+    }
 
 
 
