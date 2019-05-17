@@ -3,6 +3,7 @@ package com.mijninzet.projectteamdrie.controller;
 import com.mijninzet.projectteamdrie.model.entity.Task;
 import com.mijninzet.projectteamdrie.model.entity.TaskApplication;
 import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
+import com.mijninzet.projectteamdrie.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ import static java.time.LocalDate.now;
 public class TaskApplicationController {
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
+
+    @Autowired
+    TaskRepository taskRepository;
 
 //    @RequestMapping(value = "/applicationBasket")
 //    public String makeVacancyList(Model model) {
@@ -50,6 +54,8 @@ public class TaskApplicationController {
 
         // insert the data into database
          taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
+
+        model.addAttribute("showTasks", taskRepository.getVacancies());
 
 
         return "showtasks";
