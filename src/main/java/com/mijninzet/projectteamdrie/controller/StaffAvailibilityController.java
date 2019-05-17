@@ -31,8 +31,20 @@ public class StaffAvailibilityController {
     @RequestMapping(value = "schedule")
     public String schedules(Model model) {
         model.addAttribute("staffavailibility", new StaffAvailability());
+        model.addAttribute("allStaffAvailibilities", availibilityRepository.findAll());
+        model.addAttribute("id", sa.getId());
+        model.addAttribute("cohort", availibilityRepository.findAllByCohort(sa.getCohort()));
         return "schedule";
     }
+    @RequestMapping(value = "schedule", method=RequestMethod.POST)
+    public String postSchedules(Model model) {
+        model.addAttribute("staffavailibility", new StaffAvailability());
+        model.addAttribute("allStaffAvailibilities", availibilityRepository.findAll());
+        model.addAttribute("id", sa.getId());
+
+        return "schedule";
+    }
+
 
     @RequestMapping("schedule/{id}")
     public String getAllschedule(Model model, @PathVariable Integer id) {
@@ -61,6 +73,7 @@ public class StaffAvailibilityController {
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailabilityId",staffavailabilityId.getId() );
         model.addAttribute("staffavailibility", sa);
+        model.addAttribute("setId", availibilityRepository.getOne(id));
 
         return "schedule";
     }
@@ -91,6 +104,37 @@ public class StaffAvailibilityController {
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailibility", sa);
 
+
+        return "schedule";
+    }
+
+    @RequestMapping("schedule/{cohort}")
+    public String GetAllSchedulesByCohort(Model model, @PathVariable String cohort) {
+        List<StaffAvailability> sa = staffAvailibilityService.getAllStaffAvailibilityByCohort(cohort);
+        List<StaffAvailability> maandag = sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability> dinsdag = sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability> woensdag = sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Woensdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability> donderdag = sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Donderdag"))
+                .collect(Collectors.toList());
+        List<StaffAvailability> vrijdag = sa.stream()
+                .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
+                .collect(Collectors.toList());
+
+        model.addAttribute("maandag", maandag);
+        model.addAttribute("dinsdag", dinsdag);
+        model.addAttribute("woensdag", woensdag);
+        model.addAttribute("donderdag", donderdag);
+        model.addAttribute("vrijdag", vrijdag);
+        model.addAttribute("staffavailibility", sa);
+
+
         return "schedule";
     }
 
@@ -111,14 +155,16 @@ public class StaffAvailibilityController {
     @RequestMapping(value="/update/timeschedule", method=RequestMethod.POST)
     public String updateTimeschedule(@ModelAttribute StaffAvailability sa, StaffAvailability sa1, Model model) {
         System.out.println("mijn methode is aangeroepen");
+
         model.addAttribute("id", sa.getId());
         model.addAttribute("cohort", sa.getCohort());
         model.addAttribute("day", sa.getDay());
         model.addAttribute("dayPart", sa.getDayPart());
         model.addAttribute("colorOption", sa.getColorOption());
-        System.out.println("en geeft mee " + sa.getId() + " " + sa.getColorOption());
-        staffAvailibilityService.addStaffAvailibility(sa);
-        availibilityRepository.save(sa);
+        model.addAttribute("userId", sa.getUser());
+        System.out.println("en geeft mee " + sa.getId() + " " + sa.getColorOption() + " " + sa.getUser());
+        staffAvailibilityService.addStaffAvailibility(sa1);
+        availibilityRepository.save(sa1);
         return "schedule";
     }
 

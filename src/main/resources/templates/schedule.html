@@ -27,47 +27,17 @@
     </nav>
 
 
-        <!--<table>-->
-        <!--<tr>-->
-        <!--<td>Select Cohort:</td>-->
-        <!--<td>-->
-        <!--<select th:field="{cohort}" name="cohort">-->
-        <!--<option value=""> &#45;&#45; </option>-->
-        <!--<option th:each="cohort : ${staffavailability}"-->
-        <!--th:value="${cohort.cohort}"-->
-        <!--th:text="${cohort.cohort}"></option>-->
-        <!--</select>-->
-
-        <!--</td>-->
-        <!--</tr>-->
-
-        <!--<tr>-->
-        <!--<td><input name="submit" type="submit" value="submit" />submit</td>-->
-        <!--</tr>-->
-        <!--</table>-->
-        <!--</form>-->
+    <form action="#" th:action="@{/}" method="post">
 
 
-    </div>
-</nav>
-
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/hello">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-    </button>
-
-    <select >
-        <option th:each="sa: ${staffavailibility}"
-                th:value="${sa.cohort}"
-                th:text="${sa.cohort}"/>
-    </select>
+    <p>
+    <li class="dropdown bg-light" >
+        <td><a th:href="@{/schedule/1/15}" > Cohort 15</a></td>
+    </li>
+    <li class="dropdown bg-light ">
+        <td><a th:href="@{/schedule/1/16}" > Cohort 16</a></td>
+    </li>
+        </p>
 
 </div>
 
@@ -106,7 +76,11 @@
                     <td th:text="${maandag.colorOption}">Maandag</td>
                     <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${maandag.id})}">wijzig</a></td>
 
+
                 </tr>
+
+
+
             </table>
         </div>
 
@@ -168,6 +142,8 @@
 
     </div>
 
+
+
         <!--<form action="#" th:action="@{schedule/updated/{id}id=${staffavailibility.id})}" th:object="${sa}" method="post">-->
 
         <!--<div class="row">-->
@@ -200,6 +176,6 @@
     </div>
     </form>
 
-
+</form>
 </body>
 </html>
