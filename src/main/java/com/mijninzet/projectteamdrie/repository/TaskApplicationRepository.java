@@ -40,7 +40,7 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
 
 
 
-    
+
     // remove query:
     // DELETE FROM task_application WHERE taskid =???? AND
     //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
