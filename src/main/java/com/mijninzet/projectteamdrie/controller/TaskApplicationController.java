@@ -32,10 +32,10 @@ public class TaskApplicationController {
 //        return "applicationBasket";
 //    }
 
-    public void saveUpdateHours(int hours){
+    public void saveUpdateHours(int taskId, int hours, String fullName){
 
     }
-    public void deleteApplication(int taskId){
+    public void deleteApplication(int taskId, String fullName){
 
     }
 
@@ -69,19 +69,28 @@ public class TaskApplicationController {
     public String updateTaskApplications(HttpServletRequest request, ModelMap model){
         //get the data from httpservletRequest and put in variable
         String tempId=request.getParameter("taskId");
-        String tempFullName=request.getParameter("fullName");
+        String fullName=request.getParameter("fullName");
         String tempHours=request.getParameter("availHours");
         String actionToTake=request.getParameter("updateAppl");
 
         System.out.println("DE UIT TE VEOREN TAAK is: " + actionToTake );
         System.out.println("de ingelezen taskid waarde is: " + tempId );
-        System.out.println("de ingelezen fullname waarde is: " + tempFullName );
+        System.out.println("de ingelezen fullname waarde is: " + fullName );
         System.out.println("de ingelezen availableHours waarde is: " + tempHours );
 
 
         //Convert variable to int
-//        int iD=Integer.parseInt(tempId);
-//        int hours=Integer.parseInt(tempHours);
+        int taskId=Integer.parseInt(tempId);
+        int availHours=Integer.parseInt(tempHours);
+
+        //take action based on which button was clicked
+        if(actionToTake=="updateAppl"){
+            saveUpdateHours(taskId,availHours,fullName);
+        }else if(actionToTake=="removeAppl"){
+            deleteApplication(taskId, fullName);
+        }else{
+            System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
+        }
 
         model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview());
         return "applicationBasket";
