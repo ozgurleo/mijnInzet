@@ -36,15 +36,14 @@ public class StaffAvailibilityController {
         model.addAttribute("cohort", availibilityRepository.findAllByCohort(sa.getCohort()));
         return "schedule";
     }
-    @RequestMapping(value = "schedule", method=RequestMethod.POST)
+
+    @RequestMapping(value = "schedule", method = RequestMethod.POST)
     public String postSchedules(Model model) {
         model.addAttribute("staffavailibility", new StaffAvailability());
         model.addAttribute("allStaffAvailibilities", availibilityRepository.findAll());
         model.addAttribute("id", sa.getId());
-
         return "schedule";
     }
-
 
     @RequestMapping("schedule/{id}")
     public String getAllschedule(Model model, @PathVariable Integer id) {
@@ -71,7 +70,7 @@ public class StaffAvailibilityController {
         model.addAttribute("woensdag", woensdag);
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
-        model.addAttribute("staffavailabilityId",staffavailabilityId.getId() );
+        model.addAttribute("staffavailabilityId", staffavailabilityId.getId());
         model.addAttribute("staffavailibility", sa);
         model.addAttribute("setId", availibilityRepository.getOne(id));
 
@@ -103,8 +102,6 @@ public class StaffAvailibilityController {
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailibility", sa);
-
-
         return "schedule";
     }
 
@@ -133,8 +130,6 @@ public class StaffAvailibilityController {
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailibility", sa);
-
-
         return "schedule";
     }
 
@@ -152,53 +147,16 @@ public class StaffAvailibilityController {
         return "updateSchedule";
     }
 
-    @RequestMapping(value="/update/timeschedule", method=RequestMethod.POST)
-    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, StaffAvailability sa1, Model model) {
-        System.out.println("mijn methode is aangeroepen");
-
+    @RequestMapping(value = "/update/timeschedule", method = RequestMethod.POST)
+    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, Model model) {
         model.addAttribute("id", sa.getId());
         model.addAttribute("cohort", sa.getCohort());
         model.addAttribute("day", sa.getDay());
         model.addAttribute("dayPart", sa.getDayPart());
         model.addAttribute("colorOption", sa.getColorOption());
-        System.out.println("en geeft mee " + sa.getId() + " " + sa.getColorOption() + " " + sa.getUser());
-        System.out.println("said is : " + sa.getId() + "sa1-id is:" + sa1.getId());
-        staffAvailibilityService.updateStaffAvailability(sa.getId());
+        model.addAttribute("userid", sa.getUser().getId());
+        availibilityRepository.saveAndFlush(sa);
         return "schedule";
     }
 
-//    @PostMapping(value = "/updateSchedule/{cohort}/{day}/{dayPart}/{colorOption}")
-//    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
-//        System.out.println("methode is aangeroepen!");
-//        //get the data from httpservletRequest and put in variable
-//        String id = request.getParameter("id");
-//        String cohort=request.getParameter("cohort");
-//        String day=request.getParameter("day");
-//        String colorOption=request.getParameter("colorOption");
-//        String dayPart = request.getParameter("dayPart");
-//        //gebruik repository om de nieuwe object naar db weg te schrijven
-//        availibilityRepository.save(new StaffAvailability(1, "day", "dayPart", "colorOption", "cohort",1));
-//        return "/updateSchedule";
-   //}
-
-
-//    @PostMapping("/updateSchedule")
-//    public void updateStaffAvailibilityById(@RequestBody StaffAvailability sa, Model model, @PathVariable int id){
-//        model.addAttribute("staffavailability", sa);
-//        model.addAttribute("cohort", sa.getCohort());
-//        model.addAttribute("day", sa.getDay());
-//        model.addAttribute("dayPart", sa.getDayPart());
-//        model.addAttribute("colorOption", sa.getColorOption());
-//        availibilityRepository.save(sa);
-//        System.out.println("updateschedule" + sa.toString());
-//        }
-
-
-
-//    @RequestMapping(value="updateSchedule",  method=RequestMethod.GET)
-//    public String updateScheduleFromId(Model model){
-//       StaffAvailability sa = this.availibilityRepository.findById();
-//       model.addAttribute("staffavailibility", sa);
-//        return "updateSchedule";
-//    }
 }
