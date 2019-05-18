@@ -32,7 +32,12 @@ public class TaskApplicationController {
 //        return "applicationBasket";
 //    }
 
-    
+    public void saveUpdateHours(int hours){
+
+    }
+    public void deleteApplication(int taskId){
+
+    }
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
@@ -58,6 +63,28 @@ public class TaskApplicationController {
          // get latests data from db en send to showtasks.html
         model.addAttribute("showTasks", taskRepository.getVacancies());
         return "showtasks";
+    }
+
+    @PostMapping(value = "/taskApplications/{taskId}/{fullName}/{availHours}")
+    public String updateTaskApplications(HttpServletRequest request, ModelMap model){
+        //get the data from httpservletRequest and put in variable
+        String tempId=request.getParameter("taskId");
+        String tempFullName=request.getParameter("fullName");
+        String tempHours=request.getParameter("availHours");
+        String actionToTake=request.getParameter("updateAppl");
+
+        System.out.println("DE UIT TE VEOREN TAAK is: " + actionToTake );
+        System.out.println("de ingelezen taskid waarde is: " + tempId );
+        System.out.println("de ingelezen fullname waarde is: " + tempFullName );
+        System.out.println("de ingelezen availableHours waarde is: " + tempHours );
+
+
+        //Convert variable to int
+//        int iD=Integer.parseInt(tempId);
+//        int hours=Integer.parseInt(tempHours);
+
+        model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview());
+        return "applicationBasket";
     }
 
 

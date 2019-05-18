@@ -27,6 +27,18 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
                                @Param("availableHours")Integer availableHours, @Param("role")String role, @Param("taskID")Integer taskID);
 
 
+    // update query:UPDATE task_application SET available_hours
+    //WHERE taskid =???? AND
+    //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+
+
+
+    // remove query:DELETE FROM task_application WHERE taskid =???? AND
+    //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+
+
+
+
    // retrieve data from multiple tables by means of inner joins
     @Query(value="SELECT T.task_id taskId, T.task_name taskName, T.estimated_hours estHours, CONCAT(U.first_name, ' ', U.last_name) AS fullName " +
             ",TA.application_date applDate, TA.available_hours availHours  FROM task_application TA " +
