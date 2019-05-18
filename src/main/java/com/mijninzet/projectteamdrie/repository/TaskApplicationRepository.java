@@ -34,7 +34,7 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
     @Modifying
     @Transactional
     @Query(value = "UPDATE task_application TA SET TA.available_hours = :available_hours WHERE TA.task_task_id = :taskId", nativeQuery = true)
-    void updateHours(@Param("taskId") Integer taskId, @Param("available_hours") Integer availHours);
+    void updateHours(@Param("taskId") Integer taskId, @Param("available_hours") Integer available_hours);
 
 
 
@@ -43,6 +43,10 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
     // remove query:
     // DELETE FROM task_application WHERE taskid =???? AND
     //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM task_application WHERE task_application.task_task_id = :taskId", nativeQuery = true)
+    void deleteApplication(@Param("taskId") Integer taskId);
 
 
 

@@ -2,6 +2,7 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Task;
 import com.mijninzet.projectteamdrie.model.entity.TaskApplication;
+import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
 import com.mijninzet.projectteamdrie.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,15 @@ import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
+    private static User user = new User();
+
+
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
 
     @Autowired
     TaskRepository taskRepository;
+
 
 
     public void deleteApplication(int taskId, String fullName){
@@ -59,6 +64,8 @@ public class TaskApplicationController {
 
     @PostMapping(value = "/taskApplications/{taskId}/{fullName}/{availHours}")
     public String updateTaskApplications(HttpServletRequest request, ModelMap model){
+
+
         //get the data from httpservletRequest and put in variable
         String tempId=request.getParameter("taskId");
         String fullName=request.getParameter("fullName");
@@ -82,7 +89,7 @@ public class TaskApplicationController {
 
             }else if(deleteAction!=null){
             System.out.println("De DELETE Methode is aangeroepen");
-                    deleteApplication(taskId, fullName);
+            taskApplicationRepo.deleteApplication(taskId);
                 }else{
                      System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
         }
