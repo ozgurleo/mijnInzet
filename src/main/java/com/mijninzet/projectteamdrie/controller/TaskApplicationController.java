@@ -26,18 +26,10 @@ public class TaskApplicationController {
     @Autowired
     TaskRepository taskRepository;
 
-//    @RequestMapping(value = "/applicationBasket")
-//    public String makeVacancyList(Model model) {
-//        model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
-//        return "applicationBasket";
-//    }
 
-    public void saveUpdateHours(int taskId, int hours, String fullName){
-
-    }
     public void deleteApplication(int taskId, String fullName){
-
     }
+
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
@@ -71,25 +63,28 @@ public class TaskApplicationController {
         String tempId=request.getParameter("taskId");
         String fullName=request.getParameter("fullName");
         String tempHours=request.getParameter("availHours");
-        String actionToTake=request.getParameter("updateAppl");
+        String updateAction=request.getParameter("updateAppl");
+        String deleteAction=request.getParameter("removeAppl");
 
-        System.out.println("DE UIT TE VEOREN TAAK is: " + actionToTake );
+        System.out.println("DE UIT TE VEOREN TAAK is: " + updateAction );
         System.out.println("de ingelezen taskid waarde is: " + tempId );
         System.out.println("de ingelezen fullname waarde is: " + fullName );
         System.out.println("de ingelezen availableHours waarde is: " + tempHours );
-
 
         //Convert variable to int
         int taskId=Integer.parseInt(tempId);
         int availHours=Integer.parseInt(tempHours);
 
         //take action based on which button was clicked
-        if(actionToTake=="updateAppl"){
-            saveUpdateHours(taskId,availHours,fullName);
-        }else if(actionToTake=="removeAppl"){
-            deleteApplication(taskId, fullName);
-        }else{
-            System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
+        if(updateAction!=null){
+            System.out.println("De UPDATE Methode is aangeroepen");
+            taskApplicationRepo.updateHours(taskId,availHours);
+
+            }else if(deleteAction!=null){
+            System.out.println("De DELETE Methode is aangeroepen");
+                    deleteApplication(taskId, fullName);
+                }else{
+                     System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
         }
 
         model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview());
