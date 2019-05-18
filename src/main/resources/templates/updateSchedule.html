@@ -28,7 +28,9 @@
 
 <form action="#" th:action="@{/update/timeschedule}" th:object="${staffavailibility}" method="post">
 
+    <br><br>
 
+<div container>
     <label th:text="id">Id</label>
     <input type="text" th:field="*{id}" th:value="*{id}" id="id" name="id" placeholder="Id">
     <label th:text="Cohort">Cohort</label>
@@ -39,8 +41,8 @@
     <input type="text" th:field="*{dayPart}" th:value="*{dayPart}"/>
     <label th:text="Kleur">Kleur</label>
     <input type="text" th:field="*{colorOption}" th:value="*{colorOption}" />
-    <label th:text="userId">Id</label>
-    <input type="text" th:field="*{userId}" th:value="*{userId}">
+
+</div>
 
     <input type="submit" value="Update schedule"  >
 </form>

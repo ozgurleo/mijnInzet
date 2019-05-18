@@ -161,10 +161,9 @@ public class StaffAvailibilityController {
         model.addAttribute("day", sa.getDay());
         model.addAttribute("dayPart", sa.getDayPart());
         model.addAttribute("colorOption", sa.getColorOption());
-        model.addAttribute("userId", sa.getUser());
         System.out.println("en geeft mee " + sa.getId() + " " + sa.getColorOption() + " " + sa.getUser());
-        staffAvailibilityService.addStaffAvailibility(sa1);
-        availibilityRepository.save(sa1);
+        System.out.println("said is : " + sa.getId() + "sa1-id is:" + sa1.getId());
+        staffAvailibilityService.updateStaffAvailability(sa.getId());
         return "schedule";
     }
 
