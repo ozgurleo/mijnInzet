@@ -73,12 +73,12 @@ public class TaskApplicationController {
 
         //Convert variable to int
         int taskId=Integer.parseInt(tempId);
-        int availHours=Integer.parseInt(tempHours);
+        int available_hours=Integer.parseInt(tempHours);
 
         //take action based on which button was clicked
         if(updateAction!=null){
             System.out.println("De UPDATE Methode is aangeroepen");
-            taskApplicationRepo.updateHours(taskId,availHours);
+            taskApplicationRepo.updateHours(taskId,available_hours);
 
             }else if(deleteAction!=null){
             System.out.println("De DELETE Methode is aangeroepen");
