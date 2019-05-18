@@ -2,6 +2,24 @@ INSERT INTO Task (task_Id,task_Name,estimated_Hours,years_To_Expiry_Date) VALUES
 INSERT INTO Task (task_Id,task_Name,estimated_Hours,years_To_Expiry_Date) VALUES (2,'Lid BibliotheekCommissie',16,3);
 INSERT INTO Task (task_Id,task_Name,estimated_Hours,years_To_Expiry_Date) VALUES (3,'Begeleiding',8,3);
 
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (12,32,'niet_onderwijstaak12',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (13,30,'niet_onderwijstaak13',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (14,13,'niet_onderwijstaak14',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (15,23,'niet_onderwijstaak15',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (16,43,'niet_onderwijstaak16',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (17,6,'niet_onderwijstaak17',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (18,12,'niet_onderwijstaak18',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (19,9,'niet_onderwijstaak19',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (20,10,'niet_onderwijstaak20',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (21,11,'niet_onderwijstaak21',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (22,13,'niet_onderwijstaak22',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (23,15,'niet_onderwijstaak23',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (24,17,'niet_onderwijstaak24',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (25,19,'niet_onderwijstaak25',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (26,21,'niet_onderwijstaak26',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (27,23,'niet_onderwijstaak27',3);
+INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES (28,25,'niet_onderwijstaak28',3);
+
 INSERT INTO `mijn_inzet`.`subject` (`subject_id`, `estimated_hours`, `subject_name`, `years_to_expiry_date`) VALUES ('1', '20', 'Programming', '2');
 INSERT INTO `mijn_inzet`.`subject` (`subject_id`, `estimated_hours`, `subject_name`, `years_to_expiry_date`) VALUES ('2', '30', 'OOP', '2');
 INSERT INTO `mijn_inzet`.`subject` (`subject_id`, `estimated_hours`, `subject_name`, `years_to_expiry_date`) VALUES ('3', '20', 'Databases', '2');
