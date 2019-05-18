@@ -45,7 +45,7 @@ public class TaskApplicationController {
         String tempId=request.getParameter("taskId");
         String tempHours=request.getParameter("availableHours");
 
-        //Convert to Strings
+        //Convert variable to int
         int iD=Integer.parseInt(tempId);
         int hours=Integer.parseInt(tempHours);
 
@@ -55,15 +55,18 @@ public class TaskApplicationController {
         // insert the data into database
          taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
 
+         // get latests data from db en send to showtasks.html
         model.addAttribute("showTasks", taskRepository.getVacancies());
         return "showtasks";
     }
 
 
     @GetMapping(value = "/applicationBasket")
-    public String fillApplicationBasket(){
-
-        return"/applicationBasket";
+    public String fillApplicationBasket(Object object, Model model){
+        //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
+        model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview());
+        System.out.println("INHOUD VH OBJECT: ---> "+taskApplicationRepo.getApplicationOverview().toString());
+        return"applicationBasket";
     }
 
 
