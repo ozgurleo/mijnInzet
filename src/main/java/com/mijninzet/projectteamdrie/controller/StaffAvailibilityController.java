@@ -73,7 +73,6 @@ public class StaffAvailibilityController {
         model.addAttribute("staffavailabilityId", staffavailabilityId.getId());
         model.addAttribute("staffavailibility", sa);
         model.addAttribute("setId", availibilityRepository.getOne(id));
-
         return "schedule";
     }
 
@@ -82,18 +81,23 @@ public class StaffAvailibilityController {
         List<StaffAvailability> sa = staffAvailibilityService.getAllStaffAvailibilityByIdAndCohort(id, cohort);
         List<StaffAvailability> maandag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> dinsdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> woensdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Woensdag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> donderdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Donderdag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> vrijdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
+                .limit(3)
                 .collect(Collectors.toList());
 
         model.addAttribute("maandag", maandag);
@@ -144,17 +148,19 @@ public class StaffAvailibilityController {
     public String showUpdateScheduleForm(@PathVariable Integer id, Model model) {
         StaffAvailability sa1 = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
         model.addAttribute("staffavailibility", sa1);
+        model.addAttribute("colorOption", sa1.getColorOption());
         return "updateSchedule";
     }
 
     @RequestMapping(value = "/update/timeschedule", method = RequestMethod.POST)
-    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, Model model) {
+    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, User user, Model model) {
         model.addAttribute("id", sa.getId());
         model.addAttribute("cohort", sa.getCohort());
         model.addAttribute("day", sa.getDay());
         model.addAttribute("dayPart", sa.getDayPart());
         model.addAttribute("colorOption", sa.getColorOption());
-        model.addAttribute("userid", sa.getUser().getId());
+        model.addAttribute(user);
+        System.out.println("user id is :" +  user.getId());
         availibilityRepository.saveAndFlush(sa);
         return "schedule";
     }

@@ -75,12 +75,7 @@
                 <tr th:each="maandag:${maandag}">
                     <td th:text="${maandag.colorOption}">Maandag</td>
                     <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${maandag.id})}">wijzig</a></td>
-
-
                 </tr>
-
-
-
             </table>
         </div>
 
@@ -92,9 +87,6 @@
                 <tr th:each="dinsdag:${dinsdag}">
                     <td th:text="${dinsdag.colorOption}">Dinsdag</td>
                     <td> <a th:href ="@{http://localhost:8081/updateSchedule/{id}(id=${dinsdag.id})}">wijzig</a></td>
-
-
-
                 </tr>
             </table>
         </div>
@@ -141,6 +133,7 @@
         </div>
 
     </div>
+
 
 
 

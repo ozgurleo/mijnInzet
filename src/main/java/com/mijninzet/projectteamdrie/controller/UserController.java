@@ -13,12 +13,27 @@ package com.mijninzet.projectteamdrie.controller;
 //import javax.servlet.http.HttpSession;
 //import java.util.List;
 //import java.util.Optional;
+
+import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
+import com.mijninzet.projectteamdrie.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 //
 //@Controller
 //public class UserController {
 //
 //    @Autowired
-//private UserService userService;
+//    private UserService userService;
+//
+//
+//
+//
+//}
+
+
+
 //
 //    @RequestMapping("/users")
 //    public String getAllUsers(Model model){

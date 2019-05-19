@@ -25,22 +25,45 @@
     </form>
 </nav>
 
-<!-- Hoofdtekst -->
-<h3>Welkom .... Je bent ingelogd als leraar</h3>
-<!--<h1>MijnInzet de roosteraar applicatie</h1>-->
-<!--<h2></h2>-->
-<!--<p></p>-->
+<!-- Hoofdtekst  -->
 
-<!-- Navigatie-menu -->
-<!--<ul class="navbar">-->
-<!--    <li><a href="showTasks">Ga naar vactureoverzicht</a></li>-->
-<!--    <li><a href="showSubjects">Ga naar vakkenvoorkeur</a></li>-->
-<!--    <li><a href="addUsers">Voeg gebruiker toe</a></li>-->
-<!--    <li><a href="schedule"> Ga naar weekrooster</a></li>-->
-<!--</ul>-->
+<br><br><br>
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">Mijn Inzet</h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="#">link</a>
+                <a class="nav-link" href="#">link</a>
+                <a class="nav-link" href="#">link</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Welkom </h1>
+        <span th:text="${user}">CurrentUser</span>
+        <h3>Je bent ingelogd als leraar</h3>
+
+        <p class="lead">Je kunt hier je roostervoorkeuren opgeven </p>
+        <p class="lead">
+            <a href="#" class="btn btn-lg btn-secondary">Mooie Knop </a>
+        </p>
+    </main>
+
+</div>
+
+</body>
 
 <!-- Onderteken en dateer de pagina, wees beleefd! -->
-<address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <br><br>
+        <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
+    </div>
+</footer>
 <!--<form th:action="@{/logout}" method="post">-->
 <!--    <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
 <!--</form>-->
