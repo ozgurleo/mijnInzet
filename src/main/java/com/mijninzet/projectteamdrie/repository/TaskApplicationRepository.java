@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,12 +27,36 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
                                @Param("availableHours")Integer availableHours, @Param("role")String role, @Param("taskID")Integer taskID);
 
 
-    //retrieve data from multiple tables by means of inner joins
-//    @Query(value="SELECT T.task_id, T.task_name, T.estimated_hours, CONCAT(U.first_name, ' ', U.last_name) " +
-//            "as 'fullname',TA.application_date, TA.available_hours  FROM task_application TA " +
-//            " JOIN task T ON TA.task_task_id= T.task_id" +
-//            " JOIN user U ON TA.user_id=U.user_id;", nativeQuery = true)
-//    List<TaskApplication> getApplicationOverview();
+    // update query:
+    // UPDATE task_application SET available_hours
+    //WHERE taskid =???? AND
+    //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE task_application TA SET TA.available_hours = :available_hours WHERE TA.task_task_id = :taskId", nativeQuery = true)
+    void updateHours(@Param("taskId") Integer taskId, @Param("available_hours") Integer available_hours);
+
+
+
+
+
+    // remove query:
+    // DELETE FROM task_application WHERE taskid =???? AND
+    //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM task_application WHERE task_application.task_task_id = :taskId", nativeQuery = true)
+    void deleteApplication(@Param("taskId") Integer taskId);
+
+
+
+
+   // retrieve data from multiple tables by means of inner joins
+    @Query(value="SELECT T.task_id taskId, T.task_name taskName, T.estimated_hours estHours, CONCAT(U.first_name, ' ', U.last_name) AS fullName " +
+            ",TA.application_date applDate, TA.available_hours availHours  FROM task_application TA " +
+            " JOIN task T ON TA.task_task_id= T.task_id" +
+            " JOIN user U ON TA.user_id=U.user_id;", nativeQuery = true)
+    ArrayList<Object[]> getApplicationOverview();
 
 
 

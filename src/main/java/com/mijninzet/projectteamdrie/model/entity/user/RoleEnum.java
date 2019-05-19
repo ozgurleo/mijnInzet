@@ -8,7 +8,7 @@ public enum RoleEnum {
     ADMINISTRATOR("ADMIN", WebPage.getWindowsAdministrator()),
     //eigenaar onderwijseenheid is coordinator
     COORDINATOR("COORDINATOR", WebPage.getWindowsCoordinator()),
-    SCHEDULER("SCHEDULAR", WebPage.getWindowsScheduler()),
+    SCHEDULER("SCHEDULER", WebPage.getWindowsScheduler()),
     MANAGER("MANAGER", WebPage.getWindowsManager());
 
     private String roleDescriptor;

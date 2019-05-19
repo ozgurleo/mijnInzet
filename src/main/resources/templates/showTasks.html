@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
 </head>
 
@@ -13,7 +15,7 @@
 <nav class="navbar navbar-dark bg-dark">
     <a class="nav-link" href="/helloTeacher">MIJN INZET HOME</a>
     <a class="navbar-brand" href="/showTasks">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">SOLLICITATIEMAND</a>
+    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
     <a class="nav-link" href="/schedule">ROOSTERBEHEER</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
     <form th:action="@{/logout}" method="post">
@@ -25,7 +27,7 @@
 
     <div class="table-responsive col-sm-8">
         <table id="taskTable" class="table table-bordered">
-            <h2 class="Vacatures">VACATURES</h2>
+            <h3 class="Vacatures">VACATURES</h3>
             <tablehead>
                 <thead class="thead-dark">
                 <tr>
@@ -34,7 +36,7 @@
                     <th>Begrootte Uren</th>
                     <th>Geldigheidsduur</th>
                     <th>Geef jouw uren op</th>
-                    <th>               </th>
+                    <th>   Solliciteer   </th>
                 </tr>
                 </thead>
             </tablehead>
@@ -58,8 +60,8 @@
 
                         <td>
                         <div>
-                            <button type="submit" class="btn btn-primary" th:value="${task.taskId}"
-                                th:id="${task.taskId}" th:form = "${task.taskId}">SOLLICITEER</button>
+                            <button type="submit" class="btn btn-info" th:value="${task.taskId}"
+                                th:id="${task.taskId}" th:form = "${task.taskId}"> klik hier </button>
                         </div>
                         </td>
                     </form>
