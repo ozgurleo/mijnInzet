@@ -29,15 +29,15 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
 
     // update query: obv user_id, task_id en opgegeven uren
     @Modifying
+    @Query(value = "UPDATE task_application TA SET TA.available_hours = :available_hours WHERE TA.user_id= :userId AND TA.task_task_id = :taskId;", nativeQuery = true)
     @Transactional
-    @Query(value = "UPDATE task_application SET available_hours = :available_hours WHERE task_task_id = :taskId AND user_id=:userId", nativeQuery = true)
-    void updateHours(@Param("taskId") Integer taskId, @Param("available_hours") Integer available_hours,@Param("userId") Integer userId );
+    void updateHours(@Param("available_hours") Integer available_hours,@Param("userId") Integer userId,@Param("taskId") Integer taskId);
 
 
     // remove query: obv user_id en task_id
     @Modifying
+    @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = :taskId AND TA.user_id=:userId;", nativeQuery = true)
     @Transactional
-    @Query(value = "DELETE FROM task_application WHERE task_application.task_task_id = :taskId AND TA.user_id=:userId;", nativeQuery = true)
     void deleteApplication(@Param("taskId") Integer taskId,@Param("userId") Integer userId );
 
 

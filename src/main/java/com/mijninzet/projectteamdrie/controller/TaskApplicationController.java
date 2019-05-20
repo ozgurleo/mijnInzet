@@ -86,7 +86,7 @@ int userId=user.getCurrentUserId();
         if(updateAction!=null){
             System.out.println("De UPDATE Methode is aangeroepen");
             System.out.println("De user_id is ---> " + userId);
-            taskApplicationRepo.updateHours(taskId,available_hours,userId);
+            taskApplicationRepo.updateHours(available_hours,userId,taskId);
 
             }else if(deleteAction!=null){
             System.out.println("De DELETE Methode is aangeroepen");
