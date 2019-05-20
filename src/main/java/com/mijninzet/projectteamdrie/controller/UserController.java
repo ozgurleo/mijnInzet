@@ -15,31 +15,55 @@ package com.mijninzet.projectteamdrie.controller;
 //import java.util.Optional;
 
 import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
+import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-//
-//@Controller
-//public class UserController {
-//
-//    @Autowired
-//    private UserService userService;
-//
-//
-//
-//
-//}
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
 
 
+    public UserController(UserService userService) {
+        this.userService=userService;
+    }
+    //}
 
-//
-//    @RequestMapping("/users")
-//    public String getAllUsers(Model model){
-//        model.addAttribute("users", userService.getAllUsers());
-//        return "users";
-//    }
+    @PostMapping("/save")
+    public String save(@ModelAttribute("user") User theUser){
+
+        userService.saveUser(theUser);
+        return "redirect:/users/list";
+    }
+    //
+    @RequestMapping("/list")
+    public String getAllUsers(Model model){
+        model.addAttribute("users", userService.getAllUsers());
+        return "users";
+    }
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model){
+        User theUser=new User();
+
+        model.addAttribute("user",theUser);
+       // return "user-form";
+        return "register";
+
+    }
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("userId") int theId,Model model){
+        User theUser=userService.findById(theId);
+        model.addAttribute("user",theUser);
+        return "user-form";
+
+    }
 //
 //
 //    @RequestMapping("/users/{id}")
@@ -63,7 +87,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //
 //        userService.deleteUser(id);
 //    }
-//
+    @GetMapping("/delete")
+    public String delete(@RequestParam("userId") int theId, Model model) {
+        userService.deleteUserById(theId);
+
+        return "redirect:/users/list";
+
+    }
 //    @RequestMapping("/login")
 //    public String getLoginForm(){
 //
@@ -89,3 +119,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //        return "login";
 //    }
 //}
+}

@@ -20,5 +20,10 @@ public interface UserService {
      void addUser(User user);
      Optional<User> getUser(int id);
     void updateUser(int id,User user);
-    void deleteUser(int id);
+
+    void deleteUserById(int theId);
+
+    User findById(int theId);
+
+
 }

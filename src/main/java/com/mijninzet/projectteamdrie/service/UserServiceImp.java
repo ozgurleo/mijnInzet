@@ -81,6 +81,18 @@ public class UserServiceImp implements UserService {
         return users;
 
     }
+    public User findById(int id){
+
+        Optional<User> result = userRepository.findById(id);
+        User theUser=null;
+
+        if(result.isPresent()){
+            theUser= result.get();
+        }else {
+            throw new RuntimeException("Did not find Employee");
+        }
+        return theUser;
+    }
 
     public Optional<User> getUser(int id) {
         return userRepository.findById(id);
@@ -94,7 +106,7 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(int id) {
+    public void deleteUserById(int id) {
         userRepository.deleteById(id);
     }
 }
