@@ -26,7 +26,7 @@ public class WelcomeScreenControllerTeacher {
 
     @RequestMapping("/helloTeacher")
     public String welcomeTeacher(Model model, User user){
-       User usercurrent = userRepo.findUserById(user.getId());
+       User usercurrent = userRepo.findUserById(user.getCurrentUserId());
         model.addAttribute("user", usercurrent);
         return "helloTeacher";
     }
