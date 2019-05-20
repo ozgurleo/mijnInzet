@@ -18,6 +18,23 @@
                     $(this).removeClass('three').addClass('one');
                 }
             })
+            $("#add-schedule").on('click',function () {
+                var cell ={
+                    day: "Maandag",
+                    dayPart: "Octend",
+                    colorOption: "Rood",
+                    cohort:"17"
+                }
+
+                $.ajax({
+                    type:'POST',
+                    url:'schedule/1/new',
+                    data:cell,
+                    error:function () {
+                        alert("not succesful")
+                    }
+                })
+            })
         })
     </script>
     <style>
@@ -66,6 +83,8 @@
 
     </tbody>
 </table>
+
+<button type="button" class="btn btn-primary " id="add-schedule">Opslaan</button>
 
 
 
