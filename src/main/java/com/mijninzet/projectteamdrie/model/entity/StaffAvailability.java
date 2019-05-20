@@ -22,7 +22,6 @@ public class StaffAvailability {
 
     }
 
-
     public StaffAvailability(int id, String day, String dayPart, String colorOption, String cohort, int userID) {
         this.id = id;
         this.day = day;
