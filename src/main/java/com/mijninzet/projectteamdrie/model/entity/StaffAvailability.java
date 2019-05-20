@@ -23,15 +23,6 @@ public class StaffAvailability {
     }
 
 
-    public StaffAvailability(int id, String day, String dayPart, String colorOption, String cohort, int userID) {
-        this.id = id;
-        this.day = day;
-        this.dayPart = dayPart;
-        this.colorOption = colorOption;
-        this.cohort = cohort;
-       this.user = new User(userID);
-    }
-
     public String getCohort() {
         return cohort;
     }
