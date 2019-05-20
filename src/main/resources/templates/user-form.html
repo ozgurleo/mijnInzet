@@ -19,10 +19,11 @@
 
     <form action="#" th:action="@{/users/save}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{password}">
         <input type="text" class="form-control mb-4 col-4" th:field="*{name}" placeholder="First Name">
         <input type="text" class="form-control mb-4 col-4" th:field="*{lastName}" placeholder="Last Name">
         <input type="text" class="form-control mb-4 col-4" th:field="*{email}" placeholder="Email">
-        <input type="text" class="form-control mb-4 col-4" th:field="*{password}" placeholder="Password">
+
 
         <button  type="submit" class="btn btn-info col-2">Save</button>
 
