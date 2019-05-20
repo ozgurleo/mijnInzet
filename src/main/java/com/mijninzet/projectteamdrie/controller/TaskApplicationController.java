@@ -85,6 +85,7 @@ int loggedInUserID=user.getCurrentUserId();
         //take action based on which button was clicked
         if(updateAction!=null){
             System.out.println("De UPDATE Methode is aangeroepen");
+            System.out.println("De user_id is ---> " + loggedInUserID);
             taskApplicationRepo.updateHours(taskId,available_hours,loggedInUserID);
 
             }else if(deleteAction!=null){

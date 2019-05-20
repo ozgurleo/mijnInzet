@@ -27,25 +27,20 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
                                @Param("availableHours")Integer availableHours, @Param("role")String role, @Param("taskID")Integer taskID);
 
 
-    // update query:
-    // UPDATE task_application SET available_hours
-    //WHERE taskid =???? AND
-    //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+    // update query: obv user_id, task_id en opgegeven uren
     @Modifying
     @Transactional
-    @Query(value = "UPDATE task_application TA SET TA.available_hours = :available_hours WHERE TA.task_task_id = :taskId AND TA.user_id=:userId", nativeQuery = true)
+    @Query(value = "UPDATE task_application SET available_hours = :available_hours WHERE task_task_id = :taskId AND user_id=:userId;", nativeQuery = true)
     void updateHours(@Param("taskId") Integer taskId, @Param("available_hours") Integer available_hours,@Param("userId") Integer userId );
 
 
 
 
 
-    // remove query:
-    // DELETE FROM task_application WHERE taskid =???? AND
-    //user_ID =(SELECT user_id from user WHERE CONCAT(U.first_name, ' ', U.last_name) = ????;
+    // remove query: obv user_id en task_id
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM task_application WHERE task_application.task_task_id = :taskId AND TA.user_id=:userId", nativeQuery = true)
+    @Query(value = "DELETE FROM task_application WHERE task_application.task_task_id = :taskId AND TA.user_id=:userId;", nativeQuery = true)
     void deleteApplication(@Param("taskId") Integer taskId,@Param("userId") Integer userId );
 
 
