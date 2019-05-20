@@ -36,15 +36,14 @@ public class StaffAvailibilityController {
         model.addAttribute("cohort", availibilityRepository.findAllByCohort(sa.getCohort()));
         return "schedule";
     }
-    @RequestMapping(value = "schedule", method=RequestMethod.POST)
+
+    @RequestMapping(value = "schedule", method = RequestMethod.POST)
     public String postSchedules(Model model) {
         model.addAttribute("staffavailibility", new StaffAvailability());
         model.addAttribute("allStaffAvailibilities", availibilityRepository.findAll());
         model.addAttribute("id", sa.getId());
-
         return "schedule";
     }
-
 
     @RequestMapping("schedule/{id}")
     public String getAllschedule(Model model, @PathVariable Integer id) {
@@ -71,10 +70,9 @@ public class StaffAvailibilityController {
         model.addAttribute("woensdag", woensdag);
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
-        model.addAttribute("staffavailabilityId",staffavailabilityId.getId() );
+        model.addAttribute("staffavailabilityId", staffavailabilityId.getId());
         model.addAttribute("staffavailibility", sa);
         model.addAttribute("setId", availibilityRepository.getOne(id));
-
         return "schedule";
     }
 
@@ -83,18 +81,23 @@ public class StaffAvailibilityController {
         List<StaffAvailability> sa = staffAvailibilityService.getAllStaffAvailibilityByIdAndCohort(id, cohort);
         List<StaffAvailability> maandag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Maandag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> dinsdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Dinsdag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> woensdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Woensdag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> donderdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Donderdag"))
+                .limit(3)
                 .collect(Collectors.toList());
         List<StaffAvailability> vrijdag = sa.stream()
                 .filter(staffAvailability -> staffAvailability.getDay().contains("Vrijdag"))
+                .limit(3)
                 .collect(Collectors.toList());
 
         model.addAttribute("maandag", maandag);
@@ -103,8 +106,6 @@ public class StaffAvailibilityController {
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailibility", sa);
-
-
         return "schedule";
     }
 
@@ -133,8 +134,6 @@ public class StaffAvailibilityController {
         model.addAttribute("donderdag", donderdag);
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailibility", sa);
-
-
         return "schedule";
     }
 
@@ -149,57 +148,21 @@ public class StaffAvailibilityController {
     public String showUpdateScheduleForm(@PathVariable Integer id, Model model) {
         StaffAvailability sa1 = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
         model.addAttribute("staffavailibility", sa1);
+        model.addAttribute("colorOption", sa1.getColorOption());
         return "updateSchedule";
     }
 
-    @RequestMapping(value="/update/timeschedule", method=RequestMethod.POST)
-    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, StaffAvailability sa1, Model model) {
-        System.out.println("mijn methode is aangeroepen");
-
+    @RequestMapping(value = "/update/timeschedule", method = RequestMethod.POST)
+    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, User user, Model model) {
         model.addAttribute("id", sa.getId());
         model.addAttribute("cohort", sa.getCohort());
         model.addAttribute("day", sa.getDay());
         model.addAttribute("dayPart", sa.getDayPart());
         model.addAttribute("colorOption", sa.getColorOption());
-        model.addAttribute("userId", sa.getUser());
-        System.out.println("en geeft mee " + sa.getId() + " " + sa.getColorOption() + " " + sa.getUser());
-        staffAvailibilityService.addStaffAvailibility(sa1);
-        availibilityRepository.save(sa1);
+        model.addAttribute(user);
+        System.out.println("user id is :" +  user.getId());
+        availibilityRepository.saveAndFlush(sa);
         return "schedule";
     }
 
-//    @PostMapping(value = "/updateSchedule/{cohort}/{day}/{dayPart}/{colorOption}")
-//    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
-//        System.out.println("methode is aangeroepen!");
-//        //get the data from httpservletRequest and put in variable
-//        String id = request.getParameter("id");
-//        String cohort=request.getParameter("cohort");
-//        String day=request.getParameter("day");
-//        String colorOption=request.getParameter("colorOption");
-//        String dayPart = request.getParameter("dayPart");
-//        //gebruik repository om de nieuwe object naar db weg te schrijven
-//        availibilityRepository.save(new StaffAvailability(1, "day", "dayPart", "colorOption", "cohort",1));
-//        return "/updateSchedule";
-   //}
-
-
-//    @PostMapping("/updateSchedule")
-//    public void updateStaffAvailibilityById(@RequestBody StaffAvailability sa, Model model, @PathVariable int id){
-//        model.addAttribute("staffavailability", sa);
-//        model.addAttribute("cohort", sa.getCohort());
-//        model.addAttribute("day", sa.getDay());
-//        model.addAttribute("dayPart", sa.getDayPart());
-//        model.addAttribute("colorOption", sa.getColorOption());
-//        availibilityRepository.save(sa);
-//        System.out.println("updateschedule" + sa.toString());
-//        }
-
-
-
-//    @RequestMapping(value="updateSchedule",  method=RequestMethod.GET)
-//    public String updateScheduleFromId(Model model){
-//       StaffAvailability sa = this.availibilityRepository.findById();
-//       model.addAttribute("staffavailibility", sa);
-//        return "updateSchedule";
-//    }
 }

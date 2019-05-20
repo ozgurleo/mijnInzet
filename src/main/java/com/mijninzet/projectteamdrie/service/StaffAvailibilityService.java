@@ -16,6 +16,7 @@ public class StaffAvailibilityService {
     private StaffAvailibilityRepository staffAvailibilityRepository;
 
     private List<StaffAvailability> staffAvailabilities;
+    private StaffAvailability staffAvailability;
 
     public List<StaffAvailability> getAllStaffAvailibility(int userId){
         ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
@@ -58,17 +59,6 @@ public class StaffAvailibilityService {
         return null;
 
     }
-    public StaffAvailability updateStaffAvailability(int id){
-        for(StaffAvailability sa: staffAvailabilities){
-            if(sa.getId()==id){
-                int saIndex=staffAvailabilities.indexOf(sa);
-                staffAvailabilities.set(saIndex, sa);
-                return sa;
-            }
-        }
-        return null;
-    }
-
 
 
 }

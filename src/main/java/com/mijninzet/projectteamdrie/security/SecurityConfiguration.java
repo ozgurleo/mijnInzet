@@ -58,6 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
+
+
                 // logout
                 .logout().deleteCookies("remember-me").permitAll().and().rememberMe().tokenValiditySeconds(120);
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

@@ -7,6 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mijninzet.projectteamdrie.model.entity.user.User;
+import com.mijninzet.projectteamdrie.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +19,9 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 @Configuration
 public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    @Autowired
+    private UserRepository userRepo;
+    private static User user;
 
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -40,6 +46,20 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             roles.add(a.getAuthority());
         }
 
+
+        //Brahim Code--->
+        // Haal de ingelogde email adres op en bepaal de user ID:
+        String emailLoginUser = authentication.getName();
+        int loggedInUserId = (int) userRepo.getIdLoggedInUser(emailLoginUser);
+        System.out.println("de email vd ingelogde persoon is -----> : " + emailLoginUser);
+        System.out.println("De id is : ---->" + loggedInUserId);
+        System.out.println();
+        user.setCurrentUserIdId(loggedInUserId);
+        user.getCurrentUserId();
+        System.out.println("de user id die opgehaald is vie User.getID is ----> : " + user.getCurrentUserId());
+        // end Brahim Code
+
+
         // check user role and decide the redirect URL
         if (roles.contains("ADMIN")) {
             url = "/helloAdmin";
@@ -53,4 +73,8 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
         return url;
     }
-}
+
+    }
+
+
+
