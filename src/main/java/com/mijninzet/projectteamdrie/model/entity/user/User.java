@@ -54,18 +54,24 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Set<StaffAvailability> staffAvailabilities;
-
+    // Brahim Code: current user ID wordt hier bepaalt ingesteld;
+    // dit is geen onderdeel vd Bean! en mag niet in een constructor
+    private static int CurrentUserId;
+    public static int getCurrentUserId() {
+        return CurrentUserId;    }
+    public static void setCurrentUserIdId(int currentUserId) {
+        CurrentUserId = currentUserId;
+    }
+    // Brahim Code end ------
 
     public User() {
     }
 
 
-
     public User(int id) {
         this.id = id;
     }
+
     public int getId() {
         return id;
     }
@@ -122,6 +128,14 @@ public class User {
         this.roles = roles;
     }
 
+
+
+
+
+    @Override
+    public String toString() {
+        return  name + " " + lastName;
+    }
 }
 
 
