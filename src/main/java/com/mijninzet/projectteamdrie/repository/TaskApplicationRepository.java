@@ -29,25 +29,24 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
 
     // update query: obv user_id, task_id en opgegeven uren
     @Modifying
-    @Query(value = "UPDATE task_application TA SET TA.available_hours = :available_hours WHERE TA.user_id= :userId AND TA.task_task_id = :taskId;", nativeQuery = true)
     @Transactional
-    void updateHours(@Param("available_hours") Integer available_hours,@Param("userId") Integer userId,@Param("taskId") Integer taskId);
+    @Query(value = "UPDATE task_application TA SET TA.available_hours = ?1 WHERE TA.user_id= ?2 AND TA.task_task_id = ?3", nativeQuery = true)
+    void updateHours(Integer available_hours,Integer userId,Integer taskId);
 
 
     // remove query: obv user_id en task_id
     @Modifying
-    @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = :taskId AND TA.user_id=:userId;", nativeQuery = true)
+    @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = ?1 AND TA.user_id= ?2", nativeQuery = true)
     @Transactional
-    void deleteApplication(@Param("taskId") Integer taskId,@Param("userId") Integer userId );
+    void deleteApplication(Integer taskId,Integer userId );
 
 
 
    // retrieve data from multiple tables by means of inner joins
     @Query(value="SELECT T.task_id taskId, T.task_name taskName, T.estimated_hours estHours, CONCAT(U.first_name, ' ', U.last_name) AS fullName " +
-            ",TA.application_date applDate, TA.available_hours availHours  FROM task_application TA " +
-            " JOIN task T ON TA.task_task_id= T.task_id" +
-            " JOIN user U ON TA.user_id=U.user_id;", nativeQuery = true)
-    ArrayList<Object[]> getApplicationOverview();
+            ",TA.application_date applDate, TA.available_hours availHours  FROM task_application TA JOIN task T ON TA.task_task_id= T.task_id" +
+            " JOIN user U ON TA.user_id=U.user_id AND U.user_id= :userId", nativeQuery = true)
+    ArrayList<Object[]> getApplicationOverview(@Param("userId") Integer userId);
 
 
 
