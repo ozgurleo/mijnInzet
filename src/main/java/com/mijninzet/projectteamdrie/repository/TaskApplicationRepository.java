@@ -18,7 +18,7 @@ import java.util.List;
 @Repository
 public interface TaskApplicationRepository extends JpaRepository<TaskApplication, Integer> {
 
-// store data into the task_application tabel
+    // store data into the task_application tabel
     @Modifying
     @Query(value = "INSERT INTO task_application (user_id, application_date,available_hours,role,unsubcribe_date,task_task_id)  VALUES (:userId,:applicationDate,:availableHours,:role,:unsubcribeDate,:taskID)",nativeQuery = true)
     @Transactional
@@ -30,11 +30,8 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
     // update query: obv user_id, task_id en opgegeven uren
     @Modifying
     @Transactional
-    @Query(value = "UPDATE task_application SET available_hours = :available_hours WHERE task_task_id = :taskId AND user_id=:userId;", nativeQuery = true)
+    @Query(value = "UPDATE task_application SET available_hours = :available_hours WHERE task_task_id = :taskId AND user_id=:userId", nativeQuery = true)
     void updateHours(@Param("taskId") Integer taskId, @Param("available_hours") Integer available_hours,@Param("userId") Integer userId );
-
-
-
 
 
     // remove query: obv user_id en task_id
@@ -42,7 +39,6 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
     @Transactional
     @Query(value = "DELETE FROM task_application WHERE task_application.task_task_id = :taskId AND TA.user_id=:userId;", nativeQuery = true)
     void deleteApplication(@Param("taskId") Integer taskId,@Param("userId") Integer userId );
-
 
 
 

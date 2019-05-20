@@ -64,7 +64,7 @@ public class TaskApplicationController {
 
     @PostMapping(value = "/taskApplications/{taskId}/{fullName}/{availHours}")
     public String updateTaskApplications(HttpServletRequest request, ModelMap model){
-int loggedInUserID=user.getCurrentUserId();
+int userId=user.getCurrentUserId();
 
         //get the data from httpservletRequest and put in variable
         String tempId=request.getParameter("taskId");
@@ -85,12 +85,12 @@ int loggedInUserID=user.getCurrentUserId();
         //take action based on which button was clicked
         if(updateAction!=null){
             System.out.println("De UPDATE Methode is aangeroepen");
-            System.out.println("De user_id is ---> " + loggedInUserID);
-            taskApplicationRepo.updateHours(taskId,available_hours,loggedInUserID);
+            System.out.println("De user_id is ---> " + userId);
+            taskApplicationRepo.updateHours(taskId,available_hours,userId);
 
             }else if(deleteAction!=null){
             System.out.println("De DELETE Methode is aangeroepen");
-            taskApplicationRepo.deleteApplication(taskId,loggedInUserID);
+            taskApplicationRepo.deleteApplication(taskId,userId);
                 }else{
                      System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
         }
