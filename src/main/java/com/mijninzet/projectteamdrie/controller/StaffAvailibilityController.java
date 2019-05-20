@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -77,6 +78,7 @@ public class StaffAvailibilityController {
 
         return "schedule";
     }
+
 
     @RequestMapping("schedule/{id}/{cohort}")
     public String GetAllSchedulesByIdAndCohort(Model model, @PathVariable Integer id, @PathVariable String cohort) {
