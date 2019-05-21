@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -26,14 +27,14 @@ public class StaffAvailibilityController {
 
     StaffAvailability sa = new StaffAvailability();
 
-    @RequestMapping(value = "schedule", method=RequestMethod.GET)
+    @RequestMapping(value = "schedule", method = RequestMethod.GET)
     public String schedules(Model model, User user) {
         User currentuser = userRepository.findUserById(user.getCurrentUserId());
         StaffAvailability sa = new StaffAvailability();
         model.addAttribute("allStaffAvailibilities", availibilityRepository.findAll());
         model.addAttribute("userId", currentuser);
         model.addAttribute("id", availibilityRepository.findById(sa.getId()));
-        System.out.println("requestmapping schedule get geeft als currentuser:" + currentuser );
+        System.out.println("requestmapping schedule get geeft als currentuser:" + currentuser);
         return "schedule";
     }
 
@@ -108,7 +109,8 @@ public class StaffAvailibilityController {
         model.addAttribute("vrijdag", vrijdag);
         model.addAttribute("staffavailibility", sa);
         System.out.println("Uit requestmapping schedule/cohort komt cohort " + cohort);
-        System.out.println("en uit requestmapping schedule/ cohort komt currentUser " + currentUser);;
+        System.out.println("en uit requestmapping schedule/ cohort komt currentUser " + currentUser);
+
 
         return "schedule";
     }
@@ -154,14 +156,28 @@ public class StaffAvailibilityController {
         model.addAttribute("staffavailibility", sa1);
         model.addAttribute("colorOption", sa1.getColorOption());
         return "updateSchedule";
+
     }
 
-    @RequestMapping(value = "/update/timeschedule)", method = RequestMethod.POST)
-    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, User user, Model model, String colorOption) {
-        model.addAttribute("colorOption", sa.getColorOption());
-        System.out.println("coloroption is " + colorOption);
+//    @RequestMapping(value = "/update/timeschedule ", method = RequestMethod.POST)
+//    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, User user, Model model, String colorOption) {
+//        model.addAttribute("colorOption", sa.getColorOption());
+//        System.out.println("coloroption is " + colorOption);
+//        availibilityRepository.saveAndFlush(sa);
+//        return "schedule";
+//    }
+
+
+    @RequestMapping(value="/update/timeschedule", method = RequestMethod.POST)
+    public String updateTimeSchedule (@RequestParam ("colorOption") String coloroption, @RequestParam ("id") int id, Model model){
+        StaffAvailability sa =  availibilityRepository.findById(id);
+        model.addAttribute("colorOption",sa.getColorOption());
+        System.out.println("Uit postrequest update timeschedule komt " +coloroption);
         availibilityRepository.saveAndFlush(sa);
         return "schedule";
     }
+
+
+
 
 }
