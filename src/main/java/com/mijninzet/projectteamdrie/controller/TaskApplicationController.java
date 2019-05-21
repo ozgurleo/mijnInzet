@@ -22,7 +22,7 @@ import static java.time.LocalDate.now;
 @Controller
 public class TaskApplicationController {
     private static User user = new User();
-
+    private static int userId=user.getCurrentUserId();
 
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
@@ -40,7 +40,6 @@ public class TaskApplicationController {
    public String insertTaskAppl(HttpServletRequest request, ModelMap model){
         System.out.println("methode is aangeroepen!");
         //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
-        int userId=1;
         LocalDate todaysDate=LocalDate.now();
 
         //get the data from httpservletRequest and put in variable
@@ -84,26 +83,31 @@ public class TaskApplicationController {
 
         //take action based on which button was clicked
         if(updateAction!=null){
+
+            System.out.println("De user_id is ---> " + userId);
+            taskApplicationRepo.updateHours(available_hours,userId,taskId);
             System.out.println("De UPDATE Methode is aangeroepen");
-            taskApplicationRepo.updateHours(taskId,available_hours);
 
             }else if(deleteAction!=null){
+            taskApplicationRepo.deleteApplication(taskId,userId);
             System.out.println("De DELETE Methode is aangeroepen");
-            taskApplicationRepo.deleteApplication(taskId);
+
                 }else{
                      System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
         }
 
-        model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview());
+        model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview(userId));
         return "applicationBasket";
     }
 
 
     @GetMapping(value = "/applicationBasket")
     public String fillApplicationBasket(Object object, Model model){
+
+        System.out.println("GET method voor ophalen solliciaties is aangeroepen");
         //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
-        model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview());
-        System.out.println("INHOUD VH OBJECT: ---> "+taskApplicationRepo.getApplicationOverview().toString());
+        model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview(userId));
+        System.out.println("INHOUD VH OBJECT: ---> "+taskApplicationRepo.getApplicationOverview(userId).toString());
         return"applicationBasket";
     }
 

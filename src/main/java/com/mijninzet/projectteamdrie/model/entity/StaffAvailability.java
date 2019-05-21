@@ -31,6 +31,7 @@ public class StaffAvailability {
        this.user = new User(userID);
     }
 
+
     public String getCohort() {
         return cohort;
     }
