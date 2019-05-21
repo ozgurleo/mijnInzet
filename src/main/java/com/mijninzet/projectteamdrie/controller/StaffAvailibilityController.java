@@ -10,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -168,7 +166,7 @@ public class StaffAvailibilityController {
 //    }
 
 
-    @RequestMapping(value="/update/timeschedule", method = RequestMethod.POST)
+    @RequestMapping(value="updateSchedule/update/", method = RequestMethod.POST)
     public String updateTimeSchedule (@RequestParam ("colorOption") String coloroption, @RequestParam ("id") int id, Model model){
         StaffAvailability sa =  availibilityRepository.findById(id);
         model.addAttribute("colorOption",sa.getColorOption());
