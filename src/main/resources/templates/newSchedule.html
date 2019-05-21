@@ -10,37 +10,21 @@
     <script type="text/javascript">
         $(function(){
             $("td").click(function(){
-                if ($(this).hasClass('one')) {
-                    $(this).removeClass('one').addClass('two');
-                } else if ($(this).hasClass('two')) {
-                    $(this).removeClass('two').addClass('three');
-                } else if ($(this).hasClass('three')) {
-                    $(this).removeClass('three').addClass('one');
+                if ($(this).hasClass('Rood')) {
+                    $(this).removeClass('Rood').addClass('Geel');
+                } else if ($(this).hasClass('Geel')) {
+                    $(this).removeClass('Geel').addClass('Groen');
+                } else if ($(this).hasClass('Groen')) {
+                    $(this).removeClass('Groen').addClass('Rood');
                 }
             })
-            $("#add-schedule").on('click',function () {
-                var cell ={
-                    day: "Maandag",
-                    dayPart: "Octend",
-                    colorOption: "Rood",
-                    cohort:"17"
-                }
 
-                $.ajax({
-                    type:'POST',
-                    url:'schedule/1/new',
-                    data:cell,
-                    error:function () {
-                        alert("not succesful")
-                    }
-                })
-            })
         })
     </script>
     <style>
-        .one { background:red; }
-        .two{ background:yellow; }
-        .three { background:green; }
+        .Rood { background:red; }
+        .Geel{ background:yellow; }
+        .Groen { background:green; }
     </style>
 </head>
 <body>
@@ -58,27 +42,27 @@
     <tbody>
     <tr>
         <th scope="row">Ochtend</th>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
     </tr>
     <tr>
         <th scope="row">Middag</th>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
     </tr>
     <tr>
         <th scope="row">Avonds</th>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
-        <td class="one">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
+        <td class="Rood">...</td>
     </tr>
 
     </tbody>
