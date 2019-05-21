@@ -56,10 +56,10 @@ public class User {
 
     // Brahim Code: current user ID wordt hier bepaalt ingesteld;
     // dit is geen onderdeel vd Bean! en mag niet in een constructor
-    private static int CurrentUserId;
+    public static int CurrentUserId;
     public static int getCurrentUserId() {
         return CurrentUserId;    }
-    public static void setCurrentUserIdId(int currentUserId) {
+    public static void setCurrentUserId(int currentUserId) {
         CurrentUserId = currentUserId;
     }
     // Brahim Code end ------

@@ -1,10 +1,11 @@
 package com.mijninzet.projectteamdrie.controller;
 
-import com.mijninzet.projectteamdrie.model.entity.Task;
-import com.mijninzet.projectteamdrie.model.entity.TaskApplication;
-import com.mijninzet.projectteamdrie.model.entity.user.User;
+
+
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
 import com.mijninzet.projectteamdrie.repository.TaskRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +22,9 @@ import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
-    private static User user = new User();
-    private static int userId=user.getCurrentUserId();
+
+   // UserSingleton singletonId = UserSingleton.getInstance();
+    int userId=UserSingleton.getInstance().getId();
 
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
@@ -47,14 +49,14 @@ public class TaskApplicationController {
         String tempHours=request.getParameter("availableHours");
 
         //Convert variable to int
-        int iD=Integer.parseInt(tempId);
+        int taskId=Integer.parseInt(tempId);
         int hours=Integer.parseInt(tempHours);
 
-        System.out.println("de ingelezen taskid waarde is: " + iD );
+        System.out.println("de ingelezen taskid waarde is: " + taskId );
         System.out.println("de ingelezen availableHours waarde is: " + hours );
 
         // insert the data into database
-         taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",iD);
+         taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent",taskId);
 
          // get latests data from db en send to showtasks.html
         model.addAttribute("showTasks", taskRepository.getVacancies());
@@ -79,13 +81,13 @@ public class TaskApplicationController {
 
         //Convert variable to int
         int taskId=Integer.parseInt(tempId);
-        int available_hours=Integer.parseInt(tempHours);
+        int hours=Integer.parseInt(tempHours);
 
         //take action based on which button was clicked
         if(updateAction!=null){
 
             System.out.println("De user_id is ---> " + userId);
-            taskApplicationRepo.updateHours(available_hours,userId,taskId);
+            taskApplicationRepo.updateHours(hours,userId,taskId);
             System.out.println("De UPDATE Methode is aangeroepen");
 
             }else if(deleteAction!=null){
@@ -105,6 +107,8 @@ public class TaskApplicationController {
     public String fillApplicationBasket(Object object, Model model){
 
         System.out.println("GET method voor ophalen solliciaties is aangeroepen");
+        System.out.println("net voor het einde userid-->:" + userId);
+        System.out.println("net voor het einde testString -->:" + UserSingleton.getInstance().testString);
         //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
         model.addAttribute("applicationBasket",taskApplicationRepo.getApplicationOverview(userId));
         System.out.println("INHOUD VH OBJECT: ---> "+taskApplicationRepo.getApplicationOverview(userId).toString());

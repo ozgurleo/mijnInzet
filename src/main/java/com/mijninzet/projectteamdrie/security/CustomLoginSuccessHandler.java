@@ -1,4 +1,5 @@
 package com.mijninzet.projectteamdrie.security;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mijninzet.projectteamdrie.model.entity.user.User;
+
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +22,11 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 @Configuration
 public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+
     @Autowired
     private UserRepository userRepo;
-    private static User user;
+    private User user;
+   UserSingleton userSingle = UserSingleton.getInstance();
 
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -52,29 +57,33 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         String emailLoginUser = authentication.getName();
         int loggedInUserId = (int) userRepo.getIdLoggedInUser(emailLoginUser);
         System.out.println("de email vd ingelogde persoon is -----> : " + emailLoginUser);
-        System.out.println("De id is : ---->" + loggedInUserId);
-        System.out.println();
-        user.setCurrentUserIdId(loggedInUserId);
-        user.getCurrentUserId();
-        System.out.println("de user id die opgehaald is vie User.getID is ----> : " + user.getCurrentUserId());
+        System.out.println("De id die opgehaald is mbv de authentication.getName : ---->" + loggedInUserId);
+
+        //set  userId in UserSingleton Class
+        UserSingleton.getInstance().setId(loggedInUserId);
+        int userId = UserSingleton.getInstance().getId();
+
+        //set  userId in User  Class --> CurrentUSerID
+        user.setCurrentUserId(loggedInUserId);
+
+        System.out.println("de user id die opgehaald is via Singleton gettter  ----> : " + userId);
         // end Brahim Code
 
 
         // check user role and decide the redirect URL
         if (roles.contains("ADMIN")) {
             url = "/helloAdmin";
-        }
-        else if (roles.contains("TEACHER")) {
+        } else if (roles.contains("TEACHER")) {
             url = "/helloTeacher";
 
-        }else if(roles.contains("SCHEDULER")) {
+        } else if (roles.contains("SCHEDULER")) {
             url = "/helloScheduler";
         }
 
         return url;
     }
 
-    }
+}
 
 
 
