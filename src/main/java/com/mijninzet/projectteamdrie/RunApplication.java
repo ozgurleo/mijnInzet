@@ -8,12 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories
 @SpringBootApplication
 public class RunApplication {
-private static UserSingleton userSingleton;
-
     public static void main(String[] args) {
-        SpringApplication.run(RunApplication.class, args);
-        userSingleton.getInstance();
-        System.out.println("Singleton.getInstance() is aangeroepen in de main");
+        SpringApplication.run(RunApplication.class, args);  
 
     }
 
