@@ -51,7 +51,6 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             roles.add(a.getAuthority());
         }
 
-
         //Brahim Code--->
         // Haal de ingelogde email adres op en bepaal de user ID:
         String emailLoginUser = authentication.getName();

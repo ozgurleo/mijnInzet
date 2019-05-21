@@ -66,8 +66,7 @@ public class TaskApplicationController {
     @PostMapping(value = "/taskApplications/{taskId}/{fullName}/{availHours}")
     public String updateTaskApplications(HttpServletRequest request, ModelMap model){
 
-
-        //get the data from httpservletRequest and put in variable
+       //get the data from httpservletRequest and put in variable
         String tempId=request.getParameter("taskId");
         String fullName=request.getParameter("fullName");
         String tempHours=request.getParameter("availHours");
