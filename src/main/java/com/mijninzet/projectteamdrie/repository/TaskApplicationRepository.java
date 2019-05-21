@@ -32,18 +32,19 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
 
     // update query: obv user_id, task_id en opgegeven uren
     @Modifying
+    @Query(value = "UPDATE task_application TA SET TA.available_hours = :availableHours WHERE TA.user_id=:userId " +
+            "AND TA.task_task_id = taskId", nativeQuery = true)
     @Transactional
-    @Query(value = "UPDATE task_application TA SET TA.available_hours = ?1 WHERE TA.user_id= ?2 " +
-            "AND TA.task_task_id = ?3", nativeQuery = true)
-    void updateHours(Integer available_hours, Integer userId, Integer taskId);
+    void updateHours(@Param("availableHours") Integer availableHours, @Param("userId") Integer userId,
+                     @Param("taskId") Integer taskId);
 
 
     // remove query: obv user_id en task_id
     @Modifying
-    @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = ?1 AND TA.user_id= ?2",
+    @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = :taskId AND TA.user_id= userId",
             nativeQuery = true)
     @Transactional
-    void deleteApplication(Integer taskId, Integer userId);
+    void deleteApplication(@Param("taskId") Integer taskId, @Param("userId") Integer userId);
 
 
     // retrieve data from multiple tables by means of inner joins
@@ -51,8 +52,9 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
             "CONCAT(U.first_name, ' ', U.last_name) AS fullName " +
             ",TA.application_date AS applDate, TA.available_hours AS availHours  " +
             "FROM task_application TA JOIN task T ON (TA.task_task_id= T.task_id)" +
-            " JOIN user U ON (TA.user_id=U.user_id) WHERE U.user_id=?1",nativeQuery =true)
-    ArrayList<Object[]> getApplicationOverview(Integer userId);
+            " JOIN user U ON (TA.user_id=U.user_id) WHERE U.user_id=:userId",nativeQuery =true)
+
+    ArrayList<Object[]> getApplicationOverview(@Param("userId") Integer userId);
 
 
 }
