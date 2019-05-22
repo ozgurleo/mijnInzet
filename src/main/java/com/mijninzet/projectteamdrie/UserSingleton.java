@@ -22,7 +22,8 @@ public final class UserSingleton {
                     singletonInstance = new UserSingleton();
                     singletonInstance.count++;
                     System.out.println("COUNT IS "+ singletonInstance.count);
-                    Thread.dumpStack();
+                    // Thread.dumpStack();  // indien je wilt weten welke class deze method als eerste aanroept
+
                 }
         return singletonInstance;
     }

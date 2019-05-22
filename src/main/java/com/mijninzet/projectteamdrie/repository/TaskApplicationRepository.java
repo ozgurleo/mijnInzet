@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public interface TaskApplicationRepository extends JpaRepository<TaskApplication, Integer> {
 
     // store data into the task_application tabel
-   // @Modifying
+    @Modifying
     @Query(value = "INSERT INTO task_application (user_id, application_date,available_hours,role," +
             "unsubcribe_date,task_task_id)  " +
             "VALUES (:userId,:applicationDate,:availableHours,:role,:unsubcribeDate,:taskID)", nativeQuery = true)
-   // @Transactional
+    @Transactional
     void insertTaskapplication(@Param("userId") Integer userId, @Param("applicationDate") LocalDate applicationDate,
                                @Param("unsubcribeDate") LocalDate unsubcribeDate,
                                @Param("availableHours") Integer availableHours, @Param("role") String role,
@@ -29,19 +29,19 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
 
 
     // update query: obv user_id, task_id en opgegeven uren
-  //  @Modifying
+    @Modifying
     @Query(value = "UPDATE task_application TA SET TA.available_hours = :availableHours WHERE TA.user_id=:userId " +
             "AND TA.task_task_id =:taskId ", nativeQuery = true)
- //   @Transactional
+    @Transactional
     void updateHours(@Param("availableHours") Integer availableHours,
                      @Param("userId") Integer userId, @Param("taskId") Integer taskId);
 
 
     // remove query: obv user_id en task_id
- //   @Modifying
+    @Modifying
     @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = :taskId AND TA.user_id= :userId ",
             nativeQuery = true)
-  //  @Transactional
+    @Transactional
     void deleteApplication(@Param("taskId") Integer taskId, @Param("userId") Integer userId);
 
 
