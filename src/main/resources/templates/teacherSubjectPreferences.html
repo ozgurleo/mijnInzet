@@ -17,35 +17,7 @@
     <a class="navbar-brand" href="#">VAKKENBEHEER</a>
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </form>
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"-->
-<!--            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
-<!--        <ul class="navbar-nav">-->
-<!--            <li class="nav-item active">-->
-<!--                <a class="nav-link" href="#">home<span class="sr-only">(current)</span></a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">terug naar HOOFDMENU</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">BEHEER ROOSTER</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">BEHEER VAKKEN</a>-->
-<!--            </li>-->
-
-<!--            <li class="nav-item dropdown">-->
-<!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"-->
-<!--                   aria-haspopup="true" aria-expanded="false">-->
-<!--                    Dropdown link-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
 </nav>
 
 <h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
@@ -68,12 +40,11 @@
                     <td th:text="${subject.estimatedHours}">-1</td>
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
                     <td>
-                        <div>
-                            <input type="submit" value="Geef je voorkeur op" name="addPref" id="mc-embedded-subscribe"
-                                   class="btn btn-info" onclick="this.value='Voorkeur is opgegeven';
-                       this.style.backgroundColor='green';">
-                            </input>
-                        </div>
+                        <form action="">
+                            <input type="radio" name="preference" value="no"> ik geef dit vak liever niet.<br>
+                            <input type="radio" name="preference" value="maybe"> ja, dit vak wil ik geven.<br>
+                            <input type="radio" name="preference" value="yes"> ja, Ik  heb het vak al eerder gegeven.
+                        </form>
                     </td>
                 </tr>
 
