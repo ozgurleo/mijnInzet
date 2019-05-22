@@ -51,7 +51,11 @@ public class StaffAvailibilityService {
     public void addStaffAvailibility(StaffAvailability sa){
         staffAvailibilityRepository.save(sa);
     }{
+    }
 
+    public void updateStaffAvailibility(StaffAvailability sa){
+        StaffAvailability sanieuw = staffAvailibilityRepository.findById(sa.getId());
+        staffAvailibilityRepository.save(sanieuw);
     }
 
 

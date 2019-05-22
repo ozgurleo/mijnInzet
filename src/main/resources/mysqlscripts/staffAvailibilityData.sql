@@ -24,3 +24,16 @@ insert into staff_availability (cohort,color_option,day,day_part,user_id) values
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Ochtend",1);
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Middag",1);
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Avond",1);
+
+
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Vrijdag","Ochtend",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Vrijdag","Middag",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","ROOD","Vrijdag","Avond",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Woensdag","Middag",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GEEL","Woensdag","Avond",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GROEN","Donderdag","Ochtend",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GROEN","Donderdag","Middag",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","GROEN","Donderdag","Avond",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Ochtend",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Middag",3);
+insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("16","ROOD","Vrijdag","Avond",3);

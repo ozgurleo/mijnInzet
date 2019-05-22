@@ -25,44 +25,45 @@
 
 
 
-<form action="#" th:action="@{/update}" th:object="${staffavailibility}" method="post">
+<form action="#" th:action="@{/updatedSchedule}" th:object="${staffavailibility}" method="post">
 
 
 
 <div container>
-    <div class="form-group col-4" >
+
+    <div class="form col-4" >
     <label th:text="id">Id</label>
-    <input type="text" th:field="*{id}" th:value="*{id}" disabled>
+    <input type="text" th:field="*{id}" th:value="*{id}" readonly>
     </div>
 
-    <div class="form-group col-4" >
+    <div class="form col-4" >
     <label th:text="Cohort">Cohort</label>
-    <input type="text" th:field="*{cohort}" disabled/>
+    <input type="text" th:field="*{cohort}" readonly/>
     </div>
 
-    <div class="form-group col-4" >
+    <div class="form col-4" >
     <label th:text="Dag">Dag </label>
-    <input type="text" th:field="*{day}" th:value="*{day}" placeholder="Dag" disabled/>
+    <input type="text" th:field="*{day}" th:value="*{day}" placeholder="Dag" readonly/>
     </div>
 
-    <div class="form-group col-4" >
+    <div class="form col-4" >
     <label th:text="Dagdeel">Dagdeel</label>
-    <input type="text" th:field="*{dayPart}" th:value="*{dayPart}" placeholder="Dag"disabled/>
+    <input type="text" th:field="*{dayPart}" th:value="*{dayPart}" placeholder="Dag" readonly/>
     </div>
 
-    <div class="form-group col-4" >
+    <div class="form col-4" >
     <label th:text="Kleur">Kleur</label>
     <input type="text" th:field="*{colorOption}" th:value="*{colorOption}" />
     </div>
 
-    <div class="form-group col-4" >
+    <div class="form col-4" >
     <label th:text="id">UserId</label>
-    <input type="text" th:field="*{user}" th:value="*{user}"  placeholder="UserId" disabled>
+    <input type="text" th:field="*{user}" th:value="*{user}"  placeholder="UserId" readonly>
     </div>
 
 </div>
 
-    <input type="submit" value="Update schedule"  >
+    <input type="submit" value = "submit"  >
 </form>
 
 
