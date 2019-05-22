@@ -4,30 +4,35 @@ public final class UserSingleton {
     private static UserSingleton singletonInstance;
 
     // variable of type int
-    private static int id;
+    private  int id;
+    private int count=0;
+
+    public  int getCount() {
+        return count;
+    }
 
     // private constructor restricted to this class itself
-    private UserSingleton(int id) {
-        this.id=id;
+    private UserSingleton() {
+        this.id=-1;
     }
 
     // static method to create instance of Singleton class
-    public static UserSingleton getInstance(int id) {
-
+    public static UserSingleton getInstance() {
                 if (singletonInstance == null) {
-                    singletonInstance = new UserSingleton(id);
+                    singletonInstance = new UserSingleton();
+                    singletonInstance.count++;
+                    System.out.println("COUNT IS "+ singletonInstance.count);
+                    Thread.dumpStack();
                 }
-
-
         return singletonInstance;
     }
 
     //getter and setter for id
-    public int getId() {
+    public  int getId() {
         return id;
     }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }

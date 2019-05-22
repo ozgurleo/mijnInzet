@@ -3,6 +3,7 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
+import com.mijninzet.projectteamdrie.pkg.Singleton;
 import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
 import com.mijninzet.projectteamdrie.repository.TaskRepository;
 
@@ -19,17 +20,11 @@ import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
-    private int id2=-1;
-    UserSingleton singletonId = UserSingleton.getInstance(id2);
-
-    int userId = singletonId.getId();
 
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
-
     @Autowired
     TaskRepository taskRepository;
-
 
     public void deleteApplication(int taskId, String fullName) {
     }
@@ -37,6 +32,7 @@ public class TaskApplicationController {
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
     public String insertTaskAppl(HttpServletRequest request, ModelMap model) {
+
         System.out.println("methode is aangeroepen!");
         //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
         LocalDate todaysDate = LocalDate.now();
@@ -49,8 +45,12 @@ public class TaskApplicationController {
         int taskId = Integer.parseInt(tempId);
         int hours = Integer.parseInt(tempHours);
 
+        //haal de userId op vd loggedin user uit de Singleton
+        final int userId = UserSingleton.getInstance().getId();
+
         System.out.println("de ingelezen taskid waarde is: " + taskId);
         System.out.println("de ingelezen availableHours waarde is: " + hours);
+
 
         // insert the data into database
         taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent", taskId);
@@ -79,6 +79,9 @@ public class TaskApplicationController {
         int taskId = Integer.parseInt(tempId);
         int hours = Integer.parseInt(tempHours);
 
+        //haal de userId op vd loggedin user uit de Singleton
+        final int userId = UserSingleton.getInstance().getId();
+
         //take action based on which button was clicked
         if (updateAction != null) {
 
@@ -101,9 +104,12 @@ public class TaskApplicationController {
 
     @GetMapping(value = "/applicationBasket")
     public String fillApplicationBasket(Object object, Model model) {
+        //haal de userId op vd loggedin user uit de Singleton
+        final int userId = UserSingleton.getInstance().getId();
 
         System.out.println("GET method voor ophalen solliciaties is aangeroepen");
         System.out.println("net voor het einde userid-->:" + userId);
+
         //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
         model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview(userId));
         System.out.println("INHOUD VH OBJECT: ---> " + taskApplicationRepo.getApplicationOverview(userId).toString());

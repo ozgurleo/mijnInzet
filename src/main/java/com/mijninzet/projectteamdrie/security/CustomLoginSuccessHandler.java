@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
 import com.mijninzet.projectteamdrie.UserSingleton;
@@ -55,14 +54,18 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         //Brahim Code--->
         // Haal de ingelogde email adres op en bepaal de user ID:
         String emailLoginUser = authentication.getName();
-        int loggedInUserId = (int) userRepo.getIdLoggedInUser(emailLoginUser);
+       int loggedInUserId = (int) userRepo.getIdLoggedInUser(emailLoginUser);
         System.out.println("de email vd ingelogde persoon is -----> : " + emailLoginUser);
         System.out.println("De id die opgehaald is mbv de authentication.getName : ---->" + loggedInUserId);
 
         //set  userId in UserSingleton Class
-        UserSingleton userSingle = UserSingleton.getInstance(loggedInUserId);
-        System.out.println("de user id die opgehaald is via Singleton gettter  ----> : " + userSingle.getId());
+        System.out.println("de count is nu: " +UserSingleton.getInstance().getCount() );
+       UserSingleton.getInstance().setId(loggedInUserId);
+        System.out.println("de user id die opgehaald is via Singleton gettter  ----> : " + UserSingleton.getInstance().getId());
+        System.out.println("de count is nu: " +UserSingleton.getInstance().getCount() );
 
+        //set user met loggedInUserId tbv weergave in de welkomstscherm html
+        user.setCurrentUserId(loggedInUserId);
         // end Brahim Code
 
 
@@ -78,6 +81,7 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
         return url;
     }
+
 
 }
 
