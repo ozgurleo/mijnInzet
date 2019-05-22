@@ -8,9 +8,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
-import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
+import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     @Autowired
     private UserRepository userRepo;
     private User user;
-   UserSingleton userSingle = UserSingleton.getInstance();
+
 
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -59,13 +60,9 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         System.out.println("De id die opgehaald is mbv de authentication.getName : ---->" + loggedInUserId);
 
         //set  userId in UserSingleton Class
-        UserSingleton.getInstance().setId(loggedInUserId);
-        int userId = UserSingleton.getInstance().getId();
+        UserSingleton userSingle = UserSingleton.getInstance(loggedInUserId);
+        System.out.println("de user id die opgehaald is via Singleton gettter  ----> : " + userSingle.getId());
 
-        //set  userId in User  Class --> CurrentUSerID
-        user.setCurrentUserId(loggedInUserId);
-
-        System.out.println("de user id die opgehaald is via Singleton gettter  ----> : " + userId);
         // end Brahim Code
 
 
