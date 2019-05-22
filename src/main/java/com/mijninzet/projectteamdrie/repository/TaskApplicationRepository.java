@@ -39,8 +39,7 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
 
     // remove query: obv user_id en task_id
     @Modifying
-    @Query(value = "DELETE FROM task_application TA WHERE TA.task_task_id = :taskId AND TA.user_id= :userId ",
-            nativeQuery = true)
+    @Query(value = "DELETE FROM task_application WHERE task_task_id = :taskId AND user_id= :userId ",nativeQuery = true)
     @Transactional
     void deleteApplication(@Param("taskId") Integer taskId, @Param("userId") Integer userId);
 
