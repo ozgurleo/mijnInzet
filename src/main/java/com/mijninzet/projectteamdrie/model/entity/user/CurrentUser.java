@@ -1,20 +1,19 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
 public class CurrentUser {
-    private static int userID = -1;
+    private static int userID;
     private static String password;
     private static String username;
     private static Role role;
 
-    public CurrentUser() {
-    }
-
-    public CurrentUser(int userId, String password, String username){
-        this.userID = userId;
-        this.password = password;
-        this.username = username;
-    }
-
+//    public CurrentUser() {
+//    }
+//
+//    public CurrentUser(int userId, String password, String username){
+//        this.userID = userId;
+//        this.password = password;
+//        this.username = username;
+//    }
 
     // getters en setters
     public static int getUserID() {

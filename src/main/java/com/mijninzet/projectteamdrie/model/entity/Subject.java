@@ -1,4 +1,5 @@
 package com.mijninzet.projectteamdrie.model.entity;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -6,21 +7,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "subject")
 public class Subject {
-       @Id
+    @Id
     private int subjectId;
     private String subjectName;
     private int estimatedHours;
     private int yearsToExpiryDate;
+    private String preference;
 
     public Subject() {
-        this(0, "", 0, 0);
+        this(-1, "", -1, -1, "");
     }
 
-    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate) {
+    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate, String preference) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.estimatedHours = estimatedHours;
         this.yearsToExpiryDate = yearsToExpiryDate;
+        this.preference = preference;
     }
 
     public int getSubjectId() {
@@ -53,5 +56,13 @@ public class Subject {
 
     public void setYearsToExpiryDate(int yearsToExpiryDate) {
         this.yearsToExpiryDate = yearsToExpiryDate;
+    }
+
+    public String getPreference() {
+        return preference;
+    }
+
+    public void setPreference(String preference) {
+        this.preference = preference;
     }
 }

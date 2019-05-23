@@ -80,4 +80,16 @@ public class StaffAvailability {
     public String getColorOption() {
         return colorOption;
     }
+
+    @Override
+    public String toString() {
+        return "StaffAvailability{" +
+                "id=" + id +
+                ", day='" + day + '\'' +
+                ", dayPart='" + dayPart + '\'' +
+                ", colorOption='" + colorOption + '\'' +
+                ", cohort='" + cohort + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

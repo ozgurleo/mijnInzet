@@ -21,16 +21,16 @@
 </nav>
 
 <h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
-
-<div class="row">
-    <div class="table-responsive col-sm-6">
-        <table id="SubjectTable" class="table table-striped">
+<form name="subjectform" th:action="@{/submitPreferences}" method="post">
+    <div class="row">
+        <div class="table-responsive col-sm-6">
+            <table id="SubjectTable" class="table table-striped">
 
                 <tr>
                     <th>Vaknummer</th>
                     <th>Vak</th>
                     <th>Begrootte Uren</th>
-                    <th>Geldigheidsduur</th>
+                    <th>Geldigheidsduur (jaren)</th>
                     <th>Geef Voorkeur op</th>
                 </tr>
 
@@ -40,16 +40,17 @@
                     <td th:text="${subject.estimatedHours}">-1</td>
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
                     <td>
-                        <form action="">
+                        <form method="post" th:action="${subject.preference}" th:id="${subject.subjectId}">
                             <input type="radio" name="preference" value="no"> ik geef dit vak liever niet.<br>
                             <input type="radio" name="preference" value="maybe"> ja, dit vak wil ik geven.<br>
-                            <input type="radio" name="preference" value="yes"> ja, Ik  heb het vak al eerder gegeven.
+                            <input type="radio" name="preference" value="yes"> ja, Ik heb het vak al eerder gegeven.
                         </form>
                     </td>
                 </tr>
-
-        </table>
+            </table>
+        </div>
     </div>
-</div>
+    <button type="submit" th:form="subjectform" class="btn btn-lg btn-success">Submit Preference</button>
+</form>
 </body>
 </html>

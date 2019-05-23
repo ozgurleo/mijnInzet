@@ -6,13 +6,12 @@ import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -150,30 +149,40 @@ public class StaffAvailibilityController {
         staffAvailibilityService.addStaffAvailibility(sa);
     }
 
-    @RequestMapping(value = "updateSchedule/{id}", method = RequestMethod.GET)
-    public String showUpdateScheduleForm(@PathVariable Integer id, Model model) {
-        StaffAvailability sa1 = availibilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(("Ongeldige id" + id)));
+    @RequestMapping (value = "updateSchedule/{id}" , method=RequestMethod.GET)
+    public String showUpdateScheduleForm(@PathVariable int id, Model model) {
+        System.out.println(id);
+        StaffAvailability sa1 = availibilityRepository.findById(id);
         model.addAttribute("staffavailibility", sa1);
         model.addAttribute("colorOption", sa1.getColorOption());
+        model.addAttribute("id", sa1.getId());
+        model.addAttribute("day", sa1.getDay());
+        model.addAttribute("dayPart", sa1.getDayPart());
+        model.addAttribute("user", sa1.getUser());
+        model.addAttribute("cohort", sa1.getCohort());
+        System.out.println("uit de updateSchedule/id GET methode komt coloroption " +sa1.getColorOption());
+        System.out.println("uit de updateSchedule/id GET methode komt id " +sa1.getId());
+        System.out.println("uit de updateSchedule/id GET methode komt daypart " +sa1.getDayPart());
         return "updateSchedule";
-
     }
 
-//    @RequestMapping(value = "/update/timeschedule ", method = RequestMethod.POST)
-//    public String updateTimeschedule(@ModelAttribute StaffAvailability sa, User user, Model model, String colorOption) {
+
+    @PostMapping(value="/updatedSchedule")
+    public String updateTimeSchedule (@ModelAttribute("staffavailibility") StaffAvailability sa) {
+        System.out.println("====================== "+ sa.toString());
+//        model.addAttribute("staffavailibility", sa);
+//        model.addAttribute("id", sa.getId());
 //        model.addAttribute("colorOption", sa.getColorOption());
-//        System.out.println("coloroption is " + colorOption);
-//        availibilityRepository.saveAndFlush(sa);
-//        return "schedule";
-//    }
+//        model.addAttribute("day", sa.getDay());
+//        model.addAttribute("dayPart", sa.getDayPart());
+//        model.addAttribute("user", sa.getUser());
+//        model.addAttribute("cohort", sa.getCohort());
+        System.out.println("updatedSchedule/id post request geeft door " + sa.getColorOption());
+        System.out.println("updatedSchedule/id post request geeft door als id " + sa.getId());
+        System.out.println("updatedSchedule/id post request geeft door " + sa.getUser());
+        System.out.println("updatedSchedule/id post request geeft door als SA " + sa.toString());
+        availibilityRepository.save(sa);
 
-
-    @RequestMapping(value="/update/timeschedule", method = RequestMethod.POST)
-    public String updateTimeSchedule (@RequestParam ("colorOption") String coloroption, @RequestParam ("id") int id, Model model){
-        StaffAvailability sa =  availibilityRepository.findById(id);
-        model.addAttribute("colorOption",sa.getColorOption());
-        System.out.println("Uit postrequest update timeschedule komt " +coloroption);
-        availibilityRepository.saveAndFlush(sa);
         return "schedule";
     }
 
