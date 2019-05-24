@@ -1,11 +1,11 @@
-INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,2);
+INSERT INTO task_application VALUES (1,'2017-01-02',2,'Docent',null,2);
 INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,6);
-INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,10);
-INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,12);
+INSERT INTO task_application VALUES (3,'2017-01-02',2,'Docent',null,10);
+INSERT INTO task_application VALUES (1,'2017-01-02',2,'Docent',null,12);
 INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,13);
-INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,14);
-INSERT INTO task_application VALUES (3,'2017-02-02',2,'Docent',null,15);
-INSERT INTO task_application VALUES (3,'2017-03-02',2,'Docent',null,16);
+INSERT INTO task_application VALUES (3,'2017-01-02',2,'Docent',null,14);
+INSERT INTO task_application VALUES (1,'2017-02-02',2,'Docent',null,15);
+INSERT INTO task_application VALUES (2,'2017-03-02',2,'Docent',null,16);
 INSERT INTO task_application VALUES (3,'2017-04-02',2,'Docent',null,17);
 
 
