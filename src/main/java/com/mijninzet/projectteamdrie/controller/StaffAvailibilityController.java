@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -186,6 +188,15 @@ public class StaffAvailibilityController {
         return "schedule";
     }
 
+    @RequestMapping("schedule/{id}/{cohort}")
+    public String getAllschedule(Model model, @PathVariable Integer id, @PathVariable String cohort){
+        List<StaffAvailability> saList = staffAvailibilityService.getAllStaffAvailibilityByIdAndCohort(id,cohort);
+        Map<Integer,String> map = new HashMap<>();
+        for (StaffAvailability sa : saList) map.put(sa.getId(),sa.getColorOption());
+        model.addAttribute("map",map);
+
+        return "newSchedule";
+    }
 
 
 
