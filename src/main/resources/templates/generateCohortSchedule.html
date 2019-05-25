@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>genereer rooster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/applicationBasket">COHORT-ROOSTER BEHEER </a>
+    <form action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    </form>
+</nav>
+
+
+
+
+<table>
+
+    <form th:name="maandag" float="left">
+    </form>
+
+    <form th:name="dinsdag"float="left">
+    </form>
+
+    <form th:name="woensdag" float="left">
+    </form>
+
+    <form th:name="donderdag"float="left">
+    </form>
+
+    <form th:name="vrijdag"clear="right">
+    </form>
+
+
+</table>
+
+
+
+
+
+
+</body>
+</html>

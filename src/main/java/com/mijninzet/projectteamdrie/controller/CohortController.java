@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +46,7 @@ public class CohortController {
         return "createCohort";
     }
 
+    //hier worden het aantal weken in een cohort bepaalt
     public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate){
         int cohortWeeks=0;
         //get nr off days in a cohort
@@ -61,6 +63,12 @@ public class CohortController {
         return cohortWeeks;
     }
 
+
+    @GetMapping(value="/generateCohortSchedule")
+    public String generateCohortSchedule(){
+
+    return "generateCohortSchedule";
+    }
 
 
 }
