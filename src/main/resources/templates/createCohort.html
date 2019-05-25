@@ -76,8 +76,8 @@
             <tablebody>
                 <tr th:each="cohort:${allCohorts}">
                     <td th:text="${cohort.cohortId}">cohortid</td>
-                    <td th:text="${#dates.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
-                    <td th:text="${#dates.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
+                    <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
+                    <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
                 </tr>
             </tablebody>
         </table>
@@ -90,6 +90,7 @@
 
 <br><br>
 
+<form action="#" th:action="@{/cohort/createCohort/new}" th:object="${cohort}" method="post">
 <div class="bootstrap-iso">
     <div class="container-fluid">
         <h2>
@@ -98,7 +99,6 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group ">
-                        <form action="#" th:action="@{/createCohort/new}" th:object="${cohort}" method="post">
                             <tr>
                             <td><label th:text="id" /></td>
                             <td><input type="text" th:field="*{cohortId}" /></td>
@@ -136,7 +136,6 @@
                             </button>
                         </div>
                     </div>
-                        </form>
         </div>
     </div>
 </div>

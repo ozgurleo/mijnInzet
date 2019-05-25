@@ -36,7 +36,7 @@ public class CohortController {
         return "createCohort";
     }
 
-    @RequestMapping(value="/createCohort/new/", method= RequestMethod.POST)
+    @RequestMapping(value="/createCohort/new", method= RequestMethod.POST)
     public String createCohort(@ModelAttribute ("cohort") Cohort cohort, Model model){
         model.addAttribute("cohortId", cohort.getCohortId());
         model.addAttribute("dateBegin", cohort.getBeginDate());
