@@ -11,35 +11,87 @@
 
 <body>
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/applicationBasket">COHORT-ROOSTER BEHEER </a>
+    <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
     <form action="@{/logout}" method="post">
         <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
         <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </form>
 </nav>
 
+<h1>   </h1>
 
+<div class="table-responsive col-sm-10">
+    <table id="makeSchedule" class="table table-bordered">
 
+        <tablehead>
+            <thead class="thead-dark">
+            <tr>
+                <th>begin</th>
+                <th>eind</th>
+                <th>MAANDAG</th>
+                <th>DINSDAG</th>
+                <th>WOENSDAG</th>
+                <th>DONDERDAG</th>
+                <th>VRIJDAG</th>
+                <th>CONSTRAINTS</th>
+                <th>OPSLAAN-buttons</th>
+            </tr>
+            </thead>
+        </tablehead>
 
-<table>
+        <tablebody>
+        <tr>
+            <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}" method="post">
+                <td>
+                    <form th:name="begin" float="left">begin
+                </form>
+                </td>
 
-    <form th:name="maandag" float="left">
-    </form>
+                <td>
+                    <form th:name="eind" float="left">eind
+                </form>
+                </td>
 
-    <form th:name="dinsdag"float="left">
-    </form>
+                <td>
+                    <form th:name="maandag" float="left">maandag
+                </form>
+                </td>
 
-    <form th:name="woensdag" float="left">
-    </form>
+                <td>
+                    <form th:name="dinsdag"float="left">dinsdag
+                </form>
+                </td>
 
-    <form th:name="donderdag"float="left">
-    </form>
+                <td>
+                    <form th:name="woensdag" float="left">woensdag
+                </form>
+                </td>
 
-    <form th:name="vrijdag"clear="right">
-    </form>
+                <td><form th:name="donderdag"float="left">donderdag
+                </form>
+                </td>
+
+                <td><form th:name="vrijdag" float="left">vrijdag
+                </form>
+                </td>
+
+                <td>
+                    <form th:name="constraints" float="left">CONSTRAINTS
+                </form>
+                </td>
+
+                <td>
+                    <form th:name="button" clear="right">opslaan
+                </form>
+                </td>
+            </form>
+
+        </tr>
+        </tablebody>
 
 
 </table>
+</div>
 
 
 

@@ -20,8 +20,6 @@ import java.time.temporal.ChronoUnit;
 
 @Controller
 @RequestMapping(value="/cohort")
-
-
 public class CohortController {
 
     @Autowired
