@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +7,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
+
         $(function(){
             $("td").click(function(){
-                if ($(this).hasClass('Rood')) {
-                    $(this).removeClass('Rood').addClass('Geel');
-                } else if ($(this).hasClass('Geel')) {
-                    $(this).removeClass('Geel').addClass('Groen');
-                } else if ($(this).hasClass('Groen')) {
-                    $(this).removeClass('Groen').addClass('Rood');
+                if ($(this).hasClass('ROOD')) {
+                    $(this).removeClass('ROOD').addClass('GEEL');
+                } else if ($(this).hasClass('GEEL')) {
+                    $(this).removeClass('GEEL').addClass('GROEN');
+                } else if ($(this).hasClass('GROEN')) {
+                    $(this).removeClass('GROEN').addClass('ROOD');
                 }
             })
 
         })
     </script>
+
     <style>
-        .Rood { background:red; }
-        .Geel{ background:yellow; }
-        .Groen { background:green; }
+        .ROOD { background:red; }
+        .GEEL{ background:yellow; }
+        .GROEN { background:green; }
     </style>
 </head>
 <body>
-<table class="table table-dark">
+<div id="main"></div>
+<table class="table table-dark table-bordered">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -42,27 +45,27 @@
     <tbody>
     <tr>
         <th scope="row">Ochtend</th>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
+        <td th:class="${map1}" id="one"></td>
+        <td th:class="${map4}" id="four"></td>
+        <td th:class="${map7}" id="seven"></td>
+        <td th:class="${map10}" id="ten"></td>
+        <td th:class="${map13}" id="thirteen"></td>
     </tr>
     <tr>
         <th scope="row">Middag</th>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
+        <td th:class="${map2}" id="two"></td>
+        <td th:class="${map5}" id="five"></td>
+        <td th:class="${map8}" id="eight"></td>
+        <td th:class="${map11}" id="eleven"></td>
+        <td th:class="${map14}" id="fourteen"></td>
     </tr>
     <tr>
         <th scope="row">Avonds</th>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
+        <td th:class="${map3}" id="three"></td>
+        <td th:class="${map6}" id="six"></td>
+        <td th:class="${map9}" id="nine"></td>
+        <td th:class="${map12}" id="twelve"></td>
+        <td th:class="${map15}" id="fifteen"></td>
     </tr>
 
     </tbody>

@@ -1,6 +1,4 @@
 package com.mijninzet.projectteamdrie.model.entity;
-
-//import com.mijninzet.projectteamdrie.model.entity.user.Teacher;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import javax.persistence.*;
 
@@ -13,6 +11,7 @@ public class StaffAvailability {
     private String dayPart;
     private String colorOption;
     private String cohort;
+    private int cellNumber;
 
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id")
@@ -22,15 +21,18 @@ public class StaffAvailability {
 
     }
 
-    public StaffAvailability(int id, String day, String dayPart, String colorOption, String cohort, int userID) {
-        this.id = id;
+    public StaffAvailability(String day, String dayPart, String colorOption, String cohort, int cellNumber, int userID) {
         this.day = day;
         this.dayPart = dayPart;
         this.colorOption = colorOption;
         this.cohort = cohort;
-       this.user = new User(userID);
+        this.cellNumber = cellNumber;
+        this.user = new User(userID);
     }
 
+    public int getCellNumber() {
+        return cellNumber;
+    }
 
     public String getCohort() {
         return cohort;
