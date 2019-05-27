@@ -3,6 +3,8 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Cohort {
@@ -10,12 +12,12 @@ public class Cohort {
     @Id
     private int cohortId;
 
-    private int beginDate;
-    private int endDate;
+    private LocalDate beginDate;
+    private LocalDate endDate;
 
     public Cohort() {}
 
-    public Cohort(int cohortId, int beginDate, int endDate) {
+    public Cohort(int cohortId, LocalDate beginDate, LocalDate endDate) {
         this.cohortId = cohortId;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -29,19 +31,19 @@ public class Cohort {
         this.cohortId = cohortId;
     }
 
-    public int getBeginDate() {
+    public LocalDate getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(int beginDate) {
+    public void setBeginDate(LocalDate beginDate) {
         this.beginDate = beginDate;
     }
 
-    public int getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(int endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

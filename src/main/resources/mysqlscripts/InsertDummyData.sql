@@ -1,3 +1,11 @@
+INSERT INTO cohort VALUES (12,'2017-01-01','2017-06-01');
+INSERT INTO cohort VALUES (13,'2017-08-01','2018-01-01');
+INSERT INTO cohort VALUES (14,'2017-11-01','2018-04-01');
+INSERT INTO cohort VALUES (15,'2018-02-01','2018-07-01');
+INSERT INTO cohort VALUES (16,'2019-05-01','2019-10-01');
+INSERT INTO cohort VALUES (17,'2019-08-01','2020-01-01');
+
+
 INSERT INTO task_application VALUES (1,'2017-01-02',2,'Docent',null,2);
 INSERT INTO task_application VALUES (2,'2017-01-02',2,'Docent',null,6);
 INSERT INTO task_application VALUES (3,'2017-01-02',2,'Docent',null,10);
@@ -34,6 +42,17 @@ INSERT INTO task (task_id,estimated_hours,task_name,years_to_expiry_date) VALUES
 INSERT INTO `mijn_inzet`.`subject` (`subject_id`, `estimated_hours`, `subject_name`, `years_to_expiry_date`) VALUES ('1', '20', 'Programming', '2');
 INSERT INTO `mijn_inzet`.`subject` (`subject_id`, `estimated_hours`, `subject_name`, `years_to_expiry_date`) VALUES ('2', '30', 'OOP', '2');
 INSERT INTO `mijn_inzet`.`subject` (`subject_id`, `estimated_hours`, `subject_name`, `years_to_expiry_date`) VALUES ('3', '20', 'Databases', '2');
+INSERT INTO subject  VALUES ('4', '20', 'ADS1', '2');
+INSERT INTO subject  VALUES ('5', '20', 'ADS2', '2');
+INSERT INTO subject  VALUES ('6', '20', 'ADS3', '2');
+INSERT INTO subject  VALUES ('7', '20', 'WEBApplications1', '2');
+INSERT INTO subject  VALUES ('8', '20', 'WEBApplications2', '2');
+INSERT INTO subject  VALUES ('9', '20', 'WEBApplications3', '2');
+INSERT INTO subject  VALUES ('10', '20', 'Javascript', '2');
+INSERT INTO subject  VALUES ('11', '20', 'AJAX', '2');
+INSERT INTO subject  VALUES ('12', '20', 'Thymeleaf', '2');
+
+
 
 INSERT INTO role (role_id, role_name, role_desc) VALUES (1,'ADMIN','This user has admin rights for administrative work');
 INSERT INTO role (role_id, role_name, role_desc) VALUES (2,'TEACHER','teacher');

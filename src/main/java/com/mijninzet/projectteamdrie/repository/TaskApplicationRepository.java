@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -27,7 +28,6 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
                                @Param("availableHours") Integer availableHours, @Param("role") String role,
                                @Param("taskID") Integer taskID);
 
-
     // update query: obv user_id, task_id en opgegeven uren
     @Modifying
     @Query(value = "UPDATE task_application TA SET TA.available_hours = :availableHours WHERE TA.user_id=:userId " +
@@ -35,7 +35,6 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
     @Transactional
     void updateHours(@Param("availableHours") Integer availableHours,
                      @Param("userId") Integer userId, @Param("taskId") Integer taskId);
-
 
     // remove query: obv user_id en task_id
     @Modifying

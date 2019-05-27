@@ -2,6 +2,7 @@ package com.mijninzet.projectteamdrie.controller;
 
 
 import com.mijninzet.projectteamdrie.UserSingleton;
+import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
 import com.mijninzet.projectteamdrie.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 
 import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
-
+    CohortController cohortTest=new CohortController();
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
     @Autowired
@@ -96,6 +98,13 @@ public class TaskApplicationController {
 
     @GetMapping(value = "/applicationBasket")
     public String fillApplicationBasket(Object object, Model model) {
+
+        LocalDate begin= LocalDate.of(2018,01,01);
+        LocalDate end= LocalDate.of(2018,01,16);
+
+        cohortTest.getNumberOfCohortWeeks(begin,end);
+
+
         //haal de userId op vd loggedin user uit de Singleton
         final int userId = UserSingleton.getInstance().getId();
 
