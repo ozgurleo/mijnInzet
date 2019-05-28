@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script language="javascript" src="cohortSchedule.js"></script>
 </head>
 
 
 <body>
+
+
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
     <form th:action="@{/logout}" method="post">
@@ -49,7 +52,7 @@
 
                     <td>
                         <input type="${schedule.}" NAME ="begin" id= "begin" style="background-color:
-                        transparent;border: #FF1C19" th:value="${schedule.getDay()}" size="7" readonly/>
+                        transparent;border: #FF1C19" th:value="${schedule.getDay()}" size="9" readonly/>
                     </td>
 
                     <td>
@@ -88,7 +91,7 @@
                     </td>
 
                     <td>
-                        <form th:name="constraints">CONSTRAINTS
+                        <form th:name="constraints">
                         </form>
                     </td>
 
@@ -107,11 +110,6 @@
     </table>
 </div>
 
-<script>
-
-    var select = document.getElementById("subject"),
-    arr=[];
-</script>
 
 </body>
 </html>
