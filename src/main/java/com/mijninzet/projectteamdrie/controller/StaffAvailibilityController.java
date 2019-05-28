@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.controller;
 
+import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
@@ -47,9 +48,10 @@ public class StaffAvailibilityController {
 //        return map;
 //    }
 //
-    @RequestMapping("schedule/{id}/{cohort}")
-    public String getAllschedule(Model model, @PathVariable Integer id, @PathVariable String cohort){
-        List<StaffAvailability> saList = staffAvailibilityService.getAllStaffAvailibilityByIdAndCohort(id,cohort);
+    @RequestMapping("schedule/{cohort}")
+    public String getAllschedule(Model model, @PathVariable String cohort){
+        final int userId = UserSingleton.getInstance().getId();
+        List<StaffAvailability> saList = staffAvailibilityService.getAllStaffAvailibilityByIdAndCohort(userId,cohort);
         Map<Integer,String> map = new HashMap<>();
         for (StaffAvailability sa : saList) map.put(sa.getCellNumber(),sa.getColorOption());
         model.addAttribute("map",map);
