@@ -17,7 +17,6 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value="/cohort")
 public class CohortScheduleController {
 
     @Autowired

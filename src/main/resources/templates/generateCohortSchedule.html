@@ -42,119 +42,83 @@
         </tablehead>
 
         <tablebody>
-        <tr>
-            <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}" method="post">
+            <tr>
+                <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}"
+                      method="post">
+                    <td>
+                        <form th:name="begin" float="left">begin
+                        </form>
+                    </td>
 
-                    <form th:name="begin" float="left">begin
+                    <td>
+                        <form th:name="eind" float="left">eind
+                        </form>
+                    </td>
 
+                    <td>
+                        <form>
+                            <div>
+                                <select name="subjectselect">
+                                    <option selected="selected">vak</option>
+                                    <option value="year/1">java</option>
+                                    <option value="year/2">OOP</option>
+                                </select>
+                            </div>
 
+                            <div>
+                                <select name="teachereselect">
+                                    <option selected="selected">docent</option>
+                                    <option value="URL">Huub</option>
+                                    <option value="URL">Gerke</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select name="classroomselect">
+                                    <option selected="selected">lokaal</option>
+                                    <option value="URL">FDM.50</option>
+                                    <option value="URL">FDM.44</option>
+                                </select>
+                            </div>
+                        </form>
+                    </td>
 
+                    <td>
+                        <form th:name="dinsdag" float="left">dinsdag
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="woensdag" float="left">woensdag
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="donderdag" float="left">donderdag
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="vrijdag" float="left">vrijdag
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="constraints" float="left">CONSTRAINTS
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="button" clear="right">opslaan
+                        </form>
+                    </td>
                 </form>
-                </td>
 
-                <td>
-                    <form th:name="eind" float="left">eind
-                </form>
-                </td>
-
-                <td>
-                    <form th:name="maandag" float="left">maandag
-
-                <td>
-
-                    <div class="dropdown">
-                        <button class="btn btn-dark btn-sm dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" float="left "><h6>Vak   </h6></button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <span class="close">&times;</span>
-                                <table class="table" size =10>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-
-                <div class="dropdown">
-                    <button class="btn btn-dark btn-sm dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" clear="right"><h6>Docent</h6></button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <span class="close" >&times;</span>
-                            <table class="table" size =10>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </li>
-                    </ul>
-                </div>
-
-
-                <div class="dropdown">
-                    <button class="btn btn-dark btn-default dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" ><h6>Lokaal</h6></button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <span class="close">&times;</span>
-                            <table class="table" size =10>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </li>
-                    </ul>
-                </div>
-
-                </td>
-
-                </form>
-                </td>
-
-                <td>
-                    <form th:name="dinsdag"float="left">dinsdag
-                </form>
-                </td>
-
-                <td>
-                    <form th:name="woensdag" float="left">woensdag
-                </form>
-                </td>
-
-                <td><form th:name="donderdag"float="left">donderdag
-                </form>
-                </td>
-
-                <td><form th:name="vrijdag" float="left">vrijdag
-                </form>
-                </td>
-
-                <td>
-                    <form th:name="constraints" float="left">CONSTRAINTS
-                </form>
-                </td>
-
-                <td>
-                    <form th:name="button" clear="right">opslaan
-                </form>
-                </td>
-            </form>
-
-        </tr>
+            </tr>
         </tablebody>
 
 
-</table>
+    </table>
 </div>
-
-
-
-
 
 
 </body>
