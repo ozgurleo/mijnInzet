@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Save Employee</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Exception Directory</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Exception</p>
+
+    <form action="#" th:action="@{/exception/save}"
+          th:object="${exception}" method="POST">
+
+        <input type="date" id="startdate" th:field="*{startDate}"
+               class="form-control mb-4 col-4" placeholder="Start Date">
+
+        <input type="date" id="enddate" th:field="*{endDate}"
+               class="form-control mb-4 col-4" placeholder="End Date">
+
+        <input type="text" th:field="*{colorOption}"
+               class="form-control mb-4 col-4" placeholder="Color">
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/exception/list}">Back to Exception List</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
