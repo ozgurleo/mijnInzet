@@ -28,37 +28,41 @@
         <tablehead>
             <thead class="thead-dark">
             <tr>
-                <th>begin</th>
-                <th>eind</th>
-                <th>MAANDAG</th>
-                <th>DINSDAG</th>
-                <th>WOENSDAG</th>
-                <th>DONDERDAG</th>
-                <th>VRIJDAG</th>
+                <th>Datum</th>
+                <th>Dag</th>
+                <th>Dagdeel</th>
+                <th>Planning</th>
                 <th>CONSTRAINTS</th>
-                <th>OPSLAAN-buttons</th>
+                <th>        </th>
             </tr>
             </thead>
         </tablehead>
 
         <tablebody>
-            <tr>
-                <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}"
+            <tr th:each="schedule:${cohortschedule}">
+                <form th:id="1" th:action="@{/generateCohortSchedule}"
                       method="post">
                     <td>
-                        <form th:name="begin" float="left">begin
-                        </form>
+                        <input type="${schedule.}" NAME ="daypart" id= "daypart" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDate()}" size="7" readonly/>
                     </td>
 
                     <td>
-                        <form th:name="eind" float="left">eind
-                        </form>
+                        <input type="${schedule.}" NAME ="begin" id= "begin" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDay()}" size="7" readonly/>
                     </td>
 
                     <td>
-                        <form>
+                        <input type="${schedule.}" NAME ="end" id= "end" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" size="7" readonly/>
+                    </td>
+
+
+
+                    <td>
+                        <form >
                             <div>
-                                <select name="subjectselect">
+                                <select name="subject_menu" id="subject">
                                     <option selected="selected">vak</option>
                                     <option value="year/1">java</option>
                                     <option value="year/2">OOP</option>
@@ -66,50 +70,33 @@
                             </div>
 
                             <div>
-                                <select name="teachereselect">
+                                <select name="teacher_menu" id = teacher>
                                     <option selected="selected">docent</option>
                                     <option value="URL">Huub</option>
                                     <option value="URL">Gerke</option>
                                 </select>
                             </div>
                             <div>
-                                <select name="classroomselect">
+                                <select name="room_menu" id="room">
                                     <option selected="selected">lokaal</option>
                                     <option value="URL">FDM.50</option>
                                     <option value="URL">FDM.44</option>
                                 </select>
                             </div>
                         </form>
+
                     </td>
 
                     <td>
-                        <form th:name="dinsdag" float="left">dinsdag
+                        <form th:name="constraints">CONSTRAINTS
                         </form>
                     </td>
 
                     <td>
-                        <form th:name="woensdag" float="left">woensdag
-                        </form>
-                    </td>
-
-                    <td>
-                        <form th:name="donderdag" float="left">donderdag
-                        </form>
-                    </td>
-
-                    <td>
-                        <form th:name="vrijdag" float="left">vrijdag
-                        </form>
-                    </td>
-
-                    <td>
-                        <form th:name="constraints" float="left">CONSTRAINTS
-                        </form>
-                    </td>
-
-                    <td>
-                        <form th:name="button" clear="right">opslaan
-                        </form>
+                        <div>
+                            <button type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
+                                    th:id="opslaan" th:form ="opslaan">opslaan</button>
+                        </div>
                     </td>
                 </form>
 
@@ -120,6 +107,11 @@
     </table>
 </div>
 
+<script>
+
+    var select = document.getElementById("subject"),
+    arr=[];
+</script>
 
 </body>
 </html>
