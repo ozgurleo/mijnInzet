@@ -44,8 +44,11 @@
         <tablebody>
         <tr>
             <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}" method="post">
-                <td>
+
                     <form th:name="begin" float="left">begin
+
+
+
                 </form>
                 </td>
 
@@ -56,6 +59,60 @@
 
                 <td>
                     <form th:name="maandag" float="left">maandag
+
+                <td>
+
+                    <div class="dropdown">
+                        <button class="btn btn-dark btn-sm dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" float="left "><h6>Vak   </h6></button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <span class="close">&times;</span>
+                                <table class="table" size =10>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-dark btn-sm dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" clear="right"><h6>Docent</h6></button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <span class="close" >&times;</span>
+                            <table class="table" size =10>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="dropdown">
+                    <button class="btn btn-dark btn-default dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" ><h6>Lokaal</h6></button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <span class="close">&times;</span>
+                            <table class="table" size =10>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+
+                </td>
+
                 </form>
                 </td>
 
