@@ -1,6 +1,8 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
@@ -12,7 +14,9 @@ public class Cohort {
     @Id
     private int cohortId;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate beginDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     public Cohort() {}
