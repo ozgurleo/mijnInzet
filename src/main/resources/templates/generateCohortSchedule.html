@@ -43,8 +43,7 @@
 
         <tablebody>
             <tr th:each="schedule:${cohortschedule}">
-                <form th:id="1" th:action="@{/generateCohortSchedule}"
-                      method="post">
+                <form action="#" th:action="@{/generateCohortSchedule}" th:object="${schedule}" method="post">
                     <td>
                         <input type="${schedule.}" NAME ="daypart" id= "daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" size="7" readonly/>
@@ -64,28 +63,24 @@
 
                     <td>
                         <form >
-                            <div>
-                                <select name="subject_menu" id="subject">
-                                    <option selected="selected">vak</option>
-                                    <option value="year/1">java</option>
-                                    <option value="year/2">OOP</option>
-                                </select>
-                            </div>
 
                             <div>
-                                <select name="teacher_menu" id = teacher>
-                                    <option selected="selected">docent</option>
-                                    <option value="URL">Huub</option>
-                                    <option value="URL">Gerke</option>
-                                </select>
+                                <select th:field="${subjects}">
+                                    <option th:each="subject: ${subjects}" th:value="${subject[2]}" th:text="${subject[2]}"></select>
                             </div>
+
+
                             <div>
-                                <select name="room_menu" id="room">
-                                    <option selected="selected">lokaal</option>
-                                    <option value="URL">FDM.50</option>
-                                    <option value="URL">FDM.44</option>
-                                </select>
+                        <select th:field="${teachers}">
+                            <option th:each="teacher: ${teachers}" th:value="${teacher[3]}" th:text="${teacher[3]}">n</select>
+                           </div>
+
+
+                            <div>
+                                <select th:field="${rooms}">
+                                    <option th:each="room: ${rooms}" th:value="${room[1]}" th:text="${room[1]}"></select>
                             </div>
+
                         </form>
 
                     </td>

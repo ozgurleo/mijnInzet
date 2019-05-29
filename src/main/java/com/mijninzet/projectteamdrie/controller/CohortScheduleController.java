@@ -3,13 +3,12 @@ package com.mijninzet.projectteamdrie.controller;
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
 import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
+import com.mijninzet.projectteamdrie.repository.SubjectRepository;
+import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -21,6 +20,10 @@ public class CohortScheduleController {
 
     @Autowired
     CohortScheduleRepository cohortScheduleRepo;
+    @Autowired
+    UserRepository userRepo;
+    @Autowired
+    SubjectRepository subjectRepo;
 
     public static final int DAYS_IN_WEEK=7;
 
@@ -47,8 +50,21 @@ public class CohortScheduleController {
     @GetMapping(value="/generateCohortSchedule")
     public String generateCohortSchedule(Model model){
         model.addAttribute("cohortschedule", cohortScheduleRepo.findAll());
-    return "generateCohortSchedule";
+        model.addAttribute("subjects", subjectRepo.getSubjects());
+        model.addAttribute("teachers", userRepo.getTeachers());
+        model.addAttribute("rooms", subjectRepo.getRooms());
+
+        return "generateCohortSchedule";
     }
 
+
+//    @RequestMapping(value="/teacherList", method=RequestMethod.GET)
+//    public String getTeachers(Model model) {
+//        model.addAttribute("subjects", subjectRepo.getSubjects());
+//    model.addAttribute("teachers", userRepo.getTeachers());
+//        model.addAttribute("rooms", subjectRepo.getRooms());
+//
+//        return "generateCohortSchedule";
+//    }
 
 }
