@@ -27,6 +27,13 @@
 
 <div class="table-responsive col-sm-10">
     <table id="makeSchedule" class="table table-bordered">
+        <form>
+        <div>
+            <select th:field="${cohorts}">
+                <option value="cohorts">COHORT</option>
+                <option th:each="cohort: ${cohorts}" th:value="${cohort[0]}" th:text="${cohort[0]}"></select>
+        </div>
+        </form>
 
         <tablehead>
             <thead class="thead-dark">
@@ -35,8 +42,9 @@
                 <th>Dag</th>
                 <th>Dagdeel</th>
                 <th>Planning</th>
-                <th>CONSTRAINTS</th>
-                <th>        </th>
+                <th>Beschikbaarheid</th>
+                <th>urenoverschreiding</th>
+                <th>Vakvoorkeur</th>
             </tr>
             </thead>
         </tablehead>
@@ -66,18 +74,21 @@
 
                             <div>
                                 <select th:field="${subjects}">
+                                    <option value="onderwerp">selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[2]}" th:text="${subject[2]}"></select>
                             </div>
 
 
                             <div>
                         <select th:field="${teachers}">
+                            <option value="docent">selecteer docent</option>
                             <option th:each="teacher: ${teachers}" th:value="${teacher[3]}" th:text="${teacher[3]}">n</select>
                            </div>
 
 
                             <div>
                                 <select th:field="${rooms}">
+                                    <option value="lokaal">selecteer lokaal</option>
                                     <option th:each="room: ${rooms}" th:value="${room[1]}" th:text="${room[1]}"></select>
                             </div>
 
@@ -86,10 +97,19 @@
                     </td>
 
                     <td>
-                        <form th:name="constraints">
+                        <form th:name="beschikbaarheid">
                         </form>
                     </td>
 
+                    <td>
+                        <form th:name="uren">
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="voorkeur">
+                        </form>
+                    </td>
                     <td>
                         <div>
                             <button type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"

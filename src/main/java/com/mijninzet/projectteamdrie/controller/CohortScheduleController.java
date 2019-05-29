@@ -53,6 +53,7 @@ public class CohortScheduleController {
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
+        model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
 
         return "generateCohortSchedule";
     }
