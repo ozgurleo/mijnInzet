@@ -19,7 +19,7 @@ import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
-    CohortController cohortTest=new CohortController();
+    CohortScheduleController cohortSchedTest=new CohortScheduleController();
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
     @Autowired
@@ -102,7 +102,7 @@ public class TaskApplicationController {
         LocalDate begin= LocalDate.of(2018,01,01);
         LocalDate end= LocalDate.of(2018,01,16);
 
-        cohortTest.getNumberOfCohortWeeks(begin,end);
+        cohortSchedTest.getNumberOfCohortWeeks(begin,end);
 
 
         //haal de userId op vd loggedin user uit de Singleton
