@@ -1,6 +1,7 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
+import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
 import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
@@ -51,15 +52,39 @@ public class CohortScheduleController {
     @GetMapping(value="/generateCohortSchedule")
     public String generateCohortSchedule(Model model){
 
-               model.addAttribute("subjects", subjectRepo.getSubjects());
+        model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
         model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
-        model.addAttribute("cohortschedule", cohortScheduleRepo.findAll());
+        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
         return "generateCohortSchedule";
     }
 
 
+    @PostMapping(value="/generateCohortSchedule")
+    public String insertSchedule(HttpServletRequest request, Model model){
+        System.out.println("POST METHOD IS AANGEROEPEN; DIT IS VOOR DE HET OPSLAAN VD COHORT");
+        System.out.println(request.getContextPath());
 
+
+        model.addAttribute("subjects", subjectRepo.getSubjects());
+        model.addAttribute("teachers", userRepo.getTeachers());
+        model.addAttribute("rooms", subjectRepo.getRooms());
+        model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
+        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
+        System.out.println("DIT IS NA HET OPHALEN VD LASTCOHORTSCHEDULE!!!");
+        return "generateCohortSchedule";
+    }
+
+ //ORIGINEEL IS HIERONDER werkt tot aan save dan error
+//    @PostMapping(value="/makeSchedule/cohort")
+//    public String insertSchedule(@ModelAttribute CohortSchedule cohortschedule, Model model){
+//        System.out.println("POST METHOD IS AANGEROEPEN; DIT IS VOOR DE HET OPSLAAN VD COHORT");
+//        cohortScheduleRepo.save(cohortschedule);
+//
+//        System.out.println("DIT IS NA HET OPSLAAN VD COHORT!!!");
+//        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
+//        return "generateCohortSchedule";
+//    }
 
 }

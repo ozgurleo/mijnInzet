@@ -15,4 +15,8 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     @Query(value="SELECT * FROM mijn_inzet.cohort;", nativeQuery = true)
     ArrayList<Object[]> getCohorts();
 
+    //Brahim Code: get all teachers Names by Role=teacher
+    @Query(value="SELECT * FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id IN (select MAX(cohort_cohort_id) FROM mijn_inzet.cohort_schedule) ;", nativeQuery = true)
+    List<CohortSchedule> getScheduleLastCohort();
+
 }
