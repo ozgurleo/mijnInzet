@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -47,9 +48,16 @@ public class CohortScheduleController {
     }
 
 
-    @GetMapping(value="/generateCohortSchedule")
-    public String generateCohortSchedule(Model model){
-        model.addAttribute("cohortschedule", cohortScheduleRepo.findAll());
+    @GetMapping(value="/generateCohortSchedule/{cohort_Id}")
+    public String generateCohortSchedule(HttpServletRequest request, Model model){
+
+       int cohortId= Integer.parseInt(request.getParameter("cohort_id"));
+       if(cohortId==0){
+           model.addAttribute("cohortschedule", cohortScheduleRepo.findAll());
+       }else{
+           model.addAttribute("cohortschedule", cohortScheduleRepo.findByCohort(cohortId));
+       }
+
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
