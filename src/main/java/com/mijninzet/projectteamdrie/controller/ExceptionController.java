@@ -19,7 +19,7 @@ public class ExceptionController {
 
     @RequestMapping("/list")
     public String listException(Model model){
-        exceptions=exceptionService.findAll();
+        exceptions=exceptionService.findByUserId();
 
         model.addAttribute("exceptions",exceptions);
         return "exception/list-exceptions";
