@@ -48,32 +48,18 @@ public class CohortScheduleController {
     }
 
 
-    @GetMapping(value="/generateCohortSchedule/{cohort_Id}")
-    public String generateCohortSchedule(HttpServletRequest request, Model model){
+    @GetMapping(value="/generateCohortSchedule")
+    public String generateCohortSchedule(Model model){
 
-       int cohortId= Integer.parseInt(request.getParameter("cohort_id"));
-       if(cohortId==0){
-           model.addAttribute("cohortschedule", cohortScheduleRepo.findAll());
-       }else{
-           model.addAttribute("cohortschedule", cohortScheduleRepo.findByCohort(cohortId));
-       }
-
-        model.addAttribute("subjects", subjectRepo.getSubjects());
+               model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
         model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
-
+        model.addAttribute("cohortschedule", cohortScheduleRepo.findAll());
         return "generateCohortSchedule";
     }
 
 
-//    @RequestMapping(value="/teacherList", method=RequestMethod.GET)
-//    public String getTeachers(Model model) {
-//        model.addAttribute("subjects", subjectRepo.getSubjects());
-//    model.addAttribute("teachers", userRepo.getTeachers());
-//        model.addAttribute("rooms", subjectRepo.getRooms());
-//
-//        return "generateCohortSchedule";
-//    }
+
 
 }

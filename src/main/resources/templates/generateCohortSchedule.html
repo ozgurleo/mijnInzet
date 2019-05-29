@@ -27,13 +27,15 @@
 
 <div class="table-responsive col-sm-10">
     <table id="makeSchedule" class="table table-bordered">
-        <form>
+
         <div>
-            <select th:field="${cohorts}">
+            <select name="chortId" th:id="cohortId">
                 <option value="cohorts">COHORT</option>
-                <option th:each="cohort: ${cohorts}" th:value="${cohort[0]}" th:text="${cohort[0]}"></select>
+                <option th:each="cohort: ${cohorts}" th:value="${cohort[0]}" th:text="${cohort[0]}"
+                        th:id="${cohort[0]}" th:form="${cohort[0]}" >
+            </select>
         </div>
-        </form>
+
 
         <tablehead>
             <thead class="thead-dark">
@@ -51,7 +53,7 @@
 
         <tablebody>
             <tr th:each="schedule:${cohortschedule}">
-                <form action="#" th:action="@{/generateCohortSchedule}" th:object="${schedule}" method="post">
+                <form >
                     <td>
                         <input type="${schedule.}" NAME ="daypart" id= "daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" size="7" readonly/>
