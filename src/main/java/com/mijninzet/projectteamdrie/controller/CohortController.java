@@ -48,10 +48,12 @@ public class CohortController {
     @RequestMapping(value="/createCohort/new/", method= RequestMethod.POST)
     public String createCohort(@ModelAttribute ("cohort") Cohort cohort, Model model){
         cohortRepository.save(cohort);
+        List<Cohort> cohorts = cohortRepository.findAll();
+        model.addAttribute("showCohorts", cohorts);
         return "createCohort";
     }
 
-    //hier worden het aantal weken in een cohort bepaalt
+    //hier wordt het aantal weken in een cohort bepaalt
 
     public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate){
         int cohortWeeks=0;
