@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +10,21 @@
     <script type="text/javascript">
         $(function(){
             $("td").click(function(){
-                if ($(this).hasClass('Rood')) {
-                    $(this).removeClass('Rood').addClass('Geel');
-                } else if ($(this).hasClass('Geel')) {
-                    $(this).removeClass('Geel').addClass('Groen');
-                } else if ($(this).hasClass('Groen')) {
-                    $(this).removeClass('Groen').addClass('Rood');
+                if ($(this).hasClass('ROOD')) {
+                    $(this).removeClass('ROOD').addClass('GEEL');
+                } else if ($(this).hasClass('GEEL')) {
+                    $(this).removeClass('GEEL').addClass('GROEN');
+                } else if ($(this).hasClass('GROEN')) {
+                    $(this).removeClass('GROEN').addClass('ROOD');
                 }
             })
 
         })
     </script>
     <style>
-        .Rood { background:red; }
-        .Geel{ background:yellow; }
-        .Groen { background:green; }
+        .ROOD { background:red; }
+        .GEEL{ background:yellow; }
+        .GROEN { background:green; }
     </style>
 </head>
 <body>
@@ -49,27 +49,27 @@
     <tbody>
     <tr>
         <th scope="row">Ochtend</th>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
+        <td th:class="${map1}">...</td>
+        <td th:class="${map4}">...</td>
+        <td th:class="${map7}">...</td>
+        <td th:class="${map10}">...</td>
+        <td th:class="${map13}">...</td>
     </tr>
     <tr>
         <th scope="row">Middag</th>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
+        <td th:class="${map2}">...</td>
+        <td th:class="${map5}">...</td>
+        <td th:class="${map8}">...</td>
+        <td th:class="${map11}">...</td>
+        <td th:class="${map14}">...</td>
     </tr>
     <tr>
         <th scope="row">Avonds</th>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
-        <td class="Rood">...</td>
+        <td th:class="${map3}">...</td>
+        <td th:class="${map6}">...</td>
+        <td th:class="${map9}">...</td>
+        <td th:class="${map12}">...</td>
+        <td th:class="${map15}">...</td>
     </tr>
 
     </tbody>
