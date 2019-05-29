@@ -10,7 +10,7 @@ public class SubjectPreference {
     private String preference;
 
     @ManyToOne
-    @JoinColumn(name = "subject_preference_id")
+//    @JoinColumn(name = "subject_preference_id")
     private Subject subject;
 
     public SubjectPreference() { super(); }

@@ -31,7 +31,6 @@
                     <th>Vak</th>
                     <th>Begrootte Uren</th>
                     <th>Geldigheidsduur (jaren)</th>
-                    <th>Geef Voorkeur op</th>
                 </tr>
 
                 <tr th:each="subject:${showSubjects}">
@@ -39,18 +38,43 @@
                     <td th:text="${subject.subjectName}">-1</td>
                     <td th:text="${subject.estimatedHours}">-1</td>
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
+                </tr>
+            </table>
+            <table id="SubmitSubjectTable" class="table table-striped">
+
+                <tr>
+                    <th>Geef Voorkeur op</th>
+                </tr>
+
+                <tr>
                     <td>
-                        <form method="post" th:action="@{/TeacherPreferences/submitSubjects/}" th:id="${subject.subjectId}">
+                        <form action="#" method="post" th:action="@{/TeacherPreferences/submitSubjects/}" th:object="${subjpref}">
                             <input type="radio" name="preference" value="no"> ik geef dit vak liever niet.<br>
                             <input type="radio" name="preference" value="maybe"> ja, dit vak wil ik geven.<br>
                             <input type="radio" name="preference" value="yes"> ja, Ik heb het vak al eerder gegeven.
                         </form>
                     </td>
+
                 </tr>
             </table>
         </div>
     </div>
     <button type="submit" th:form="subjectform" class="btn btn-lg btn-success">Submit Preference</button>
 </form>
+<!--<form action="#" method="post" th:action="@{/TeacherPreferences/submitSubjects/}" th:object="${subjpref}">-->
+<!--    <table border="1">-->
+<!--        <tr>-->
+<!--            <td><label th:text="Naam"></label></td>-->
+<!--            <td><input type="text" th:field="*{naam}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label th:text="Stadion"></label></td>-->
+<!--            <td><input type="text" th:field="*{stadion}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><input type="submit" value="OK"/></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</form>-->
 </body>
 </html>
