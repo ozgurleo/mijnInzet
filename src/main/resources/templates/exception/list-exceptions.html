@@ -23,6 +23,10 @@
 
     <h3>Employee Directory</h3>
     <hr>
+    <a th:href="@{/exception/addException}"
+       class="btn btn-primary btn-sm mb-3">
+        Incident Toevoegen
+    </a>
 
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -30,6 +34,7 @@
             <th>Begin Datum</th>
             <th>Eind Datum</th>
             <th>Aanwijzigheid</th>
+            <th>#</th>
         </tr>
         </thead>
 
@@ -39,6 +44,13 @@
             <td th:text="${tempExceptions.startDate}" />
             <td th:text="${tempExceptions.endDate}" />
             <td th:class="${tempExceptions.colorOption}"  th:text="${tempExceptions.colorOption}" />
+
+            <td>
+                <a th:href="@{/exception/updateException(exceptionId=${tempExceptions.id})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+            </td>
 
         </tr>
         </tbody>

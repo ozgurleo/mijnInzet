@@ -1,15 +1,11 @@
 package com.mijninzet.projectteamdrie.controller;
 
-import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.Exception;
-import com.mijninzet.projectteamdrie.service.ExceptionService;
+import com.mijninzet.projectteamdrie.service.ExceptionServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,13 +13,13 @@ import java.util.List;
 @RequestMapping("/exception")
 public class ExceptionController {
     @Autowired
-    private ExceptionService exceptionService;
+    private ExceptionServiceImp exceptionService;
 
     private List<Exception>exceptions;
 
     @RequestMapping("/list")
     public String listException(Model model){
-        exceptions=exceptionService.getAll();
+        exceptions=exceptionService.findAll();
 
         model.addAttribute("exceptions",exceptions);
         return "exception/list-exceptions";
@@ -37,10 +33,19 @@ public class ExceptionController {
 
     }
 
+    @GetMapping("/updateException")
+    public String updateException(@RequestParam("exceptionId") int theId, Model model){
+        Exception theException=exceptionService.findById(theId);
+        model.addAttribute("exception",theException);
+        return "exception/exception-form";
+    }
+
     @PostMapping("/save")
     public String saveException(@ModelAttribute("exception") Exception theException){
 
-        exceptionService.saveException(theException);
+        exceptionService.save(theException);
+
+
         return ("redirect:/exception/list");
     }
 

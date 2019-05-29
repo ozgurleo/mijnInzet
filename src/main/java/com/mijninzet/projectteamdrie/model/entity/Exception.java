@@ -19,7 +19,7 @@ public class Exception {
     private String startDate;
     private String colorOption;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
     @JoinColumn(name="user_id")
     private User user;
 
