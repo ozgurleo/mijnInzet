@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Employee Directory</title>
+    <style>
+        .ROOD { background:red; }
+        .GEEL{ background:yellow; }
+        .GROEN { background:green; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Employee Directory</h3>
+    <hr>
+    <a th:href="@{/exception/addException}"
+       class="btn btn-primary btn-sm mb-3">
+        Incident Toevoegen
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Begin Datum</th>
+            <th>Eind Datum</th>
+            <th>Aanwijzigheid</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempExceptions : ${exceptions}">
+
+            <td th:text="${tempExceptions.startDate}" />
+            <td th:text="${tempExceptions.endDate}" />
+            <td th:class="${tempExceptions.colorOption}"  th:text="${tempExceptions.colorOption}" />
+
+            <td>
+                <a th:href="@{/exception/updateException(exceptionId=${tempExceptions.id})}"
+                   class="btn btn-info btn-sm" >
+                    Update
+                </a>
+
+                <a th:href="@{/exception/deleteException(exceptionId=${tempExceptions.id})}"
+                   class="btn btn-danger btn-sm" onclick="if(!(confirm('Ben je zeker!?')) ) return false">
+                    Verwijderen
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
