@@ -1,30 +1,7 @@
-package com.mijninzet.projectteamdrie.model.entity.user;
-
-
-import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-@Entity
-public class Teacher extends User{
-    @OneToMany(mappedBy = "user")
-    private Set<StaffAvailability>staffAvailabilities=new HashSet<>();
-
-
-    public Teacher() {
-    }
-
-    public Teacher(int userID) {
-        super(userID);
-    }
-
-}
-
-
-
+//package com.mijninzet.projectteamdrie.model.entity.user;
+//
+//import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
+//
 //import javax.persistence.*;
 //import java.util.HashSet;
 //import java.util.List;
@@ -33,9 +10,9 @@ public class Teacher extends User{
 //@Entity
 //@DiscriminatorValue("teacher")
 //public class Teacher extends User{
-////    @OneToMany(mappedBy = "user")
-////    private Set<StaffAvailability>staffAvailabilities=new HashSet<>();
-//    private int percentageAanstelling ;
+//    @OneToMany(mappedBy = "user")
+//    private Set<StaffAvailability>staffAvailabilities=new HashSet<>();
+//
 //
 //    public Teacher() {
 //    }
@@ -44,11 +21,34 @@ public class Teacher extends User{
 //        super(userID);
 //    }
 //
-//    public int getPercentageAanstelling() {
-//        return percentageAanstelling;
-//    }
-//
-//    public void setPercentageAanstelling(int percentageAanstelling) {
-//        this.percentageAanstelling = percentageAanstelling;
-//    }
 //}
+//
+////
+////
+////import javax.persistence.*;
+////import java.util.HashSet;
+////import java.util.List;
+////import java.util.Set;
+////
+////@Entity
+////@DiscriminatorValue("teacher")
+////public class Teacher extends User{
+//////    @OneToMany(mappedBy = "user")
+//////    private Set<StaffAvailability>staffAvailabilities=new HashSet<>();
+////    private int percentageAanstelling ;
+////
+////    public Teacher() {
+////    }
+////
+////    public Teacher(int userID) {
+////        super(userID);
+////    }
+////
+////    public int getPercentageAanstelling() {
+////        return percentageAanstelling;
+////    }
+////
+////    public void setPercentageAanstelling(int percentageAanstelling) {
+////        this.percentageAanstelling = percentageAanstelling;
+////    }
+////}

@@ -6,8 +6,8 @@ public class CurrentUser {
     private static String username;
     private static Role role;
 
-//    public CurrentUser() {
-//    }
+    public CurrentUser() {
+    }
 //
 //    public CurrentUser(int userId, String password, String username){
 //        this.userID = userId;
