@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 public class Exception {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int Id;
     @JsonFormat(pattern="dd-MM-yyyy")
     private String endDate;
@@ -19,7 +19,7 @@ public class Exception {
     private String startDate;
     private String colorOption;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER,cascade ={ CascadeType.MERGE, CascadeType.PERSIST} )
     @JoinColumn(name="user_id")
     private User user;
 
@@ -33,14 +33,13 @@ public class Exception {
         this.endDate = endDate;
         this.startDate = startDate;
         this.colorOption = colorOption;
-        final int userId = UserSingleton.getInstance().getId();
-        this.user = new User(userId);
-
     }
 
-    public Exception(int userID) {
-        this.user = new User(userID);
+    public Exception(int id) {
+        this.Id = id;
     }
+
+
 
 //    public Exception(String endDate, String startDate, String colorOption) {
 //        this.endDate = endDate;
