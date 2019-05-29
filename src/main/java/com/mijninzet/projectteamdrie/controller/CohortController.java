@@ -1,17 +1,18 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
+import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
+import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.List;
 
 import java.time.LocalDate;
@@ -20,31 +21,38 @@ import java.time.temporal.ChronoUnit;
 
 @Controller
 @RequestMapping(value="/cohort")
+
+
 public class CohortController {
 
     @Autowired
     CohortRepository cohortRepository;
+    @Autowired
+    UserRepository userRepository;
 
     public static final int DAYS_IN_WEEK=7;
 
     @RequestMapping(value="/createCohort", method = RequestMethod.GET)
-    public String getAllCohorts(Model model, Cohort cohort){
+    public String getAllCohorts(Model model, User user){
+        User currentuser = userRepository.findUserById(user.getCurrentUserId());
         List<Cohort> cohorts = cohortRepository.findAll();
-        Cohort cohort1 = new Cohort();
+        Cohort cohort = new Cohort();
         model.addAttribute("allCohorts", cohorts);
+        model.addAttribute("cohort", cohort);
+        model.addAttribute("cohortId", cohort.getCohortId());
+        model.addAttribute("beginDate", cohort.getBeginDate());
+        model.addAttribute("endDate", cohort.getEndDate());
         return "createCohort";
     }
 
     @RequestMapping(value="/createCohort/new/", method= RequestMethod.POST)
     public String createCohort(@ModelAttribute ("cohort") Cohort cohort, Model model){
-        model.addAttribute("cohortId", cohort.getCohortId());
-        model.addAttribute("dateBegin", cohort.getBeginDate());
-        model.addAttribute("dateEnd", cohort.getEndDate());
-        System.out.println("uit model addattribute komt als begindate " + cohort.getBeginDate() + " en enddate " + cohort.getEndDate());
+        cohortRepository.save(cohort);
         return "createCohort";
     }
 
     //hier worden het aantal weken in een cohort bepaalt
+
     public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate){
         int cohortWeeks=0;
         //get nr off days in a cohort
