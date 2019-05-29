@@ -36,11 +36,14 @@ public class ExceptionServiceImp implements ExceptionService {
     @Override
     public void save(Exception e){
         exceptionRepository.save(e);
+
     }
     @Override
     public void deleteById(int theId){
         exceptionRepository.deleteById(theId);
     }
+
+
 
 
 }

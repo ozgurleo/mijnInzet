@@ -9,4 +9,5 @@ public interface ExceptionService {
     public Exception findById(int theId);
     public void save(Exception theException);
     public void deleteById(int theId);
+
 }

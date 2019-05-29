@@ -44,6 +44,8 @@ public class ExceptionController {
     public String saveException(@ModelAttribute("exception") Exception theException){
 
         exceptionService.save(theException);
+
+
         return ("redirect:/exception/list");
     }
 
