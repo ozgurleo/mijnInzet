@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
 import java.util.List;
@@ -47,12 +45,13 @@ public class CohortController {
         return "createCohort";
     }
 
-    @RequestMapping(value="/createCohort/new/", method=RequestMethod.POST)
+    @RequestMapping(value="/createCohort/new/", method= RequestMethod.POST)
     public String createCohort(@ModelAttribute ("cohort") Cohort cohort, Model model){
         cohortRepository.save(cohort);
         return "createCohort";
     }
 
+    //hier worden het aantal weken in een cohort bepaalt
 
     public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate){
         int cohortWeeks=0;
@@ -70,6 +69,12 @@ public class CohortController {
         return cohortWeeks;
     }
 
+
+    @GetMapping(value="/generateCohortSchedule")
+    public String generateCohortSchedule(){
+
+    return "generateCohortSchedule";
+    }
 
 
 }
