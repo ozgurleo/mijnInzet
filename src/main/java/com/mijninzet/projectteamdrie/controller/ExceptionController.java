@@ -49,5 +49,12 @@ public class ExceptionController {
         return ("redirect:/exception/list");
     }
 
+    @GetMapping("/deleteException")
+    public String deleteException(@RequestParam ("exceptionId") int theId){
+        exceptionService.deleteById(theId);
+        return ("redirect:/exception/list");
+
+    }
+
 
 }
