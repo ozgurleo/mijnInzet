@@ -40,7 +40,7 @@
                     <td th:text="${subject.estimatedHours}">-1</td>
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
                     <td>
-                        <form method="post" th:action="${subject.preference}" th:id="${subject.subjectId}">
+                        <form method="post" th:action="@{/TeacherPreferences/submitSubjects/}" th:id="${subject.subjectId}">
                             <input type="radio" name="preference" value="no"> ik geef dit vak liever niet.<br>
                             <input type="radio" name="preference" value="maybe"> ja, dit vak wil ik geven.<br>
                             <input type="radio" name="preference" value="yes"> ja, Ik heb het vak al eerder gegeven.

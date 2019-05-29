@@ -1,33 +1,36 @@
 package com.mijninzet.projectteamdrie.controller;
 
+import com.mijninzet.projectteamdrie.model.entity.Subject;
+import com.mijninzet.projectteamdrie.model.entity.SubjectPreference;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
+@RequestMapping(value = "/teacherPreferences")
 public class SubjectPreferencesController {
     @Autowired
     private SubjectRepository subjectRepository;
 
     @RequestMapping(value = "/showSubjects")
-    public String makeSubjectList(Model model) {
-        model.addAttribute("showSubjects", subjectRepository.findAll());
+    public String getSubjectList(Model model) {
+        List<Subject> subjectList = subjectRepository.findAll();
+        model.addAttribute("showSubjects", subjectList);
         return "teacherSubjectPreferences";
     }
 
-    @PostMapping(value = "/submitPreferences")
-    public String submitPreferences(HttpServletRequest request, ModelMap model) {
-        request.getParameter("subjectId");
-        request.getParameter("preference");
-
-        System.out.println(  "dit is een test voor buttonsubmit " +request.getParameter("preference") + " -"  );
-        model.addAttribute("teacherSubjectPreferences", subjectRepository.findAll());
+    @RequestMapping(value = "/submitSubjects", method = RequestMethod.POST)
+    public String submitPreferences(SubjectPreference subjectPreference, Model model) {
+//        model.addAttribute("userID", subjectPreference.getUserId());
+//        model.addAttribute("Subject", subjectPreference.getSubject());
+//        model.addAttribute("Preference", subjectPreference.getPreference());
+//
+//        subjectRepository.save(subjectPreference);
         return "teacherSubjectPreferences";
     }
 }
