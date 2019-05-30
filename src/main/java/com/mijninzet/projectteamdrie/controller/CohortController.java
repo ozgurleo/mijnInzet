@@ -1,7 +1,6 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
-import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.ITemplateEngine;
+import org.thymeleaf.context.WebContext;
 
-import javax.swing.*;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 
 
 @Controller
@@ -33,8 +39,7 @@ public class CohortController {
     public static final int DAYS_IN_WEEK=7;
 
     @RequestMapping(value="/createCohort", method = RequestMethod.GET)
-    public String getAllCohorts(Model model, User user){
-        User currentuser = userRepository.findUserById(user.getCurrentUserId());
+    public String getAllCohorts(Model model){
         List<Cohort> cohorts = cohortRepository.findAll();
         Cohort cohort = new Cohort();
         model.addAttribute("allCohorts", cohorts);
@@ -47,10 +52,13 @@ public class CohortController {
 
     @RequestMapping(value="/createCohort/new/", method= RequestMethod.POST)
     public String createCohort(@ModelAttribute ("cohort") Cohort cohort, Model model){
+
+        boolean exists = cohortRepository.existsById(cohort.getCohortId());
+        if(exists){
+            return "createCohortError";
+        }
         cohortRepository.save(cohort);
-        List<Cohort> cohorts = cohortRepository.findAll();
-        model.addAttribute("showCohorts", cohorts);
-        return "createCohort";
+        return ("redirect:/cohort/createCohort");
     }
 
     //hier wordt het aantal weken in een cohort bepaalt

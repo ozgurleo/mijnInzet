@@ -43,9 +43,9 @@
                 <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
 
                     <label class="form-group ">
-                        <label class="control-label"/> </label>
+                        <label class="control-label"/> Cohort </label>
                     <div class="input-group">
-                        <input type="number" placeholder="Selecteer cohort"
+                        <input type="number" id="cohortId" placeholder="Selecteer cohort"
                                th:field="*{cohortId}"/>
                     </div>
                     </label>
@@ -67,11 +67,15 @@
                     </label>
 <br><br>
                     <div class="form-group ">
-                        <button class="btn btn-success " name="submit" type="submit">
+                        <button class="btn btn-success" onclick="f()" name="submit" type="submit">
                             Submit
                         </button>
+                        <br>
+
                     </div>
+
                 </form>
+
             </div>
         </div>
     </div>
@@ -108,99 +112,18 @@
 </div>
 </div>
 
-<!--<div class="bootstrap-iso">-->
-<!--<div class="container-fluid">-->
-<!--<form action="#" th:action="@{cohort/createCohort/new/}" th:object="${cohort}" method="post">-->
 
-<!--<h3 style="color: blue">Geef nieuw cohort op : </h3>-->
-<!--<br>-->
+<script th:inline="javascript">
+var waarschuwing = [[${letOp}]];
+function f() {
+    if ([[${letOp}]] ){
+        console.log("let op waarschuwing is gevuld");
+        alert("Let op, dit cohort bestaat al");
+    }
 
-<!--<div class = "row">-->
-<!--<div class="col-md-2 col-sm-4 col-xs-6">-->
-<!--<tr>-->
-<!--<td><label th:text="id" />Cohort nummer </td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<td><input type="number" th:field="*{cohortId}" /></td>-->
-<!--</tr>-->
-<!--</div>-->
-<!--</div>-->
-<!--<br><br>-->
+}
 
-
-<!--<div class="row">-->
-<!--<div class="col-md-6 col-sm-6 col-xs-12">-->
-<!--<div class="form-group ">-->
-<!--<label class="control-label requiredField" for="beginDate">-->
-<!--Begindatum-->
-<!--<span class="asteriskField"></span>-->
-<!--</label>-->
-<!--<div class="input-group">-->
-<!--<div class="input-group-addon">-->
-<!--<i class="fa fa-calendar">-->
-<!--</i>-->
-<!--</div>-->
-<!--<input class="form-control" id="beginDate" name="beginDate" th:field="*{beginDate}" placeholder="DD/MM/YYYY"-->
-<!--type="text"/>-->
-<!--</div>-->
-<!--<div class="form-group ">-->
-<!--<label class="control-label " for="endDate">-->
-<!--Einddatum-->
-<!--</label>-->
-<!--<div class="input-group">-->
-<!--<div class="input-group-addon">-->
-<!--<i class="fa fa-calendar">-->
-<!--</i>-->
-<!--</div>-->
-<!--<input class="form-control" id="endDate" name="endDate" th:field="*{endDate}" placeholder="DD/MM/YYYY"-->
-<!--type="text"/>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<div>-->
-<!--<button class="btn btn-success " name="submit" type="submit">-->
-<!--Submit-->
-<!--</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</form>-->
-
-<!--</div>-->
-<!--</div>-->
-
-
-<!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-
-<!--&lt;!&ndash; Include Date Range Picker &ndash;&gt;-->
-<!--<script type="text/javascript"-->
-<!--src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>-->
-<!--<link rel="stylesheet"-->
-<!--href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
-
-<!--<script>-->
-<!--$(document).ready(function () {-->
-<!--var date_input_begin = $('input[name="beginDate"]'); //our date input has the name "date"-->
-<!--var date_input_end = $('input[name="endDate"]');-->
-<!--var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";-->
-<!--date_input_begin.datepicker({-->
-<!--format: 'dd/mm/yyyy',-->
-<!--container: container,-->
-<!--todayHighlight: true,-->
-<!--autoclose: true,-->
-<!--}),-->
-<!--date_input_end.datepicker({-->
-<!--format: 'dd/mm/yyyy',-->
-<!--container: container,-->
-<!--todayHighlight: true,-->
-<!--autoclose: true,-->
-<!--})-->
-<!--})-->
-<!--$('#sandbox-container .input-daterange').datepicker({});-->
-
-<!--</script>-->
+</script>
 
 
 </body>
