@@ -21,6 +21,8 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     Integer getIdLoggedInUser(@Param("email") String emailUser);
 
 
-    //User findByUsernameAndPassword(String username, String password);
+    //Brahim Code: get all teachers Names by Role=teacher
+    @Query(value="SELECT * FROM mijn_inzet.user WHERE user_id IN (select user_id FROM mijn_inzet.user_role WHERE role_id=2);", nativeQuery = true)
+    ArrayList<Object[]> getTeachers();
 
 }

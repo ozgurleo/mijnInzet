@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script language="javascript" src="cohortSchedule.js"></script>
 </head>
 
 
 <body>
+
+
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
     <form th:action="@{/logout}" method="post">
@@ -24,80 +27,103 @@
 
 <div class="table-responsive col-sm-10">
     <table id="makeSchedule" class="table table-bordered">
+        <form>
+        <div>
+            <select th:field="${cohorts}">
+                <option value="cohorts">COHORT</option>
+                <option th:each="cohort: ${cohorts}" th:value="${cohort[0]}" th:text="${cohort[0]}"></select>
+        </div>
+        </form>
 
         <tablehead>
             <thead class="thead-dark">
             <tr>
-                <th>begin</th>
-                <th>eind</th>
-                <th>MAANDAG</th>
-                <th>DINSDAG</th>
-                <th>WOENSDAG</th>
-                <th>DONDERDAG</th>
-                <th>VRIJDAG</th>
-                <th>CONSTRAINTS</th>
-                <th>OPSLAAN-buttons</th>
+                <th>Datum</th>
+                <th>Dag</th>
+                <th>Dagdeel</th>
+                <th>Planning</th>
+                <th>Beschikbaarheid</th>
+                <th>urenoverschreiding</th>
+                <th>Vakvoorkeur</th>
             </tr>
             </thead>
         </tablehead>
 
         <tablebody>
-        <tr>
-            <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}" method="post">
-                <td>
-                    <form th:name="begin" float="left">begin
-                </form>
-                </td>
+            <tr th:each="schedule:${cohortschedule}">
+                <form action="#" th:action="@{/generateCohortSchedule}" th:object="${schedule}" method="post">
+                    <td>
+                        <input type="${schedule.}" NAME ="daypart" id= "daypart" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDate()}" size="7" readonly/>
+                    </td>
 
-                <td>
-                    <form th:name="eind" float="left">eind
-                </form>
-                </td>
+                    <td>
+                        <input type="${schedule.}" NAME ="begin" id= "begin" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDay()}" size="9" readonly/>
+                    </td>
 
-                <td>
-                    <form th:name="maandag" float="left">maandag
-                </form>
-                </td>
+                    <td>
+                        <input type="${schedule.}" NAME ="end" id= "end" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" size="7" readonly/>
+                    </td>
 
-                <td>
-                    <form th:name="dinsdag"float="left">dinsdag
-                </form>
-                </td>
 
-                <td>
-                    <form th:name="woensdag" float="left">woensdag
-                </form>
-                </td>
 
-                <td><form th:name="donderdag"float="left">donderdag
-                </form>
-                </td>
+                    <td>
+                        <form >
 
-                <td><form th:name="vrijdag" float="left">vrijdag
-                </form>
-                </td>
+                            <div>
+                                <select th:field="${subjects}">
+                                    <option value="onderwerp">selecteer vak</option>
+                                    <option th:each="subject: ${subjects}" th:value="${subject[2]}" th:text="${subject[2]}"></select>
+                            </div>
 
-                <td>
-                    <form th:name="constraints" float="left">CONSTRAINTS
-                </form>
-                </td>
 
-                <td>
-                    <form th:name="button" clear="right">opslaan
-                </form>
-                </td>
-            </form>
+                            <div>
+                        <select th:field="${teachers}">
+                            <option value="docent">selecteer docent</option>
+                            <option th:each="teacher: ${teachers}" th:value="${teacher[3]}" th:text="${teacher[3]}">n</select>
+                           </div>
 
-        </tr>
+
+                            <div>
+                                <select th:field="${rooms}">
+                                    <option value="lokaal">selecteer lokaal</option>
+                                    <option th:each="room: ${rooms}" th:value="${room[1]}" th:text="${room[1]}"></select>
+                            </div>
+
+                        </form>
+
+                    </td>
+
+                    <td>
+                        <form th:name="beschikbaarheid">
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="uren">
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:name="voorkeur">
+                        </form>
+                    </td>
+                    <td>
+                        <div>
+                            <button type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
+                                    th:id="opslaan" th:form ="opslaan">opslaan</button>
+                        </div>
+                    </td>
+                </form>
+
+            </tr>
         </tablebody>
 
 
-</table>
+    </table>
 </div>
-
-
-
-
 
 
 </body>
