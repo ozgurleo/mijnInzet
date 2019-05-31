@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Docenten FTE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+    <!-- Navigatie-menu -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/helloTeacher">HOME</a>
+        <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
+        <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
+        <a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>
+        <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false" >MIJN INCIDENTEN</a>
+        <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+        </form>
+    </nav>
+
+
+    <div class="container">
+        <br><br>
+        <h3>Docent Uren Overzicht</h3>
+        <hr>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>FTE</th>
+                <th>Beschikbare onderwijsuren</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+                <td th:text="${voornaam}"/>
+                <td th:text="${achternaam}"/>
+                <td th:text="${fte}"/>
+                <td th:text="${beschikbareUren}"/>
+            </tr>
+
+                    <!--<a th:href="@{/users/showFormForUpdate(userId=${user.id})}" class="btn btn-info btn-sm">Update</a>-->
+                    <!--<a th:href="@{/users/delete(userId=${user.id})}" class="btn btn-danger btn-sm" onclick="if(!(confirm('Are you sure you want to delete this user?')) ) return false">Delete</a>-->
+                <!--</td>-->
+            </tbody>
+        </table>
+        <hr>
+        <a th:href="@{/helloTeacher}" >Back to Home</a>
+    </div>
+
+</body>
+</html>

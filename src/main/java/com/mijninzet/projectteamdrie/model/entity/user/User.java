@@ -49,6 +49,10 @@ public class User {
     private String status;
 
 
+    @Column(name="fte")
+    private Double fte = 1.0;
+
+
     @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -129,13 +133,17 @@ public class User {
         this.roles = roles;
     }
 
+    public Double getFte() {
+        return fte;
+    }
 
-
-
+    public void setFte(Double fte) {
+        this.fte = fte;
+    }
 
     @Override
     public String toString() {
-        return  name + " " + lastName + "userid :" +id;
+        return  name + " " + lastName ;
     }
 }
 
