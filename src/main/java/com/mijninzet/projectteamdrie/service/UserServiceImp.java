@@ -22,6 +22,9 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
 
+   static double ONE_FTE_IN_HOUR_ = 1658;
+
+
     @Override
     public void saveUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
@@ -93,6 +96,22 @@ public class UserServiceImp implements UserService {
         }
         return theUser;
     }
+
+
+
+    //calculate total available teaching hours of teacher (percentage of fte in hours minus 20% overhead)
+    public double calculateTotalAvailableHours(int userId) {
+        double totalhoursMinusOverhead;
+
+//        double percentage = userRepository.getOne(userId).getFte();
+        double totalhours =  ONE_FTE_IN_HOUR_* 1.0;
+        System.out.println("totalhours in methode calculatetotalavailablehours is " + totalhours);
+        totalhoursMinusOverhead = totalhours * 0.8;
+
+        return totalhoursMinusOverhead;
+    }
+
+
 
     public Optional<User> getUser(int id) {
         return userRepository.findById(id);

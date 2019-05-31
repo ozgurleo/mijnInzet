@@ -12,10 +12,11 @@
 
 <!-- Navigatie-menu -->
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloTeacher">MIJN INZET HOME</a>
+    <a class="navbar-brand" href="/helloTeacher">HOME</a>
     <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
     <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
     <a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>
+    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
     <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false" >MIJN INCIDENTEN</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
     <form th:action="@{/logout}" method="post">
@@ -34,22 +35,26 @@
             <div class="jumbotron">
             <h1 class="masthead-brand">Mijn Inzet</h1>
             </div>
-            <nav class="nav nav-masthead justify-content-center">
-                <!--<a class="nav-link active" href="#">link</a>-->
-                <!--<a class="nav-link" href="#">link</a>-->
-                <!--<a class="nav-link" href="#">link</a>-->
-            </nav>
         </div>
     </header>
 
     <main role="main" class="inner cover">
         <h2 class="cover-heading">Welkom </h2>
-        <span th:text="${user}"></span>
+        <br>
+        <h3 STYLE="color: blue"><span th:text="${user.toString()}"></span></h3>
+        <br>
         <h3>Je bent ingelogd als leraar</h3>
 
-        <p class="lead">Je kunt hier je roostervoorkeuren opgeven </p>
+        <nav class="nav nav-masthead justify-content-center">
+            <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+        </nav>
+        <br>
+
+        <p class="lead">Bekijk direct je uren overzicht </p>
         <p class="lead">
-            <a href="/schedule" class="btn btn-lg btn-primary">Roostervoorkeuren </a>
+            <a href="/users/teacherFTE" class="btn btn-lg btn-primary">Mijn uren overzicht </a>
         </p>
     </main>
 
