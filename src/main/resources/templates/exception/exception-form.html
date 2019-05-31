@@ -23,6 +23,7 @@
 
     <form action="#" th:action="@{/exception/save}"
           th:object="${exception}" method="POST">
+
         <input type="hidden" th:field="*{id}" />
 
         <input type="date" id="startdate" th:field="*{startDate}"
