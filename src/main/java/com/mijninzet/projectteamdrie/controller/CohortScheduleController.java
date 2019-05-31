@@ -56,6 +56,7 @@ public class CohortScheduleController {
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
+        model.addAttribute("preferences",subjectRepo.getPreferences());
         model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
         model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
 
@@ -65,7 +66,7 @@ public class CohortScheduleController {
 
     @PostMapping(value="/generateCohortSchedule")
     public String insertSchedule(HttpServletRequest request, Model model){
-        System.out.println("POST METHOD IS AANGEROEPEN; DIT IS VOOR DE HET OPSLAAN VD COHORT");
+        System.out.println("POST METHOD IS AANGEROEPEN:");
         System.out.println("-------------------------------------------------------------");
         System.out.println("-------------------------------------------------------------");
         System.out.println("daypart = :" + request.getParameter("daypart"));
@@ -78,8 +79,8 @@ public class CohortScheduleController {
         System.out.println("-------------------------------------------------------------");
         System.out.println("-------------------------------------------------------------");
 
+        // Brahim code:  tbv checken welke parameterNamen met POST worden verstuurd:
 //        Enumeration paramNames = request.getParameterNames();
-//
 //        while(paramNames.hasMoreElements()) {
 //            String paramName = (String)paramNames.nextElement();
 //            System.out.println("<tr><td>" + paramName + "</td>\n<td>");
@@ -103,27 +104,17 @@ public class CohortScheduleController {
 //            }
 //        }
 //        System.out.println("</tr>\n</table>\n</body></html>");
-
-
+        // End code
 
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
+        model.addAttribute("preferences",subjectRepo.getPreferences());
         model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
         model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
         System.out.println("DIT IS NA HET OPHALEN VD LASTCOHORTSCHEDULE!!!");
         return "generateCohortSchedule";
     }
 
- //ORIGINEEL IS HIERONDER werkt tot aan save dan error
-//    @PostMapping(value="/makeSchedule/cohort")
-//    public String insertSchedule(@ModelAttribute CohortSchedule cohortschedule, Model model){
-//        System.out.println("POST METHOD IS AANGEROEPEN; DIT IS VOOR DE HET OPSLAAN VD COHORT");
-//        cohortScheduleRepo.save(cohortschedule);
-//
-//        System.out.println("DIT IS NA HET OPSLAAN VD COHORT!!!");
-//        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
-//        return "generateCohortSchedule";
-//    }
-
+ 
 }
