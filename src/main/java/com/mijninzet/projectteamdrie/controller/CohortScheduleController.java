@@ -50,20 +50,18 @@ public class CohortScheduleController {
     }
 
     public String checkSubjectPreference(int teacherId,int subjectId){
-
-
         return "subjectNOK";
     }
 
     public String checkAvailability(int teacherId,String day,String dayPart){
-
-
         return "availabilityNOK";
     }
     public String checkTeacherHours(int teacherId,int subjectId){
-
-
         return "hoursNOK";
+    }
+
+    public String checkCohortOverlap(int teacherId,LocalDate datePlanned, String dayPart){
+        return "overlapNOK";
     }
 
 
