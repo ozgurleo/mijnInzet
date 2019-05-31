@@ -24,19 +24,20 @@
 <br>
 <br>
 
-<div class="table responsive">
+<div class="container">
     <table id="generateSchedule" class="table table-bordered">
 
         <tablehead>
             <thead class="thead-dark">
-            <tr>
-                <th>Cohort</th>
-                <th>DATUM</th>
-                <th>DAG</th>
-                <th>DAGDEEL</th>
-                <th>PLANNING</th>
-                <th>CONFLICT</th>
-                <th></th>
+            <tr class="row m-0">
+                <th class="d-inline-block col-1">Cohort</th>
+                <th class="d-inline-block col-2">DATUM</th>
+                <th class="d-inline-block col-1">DAG</th>
+                <th class="d-inline-block col-1">DAGDEEL</th>
+                <th class="d-inline-block col-3">PLANNING</th>
+                <th class="d-inline-block col-2">CONFLICT</th>
+                <th class="d-inline-block col-1">       </th>
+                <th class="d-inline-block col-1">       </th>
 
             </tr>
             </thead>
@@ -44,34 +45,34 @@
 
 
         <tablebody>
-            <tr th:each="schedule:${cohortschedule}">
+            <tr class="row m-0" th:each="schedule:${cohortschedule}">
                 <form th:id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
                       th:object="${cohortschedule}"
                       method="post">
-                    <td>
+                    <td class="d-inline-block col-1">
                         <input type="${schedule}" NAME="cohort" id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
 
 
-                    <td>
+                    <td class="d-inline-block col-2">
                         <input type="${schedule}" NAME="date" id="date" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
 
-                    <td>
+                    <td class="d-inline-block col-1">
                         <input type="${schedule}" NAME="day" id="day" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
                     </td>
 
-                    <td>
+                    <td class="d-inline-block col-1">
                         <input type="${schedule}" NAME="daypart" id="daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
                                readonly/>
                     </td>
 
-                    <td>
+                    <td class="d-inline-block col-3">
                         <form>
 
                             <div>
@@ -102,7 +103,7 @@
 
                     </td>
 
-                    <td>
+                    <td class="d-inline-block col-2">
                         <div>
                             <form th:name="constraint">
                             </form>
@@ -110,7 +111,14 @@
                     </td>
 
 
-                    <td>
+                    <td class="d-inline-block col-1">
+                        <div>
+                        <button type="submit" class="btn btn-info" th:value="check" name="check"
+                                th:id="${schedule.getId()}" th:form="${schedule.getId()}">check
+                        </button>
+                    </div>
+                    </td>
+                    <<td class="d-inline-block col-1">
                         <div>
                             <button type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
                                     th:id="${schedule.getId()}" th:form="${schedule.getId()}">opslaan

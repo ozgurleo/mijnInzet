@@ -22,5 +22,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     @Query(value="SELECT * FROM mijn_inzet.temp_subject_preference;", nativeQuery = true)
     ArrayList<Object[]> getPreferences();
 
-
+    //Brahim Code: get teacher with single teacher preference for one subject
+    @Query(value="SELECT * FROM mijn_inzet.temp_subject_preference;", nativeQuery = true)
+    ArrayList<Object[]> getSingleTeacherSubjectPref();
 }

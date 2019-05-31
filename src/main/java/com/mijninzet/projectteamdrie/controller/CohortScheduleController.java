@@ -49,6 +49,23 @@ public class CohortScheduleController {
         return cohortWeeks;
     }
 
+    public String checkSubjectPreference(int teacherId,int subjectId){
+
+
+        return "subjectNOK";
+    }
+
+    public String checkAvailability(int teacherId,String day,String dayPart){
+
+
+        return "availabilityNOK";
+    }
+    public String checkTeacherHours(int teacherId,int subjectId){
+
+
+        return "hoursNOK";
+    }
+
 
     @GetMapping(value="/generateCohortSchedule")
     public String generateCohortSchedule(Model model){
@@ -75,7 +92,8 @@ public class CohortScheduleController {
         System.out.println("onderwerp = : " + request.getParameter("subject"));
         System.out.println("docent = : " + request.getParameter("user"));
         System.out.println("lokaal = : " + request.getParameter("classRoom"));
-
+        System.out.println("check = : " + request.getParameter("check"));
+        System.out.println("opslaan = : " + request.getParameter("opslaan"));
         System.out.println("-------------------------------------------------------------");
         System.out.println("-------------------------------------------------------------");
 
@@ -116,5 +134,5 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
- 
+
 }
