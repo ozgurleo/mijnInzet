@@ -51,31 +51,29 @@
         <tbody>
         <tr th:each="temSchedule:${schedule}">
             <th scope="row">Ochtend</th>
-            <td th:class="${temSchedule.getMaandagOchtend()}">...</td>
-            <td th:class="${temSchedule.getDinsdagOchtend()}">...</td>
-            <td th:class="${temSchedule.getWoensdagOchtend()}">...</td>
-            <td th:class="${temSchedule.getDonderdagOchtend()}">...</td>
-            <td th:class="${temSchedule.getVrijdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getMaandagOchtend()}" th:text="${temSchedule.getMaandagOchtend()}">...</td>
+            <td th:class="${temSchedule.getDinsdagOchtend()}" th:text="${temSchedule.getDinsdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getWoensdagOchtend()}" th:text="${temSchedule.getWoensdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getDonderdagOchtend()}" th:text="${temSchedule.getDonderdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getVrijdagOchtend()}" th:text="${temSchedule.getVrijdagOchtend()}">...</td>
         </tr>
         <tr th:each="temSchedule:${schedule}">
             <th scope="row">Middag</th>
-            <td th:class="${temSchedule.getMaandagMiddag()}">...</td>
-            <td th:class="${temSchedule.getDinsdagMiddag()}">...</td>
-            <td th:class="${temSchedule.getWoensdagMiddag()}">...</td>
-            <td th:class="${temSchedule.getDonderdagMiddag()}">...</td>
-            <td th:class="${temSchedule.getVrijdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getMaandagMiddag()}" th:text="${temSchedule.getMaandagMiddag()}">...</td>
+            <td th:class="${temSchedule.getDinsdagMiddag()}" th:text="${temSchedule.getDinsdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getWoensdagMiddag()}" th:text="${temSchedule.getWoensdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getDonderdagMiddag()}" th:text="${temSchedule.getDonderdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getVrijdagMiddag()}" th:text="${temSchedule.getVrijdagMiddag()}">...</td>
 
         </tr>
         <tr th:each="temSchedule:${schedule}">
             <th scope="row">Avonds</th>
-            <td th:class="${temSchedule.getMaandagAvond()}">...</td>
-            <td th:class="${temSchedule.getDinsdagAvond()}">...</td>
-            <td th:class="${temSchedule.getWoensdagAvond()}">...</td>
-            <td th:class="${temSchedule.getDonderdagAvond()}">...</td>
-            <td th:class="${temSchedule.getVrijdagAvond()}">...</td>
-
+            <td th:class="${temSchedule.getMaandagAvond()}" th:text="${temSchedule.getMaandagAvond()}">...</td>
+            <td th:class="${temSchedule.getDinsdagAvond()}" th:text="${temSchedule.getDinsdagAvond()}">...</td>
+            <td th:class="${temSchedule.getWoensdagAvond()}" th:text="${temSchedule.getWoensdagAvond()}">...</td>
+            <td th:class="${temSchedule.getDonderdagAvond()}" th:text="${temSchedule.getDonderdagAvond()}">...</td>
+            <td th:class="${temSchedule.getVrijdagAvond()}" th:text="${temSchedule.getVrijdagAvond()}">...</td>
         </tr>
-
         </tbody>
     </table>
 </div>

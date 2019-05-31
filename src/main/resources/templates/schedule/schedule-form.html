@@ -23,24 +23,93 @@
 
     <form action="#" th:action="@{/schedule/save}"
           th:object="${schedule}" method="POST">
-        <input type="hidden" th:field="*{id}" />
-        <input type="hidden" th:field="*{user.id}"/>
+        <div class="container">
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="input-group mb-3">
+                    <input type="hidden" th:field="*{user.id}" >
+                    <input type="hidden" th:field="*{id}" >
+                    <input type="text" th:field="*{cohort}" placeholder="Cohort">
+                </div>
+                <table class="table table-dark ">
 
-        <input type="date" id="startdate" th:field="*{startDate}"
-               class="form-control mb-4 col-4" placeholder="Start Date">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Maandag</th>
+                        <th scope="col">Dinsadag</th>
+                        <th scope="col">Woensdag</th>
+                        <th scope="col">Donderdadag</th>
+                        <th scope="col">Vrijdag</th>
+                    </tr>
+                    </thead>
 
-        <input type="date" id="enddate" th:field="*{endDate}"
-               class="form-control mb-4 col-4" placeholder="End Date">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Ochtend</th>
+                        <td>
+                            <input type="text" th:field="*{maandagOchtend}" name="ColorOption" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{dinsdagOchtend}" name="ColorOption" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{woensdagOchtend}" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{donderdagOchtend}" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{vrijdagOchtend}"  placeholder="Beschikbaarheid?">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Middag</th>
+                        <td>
+                            <input type="text" th:field="*{maandagMiddag}"  placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{dinsdagMiddag}" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{woensdagMiddag}" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{donderdagMiddag}"  placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{vrijdagMiddag}" placeholder="Beschikbaarheid?">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Avond</th>
+                        <td>
+                            <input type="text" th:field="*{maandagAvond}" placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{dinsdagAvond}"  placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{woensdagAvond}"  placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{donderdagAvond}"  placeholder="Beschikbaarheid?">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{vrijdagAvond}"  placeholder="Beschikbaarheid?">
+                        </td>
+                    </tr>
 
-        <input type="text" th:field="*{colorOption}"
-               class="form-control mb-4 col-4" placeholder="Color">
-
-        <button type="submit" class="btn btn-info col-2">Save</button>
-
+                    </tbody>
+                </table>
+                <P>
+                    <INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1">
+                </P>
+            </div>
+        </div>
     </form>
 
     <hr>
-    <a th:href="@{/exception/list}">Back to Exception List</a>
+    <a th:href="@{/helloTeacher}">Terug naar Main Menu</a>
 
 </div>
 </body>

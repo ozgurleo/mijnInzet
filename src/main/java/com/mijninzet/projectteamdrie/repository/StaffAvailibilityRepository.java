@@ -16,6 +16,7 @@ import java.util.List;
 public interface StaffAvailibilityRepository extends CrudRepository<StaffAvailability,Integer> {
 
     List<StaffAvailability> findByUser_IdAndAndCohort(int id,String cohort);
+    StaffAvailability findById(int id);
 
 //    List<StaffAvailability> findByUserId(int id);
 //
@@ -25,7 +26,7 @@ public interface StaffAvailibilityRepository extends CrudRepository<StaffAvailab
 //
 //    List<StaffAvailability> findAllByUserIdAndCohort(int id, int cohort);
 //
-//    StaffAvailability findById(int id);
+
 
 }
 

@@ -1,4 +1,5 @@
 package com.mijninzet.projectteamdrie.model.entity;
+import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import javax.persistence.*;
 
@@ -31,7 +32,8 @@ public class StaffAvailability {
     private User user;
 
     public StaffAvailability() {
-
+        final int userId = UserSingleton.getInstance().getId();
+        this.user = new User(userId);
     }
 
     public StaffAvailability(String maandagOchtend, String maandagMiddag, String maandagAvond, String dinsdagOchtend,

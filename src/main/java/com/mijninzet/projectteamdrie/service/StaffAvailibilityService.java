@@ -33,6 +33,12 @@ public class StaffAvailibilityService {
         return staffAvailabilities;
     }
 
+    public StaffAvailability findById(int id){
+        StaffAvailability sa = new StaffAvailability();
+        sa=staffAvailibilityRepository.findById(id);
+        return sa;
+    }
+
 //    public List<StaffAvailability> getAllStaffAvailibility(int userId){
 //        ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
 //        staffAvailibilityRepository.findByUserId(userId)
