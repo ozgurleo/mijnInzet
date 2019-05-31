@@ -11,10 +11,10 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloTeacher">MIJN INZET HOME</a>
+    <a class="navbar-brand" href="/helloAdmin">MIJN INZET HOME</a>
     <!--<a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
-    <!--<a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>-->
-    <a class="nav-link" href="/register">BEHEER GEBRUIKERS</a>
+    <a class="nav-link" href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a>
+    <a class="nav-link" href="/register">NIEUWE GEBRUIKER</a>
     <a class ="nav-link" href="/cohort/createCohort">BEHEER COHORTEN</a>
     <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
     <form th:action="@{/logout}" method="post">
@@ -46,14 +46,10 @@
         <span th:text="${user}"></span>
         <h3>Je bent ingelogd als administrator</h3>
 
-        <p class="lead">Je kunt hier een nieuw cohort aanmaken </p>
-        <p class="lead">
-            <a href="/cohort/createCohort" class="btn btn-lg btn-primary">Nieuw Cohort </a>
-        </p>
 
-        <p class="lead">Je kunt hier gebruikers beheren </p>
+        <p class="lead">Je kunt hier gebruikers zien </p>
         <p class="lead">
-            <a href="/register" class="btn btn-lg btn-primary">Beheer gebruikers </a>
+            <a href="/users/list" class="btn btn-lg btn-primary">Overzicht gebruikers </a>
         </p>
     </main>
 

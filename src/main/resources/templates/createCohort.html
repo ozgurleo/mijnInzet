@@ -38,14 +38,14 @@
             <div class="col-sm-12">
                 <br>
                 <h3>Geef nieuw cohort op  </h3>
-                <br>
+                <hr>
 
                 <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
 
                     <label class="form-group ">
                         <label class="control-label"/> Cohort </label>
                     <div class="input-group">
-                        <input type="number" id="cohortId" placeholder="Selecteer cohort"
+                        <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"
                                th:field="*{cohortId}"/>
                     </div>
                     </label>
@@ -53,7 +53,7 @@
                     <label class="form-group  ">
                         <label class="control-label" th:text="begindatum">Begindatum</label>
                         <div class="input-group">
-                            <input type="date" id="beginDate" name="beginDate"
+                            <input type="date" class="form-control mb-4 col-12" id="beginDate" name="beginDate"
                                    placeholder="MM/DD/YYY" th:field="*{beginDate}"/>
                         </div>
                     </label>
@@ -61,13 +61,12 @@
                     <label class="form-group  ">
                         <label class="control-label" th:text="einddatum">Einddatum</label>
                         <div class="input-group">
-                            <input type="date" id="ëndDate" name="ëndDate"
+                            <input type="date" class="form-control mb-4 col-12" id="ëndDate" name="ëndDate"
                                    placeholder="MM/DD/YYY" th:field="*{endDate}"/>
                         </div>
                     </label>
-<br><br>
                     <div class="form-group ">
-                        <button class="btn btn-success" onclick="f()" name="submit" type="submit">
+                        <button class="btn btn-succes col-2" onclick="f()" name="submit" type="submit">
                             Submit
                         </button>
                         <br>
