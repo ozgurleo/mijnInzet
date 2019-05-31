@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Employee Directory</title><script type="text/javascript">
+    $(function(){
+
+    })
+</script>
+    <style>
+        .ROOD { background:red; }
+        .GEEL{ background:yellow; }
+        .GROEN { background:green; }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Employee Directory</h3>
+    <hr>
+    <a th:href="@{/schedule/addSchedule}"
+       class="btn btn-primary btn-sm mb-3">
+        Rooster Toevoegen
+    </a>
+
+    <table class="table table-dark ">
+
+
+        <thead>
+        <tr >
+            <th scope="col">#</th>
+            <th scope="col">Maandag</th>
+            <th scope="col">Dinsadag</th>
+            <th scope="col">Woensdag</th>
+            <th scope="col">Donderdadag</th>
+            <th scope="col">Vrijdag</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="temSchedule:${schedule}">
+            <th scope="row">Ochtend</th>
+            <td th:class="${temSchedule.getMaandagOchtend()}">...</td>
+            <td th:class="${temSchedule.getDinsdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getWoensdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getDonderdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getVrijdagOchtend()}">...</td>
+        </tr>
+        <tr th:each="temSchedule:${schedule}">
+            <th scope="row">Middag</th>
+            <td th:class="${temSchedule.getMaandagMiddag()}">...</td>
+            <td th:class="${temSchedule.getDinsdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getWoensdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getDonderdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getVrijdagMiddag()}">...</td>
+
+        </tr>
+        <tr th:each="temSchedule:${schedule}">
+            <th scope="row">Avonds</th>
+            <td th:class="${temSchedule.getMaandagAvond()}">...</td>
+            <td th:class="${temSchedule.getDinsdagAvond()}">...</td>
+            <td th:class="${temSchedule.getWoensdagAvond()}">...</td>
+            <td th:class="${temSchedule.getDonderdagAvond()}">...</td>
+            <td th:class="${temSchedule.getVrijdagAvond()}">...</td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
