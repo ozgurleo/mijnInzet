@@ -11,9 +11,10 @@ import java.time.LocalDate;
 public class CohortSchedule {
    @Id
    private int id;
-   private LocalDate date;
    private String day;
    private String daypart;
+   private LocalDate date;
+
 
    @ManyToOne
    User user;
@@ -32,12 +33,12 @@ public class CohortSchedule {
 
    public CohortSchedule(int id, LocalDate date, String day, String daypart, User user, Subject subject, String classRoom, Cohort cohort) {
       this.id = id;
-      this.date = date;
+      this.classRoom = classRoom;
       this.day = day;
       this.daypart = daypart;
+      this.date = date;
       this.user = user;
       this.subject = subject;
-      this.classRoom = classRoom;
       this.cohort = cohort;
    }
 
