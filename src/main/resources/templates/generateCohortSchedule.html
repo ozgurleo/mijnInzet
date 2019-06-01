@@ -10,10 +10,49 @@
 
     <script th:inline="javascript">
 
-       var myCheck= [[${checkSubject}]];
+       var checkSubject= [[${checkSubject}]];
+       var checkAvail= [[${checkAvailbility}]];
+       var checkOverlap= [[${checkSubject}]];
+       var checkHours= [[${checkSubject}]];
+
+       var subjectToSet=[[${selectedSubject}]];
+
+       function subjectSelect(c){
+           for(var i = 0;i < document.getElementById("subjectMenu").length;i++){
+               if(document.getElementById("subjectMenu").options[i].value == c ){
+                   document.getElementById("subjectMenu").selected = i;
+               }
+           }
+       }
+
+       function subjectSelect(c){
+           for(var i = 0;i < document.getElementById("teacherMenu").length;i++){
+               if(document.getElementById("teacherMenu").options[i].value == c ){
+                   document.getElementById("teacherMenu").selected = i;
+               }
+           }
+       }
+
+       function subjectSelect(){
+           for(var i = 0;i < document.getElementById("roomMenu").length;i++){
+               if(document.getElementById("roomMenu").options[i].value == c ){
+                   document.getElementById("roomMenu").selected = i;
+               }
+           }
+       }
+
 
         function insertText () {
-            document.getElementById('td1').innerHTML=myCheck;
+            if (checkSubject !== null) {
+            document.getElementById('td1').style.background = "red";
+            document.getElementById('td1').innerHTML = checkSubject;
+            subjectSelect(subjectToSet);
+
+
+
+
+
+            }
         }
     </script>
 
@@ -86,7 +125,7 @@
                         <form>
 
                             <div>
-                                <select th:id="${schedule.getId()}" class="subject" name="subject">
+                                <select th:id="${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
 
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[2]}" th:text="${subject[2]}">
@@ -95,7 +134,7 @@
 
 
                             <div>
-                                <select th:id="${schedule.getId()}" class="user" name="user">
+                                <select th:id="${schedule.getId()}" id="teacherMenu" class="user" name="teacherMenu">
                                     <option>selecteer docent</option>
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[3]}" th:text="${teacher[3]}">
                                 </select>
@@ -103,7 +142,7 @@
 
 
                             <div>
-                                <select th:id="${schedule.getId()}" class="classRoom" name="classRoom">
+                                <select th:id="${schedule.getId()}" id="roomMenu" class="classRoom" name="roomMenu">
                                     <option>selecteer lokaal</option>
                                     <option th:each="room: ${rooms}" th:value="${room[1]}" th:text="${room[1]}">
                                 </select>
