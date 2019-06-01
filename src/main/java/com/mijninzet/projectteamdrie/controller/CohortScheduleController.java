@@ -6,6 +6,7 @@ import com.mijninzet.projectteamdrie.repository.CohortRepository;
 import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,8 +130,10 @@ public class CohortScheduleController {
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate date = LocalDate.of(year, month, day);
+        String selectedSubject=request.getParameter("subjectMenu");
 
-        model.addAttribute("selectedSubject",request.getParameter("subjectMenu"));
+        
+        model.addAttribute("selectedSubject",selectedSubject);
 
         model.addAttribute("checkSubject", checkSubjectPreference(1, 1));
         model.addAttribute("checkAvailbility", checkAvailability(1, "monday", "ochtend"));

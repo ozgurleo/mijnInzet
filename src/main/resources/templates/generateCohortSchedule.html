@@ -16,50 +16,30 @@
        var checkHours= [[${checkSubject}]];
 
        var subjectToSet=[[${selectedSubject}]];
+console.log("DIT IS DE WAARDE VAN SELECTEDSUBJECT");
+console.log(subjectToSet);
 
-       function subjectSelect(c){
-           for(var i = 0;i < document.getElementById("subjectMenu").length;i++){
-               if(document.getElementById("subjectMenu").options[i].value == c ){
-                   document.getElementById("subjectMenu").selected = i;
-               }
-           }
-       }
+       function SelectElement(id, valueToSelect){
+           var element = document.getElementById(id);
+           element.value = valueToSelect;
+           console.log(valueToSelect);}
 
-       function subjectSelect(c){
-           for(var i = 0;i < document.getElementById("teacherMenu").length;i++){
-               if(document.getElementById("teacherMenu").options[i].value == c ){
-                   document.getElementById("teacherMenu").selected = i;
-               }
-           }
-       }
-
-       function subjectSelect(){
-           for(var i = 0;i < document.getElementById("roomMenu").length;i++){
-               if(document.getElementById("roomMenu").options[i].value == c ){
-                   document.getElementById("roomMenu").selected = i;
-               }
-           }
+       function insertText(){
+           if (checkSubject !== null) {
+               document.getElementById('td1').style.background = "red";
+               document.getElementById('td1').innerHTML = checkSubject;
+                     }
+           SelectElement("subjectMenu", subjectToSet);
        }
 
 
-        function insertText () {
-            if (checkSubject !== null) {
-            document.getElementById('td1').style.background = "red";
-            document.getElementById('td1').innerHTML = checkSubject;
-            subjectSelect(subjectToSet);
 
-
-
-
-
-            }
-        }
     </script>
 
     </head>
 
 
-    <body onload="insertText()">
+    <body onload= "insertText()">
 
 
     <nav class="navbar navbar-dark bg-dark">
@@ -128,7 +108,7 @@
                                 <select th:id="${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
 
                                     <option>selecteer vak</option>
-                                    <option th:each="subject: ${subjects}" th:value="${subject[2]}" th:text="${subject[2]}">
+                                    <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
                                 </select>
                             </div>
 
