@@ -6,18 +6,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script language="javascript" src="cohortSchedule.js"></script>
-</head>
 
 
-<body>
+    <script th:inline="javascript">
+
+       var myCheck= [[${checkSubject}]];
+
+        function insertText () {
+            document.getElementById('td1').innerHTML=myCheck;
+        }
+    </script>
+
+    </head>
 
 
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    <body onload="insertText()">
+
+
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </form>
 </nav>
 
@@ -103,7 +113,7 @@
 
                     </td>
 
-                    <td class="d-inline-block col-2">
+                    <td id="td1" class="d-inline-block col-2">
                         <div>
                             <form th:name="constraint">
                             </form>
@@ -132,5 +142,6 @@
 
     </table>
 </div>
+
 </body>
 </html>

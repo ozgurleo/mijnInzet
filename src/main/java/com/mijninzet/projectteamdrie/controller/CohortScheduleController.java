@@ -52,14 +52,12 @@ public class CohortScheduleController {
     public String checkSubjectPreference(int teacherId,int subjectId){
         return "subjectNOK";
     }
-
     public String checkAvailability(int teacherId,String day,String dayPart){
         return "availabilityNOK";
     }
     public String checkTeacherHours(int teacherId,int subjectId){
         return "hoursNOK";
     }
-
     public String checkCohortOverlap(int teacherId,LocalDate datePlanned, String dayPart){
         return "overlapNOK";
     }
@@ -67,13 +65,14 @@ public class CohortScheduleController {
 
     @GetMapping(value="/generateCohortSchedule")
     public String generateCohortSchedule(Model model){
-
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
         model.addAttribute("rooms", subjectRepo.getRooms());
         model.addAttribute("preferences",subjectRepo.getPreferences());
         model.addAttribute("cohorts",cohortScheduleRepo.getCohorts());
         model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
+
+
 
         return "generateCohortSchedule";
     }
@@ -121,6 +120,14 @@ public class CohortScheduleController {
 //        }
 //        System.out.println("</tr>\n</table>\n</body></html>");
         // End code
+
+
+        model.addAttribute("checkSubject", checkSubjectPreference(1,1));
+        model.addAttribute("checkAvailbility", checkAvailability(1,"monday","ochtend"));
+        model.addAttribute("checkSubject", checkCohortOverlap(1,LocalDate date,"ochtend"));
+        model.addAttribute("checkHours", checkTeacherHours(1,1));
+
+
 
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
