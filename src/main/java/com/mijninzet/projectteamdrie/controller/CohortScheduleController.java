@@ -33,15 +33,25 @@ public class CohortScheduleController {
 
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
+        String output="NO OUTPUT VALUE";
+        int preference= subjectRepo.getSingleTeacherSubjectPref(teacherId,subjectId);
 
-        return "subjectNOK";
+        if(preference==1 ){
+            output="ok";
+
+        }else if(preference==2){
+            output="partly ok";
+        }else if(preference==3){
+            output = "NO";
+        }
+        return output;
     }
 
     public String checkAvailability(int teacherId, String day, String dayPart) {
         return "availabilityNOK";
     }
 
-    public String checkTeacherHours(int teacherId, int subjectId) {
+    public String checkTeacherHours(int teacherId) {
         return "hoursNOK";
     }
 
@@ -142,10 +152,10 @@ public class CohortScheduleController {
 
 
         //add result of contraints check to the modelAttribute
-        model.addAttribute("checkSubject", checkSubjectPreference(1, 1));
-        model.addAttribute("checkAvailbility", checkAvailability(1, "monday", "ochtend"));
-        model.addAttribute("checkOverlap", checkCohortOverlap(1, date, "ochtend"));
-        model.addAttribute("checkHours", checkTeacherHours(1, 1));
+        model.addAttribute("checkSubject", checkSubjectPreference(6, 2));
+        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend"));
+        model.addAttribute("checkOverlap", checkCohortOverlap(6, date, "ochtend"));
+        model.addAttribute("checkHours", checkTeacherHours(6));
 
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());

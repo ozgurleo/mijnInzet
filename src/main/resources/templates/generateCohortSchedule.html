@@ -20,6 +20,7 @@
        var roomToSet=[[${selectedRoom}]];
 
 
+
        function SelectElement(id, valueToSelect){
            document.getElementById(id).value =valueToSelect;
            console.log(document.getElementById(id).value);   }
@@ -29,7 +30,7 @@
                document.getElementById('td1').style.background = "red";
                document.getElementById('td1').innerHTML = checkSubject;
                      }
-           SelectElement("subjectSelectMenu", subjectToSet);
+           SelectElement("'subjectSelectMenu' + ${schedule.getId()}", subjectToSet);
            SelectElement("teacherSelectMenu", teacherToSet);
            SelectElement("roomSelectMenu", roomToSet);
        }
@@ -107,7 +108,7 @@
                         <form>
 
                             <div>
-                                <select th:id="subjectSelectMenu" id = "subjectMenu" class="subject" name="subjectMenu">
+                                <select th:id="'subjectSelectMenu' + ${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
 
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
