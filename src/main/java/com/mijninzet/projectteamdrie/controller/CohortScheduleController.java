@@ -33,6 +33,7 @@ public class CohortScheduleController {
 
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
+
         return "subjectNOK";
     }
 
@@ -131,10 +132,16 @@ public class CohortScheduleController {
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate date = LocalDate.of(year, month, day);
         String selectedSubject=request.getParameter("subjectMenu");
+        String selectedTeacher=request.getParameter("teacherMenu");
+        String selectedRoom=request.getParameter("roomMenu");
 
-        
+        // add selection of the checkboxes to the modelAttribute
         model.addAttribute("selectedSubject",selectedSubject);
+        model.addAttribute("selectedTeacher",selectedTeacher);
+        model.addAttribute("selectedRoom",selectedRoom);
 
+
+        //add result of contraints check to the modelAttribute
         model.addAttribute("checkSubject", checkSubjectPreference(1, 1));
         model.addAttribute("checkAvailbility", checkAvailability(1, "monday", "ochtend"));
         model.addAttribute("checkOverlap", checkCohortOverlap(1, date, "ochtend"));

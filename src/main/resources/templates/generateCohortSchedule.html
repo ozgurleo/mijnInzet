@@ -12,24 +12,26 @@
 
        var checkSubject= [[${checkSubject}]];
        var checkAvail= [[${checkAvailbility}]];
-       var checkOverlap= [[${checkSubject}]];
-       var checkHours= [[${checkSubject}]];
+       var checkOverlap= [[${checkOverlap}]];
+       var checkHours= [[${checkHours}]];
 
        var subjectToSet=[[${selectedSubject}]];
-console.log("DIT IS DE WAARDE VAN SELECTEDSUBJECT");
-console.log(subjectToSet);
+       var teacherToSet=[[${selectedTeacher}]];
+       var roomToSet=[[${selectedRoom}]];
+
 
        function SelectElement(id, valueToSelect){
-           var element = document.getElementById(id);
-           element.value = valueToSelect;
-           console.log(valueToSelect);}
+           document.getElementById(id).value =valueToSelect;
+           console.log(document.getElementById(id).value);   }
 
        function insertText(){
            if (checkSubject !== null) {
                document.getElementById('td1').style.background = "red";
                document.getElementById('td1').innerHTML = checkSubject;
                      }
-           SelectElement("subjectMenu", subjectToSet);
+           SelectElement("subjectSelectMenu", subjectToSet);
+           SelectElement("teacherSelectMenu", teacherToSet);
+           SelectElement("roomSelectMenu", roomToSet);
        }
 
 
@@ -105,7 +107,7 @@ console.log(subjectToSet);
                         <form>
 
                             <div>
-                                <select th:id="${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
+                                <select th:id="subjectSelectMenu" id = "subjectMenu" class="subject" name="subjectMenu">
 
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
@@ -114,17 +116,17 @@ console.log(subjectToSet);
 
 
                             <div>
-                                <select th:id="${schedule.getId()}" id="teacherMenu" class="user" name="teacherMenu">
+                                <select th:id="teacherSelectMenu" id="teacherMenu" class="user" name="teacherMenu">
                                     <option>selecteer docent</option>
-                                    <option th:each="teacher: ${teachers}" th:value="${teacher[3]}" th:text="${teacher[3]}">
+                                    <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
                                 </select>
                             </div>
 
 
                             <div>
-                                <select th:id="${schedule.getId()}" id="roomMenu" class="classRoom" name="roomMenu">
+                                <select th:id="roomSelectMenu" id="roomMenu" class="classRoom" name="roomMenu">
                                     <option>selecteer lokaal</option>
-                                    <option th:each="room: ${rooms}" th:value="${room[1]}" th:text="${room[1]}">
+                                    <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[1]}">
                                 </select>
                             </div>
 
