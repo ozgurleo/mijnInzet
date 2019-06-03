@@ -24,12 +24,12 @@ public class StaffAvailability {
     private String vrijdagMiddag;
     private String vrijdagAvond;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
     @JoinColumn(name="cohort")
     private Cohort cohort;
 
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
     @JoinColumn(name="user_id")
     private User user;
 
