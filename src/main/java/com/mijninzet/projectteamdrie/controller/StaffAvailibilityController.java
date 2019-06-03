@@ -50,9 +50,9 @@ public class StaffAvailibilityController {
     @GetMapping("/addSchedule")
     public String addSchedule(Model model){
         StaffAvailability theSA= new StaffAvailability();
-//        List<Cohort>cohorts=cohortService.findAll();
+        List<Cohort>cohorts=cohortService.findAll();
         model.addAttribute("schedule", theSA);
-//        model.addAttribute("cohorts",cohorts);
+        model.addAttribute("cohorts",cohorts);
         return "schedule/schedule-form";
 
     }
