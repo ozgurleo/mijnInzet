@@ -30,12 +30,15 @@ public class CohortSchedule {
       super();
    }
 
-   public CohortSchedule(int id, LocalDate date, String day, String daypart, String classRoom) {
+   public CohortSchedule(int id, LocalDate date, String day, String daypart, User user, Subject subject, String classRoom, Cohort cohort) {
       this.id = id;
       this.date = date;
       this.day = day;
       this.daypart = daypart;
+      this.user = user;
+      this.subject = subject;
       this.classRoom = classRoom;
+      this.cohort = cohort;
    }
 
    public int getId() {
@@ -76,5 +79,29 @@ public class CohortSchedule {
 
    public void setClassRoom(String classRoom) {
       this.classRoom = classRoom;
+   }
+
+   public User getUser() {
+      return user;
+   }
+
+   public void setUser(User user) {
+      this.user = user;
+   }
+
+   public Subject getSubject() {
+      return subject;
+   }
+
+   public void setSubject(Subject subject) {
+      this.subject = subject;
+   }
+
+   public Cohort getCohort() {
+      return cohort;
+   }
+
+   public void setCohort(Cohort cohort) {
+      this.cohort = cohort;
    }
 }
