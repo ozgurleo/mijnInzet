@@ -26,9 +26,9 @@ public class StaffAvailibilityService {
         return sa;
     }
 
-    public List<StaffAvailability> findStaffAvailibilityByUseridAndCohort(int userId, String cohort){
+    public List<StaffAvailability> findStaffAvailibilityByUseridAndCohort(int userId, int cohort){
         List<StaffAvailability> staffAvailabilities=new ArrayList<>();
-        staffAvailibilityRepository.findByUser_IdAndAndCohort(userId,cohort)
+        staffAvailibilityRepository.findByUser_IdAndCohort_CohortId(userId,cohort)
                 .forEach(staffAvailabilities::add);
         return staffAvailabilities;
     }
@@ -37,6 +37,13 @@ public class StaffAvailibilityService {
         StaffAvailability sa = new StaffAvailability();
         sa=staffAvailibilityRepository.findById(id);
         return sa;
+    }
+
+    public List<StaffAvailability>findByUserId(int id){
+        List<StaffAvailability> staffAvailabilities=new ArrayList<>();
+        staffAvailibilityRepository.findByUserId(id)
+                .forEach(staffAvailabilities::add);
+        return staffAvailabilities;
     }
 
 //    public List<StaffAvailability> getAllStaffAvailibility(int userId){
