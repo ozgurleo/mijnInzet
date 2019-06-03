@@ -66,8 +66,8 @@ public class StaffAvailibilityController {
     @GetMapping("/updateSchedule")
     public String updateSchedule(@RequestParam("scheduleId") int theId, Model model){
         StaffAvailability sa =staffAvailibilityService.findById(theId);
-        model.addAttribute("sa",sa);
-        return "schedule/schedule-form";
+        model.addAttribute("schedule",sa);
+        return "schedule/schedule-updateform";
     }
 
     @RequestMapping("/listCohort")

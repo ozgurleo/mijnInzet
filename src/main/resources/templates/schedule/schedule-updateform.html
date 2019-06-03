@@ -10,25 +10,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Save Schedule</title>
-    <script type="text/javascript">
-        $(function(){
-            $("td").click(function(){
-                if ($(this).hasClass('ROOD')) {
-                    $(this).removeClass('ROOD').addClass('GEEL');
-                } else if ($(this).hasClass('GEEL')) {
-                    $(this).removeClass('GEEL').addClass('GROEN');
-                } else if ($(this).hasClass('GROEN')) {
-                    $(this).removeClass('GROEN').addClass('ROOD');
-                }
-            })
-
-        })
-    </script>
-    <style>
-        .ROOD { background:red; }
-        .GEEL{ background:yellow; }
-        .GROEN { background:green; }
-    </style>
 </head>
 
 <body>
@@ -48,15 +29,15 @@
                     <input type="hidden" th:field="*{user.id}" />
                     <input type="hidden" th:field="*{id}" />
                     <!--<div class="col-lg-3">-->
-                        <!--<select class="form-control" id="testOrder" name="testOrder">-->
-                            <!--<option value="">Select Test Order</option>-->
-                            <!--<option th:each="test : ${cohorts}"-->
-                                    <!--th:value="*{cohort}"-->
-                                    <!--th:text="${test.cohortId}"></option>-->
-                        <!--</select>-->
+                    <!--<select class="form-control" id="testOrder" name="testOrder">-->
+                    <!--<option value="">Select Test Order</option>-->
+                    <!--<option th:each="test : ${cohorts}"-->
+                    <!--th:value="*{cohort}"-->
+                    <!--th:text="${test.cohortId}"></option>-->
+                    <!--</select>-->
                     <!--</div>-->
 
-                    <input type="text" th:field="*{cohort}" placeholder="Cohort" required="required"/>
+                    <input type="text" th:field="*{cohort}" placeholder="Cohort" required="required" readonly/>
                 </div>
                 <table class="table table-dark ">
 
