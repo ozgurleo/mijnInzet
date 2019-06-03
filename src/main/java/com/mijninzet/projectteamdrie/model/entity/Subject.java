@@ -12,18 +12,16 @@ public class Subject {
     private String subjectName;
     private int estimatedHours;
     private int yearsToExpiryDate;
-    private String preference;
 
     public Subject() {
-        this(-1, "", -1, -1, "");
+        this(-1, "", -1, -1);
     }
 
-    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate, String preference) {
+    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.estimatedHours = estimatedHours;
         this.yearsToExpiryDate = yearsToExpiryDate;
-        this.preference = preference;
     }
 
     public int getSubjectId() {
@@ -58,11 +56,4 @@ public class Subject {
         this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
-    public String getPreference() {
-        return preference;
-    }
-
-    public void setPreference(String preference) {
-        this.preference = preference;
-    }
 }
