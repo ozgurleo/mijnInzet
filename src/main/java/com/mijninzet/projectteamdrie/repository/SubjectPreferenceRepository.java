@@ -6,7 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SubjectPreferenceRepository extends JpaRepository<SubjectPreference, Integer> {
-
-SubjectPreference save();
-
 }

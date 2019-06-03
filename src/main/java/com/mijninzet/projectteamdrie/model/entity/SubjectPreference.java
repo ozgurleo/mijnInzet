@@ -1,38 +1,52 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
+import com.mijninzet.projectteamdrie.model.entity.user.User;
+
 import javax.persistence.*;
 
 @Entity
 public class SubjectPreference {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int userId;
-    private String preference;
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
 
     @ManyToOne
-//    @JoinColumn(name = "subject_preference_id")
+    private User user;
+    private int preference;
+    @ManyToOne
     private Subject subject;
 
-    public SubjectPreference() { super(); }
+    public SubjectPreference() {
+        super();
+    }
 
-    public SubjectPreference(String preference, Subject subject) {
+    public SubjectPreference(User user, int preference, Subject subject) {
+        this.user = user;
         this.preference = preference;
         this.subject = subject;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPreference() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getPreference() {
         return preference;
     }
 
-    public void setPreference(String preference) {
+    public void setPreference(int preference) {
         this.preference = preference;
     }
 
@@ -44,3 +58,8 @@ public class SubjectPreference {
         this.subject = subject;
     }
 }
+
+
+
+
+

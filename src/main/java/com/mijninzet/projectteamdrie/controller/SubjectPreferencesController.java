@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/teacherPreferences")
+//@RequestMapping(value = "/teacherPreferences")
 public class SubjectPreferencesController {
 
     @Autowired
@@ -30,14 +33,26 @@ public class SubjectPreferencesController {
         return "teacherSubjectPreferences";
     }
 
-    @RequestMapping(value = "/submitSubjects", method = RequestMethod.POST)
-    public String submitPreferences(@ModelAttribute("subjpref") SubjectPreference subjectPreference, Model model) {
-//        SubjectPreference subjectPreference1 = new SubjectPreference();
-        model.addAttribute("userID", subjectPreference.getUserId());
-        model.addAttribute("Preference", subjectPreference.getPreference());
-        model.addAttribute("Subject", subjectPreference.getSubject());
 
-        subjectPreferenceRepository.save(subjectPreference);
+
+    @RequestMapping(value = "/submitPreferences", method = RequestMethod.POST)
+    public String submitPreferences (@ModelAttribute ArrayList<SubjectPreference> subjectPreferences, Model model) {
+        System.out.println("De inhoud van subjectPreferences: ");
+
+        for (SubjectPreference s : subjectPreferences){
+            System.out.println(s.getId());
+            System.out.println(s.getPreference());
+            System.out.println(s.getSubject());
+//        System.out.println(subjectPreference.getUser().getId());
+        }
+//        subjectPreferenceRepository.save(subjectPreference);
+//        System.out.println("save all is aangeroepen...");
+////        SubjectPreference subjectPreference1 = new SubjectPreference();
+//        model.addAttribute("userID", subjectPreference.getUser().getId());
+//        model.addAttribute("Preference", subjectPreference.getPreference());
+//        model.addAttribute("Subject", subjectPreference.getSubject());
         return "teacherSubjectPreferences";
     }
+
+
 }
