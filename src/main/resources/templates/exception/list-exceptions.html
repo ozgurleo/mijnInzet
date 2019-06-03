@@ -41,6 +41,7 @@
         <tbody>
         <tr th:each="tempExceptions : ${exceptions}">
 
+
             <td th:text="${tempExceptions.startDate}" />
             <td th:text="${tempExceptions.endDate}" />
             <td th:class="${tempExceptions.colorOption}"  th:text="${tempExceptions.colorOption}" />

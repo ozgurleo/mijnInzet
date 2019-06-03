@@ -23,6 +23,7 @@
 
     <form action="#" th:action="@{/exception/save}"
           th:object="${exception}" method="POST">
+
         <input type="hidden" th:field="*{id}" />
 
         <input type="date" id="startdate" th:field="*{startDate}"
@@ -39,7 +40,7 @@
     </form>
 
     <hr>
-    <a th:href="@{/exception/list}">Back to Exception List</a>
+    <a th:href="@{/exception/list}">Terug Naar Exception List</a>
 
 </div>
 </body>
