@@ -26,37 +26,57 @@ public class StaffAvailibilityService {
         return sa;
     }
 
-    public List<StaffAvailability> getAllStaffAvailibility(int userId){
-        ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
-        staffAvailibilityRepository.findByUserId(userId)
-                .forEach(staffAvailabilities::add);
-        return staffAvailabilities;
-
-    }
-
-    public List<StaffAvailability> getAllStaffAvailibilityByIdAndCohort(int userId, String cohort){
-        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
-        staffAvailibilityRepository.findAllByUserIdAndCohort(userId, cohort)
+    public List<StaffAvailability> findStaffAvailibilityByUseridAndCohort(int userId, int cohort){
+        List<StaffAvailability> staffAvailabilities=new ArrayList<>();
+        staffAvailibilityRepository.findByUser_IdAndCohort_CohortId(userId,cohort)
                 .forEach(staffAvailabilities::add);
         return staffAvailabilities;
     }
 
-    public List<StaffAvailability> getAllStaffAvailibilityByCohort(String cohort){
-        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
-        staffAvailibilityRepository.findAllByCohort( cohort)
+    public StaffAvailability findById(int id){
+        StaffAvailability sa = new StaffAvailability();
+        sa=staffAvailibilityRepository.findById(id);
+        return sa;
+    }
+
+    public List<StaffAvailability>findByUserId(int id){
+        List<StaffAvailability> staffAvailabilities=new ArrayList<>();
+        staffAvailibilityRepository.findByUserId(id)
                 .forEach(staffAvailabilities::add);
         return staffAvailabilities;
     }
 
+//    public List<StaffAvailability> getAllStaffAvailibility(int userId){
+//        ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
+//        staffAvailibilityRepository.findByUserId(userId)
+//                .forEach(staffAvailabilities::add);
+//        return staffAvailabilities;
+//
+//    }
+//
+//    public List<StaffAvailability> getAllStaffAvailibilityByIdAndCohort(int userId, int cohort){
+//        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
+//        staffAvailibilityRepository.findAllByUserIdAndCohort(userId, cohort)
+//                .forEach(staffAvailabilities::add);
+//        return staffAvailabilities;
+//    }
+//
+//    public List<StaffAvailability> getAllStaffAvailibilityByCohort(String cohort){
+//        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
+//        staffAvailibilityRepository.findAllByCohort( cohort)
+//                .forEach(staffAvailabilities::add);
+//        return staffAvailabilities;
+//    }
+//
     public void addStaffAvailibility(StaffAvailability sa){
         staffAvailibilityRepository.save(sa);
-    }{
-    }
 
-    public void updateStaffAvailibility(StaffAvailability sa){
-        StaffAvailability sanieuw = staffAvailibilityRepository.findById(sa.getId());
-        staffAvailibilityRepository.save(sanieuw);
     }
+//
+//    public void updateStaffAvailibility(StaffAvailability sa){
+//        StaffAvailability sanieuw = staffAvailibilityRepository.findById(sa.getId());
+//        staffAvailibilityRepository.save(sanieuw);
+//    }
 
 
 }

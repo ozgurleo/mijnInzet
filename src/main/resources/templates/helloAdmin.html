@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
-<!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -12,37 +11,58 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloTeacher">MIJN INZET HOME</a>
-    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
-    <a class="nav-link" href="/schedule">MIJN ROOSTER VOORKEUREN</a>
-    <a class ="nav-link" href="createCohort">maak nieuw cohort</a>
-    <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
+    <a class="navbar-brand" href="/helloAdmin">MIJN INZET HOME</a>
+    <!--<a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
+    <a class="nav-link" href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a>
+    <a class="nav-link" href="/register">NIEUWE GEBRUIKER</a>
+    <a class ="nav-link" href="/cohort/createCohort">BEHEER COHORTEN</a>
+    <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
         <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </form>
 </nav>
 
-<!-- Hoofdtekst -->
-<h3>Welkom .... Je bent ingelogd als administrateur</h3>
-<!--<h1>MijnInzet de roosteraar applicatie</h1>-->
-<!--<h2></h2>-->
-<!--<p></p>-->
 
-<!-- Navigatie-menu -->
-<!--<ul class="navbar">-->
-<!--    <li><a href="showTasks">Ga naar vactureoverzicht</a></li>-->
-<!--    <li><a href="showSubjects">Ga naar vakkenvoorkeur</a></li>-->
-<!--    <li><a href="addUsers">Voeg gebruiker toe</a></li>-->
-<!--    <li><a href="schedule"> Ga naar weekrooster</a></li>-->
-<!--</ul>-->
 
-<!-- Onderteken en dateer de pagina, wees beleefd! -->
-<address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address>
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
-<!--</form>-->
+<br><br><br>
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <div class="jumbotron">
+            <h1 class="masthead-brand">Mijn Inzet</h1>
+            </div>
+            <nav class="nav nav-masthead justify-content-center">
+                <!--<a class="nav-link active" href="#">link</a>-->
+                <!--<a class="nav-link" href="#">link</a>-->
+                <!--<a class="nav-link" href="#">link</a>-->
+            </nav>
+        </div>
+    </header>
 
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Welkom </h1>
+        <span th:text="${user}"></span>
+        <h3>Je bent ingelogd als administrator</h3>
+
+
+        <p class="lead">Je kunt hier gebruikers zien </p>
+        <p class="lead">
+            <a href="/users/list" class="btn btn-lg btn-primary">Overzicht gebruikers </a>
+        </p>
+    </main>
+
+
+</div>
+
+
+</body>
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <br><br>
+        <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
+    </div>
+</footer>
 </body>
 </html>

@@ -6,99 +6,164 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-</head>
 
 
-<body>
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    <script th:inline="javascript">
+
+       var checkSubject= [[${checkSubject}]];
+       var checkAvail= [[${checkAvailbility}]];
+       var checkOverlap= [[${checkOverlap}]];
+       var checkHours= [[${checkHours}]];
+
+       var subjectToSet=[[${selectedSubject}]];
+       var teacherToSet=[[${selectedTeacher}]];
+       var roomToSet=[[${selectedRoom}]];
+
+
+
+       function SelectElement(id, valueToSelect){
+           document.getElementById(id).value =valueToSelect;
+           console.log(document.getElementById(id).value);   }
+
+       function insertText(){
+           if (checkSubject !== null) {
+               document.getElementById('td1').style.background = "red";
+               document.getElementById('td1').innerHTML = checkSubject;
+                     }
+           SelectElement("'subjectSelectMenu' + ${schedule.getId()}", subjectToSet);
+           SelectElement("teacherSelectMenu", teacherToSet);
+           SelectElement("roomSelectMenu", roomToSet);
+       }
+
+
+
+    </script>
+
+    </head>
+
+
+    <body onload= "insertText()">
+
+
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </form>
 </nav>
 
-
 <br>
 <br>
 
-<div class="table-responsive col-sm-10">
-    <table id="makeSchedule" class="table table-bordered">
+<div class="container">
+    <table id="generateSchedule" class="table table-bordered">
 
         <tablehead>
             <thead class="thead-dark">
-            <tr>
-                <th>begin</th>
-                <th>eind</th>
-                <th>MAANDAG</th>
-                <th>DINSDAG</th>
-                <th>WOENSDAG</th>
-                <th>DONDERDAG</th>
-                <th>VRIJDAG</th>
-                <th>CONSTRAINTS</th>
-                <th>OPSLAAN-buttons</th>
+            <tr class="row m-0">
+                <th class="d-inline-block col-1">Cohort</th>
+                <th class="d-inline-block col-2">DATUM</th>
+                <th class="d-inline-block col-1">DAG</th>
+                <th class="d-inline-block col-1">DAGDEEL</th>
+                <th class="d-inline-block col-3">PLANNING</th>
+                <th class="d-inline-block col-2">CONFLICT</th>
+                <th class="d-inline-block col-1">       </th>
+                <th class="d-inline-block col-1">       </th>
+
             </tr>
             </thead>
         </tablehead>
 
+
         <tablebody>
-        <tr>
-            <form th:id="1" th:action="@{/cohort/generateCohortSchedule/begindate/enddate/day/availHours}" method="post">
-                <td>
-                    <form th:name="begin" float="left">begin
-                </form>
-                </td>
+            <tr class="row m-0" th:each="schedule:${cohortschedule}">
+                <form th:id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
+                      th:object="${cohortschedule}"
+                      method="post">
+                    <td class="d-inline-block col-1">
+                        <input type="${schedule}" NAME="cohort" id="cohort" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
+                               th:field="${cohort}" readonly/>
+                    </td>
 
-                <td>
-                    <form th:name="eind" float="left">eind
-                </form>
-                </td>
 
-                <td>
-                    <form th:name="maandag" float="left">maandag
-                </form>
-                </td>
+                    <td class="d-inline-block col-2">
+                        <input type="${schedule}" NAME="date" id="date" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
+                    </td>
 
-                <td>
-                    <form th:name="dinsdag"float="left">dinsdag
-                </form>
-                </td>
+                    <td class="d-inline-block col-1">
+                        <input type="${schedule}" NAME="day" id="day" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
+                    </td>
 
-                <td>
-                    <form th:name="woensdag" float="left">woensdag
-                </form>
-                </td>
+                    <td class="d-inline-block col-1">
+                        <input type="${schedule}" NAME="daypart" id="daypart" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
+                               readonly/>
+                    </td>
 
-                <td><form th:name="donderdag"float="left">donderdag
-                </form>
-                </td>
+                    <td class="d-inline-block col-3">
+                        <form>
 
-                <td><form th:name="vrijdag" float="left">vrijdag
-                </form>
-                </td>
+                            <div>
+                                <select th:id="'subjectSelectMenu' + ${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
 
-                <td>
-                    <form th:name="constraints" float="left">CONSTRAINTS
-                </form>
-                </td>
+                                    <option>selecteer vak</option>
+                                    <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
+                                </select>
+                            </div>
 
-                <td>
-                    <form th:name="button" clear="right">opslaan
-                </form>
-                </td>
-            </form>
 
-        </tr>
+                            <div>
+                                <select th:id="teacherSelectMenu" id="teacherMenu" class="user" name="teacherMenu">
+                                    <option>selecteer docent</option>
+                                    <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
+                                </select>
+                            </div>
+
+
+                            <div>
+                                <select th:id="roomSelectMenu" id="roomMenu" class="classRoom" name="roomMenu">
+                                    <option>selecteer lokaal</option>
+                                    <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[1]}">
+                                </select>
+                            </div>
+
+                        </form>
+
+                    </td>
+
+                    <td id="td1" class="d-inline-block col-2">
+                        <div>
+                            <form th:name="constraint">
+                            </form>
+                        </div>
+                    </td>
+
+
+                    <td class="d-inline-block col-1">
+                        <div>
+                        <button type="submit" class="btn btn-info" th:value="check" name="check"
+                                th:id="${schedule.getId()}" th:form="${schedule.getId()}">check
+                        </button>
+                    </div>
+                    </td>
+                    <<td class="d-inline-block col-1">
+                        <div>
+                            <button type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
+                                    th:id="${schedule.getId()}" th:form="${schedule.getId()}">opslaan
+                            </button>
+                        </div>
+                    </td>
+                </form>
+            </tr>
         </tablebody>
 
 
-</table>
+    </table>
 </div>
-
-
-
-
-
 
 </body>
 </html>

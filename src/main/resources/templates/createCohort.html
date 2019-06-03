@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Cohort</title>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
     <title>Title</title>
 </head>
 <body>
@@ -15,210 +19,111 @@
 
 <form>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="nav-link" href="/helloTeacher">MIJN INZET HOME</a>
+        <a class="nav-link" href="/helloTeacher">HOME</a>
         <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
         <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
+        <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
         <a class="navbar-brand" href="/schedule">MIJN ROOSTER VOORKEUREN</a>
         <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
-        </form>
+        <!--<form th:action="@{/logout}" method="post">-->
+        <!--<button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
+        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </nav>
-
 </form>
 
-
-<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
-
-<!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css"/>
-
-<!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black
-}
-
-.bootstrap-iso form button, .bootstrap-iso form button:hover {
-    color: #ffffff !important;
-}
-
-.bootstrap-iso .form-control:focus {
-    border-color: #e97c66;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 124, 102, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 124, 102, 0.6);
-}
-
-.asteriskField {
-    color: red;
-}
-</style>
-
-<br><br><br>
-
-<div container>
-
-    <div class="table-responsive col-sm-8">
-        <table id="CohortTable2" class="table table-bordered">
-            <h3>Cohorten</h3>
-            <tablehead>
-                <thead class="thead-dark">
-                <tr>
-                    <th>Cohort</th>
-                    <th> Begindatum</th>
-                    <th> Einddatum</th>
-                </tr>
-                </thead>
-            </tablehead>
-
-            <tablebody>
-                <tr th:each="cohort:${allCohorts}">
-                    <td th:text="${cohort.cohortId}">cohortid</td>
-                    <td th:text="${#dates.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
-                    <td th:text="${#dates.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
-                </tr>
-            </tablebody>
-        </table>
-    </div>
-</div>
-
 <br><br>
 
-<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<div class="container">
+    <div class="row">
+        <div class="container">
+            <div class="col-sm-12">
+                <br>
+                <h3>Geef nieuw cohort op  </h3>
+                <hr>
 
-<br><br>
+                <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
 
-<div class="bootstrap-iso">
-    <div class="container-fluid">
-        <h2>
-            <legend>Nieuw Cohort</legend>
-        </h2>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group ">
-                        <form action="#" th:action="@{/createCohort/new}" th:object="${cohort}" method="post">
-                            <tr>
-                            <td><label th:text="id" /></td>
-                            <td><input type="text" th:field="*{cohortId}" /></td>
-                            </tr>
-
-                        <label class="control-label requiredField" for="dateBegin">
-                            Begindatum
-                            <span class="asteriskField"></span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar">
-                                </i>
-                            </div>
-                            <input class="form-control" id="dateBegin" name="dateBegin" th:field="*{beginDate}" placeholder="DD/MM/YYYY"
-                                   type="text"/>
-                        </div>
-                    <div class="form-group ">
-                        <label class="control-label " for="dateEnd">
-                            Einddatum
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar">
-                                </i>
-                            </div>
-                            <input class="form-control" id="dateEnd" name="dateEnd" th:field="*{endDate}" placeholder="DD/MM/YYYY"
-                                   type="text"/>
-                        </div>
+                    <label class="form-group ">
+                        <label class="control-label"/> Cohort </label>
+                    <div class="input-group">
+                        <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"
+                               th:field="*{cohortId}"/>
                     </div>
-                    <div class="form-group">
-                        <div>
-                            <button class="btn btn-success " name="submit" type="submit">
-                                Submit
-                            </button>
+                    </label>
+                  <label class="form-group  ">
+                        <label class="control-label" th:text="begindatum">Begindatum</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control mb-4 col-12" id="beginDate" name="beginDate"
+                                   placeholder="MM/DD/YYY" th:field="*{beginDate}"/>
                         </div>
+                    </label>
+
+                    <label class="form-group  ">
+                        <label class="control-label" th:text="einddatum">Einddatum</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control mb-4 col-12" id="ëndDate" name="ëndDate"
+                                   placeholder="MM/DD/YYY" th:field="*{endDate}"/>
+                        </div>
+                    </label>
+                    <div class="form-group ">
+                        <button class="btn btn-succes col-2" onclick="f()" name="submit" type="submit">
+                            Submit
+                        </button>
+                        <br>
+
                     </div>
-                        </form>
+
+                </form>
+
+            </div>
         </div>
     </div>
 </div>
+
+
+<br><br>
+<div class="row">
+    <div class="container">
+        <div class="table-responsive col-sm-12">
+            <table id="CohortTable2" class="table table-bordered">
+                <h3>Bestaande Cohorten</h3>
+                <tablehead>
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Cohort</th>
+                        <th> Begindatum</th>
+                        <th> Einddatum</th>
+                    </tr>
+                    </thead>
+                </tablehead>
+
+                <tablebody>
+                    <tr th:each="cohort:${allCohorts}">
+                        <td th:text="${cohort.cohortId}">cohortid</td>
+                        <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
+                        <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
+                    </tr>
+                </tablebody>
+            </table>
+        </div>
+
     </div>
 </div>
 </div>
-</form>
 
 
-    <!--<form action="#" th:action="@{/createCohort/new}" th:object="${cohort}" method="post">-->
+<script th:inline="javascript">
+var waarschuwing = [[${letOp}]];
+function f() {
+    if ([[${letOp}]] ){
+        console.log("let op waarschuwing is gevuld");
+        alert("Let op, dit cohort bestaat al");
+    }
 
-    <!--<table border="1">-->
-        <!--<tr>-->
-            <!--<td><label th:text="id" /></td>-->
-            <!--<td><input type="text" th:field="*{cohortId}" /></td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<td><label th:text="begindatum" /></td>-->
-            <!--<td><input type="text" th:field="*{beginDate}"/></td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<td><input type="submit" value="OK" /></td>-->
-        <!--</tr>-->
-    <!--</table>-->
-<!--</form>-->
-
-
-<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>
-    $(document).ready(function () {
-        var date_input_begin = $('input[name="dateBegin"]'); //our date input has the name "date"
-        var date_input_end = $('input[name="dateEnd"]');
-        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-        date_input_begin.datepicker({
-            format: 'dd/mm/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        }),
-            date_input_end.datepicker({
-                format: 'dd/mm/yyyy',
-                container: container,
-                todayHighlight: true,
-                autoclose: true,
-            })
-    })
-</script>
-
-
-<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>
-    $(document).ready(function () {
-        var date_input = $('input[name="date"]'); //our date input has the name "date"
-        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-        date_input.datepicker({
-            format: 'mm/dd/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        })
-    })
-    $('#sandbox-container .input-daterange').datepicker({});
+}
 
 </script>
+
 
 </body>
 </html>

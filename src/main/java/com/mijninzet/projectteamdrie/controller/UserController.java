@@ -17,6 +17,7 @@ package com.mijninzet.projectteamdrie.controller;
 import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.service.UserService;
+import com.mijninzet.projectteamdrie.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserServiceImp userServiceImp;
 
 
     public UserController(UserService userService) {
@@ -63,6 +67,19 @@ public class UserController {
         model.addAttribute("user",theUser);
         return "user-form";
 
+    }
+
+    @GetMapping("/teacherFTE")
+    public String getTeacherFte(User user, Model model){
+    User currentUser=userService.findById(user.getCurrentUserId());
+    double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
+    double userFTE = user.getFte();
+    model.addAttribute("voornaam", currentUser.getName());
+    model.addAttribute("achternaam", currentUser.getLastName());
+    model.addAttribute("fte", userFTE );
+    model.addAttribute("beschikbareUren",availableHours);
+
+    return"teacherFTE";
     }
 //
 //

@@ -11,8 +11,7 @@ import java.time.LocalDate;
 public class CohortSchedule {
    @Id
    private int id;
-   private LocalDate startWeekDay;
-   private LocalDate endWeekDay;
+   private LocalDate date;
    private String day;
    private String daypart;
 
@@ -31,9 +30,9 @@ public class CohortSchedule {
       super();
    }
 
-   public CohortSchedule(LocalDate startWeekDay, LocalDate endWeekDay, String day, String daypart, User user, Subject subject, String classRoom, Cohort cohort) {
-      this.startWeekDay = startWeekDay;
-      this.endWeekDay = endWeekDay;
+   public CohortSchedule(int id, LocalDate date, String day, String daypart, User user, Subject subject, String classRoom, Cohort cohort) {
+      this.id = id;
+      this.date = date;
       this.day = day;
       this.daypart = daypart;
       this.user = user;
@@ -50,20 +49,12 @@ public class CohortSchedule {
       this.id = id;
    }
 
-   public LocalDate getStartWeekDay() {
-      return startWeekDay;
+   public LocalDate getDate() {
+      return date;
    }
 
-   public void setStartWeekDay(LocalDate startWeekDay) {
-      this.startWeekDay = startWeekDay;
-   }
-
-   public LocalDate getEndWeekDay() {
-      return endWeekDay;
-   }
-
-   public void setEndWeekDay(LocalDate endWeekDay) {
-      this.endWeekDay = endWeekDay;
+   public void setDate(LocalDate date) {
+      this.date = date;
    }
 
    public String getDay() {
@@ -82,6 +73,14 @@ public class CohortSchedule {
       this.daypart = daypart;
    }
 
+   public String getClassRoom() {
+      return classRoom;
+   }
+
+   public void setClassRoom(String classRoom) {
+      this.classRoom = classRoom;
+   }
+
    public User getUser() {
       return user;
    }
@@ -96,14 +95,6 @@ public class CohortSchedule {
 
    public void setSubject(Subject subject) {
       this.subject = subject;
-   }
-
-   public String getClassRoom() {
-      return classRoom;
-   }
-
-   public void setClassRoom(String classRoom) {
-      this.classRoom = classRoom;
    }
 
    public Cohort getCohort() {

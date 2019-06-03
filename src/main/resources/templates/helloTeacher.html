@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
-    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -13,10 +12,12 @@
 
 <!-- Navigatie-menu -->
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloTeacher">MIJN INZET HOME</a>
+    <a class="navbar-brand" href="/helloTeacher">HOME</a>
     <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
     <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
-    <a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>
+    <a class="nav-link" href="/schedule/listCohort">MIJN ROOSTERVOORKEUREN</a>
+    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
+    <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false" >MIJN INCIDENTEN</a>
     <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
@@ -31,31 +32,33 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand">Mijn Inzet</h3>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">link</a>
-                <a class="nav-link" href="#">link</a>
-                <a class="nav-link" href="#">link</a>
-            </nav>
+            <div class="jumbotron">
+            <h1 class="masthead-brand">Mijn Inzet</h1>
+            </div>
         </div>
     </header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">Welkom </h1>
-        <span th:text="${user}"></span>
+        <h2 class="cover-heading">Welkom </h2>
+        <br>
+        <h3 STYLE="color: blue"><span th:text="${user.toString()}"></span></h3>
+        <br>
         <h3>Je bent ingelogd als leraar</h3>
 
-        <p class="lead">Je kunt hier je roostervoorkeuren opgeven </p>
+        <nav class="nav nav-masthead justify-content-center">
+            <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+        </nav>
+        <br>
+
+        <p class="lead">Bekijk direct je uren overzicht </p>
         <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary">Mooie Knop </a>
+            <a href="/users/teacherFTE" class="btn btn-lg btn-primary">Mijn uren overzicht </a>
         </p>
     </main>
 
 </div>
-
-</body>
-
-<!-- Onderteken en dateer de pagina, wees beleefd! -->
 
 <footer class="mastfoot mt-auto">
     <div class="inner">
@@ -63,9 +66,20 @@
         <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
     </div>
 </footer>
+</body>
+
+<!-- Onderteken en dateer de pagina, wees beleefd! -->
+
 <!--<form th:action="@{/logout}" method="post">-->
 <!--    <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
 <!--</form>-->
+<script>
+    // JavaScript popup window function
+    function basicPopup(url) {
+        popupWindow = window.open(url,'popUpWindow','height=70000,width=500,left=50,top=50,resizable=yes,' +
+            'scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
+    }
 
+</script>
 </body>
 </html>
