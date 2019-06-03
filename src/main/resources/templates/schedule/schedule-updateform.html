@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Save Schedule</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#vrijdagAvond').change(function () {
+                var aantwoord = $(this).val()
+                if(aantwoord=="JA"){
+                    alert("Vrijdag Avond\n"+"SERIEUS??")
+                }
+            })
+        })
+
+    </script>
 </head>
 
 <body>
@@ -28,16 +40,8 @@
                 <div class="input-group mb-3">
                     <input type="hidden" th:field="*{user.id}" />
                     <input type="hidden" th:field="*{id}" />
-                    <!--<div class="col-lg-3">-->
-                    <!--<select class="form-control" id="testOrder" name="testOrder">-->
-                    <!--<option value="">Select Test Order</option>-->
-                    <!--<option th:each="test : ${cohorts}"-->
-                    <!--th:value="*{cohort}"-->
-                    <!--th:text="${test.cohortId}"></option>-->
-                    <!--</select>-->
-                    <!--</div>-->
-
                     <input type="text" th:field="*{cohort}" placeholder="Cohort" required="required" readonly/>
+
                 </div>
                 <table class="table table-dark ">
 
@@ -56,55 +60,116 @@
                     <tr>
                         <th scope="row">Ochtend</th>
                         <td>
-                            <input type="text" th:field="*{maandagOchtend}" name="ColorOption" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{maandagOchtend}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{dinsdagOchtend}" name="ColorOption" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{dinsdagOchtend}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{woensdagOchtend}" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{woensdagOchtend}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{donderdagOchtend}" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{donderdagOchtend}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{vrijdagOchtend}"  placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{vrijdagOchtend}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Middag</th>
                         <td>
-                            <input type="text" th:field="*{maandagMiddag}"  placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{maandagMiddag}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
+
                         </td>
                         <td>
-                            <input type="text" th:field="*{dinsdagMiddag}" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{dinsdagMiddag}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{woensdagMiddag}" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{woensdagMiddag}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{donderdagMiddag}"  placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{donderdagMiddag}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{vrijdagMiddag}" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{vrijdagMiddag}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Avond</th>
                         <td>
-                            <input type="text" th:field="*{maandagAvond}" placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{maandagAvond}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{dinsdagAvond}"  placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{dinsdagAvond}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{woensdagAvond}"  placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{woensdagAvond}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{donderdagAvond}"  placeholder="Beschikbaarheid?"/>
+                            <select class="mdb-select md-form" th:field="*{donderdagAvond}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" th:field="*{vrijdagAvond}"  placeholder="Beschikbaarheid?"/>
+                            <select id="vrijdagAvond" class="mdb-select md-form" th:field="*{vrijdagAvond}" required="required">
+                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option value="JA">JA</option>
+                                <option value="NEE">NEE</option>
+                            </select>
                         </td>
                     </tr>
 
