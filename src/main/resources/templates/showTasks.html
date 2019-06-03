@@ -13,16 +13,28 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="nav-link" href="/helloTeacher">HOME</a>
-    <a class="navbar-brand" href="/showTasks">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
-    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
-    <a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>
-    <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
-    </form>
+        <a class="navbar-brand" href="/helloTeacher">HOME</a>
+        <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
+        <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
+        <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
+        <!--<a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>-->
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" style="color: #b8d1f3">
+                MIJN VAK & ROOSTER VOORKEUREN
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/schedule/listCohort">Mijn roostervoorkeuren</a>
+                <a class="dropdown-item" href="/showSubjects">Mijn vak voorkeuren</a>
+            </div>
+        </div>
+        <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false">MIJN INCIDENTEN</a>
+        <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+        </form>
 </nav>
 
 
