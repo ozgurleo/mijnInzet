@@ -37,12 +37,12 @@ public class CohortScheduleController {
         int preference= subjectRepo.getSingleTeacherSubjectPref(teacherId,subjectId);
 
         if(preference==1 ){
-            output="ok";
+            output="OK";
 
         }else if(preference==2){
-            output="partly ok";
+            output="partly OK";
         }else if(preference==3){
-            output = "NO";
+            output = "NOK";
         }
         return output;
     }
@@ -52,6 +52,7 @@ public class CohortScheduleController {
     }
 
     public String checkTeacherHours(int teacherId) {
+
         return "hoursNOK";
     }
 

@@ -14,7 +14,7 @@
        var checkAvail= [[${checkAvailbility}]];
        var checkOverlap= [[${checkOverlap}]];
        var checkHours= [[${checkHours}]];
-
+       var cohortSchedule=[[${cohortSchedule}]];
        var subjectToSet=[[${selectedSubject}]];
        var teacherToSet=[[${selectedTeacher}]];
        var roomToSet=[[${selectedRoom}]];
@@ -30,7 +30,7 @@
                document.getElementById('td1').style.background = "red";
                document.getElementById('td1').innerHTML = checkSubject;
                      }
-           SelectElement("'subjectSelectMenu' + ${schedule.getId()}", subjectToSet);
+           SelectElement([${schedule.getId()], subjectToSet);
            SelectElement("teacherSelectMenu", teacherToSet);
            SelectElement("roomSelectMenu", roomToSet);
        }
@@ -108,7 +108,7 @@
                         <form>
 
                             <div>
-                                <select th:id="'subjectSelectMenu' + ${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
+                                <select th:id="${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
 
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
