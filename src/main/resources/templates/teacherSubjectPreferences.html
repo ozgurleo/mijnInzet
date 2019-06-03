@@ -21,7 +21,7 @@
 </nav>
 
 <h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
-<form name="subjectform" th:id="submitbutton" th:action="@{/submitPreferences}" method="post">
+<form name="subjectform" th:id="submitbutton" action="#" th:action="@{/submitPreferences}" method="post">
     <div class="row">
         <div class="table-responsive col-sm-6">
             <table id="SubjectTable" class="table table-striped">
@@ -39,11 +39,11 @@
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
                     <td>
                         <form>
-                            <input type="radio" th:name="${subject.getSubjectId()}" value="no"> ik geef dit vak liever
+                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="no"> ik geef dit vak liever
                             niet.<br>
-                            <input type="radio" th:name="${subject.getSubjectId()}" value="maybe"> ja, dit vak wil ik
+                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="maybe"> ja, dit vak wil ik
                             geven.<br>
-                            <input type="radio" th:name="${subject.getSubjectId()}" value="yes"> ja, Ik heb het vak al
+                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="yes"> ja, Ik heb het vak al
                             eerder gegeven.
                         </form>
                     </td>
