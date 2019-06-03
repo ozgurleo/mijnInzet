@@ -23,6 +23,7 @@
 <!-- Navigatie-menu -->
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="/helloTeacher">HOME</a>
+    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
     <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
     <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
     <!--<a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>-->
@@ -33,11 +34,10 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/schedule">Mijn roostervoorkeuren</a>
+            <a class="dropdown-item" href="/schedule/listCohort">Mijn roostervoorkeuren</a>
             <a class="dropdown-item" href="/showSubjects">Mijn vak voorkeuren</a>
         </div>
     </div>
-    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
     <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false">MIJN INCIDENTEN</a>
     <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
     <form th:action="@{/logout}" method="post">

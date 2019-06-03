@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeacherHoursRepository extends JpaRepository<TeacherHours, Integer> {
 
-    int getByUserId();
+    int getByUserId(int userid);
 
 
 

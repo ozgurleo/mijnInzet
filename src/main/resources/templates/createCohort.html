@@ -19,15 +19,16 @@
 
 <form>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="nav-link" href="/helloTeacher">HOME</a>
-        <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
-        <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
-        <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
-        <a class="navbar-brand" href="/schedule">MIJN ROOSTER VOORKEUREN</a>
-        <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
-        <!--<form th:action="@{/logout}" method="post">-->
-        <!--<button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+        <a class="navbar-brand" href="/helloAdmin">MIJN INZET HOME</a>
+        <!--<a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
+        <a class="nav-link" href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a>
+        <a class="nav-link" href="/register">NIEUWE GEBRUIKER</a>
+        <a class ="nav-link" href="/cohort/createCohort">BEHEER COHORTEN</a>
+        <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+        </form>
     </nav>
 </form>
 
