@@ -24,7 +24,9 @@ public class StaffAvailability {
     private String vrijdagMiddag;
     private String vrijdagAvond;
 
-    private String cohort;
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @JoinColumn(name="cohort")
+    private Cohort cohort;
 
 
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
@@ -39,7 +41,7 @@ public class StaffAvailability {
     public StaffAvailability(String maandagOchtend, String maandagMiddag, String maandagAvond, String dinsdagOchtend,
                              String dinsdagMiddag, String dinsdagAvond, String woensdagOchtend, String woensdagMiddag,
                              String woensdagAvond, String donderdagOchtend, String donderdagMiddag, String donderdagAvond,
-                             String vrijdagOchtend, String vrijdagMiddag, String vrijdagAvond, String cohort, User user) {
+                             String vrijdagOchtend, String vrijdagMiddag, String vrijdagAvond, Cohort cohort, User user) {
         this.maandagOchtend = maandagOchtend;
         this.maandagMiddag = maandagMiddag;
         this.maandagAvond = maandagAvond;
@@ -187,11 +189,11 @@ public class StaffAvailability {
         this.vrijdagAvond = vrijdagAvond;
     }
 
-    public String getCohort() {
+    public Cohort getCohort() {
         return cohort;
     }
 
-    public void setCohort(String cohort) {
+    public void setCohort(Cohort cohort) {
         this.cohort = cohort;
     }
 
