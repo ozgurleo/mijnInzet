@@ -20,7 +20,7 @@
         function insertText(){
             if (checkSubject !== null) {
                 document.getElementById("tempVariable").style.background = "red";
-                document.getElementById("tempVariable").innerHTML = checkSubject;
+                document.getElementById("tempVariable").innerHTML = checkSubject + " " + checkHours;
             }
             SelectElement("someVariable" + "subjectMenu", subjectToSet);
             SelectElement("someVariable" +"teacherMenu", teacherToSet);
@@ -94,7 +94,7 @@
                             <div>
                                 <select th:with="someVariable=${schedule.getId()}" th:id="someVariable + roomMenu" id="roomMenu" class="classRoom" name="roomMenu">
                                     <option>selecteer lokaal</option>
-                                    <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[1]}">
+                                    <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[0]}">
                                 </select>
                             </div>
                         </form>

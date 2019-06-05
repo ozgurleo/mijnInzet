@@ -2,10 +2,9 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
-import com.mijninzet.projectteamdrie.repository.CohortRepository;
-import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
-import com.mijninzet.projectteamdrie.repository.SubjectRepository;
-import com.mijninzet.projectteamdrie.repository.UserRepository;
+import com.mijninzet.projectteamdrie.model.entity.Subject;
+import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
+import com.mijninzet.projectteamdrie.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,20 +27,22 @@ public class CohortScheduleController {
     UserRepository userRepo;
     @Autowired
     SubjectRepository subjectRepo;
+    @Autowired
+    TeacherHoursRepository teacherHoursRepository;
 
     public static final int DAYS_IN_WEEK = 7;
 
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
-        String output="NO OUTPUT VALUE";
-        int preference= subjectRepo.getSingleTeacherSubjectPref(teacherId,subjectId);
+        String output = "NO OUTPUT VALUE";
+        int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
 
-        if(preference==1 ){
-            output="OK";
+        if (preference == 1) {
+            output = "OK";
 
-        }else if(preference==2){
-            output="partly OK";
-        }else if(preference==3){
+        } else if (preference == 2) {
+            output = "partly OK";
+        } else if (preference == 3) {
             output = "NOK";
         }
         return output;
@@ -51,9 +52,73 @@ public class CohortScheduleController {
         return "availabilityNOK";
     }
 
-    public String checkTeacherHours(int teacherId) {
+    public String checkTeacherHours(int teacherId, int subjectId) {
 
-        return "hoursNOK";
+        Subject subject = subjectRepo.getBySubjectId(subjectId);
+        String subjectname = subject.getSubjectName();
+        TeacherHours teacherHours = teacherHoursRepository.findByUserId(teacherId);
+        System.out.println("======================= Uit checkTeacherHours komt subject : " + subjectname + " en teacherHours : " + teacherHours);
+        int realTeacherHours = 4;
+
+        if (teacherHours != null) {
+            if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId)) {
+                if (teacherHours.getTeachingHoursLeft() < 8)
+                    return "docUrenOp";
+                else {
+                    return "UrenOk";
+                }
+            } else {
+                int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
+                System.out.println(" -------------------  Uit checkTeacherHours komt : YearsOfExperience " + yearsOfExperience + "----------------------");
+                switch (yearsOfExperience) {
+                    case 1:
+                        realTeacherHours = 6;
+                        System.out.println("----------------------  Uit checkTeacherHours komt : realteacherHours " + realTeacherHours + " ---------------- ");
+                        break;
+                    case 2:
+                        realTeacherHours = 4;
+                        System.out.println("----------------------  Uit checkTeacherHours komt : realteacherHours " + realTeacherHours + " ---------------- ");
+                        break;
+                }
+                if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
+                    return "UrenNietOk";
+                }
+            }
+            return "UrenOk";
+        } else {
+            return "docentNietBekend";
+        }
+    }
+
+
+    public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId) {
+
+        boolean experience = false;
+
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
+        System.out.println("UIT doesTeacherHaveExpWithSubject komt cohortscheduleList " + cohortScheduleList + "De size is " + cohortScheduleList.size());
+        if (cohortScheduleList.size() > 0) {
+            experience = true;
+        } else {
+            experience = false;
+        }
+        return experience;
+    }
+
+    public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId) {
+
+        int numberOfYearsExperience;
+
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
+
+        if (cohortScheduleList.size() == 1) {
+            numberOfYearsExperience = 1;
+        } else if (cohortScheduleList.size() == 2) {
+            numberOfYearsExperience = 2;
+        } else {
+            numberOfYearsExperience = 3;
+        }
+        return numberOfYearsExperience;
     }
 
     public String checkCohortOverlap(int teacherId, LocalDate datePlanned, String dayPart) {
@@ -142,21 +207,22 @@ public class CohortScheduleController {
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate date = LocalDate.of(year, month, day);
-        String selectedSubject=request.getParameter("subjectMenu");
-        String selectedTeacher=request.getParameter("teacherMenu");
-        String selectedRoom=request.getParameter("roomMenu");
+        String selectedSubject = request.getParameter("subjectMenu");
+        String selectedTeacher = request.getParameter("teacherMenu");
+        String selectedRoom = request.getParameter("roomMenu");
+
 
         // add selection of the checkboxes to the modelAttribute
-        model.addAttribute("selectedSubject",selectedSubject);
-        model.addAttribute("selectedTeacher",selectedTeacher);
-        model.addAttribute("selectedRoom",selectedRoom);
+        model.addAttribute("selectedSubject", selectedSubject);
+        model.addAttribute("selectedTeacher", selectedTeacher);
+        model.addAttribute("selectedRoom", selectedRoom);
 
 
         //add result of contraints check to the modelAttribute
-        model.addAttribute("checkSubject", checkSubjectPreference(6, 2));
+        model.addAttribute("checkSubject", checkSubjectPreference(6, 1));
         model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend"));
         model.addAttribute("checkOverlap", checkCohortOverlap(6, date, "ochtend"));
-        model.addAttribute("checkHours", checkTeacherHours(6));
+        model.addAttribute("checkHours", checkTeacherHours(Integer.parseInt(request.getParameter("teacherMenu")), Integer.parseInt(request.getParameter("subjectMenu"))));
 
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
