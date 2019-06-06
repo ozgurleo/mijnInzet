@@ -50,7 +50,7 @@
 
 
 <h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
-<form name="subjectform" th:id="submitbutton" action="#" th:action="@{/submitPreferences}" method="post">
+<form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">
     <div class="row">
         <div class="table-responsive col-sm-6">
             <table id="SubjectTable" class="table table-striped">
@@ -68,11 +68,14 @@
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
                     <td>
                         <form>
-                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="no"> ik geef dit vak liever
+                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                                   value="1"> ik geef dit vak liever
                             niet.<br>
-                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="maybe"> ja, dit vak wil ik
+                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                                   value="2"> ja, dit vak wil ik
                             geven.<br>
-                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="yes"> ja, Ik heb het vak al
+                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                                   value="3"> ja, Ik heb het vak al
                             eerder gegeven.
                         </form>
                     </td>
@@ -80,7 +83,7 @@
             </table>
         </div>
     </div>
-    <button type="submit" th:id="submitbutton" name="subjectform" class="btn btn-lg btn-success">Submit Preference
+    <button type="submit" form="myForm" name="subjectform" class="btn btn-lg btn-success">Submit Preference
     </button>
 </form>
 </body>
