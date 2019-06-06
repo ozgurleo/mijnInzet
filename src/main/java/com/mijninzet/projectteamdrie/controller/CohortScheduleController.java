@@ -42,12 +42,12 @@ public class CohortScheduleController {
         int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
 
         if (preference == 1) {
-            output = "OK";
+            output = "PrefOK";
 
         } else if (preference == 2) {
-            output = "partly OK";
+            output = "prefPartlyOK";
         } else if (preference == 3) {
-            output = "NOK";
+            output = "PrefNOK";
         }
         return output;
     }
@@ -67,9 +67,9 @@ public class CohortScheduleController {
         if (teacherHours != null) {
             if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId)) {
                 if (teacherHours.getTeachingHoursLeft() < 8)
-                    return "docUrenOp";
+                    return "UrenNOK";
                 else {
-                    return "UrenOk";
+                    return "UrenOK";
                 }
             } else {
                 int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
@@ -85,14 +85,15 @@ public class CohortScheduleController {
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
-                    return "UrenNietOk";
+                    return "UrenNOK";
                 }
             }
-            return "UrenOk";
+            return "UrenOK";
         } else {
             return "docentNietBekend";
         }
     }
+
 
 
     public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId) {
@@ -149,7 +150,13 @@ public class CohortScheduleController {
     }
 
     // FOR AJAX google: ajax post to spring mvc controller
+    @PostMapping(value = "/generateCohortSchedule/test")
+    public String ajaxPostTest(HttpServletRequest request){
+        System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
+String result="UrenNOK";
 
+        return result;
+    }
 
 
     @GetMapping(value = "/generateCohortSchedule")

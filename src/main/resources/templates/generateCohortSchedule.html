@@ -5,28 +5,10 @@
     <title>genereer rooster</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script th:inline="javascript">
-        var checkSubject= [[${checkSubject}]];
-        var checkAvail= [[${checkAvailbility}]];
-        var checkOverlap= [[${checkOverlap}]];
-        var checkHours= [[${checkHours}]];
-        var cohortSchedule=[[${cohortSchedule}]];
-        var subjectToSet=[[${selectedSubject}]];
-        var teacherToSet=[[${selectedTeacher}]];
-        var roomToSet=[[${selectedRoom}]];
-        function SelectElement(id, valueToSelect){
-            document.getElementById(id).value =valueToSelect;
-            console.log(document.getElementById(id).value);   }
-        function insertText(){
-            if (checkSubject !== null) {
-                document.getElementById("tempVariable").style.background = "red";
-                document.getElementById("tempVariable").innerHTML = checkSubject + " " + checkHours;
-            }
-            SelectElement("someVariable" + "subjectMenu", subjectToSet);
-            SelectElement("someVariable" +"teacherMenu", teacherToSet);
-            SelectElement("someVariable" +"roomMenu", roomToSet);
-        }
-    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
 </head>
 <body onload= "insertText()">
 <nav class="navbar navbar-dark bg-dark">
@@ -56,43 +38,43 @@
         </tablehead>
         <tablebody>
             <tr class="row m-0" th:each="schedule:${cohortschedule}">
-                <form th:id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
+                <form id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
                       th:object="${cohortschedule}"
                       method="post">
                     <td class="d-inline-block col-1">
-                        <input type="${schedule}" NAME="cohort" id="cohort" style="background-color:
+                        <input type="${schedule}" NAME="cohort" th:id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
                     <td class="d-inline-block col-2">
-                        <input type="${schedule}" NAME="date" id="date" style="background-color:
+                        <input type="${schedule}" NAME="date" th:id="dateDay" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
                     <td class="d-inline-block col-1">
-                        <input type="${schedule}" NAME="day" id="day" style="background-color:
+                        <input type="${schedule}" NAME="day" th:id="day" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
                     </td>
                     <td class="d-inline-block col-1">
-                        <input type="${schedule}" NAME="daypart" id="daypart" style="background-color:
+                        <input type="${schedule}" NAME="daypart" th:id="daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
                                readonly/>
                     </td>
                     <td class="d-inline-block col-3">
                         <form>
                             <div>
-                                <select th:with="someVariable=${schedule.getId()}" th:id="someVariable + subjectMenu" id = "subjectMenu" class="subject" name="subjectMenu">
+                                <select th:with="subjectVariable='${schedule.getId()} + subject'" th:id="subjectVariable" id = "subjectMenu" class="subject" name="subjectMenu">
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
                                 </select>
                             </div>
                             <div>
-                                <select th:with="someVariable=${schedule.getId()}" th:id="someVariable + teacherMenu" id="teacherMenu" class="user" name="teacherMenu">
+                                <select th:with="teacherVariable='${schedule.getId()} + teacher'" th:id="teacherVariable" id="teacherMenu" class="user" name="teacherMenu">
                                     <option>selecteer docent</option>
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
                                 </select>
                             </div>
                             <div>
-                                <select th:with="someVariable=${schedule.getId()}" th:id="someVariable + roomMenu" id="roomMenu" class="classRoom" name="roomMenu">
+                                <select th:with="roomVariable='${schedule.getId()}+ room'" th:id="roomVariable" id="roomMenu" class="classRoom" name="roomMenu">
                                     <option>selecteer lokaal</option>
                                     <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[0]}">
                                 </select>
@@ -107,15 +89,15 @@
                     </td>
                     <td class="d-inline-block col-1">
                         <div>
-                            <button type="submit" class="btn btn-info" th:value="check" name="check"
-                                    th:id="${schedule.getId()}" th:form="${schedule.getId()}">check
+                            <button th:with="buttonVariableC='${schedule.getId()} + check'" th:id="buttonVariableC" type="submit" class="btn btn-info" th:value="check" name="check"
+                                     th:form="${schedule.getId()}">check
                             </button>
                         </div>
                     </td>
                     <<td class="d-inline-block col-1">
                     <div>
-                        <button type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
-                                th:id="${schedule.getId()}" th:form="${schedule.getId()}">opslaan
+                        <button th:with="buttonVariableS='${schedule.getId()} + opslaan'" th:id="buttonVariableS" type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
+                                 th:form="${schedule.getId()}">opslaan
                         </button>
                     </div>
                 </td>
@@ -125,4 +107,84 @@
     </table>
 </div>
 </body>
+<script th:inline="javascript">
+
+    cohortnr=$('#cohort').val();
+    console.log(cohortnr);
+    dateDay=$('#dateDay').val();
+    console.log(dateDay);
+    day=$("#day").val();
+    console.log(day);
+    daypart=$('#daypart').val();
+    console.log(daypart);
+
+    subjectnr=$('#subjectVariable').val();
+    console.log(subjectnr);
+    teachernr=$('#teacherVariable').val();
+    console.log(teachernr);
+
+
+    $("#buttonVariableC").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/generateCohortSchedule/test/",
+            data: {
+                "cohortnr":cohortnr,
+                "dateDay":dateDay,
+                "day":day,
+                "daypart":daypart,
+                "subjectnr" :subjectnr,
+                "teachernr":teachernr
+            },
+            success: function(result) {
+                if(result=="OK"){
+                    document.getElementById("tempVariable").style.background = "green";
+                    document.getElementById("tempVariable").innerHTML = "Geen conflicten gevonden";}
+                else if(result=="NOK"){
+                    document.getElementById("tempVariable").style.background = "red";
+                    document.getElementById("tempVariable").innerHTML = "2 conflicten: DocentUrenoverschreiding, Docent niet beschikbaar";
+                }
+                else if(result=="UrenNOK"){
+                    document.getElementById("tempVariable").style.background = "red";
+                    document.getElementById("tempVariable").innerHTML = "1 conflict: DocentUrenoverschreiding";
+                }
+                else{
+                    document.getElementById("tempVariable").style.background = "red";
+                    document.getElementById("tempVariable").innerHTML = "1 conflict: Docent niet beschikbaar";
+
+                }
+
+                           },
+            error: function(result) {
+                alert('error');
+            }
+        });
+    });
+
+    <!--
+            var checkSubject= [[${checkSubject}]];
+            var checkAvail= [[${checkAvailbility}]];
+            var checkOverlap= [[${checkOverlap}]];
+            var checkHours= [[${checkHours}]];
+            var cohortSchedule=[[${cohortSchedule}]];
+            var subjectToSet=[[${selectedSubject}]];
+            var teacherToSet=[[${selectedTeacher}]];
+            var roomToSet=[[${selectedRoom}]];
+            function SelectElement(id, valueToSelect){
+                document.getElementById(id).value =valueToSelect;
+                console.log(document.getElementById(id).value);   }
+            function insertText(){
+                if (checkSubject !== null) {
+                    document.getElementById("tempVariable").style.background = "red";
+                    document.getElementById("tempVariable").innerHTML = checkSubject + " " + checkHours;
+                }
+                SelectElement("someVariable" + "subjectMenu", subjectToSet);
+                SelectElement("someVariable" +"teacherMenu", teacherToSet);
+                SelectElement("someVariable" +"roomMenu", roomToSet);
+            }
+
+            -->
+
+</script>
 </html>
