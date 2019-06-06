@@ -7,12 +7,16 @@ import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 
+import com.sun.net.httpserver.HttpContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Enumeration;
@@ -78,6 +82,9 @@ public class CohortScheduleController {
         System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
         return cohortWeeks;
     }
+
+    // FOR AJAX google: ajax post to spring mvc controller
+
 
 
     @GetMapping(value = "/generateCohortSchedule")

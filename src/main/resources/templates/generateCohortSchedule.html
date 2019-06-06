@@ -7,8 +7,36 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script th:inline="javascript">
+
+
+        var subject=$('#someVariable + subjectMenu').val();
+        var teacher=$('#someVariable + teacherMenu').val();
+        var room=$('#someVariable + roomMenu').val();
+        var date=$('#date').val();
+        var day=$('#day').val();
+        var daypart=$('#daypart').val();
+        var cohort=$('#cohort').val();
+
+        const xhr = new XMLHttpRequest();
+
+
+        xhr.onload=function(){
+            const serverResponse=document.getElementById("tempVariable").innerHTML=this.responseText;
+
+        }
+        xhr.open("POST","/generateCohortSchedule/ajaxtest");
+
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        data: JSON.stringify(myData), // This converts the payLoad to Json to pass along to Controller
+            success :function(result) {
+        }
+
+
+
+        <!--
 
        var checkSubject= [[${checkSubject}]];
        var checkAvail= [[${checkAvailbility}]];
@@ -19,22 +47,20 @@
        var teacherToSet=[[${selectedTeacher}]];
        var roomToSet=[[${selectedRoom}]];
 
-
-
        function SelectElement(id, valueToSelect){
            document.getElementById(id).value =valueToSelect;
            console.log(document.getElementById(id).value);   }
 
        function insertText(){
            if (checkSubject !== null) {
-               document.getElementById('td1').style.background = "red";
-               document.getElementById('td1').innerHTML = checkSubject;
+               document.getElementById("tempVariable").style.background = "red";
+               document.getElementById("tempVariable").innerHTML = checkSubject;
                      }
-           SelectElement([${schedule.getId()], subjectToSet);
-           SelectElement("teacherSelectMenu", teacherToSet);
-           SelectElement("roomSelectMenu", roomToSet);
+           SelectElement("someVariable" + "subjectMenu", subjectToSet);
+           SelectElement("someVariable" +"teacherMenu", teacherToSet);
+           SelectElement("someVariable" +"roomMenu", roomToSet);
        }
-
+-->
 
 
     </script>
@@ -82,14 +108,14 @@
                       th:object="${cohortschedule}"
                       method="post">
                     <td class="d-inline-block col-1">
-                        <input type="${schedule}" NAME="cohort" id="cohort" style="background-color:
+                        <input type="${schedule}" NAME="cohort" th:id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
 
 
                     <td class="d-inline-block col-2">
-                        <input type="${schedule}" NAME="date" id="date" style="background-color:
+                        <input type="${schedule}" NAME="date" th:id="date" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
 
@@ -108,7 +134,7 @@
                         <form>
 
                             <div>
-                                <select th:id="${schedule.getId()}" id = "subjectMenu" class="subject" name="subjectMenu">
+                                <select th:with="someVariable=${schedule.getId()}" th:id="someVariable + subjectMenu" id = "subjectMenu" class="subject" name="subjectMenu">
 
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
@@ -117,25 +143,18 @@
 
 
                             <div>
-                                <select th:id="teacherSelectMenu" id="teacherMenu" class="user" name="teacherMenu">
+                                <select th:with="someVariable=${schedule.getId()}" th:id="someVariable + teacherMenu" id="teacherMenu" class="user" name="teacherMenu">
                                     <option>selecteer docent</option>
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
                                 </select>
                             </div>
 
 
-                            <div>
-                                <select th:id="roomSelectMenu" id="roomMenu" class="classRoom" name="roomMenu">
-                                    <option>selecteer lokaal</option>
-                                    <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[1]}">
-                                </select>
-                            </div>
-
                         </form>
 
                     </td>
 
-                    <td id="td1" class="d-inline-block col-2">
+                    <td th:with="tempVariable=${schedule.getId()}" th:id="tempVariable" th:value="tempVariable" id="constraint_box" class="d-inline-block col-2">
                         <div>
                             <form th:name="constraint">
                             </form>
@@ -146,7 +165,7 @@
                     <td class="d-inline-block col-1">
                         <div>
                         <button type="submit" class="btn btn-info" th:value="check" name="check"
-                                th:id="${schedule.getId()}" th:form="${schedule.getId()}">check
+                                th:id="checkBtn" th:form="${schedule.getId()}">check
                         </button>
                     </div>
                     </td>
