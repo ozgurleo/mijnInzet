@@ -20,83 +20,83 @@
 </nav>
 <br>
 <br>
-<div class="container">
+<div class="table-responsive col-sm-10">
     <table id="generateSchedule" class="table table-bordered">
         <tablehead>
             <thead class="thead-dark">
-            <tr class="row m-0">
-                <th class="d-inline-block col-1">Cohort</th>
-                <th class="d-inline-block col-1">DATUM</th>
-                <th class="d-inline-block col-1">DAG</th>
-                <th class="d-inline-block col-1">DAGDEEL</th>
-                <th class="d-inline-block col-3">PLANNING</th>
-                <th class="d-inline-block col-3">       </th>
-                <th class="d-inline-block col-1">       </th>
-                <th class="d-inline-block col-1">       </th>
+            <tr>
+                <th>Cohort</th>
+                <th>DATUM</th>
+                <th>DAG</th>
+                <th>DAGDEEL</th>
+                <th>PLANNING</th>
+                <th>           check              </th>
+                <th>       </th>
+                <th>       </th>
             </tr>
             </thead>
         </tablehead>
         <tablebody>
-            <tr class="row m-0" th:each="schedule:${cohortschedule}">
+            <tr th:each="schedule:${cohortschedule}">
                 <form id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
                       th:object="${cohortschedule}"
                       method="post">
-                    <td class="d-inline-block col-1">
+                    <td>
                         <input th:with="cohort=${schedule.getCohort().getCohortId()}"type="${schedule}" NAME="cohort" th:id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
-                    <td class="d-inline-block col-1">
+                    <td>
                         <input th:with="dateDay=${schedule.getId()}" type="${schedule}" NAME="date" th:id="dateDay" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
-                    <td class="d-inline-block col-1">
+                    <td>
                         <input th:with="day=${schedule.getId()}"type="${schedule}" NAME="day" th:id="day" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
                     </td>
-                    <td class="d-inline-block col-1">
+                    <td>
                         <input th:with="datepart=${schedule.getId()}" type="${schedule}" NAME="daypart" th:id="daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
                                readonly/>
                     </td>
-                    <td class="d-inline-block col-3">
+                    <td>
                         <form>
                             <div>
-                                <select th:with="subjectVariable=${schedule.getId()} + 'subject'" th:id="subjectVariable" class="subject">
+                                <select th:id="subjectVariable" class="subject">
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
                                 </select>
                             </div>
                             <div>
-                                <select th:with="teacherVariable=${schedule.getId()} + 'teacher'" th:id="teacherVariable" class="user">
+                                <select th:id="teacherVariable" class="teacher">
                                     <option>selecteer docent</option>
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
                                 </select>
                             </div>
                             <div>
-                                <select th:with="roomVariable=${schedule.getId()}+ 'room'" th:id="roomVariable" class="classRoom">
+                                <select th:id="roomVariable" class="room">
                                     <option>selecteer lokaal</option>
                                     <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[0]}">
                                 </select>
                             </div>
                         </form>
                     </td>
-                    <td th:with="textBoxVariable=${schedule.getId()}" th:id="${textBoxVariable} + 'constraint_box'" th:value="tempVariable" id="constraint_box" class="d-inline-block col-3">
+                    <td th:with ="textBox=${schedule.getId()}" th:id="textBox" class="Box">
                         <div>
-                            <form th:name="constraint">
+                            <form th:name="constraint" >
                             </form>
                         </div>
                     </td>
-                    <td class="d-inline-block col-1">
+                    <td >
                         <div>
-                            <button th:id="checkButton" class="checkButton" th:value="check" name="check"
+                            <button th:id="${schedule.getId()}" type="submit" class="checkButton" th:value="check" name="check"
                                      th:form="${schedule.getId()}">check
                             </button>
                         </div>
                     </td>
-                    <<td class="d-inline-block col-1">
+                    <<td>
                     <div>
-                        <button th:id="opslaanButton" type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
+                        <button th:id="saveButton" type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
                                  th:form="${schedule.getId()}">opslaan
                         </button>
                     </div>
@@ -119,21 +119,21 @@
     console.log(daypart);
 
     <!--Select only the value that is selected in the dropdownmenu -->
-    $("#subjectVariable").on('change', function(){
-        console.log("list item selected");
-         subjectnr = $(this).val();
+    $(".subject").on('change', function(){
+        subjectnr = $(this).val();
         console.log(subjectnr);
     });
 
-    $("#teacherVariable").on('change', function(){
+    $(".teacher").on('change', function(){
         teachernr = $(this).val();
         console.log(teachernr);
     });
 
 
-    $('.checkButton').click(function(e) {
+
+    $(".checkButton").click(function(e) {
         e.preventDefault();
-        var button=$(this).val();
+
         $.ajax({
             type: "POST",
             url: "/generateCohortSchedule/check/",
@@ -147,19 +147,19 @@
             },
             success: function(result) {
                 if(result=="OK"){
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").style.background = "green";
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").innerHTML = "0 conflicten";}
+                    document.getElementById("textBox").style.background = "green";
+                    document.getElementById("textBox").innerHTML = "0 conflicten";}
                 else if(result=="NOK"){
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").style.background = "red";
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").innerHTML ="2 conflicten:" + "<br>" +"- Docenturen overschreden" + "<br>" + "- Docent niet aanwezig" ;
+                    document.getElementById("textBox").style.background = "red";
+                    document.getElementById("textBox").innerHTML ="2 conflicten:" + "<br>" +"- Docenturen overschreden" + "<br>" + "- Docent niet aanwezig" ;
                 }
                 else if(result=="UrenNOK"){
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").style.background = "red";
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").innerHTML = "1 conflict:" + "<br>" + "- Docenturen overschreden";
+                    document.getElementById("textBox").style.background = "red";
+                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "- Docenturen overschreden";
                 }
                 else{
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").style.background = "red";
-                    document.getElementById("${textBoxVariable} + 'constraint_box'").innerHTML = "1 conflict:" + "<br>" + "- Docent niet aanwezig";
+                    document.getElementById("textBox").style.background = "red";
+                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "- Docent niet aanwezig";
 
                 }
 
