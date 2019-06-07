@@ -14,6 +14,9 @@ public interface CohortRepository extends JpaRepository<Cohort, Integer> {
     List<Cohort> findAll();
     Date findByBeginDate(Date date);
 
+    Cohort getByCohortId(int cohortId);
+
+
 
 
 }

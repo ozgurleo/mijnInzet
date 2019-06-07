@@ -56,4 +56,13 @@ public class Subject {
         this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "subjectId=" + subjectId +
+                ", subjectName='" + subjectName + '\'' +
+                ", estimatedHours=" + estimatedHours +
+                ", yearsToExpiryDate=" + yearsToExpiryDate +
+                '}';
+    }
 }

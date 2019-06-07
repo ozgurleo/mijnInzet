@@ -13,4 +13,6 @@ public interface TeacherHoursRepository extends JpaRepository<TeacherHours, Inte
 
 
 
+
+
 }

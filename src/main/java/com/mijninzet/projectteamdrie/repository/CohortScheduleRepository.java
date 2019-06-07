@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.repository;
 
+import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
 import com.mijninzet.projectteamdrie.model.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,10 +19,16 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
 
     //Brahim Code: get all teachers Names by Role=teacher
     @Query(value="SELECT * FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id IN (select MAX(cohort_cohort_id) FROM mijn_inzet.cohort_schedule) ;", nativeQuery = true)
+
     List<CohortSchedule> getScheduleLastCohort();
+
+    List<CohortSchedule> getAllByCohort_CohortId(int cohortId);
 
     List<CohortSchedule> getAllByUserIdAndSubject_SubjectId(int userId, int subjectId);
 
+    List<CohortSchedule> getCohortScheduleByCohort_CohortIdAndUser_Id(int cohortId, int userId);
+
+    List<CohortSchedule> getCohortScheduleByUser_Id(int userId);
 
 
 }

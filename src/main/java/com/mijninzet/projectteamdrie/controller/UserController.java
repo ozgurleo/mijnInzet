@@ -69,18 +69,6 @@ public class UserController {
 
     }
 
-    @GetMapping("/teacherFTE")
-    public String getTeacherFte(User user, Model model){
-    User currentUser=userService.findById(user.getCurrentUserId());
-    double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
-    double userFTE = user.getFte();
-    model.addAttribute("voornaam", currentUser.getName());
-    model.addAttribute("achternaam", currentUser.getLastName());
-    model.addAttribute("fte", userFTE );
-    model.addAttribute("beschikbareUren",availableHours);
-
-    return"teacherFTE";
-    }
 //
 //
 //    @RequestMapping("/users/{id}")

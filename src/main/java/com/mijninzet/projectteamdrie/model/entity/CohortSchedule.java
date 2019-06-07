@@ -105,4 +105,18 @@ public class CohortSchedule {
    public void setCohort(Cohort cohort) {
       this.cohort = cohort;
    }
+
+   @Override
+   public String toString() {
+      return "CohortSchedule{" +
+              "id=" + id +
+              ", day='" + day + '\'' +
+              ", daypart='" + daypart + '\'' +
+              ", date=" + date +
+              ", user=" + user +
+              ", subject=" + subject +
+              ", classRoom='" + classRoom + '\'' +
+              ", cohort=" + cohort +
+              '}';
+   }
 }

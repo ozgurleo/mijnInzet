@@ -53,11 +53,10 @@ public class Cohort {
 
     @Override
     public String toString() {
-        return "Cohort{" +
-                "cohortId=" + cohortId +
-                ", beginDate=" + beginDate +
-                ", endDate=" + endDate +
-                '}';
+        return " Cohort " +
+                "  " + cohortId +
+                " | vanaf " + beginDate +
+                " tot " + endDate;
     }
 
 }

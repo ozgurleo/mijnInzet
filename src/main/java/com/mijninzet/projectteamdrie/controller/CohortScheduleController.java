@@ -29,6 +29,8 @@ public class CohortScheduleController {
     SubjectRepository subjectRepo;
     @Autowired
     TeacherHoursRepository teacherHoursRepository;
+    @Autowired
+    CohortRepository cohortRepository;
 
     public static final int DAYS_IN_WEEK = 7;
 
@@ -38,12 +40,12 @@ public class CohortScheduleController {
         int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
 
         if (preference == 1) {
-            output = "OK";
+            output = "preference is ok";
 
         } else if (preference == 2) {
-            output = "partly OK";
+            output = "preference is partly OK";
         } else if (preference == 3) {
-            output = "NOK";
+            output = "preference is NOK";
         }
         return output;
     }
@@ -57,7 +59,6 @@ public class CohortScheduleController {
         Subject subject = subjectRepo.getBySubjectId(subjectId);
         String subjectname = subject.getSubjectName();
         TeacherHours teacherHours = teacherHoursRepository.findByUserId(teacherId);
-        System.out.println("======================= Uit checkTeacherHours komt subject : " + subjectname + " en teacherHours : " + teacherHours);
         int realTeacherHours = 4;
 
         if (teacherHours != null) {
@@ -69,15 +70,12 @@ public class CohortScheduleController {
                 }
             } else {
                 int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
-                System.out.println(" -------------------  Uit checkTeacherHours komt : YearsOfExperience " + yearsOfExperience + "----------------------");
                 switch (yearsOfExperience) {
                     case 1:
                         realTeacherHours = 6;
-                        System.out.println("----------------------  Uit checkTeacherHours komt : realteacherHours " + realTeacherHours + " ---------------- ");
                         break;
                     case 2:
                         realTeacherHours = 4;
-                        System.out.println("----------------------  Uit checkTeacherHours komt : realteacherHours " + realTeacherHours + " ---------------- ");
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
@@ -86,17 +84,15 @@ public class CohortScheduleController {
             }
             return "UrenOk";
         } else {
-            return "docentNietBekend";
+            return "IetsofIemandNietBekend";
         }
     }
-
 
     public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId) {
 
         boolean experience = false;
 
         List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
-        System.out.println("UIT doesTeacherHaveExpWithSubject komt cohortscheduleList " + cohortScheduleList + "De size is " + cohortScheduleList.size());
         if (cohortScheduleList.size() > 0) {
             experience = true;
         } else {
@@ -144,6 +140,18 @@ public class CohortScheduleController {
         return cohortWeeks;
     }
 
+    public List<CohortSchedule> getAllSchedulesInCohort(int cohortId) {
+
+       List<CohortSchedule> listCohortSchedulesByCohortid = cohortScheduleRepo.getAllByCohort_CohortId(cohortId);
+
+       Cohort cohort = cohortRepository.getByCohortId(cohortId);
+
+       LocalDate beginDate = cohort.getBeginDate();
+       LocalDate endDate = cohort.getEndDate();
+
+       return listCohortSchedulesByCohortid;
+
+    }
 
     @GetMapping(value = "/generateCohortSchedule")
     public String generateCohortSchedule(Model model) {
