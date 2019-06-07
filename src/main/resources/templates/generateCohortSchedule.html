@@ -10,12 +10,11 @@
 
 
 </head>
-<body onload= "insertText()">
+<body>
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
     </form>
 </nav>
 <br>
@@ -42,20 +41,20 @@
                       th:object="${cohortschedule}"
                       method="post">
                     <td>
-                        <input th:with="cohort=${schedule.getCohort().getCohortId()}"type="${schedule}" NAME="cohort" th:id="cohort" style="background-color:
+                        <input th:with="cohort=${schedule.getCohort().getCohortId()}"type="${schedule}" class="cohort" NAME="cohort" th:data-ID="${schedule.getId()}" th:id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
                     <td>
-                        <input th:with="dateDay=${schedule.getId()}" type="${schedule}" NAME="date" th:id="dateDay" style="background-color:
+                        <input th:with="dateDay=${schedule.getId()}" type="${schedule}" class="date" NAME="date" th:data-ID="${schedule.getId()}" th:id="dateDay" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
                     <td>
-                        <input th:with="day=${schedule.getId()}"type="${schedule}" NAME="day" th:id="day" style="background-color:
+                        <input th:with="day=${schedule.getId()}"type="${schedule}" class="day" NAME="day" th:data-ID="${schedule.getId()}" th:id="day" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
                     </td>
                     <td>
-                        <input th:with="datepart=${schedule.getId()}" type="${schedule}" NAME="daypart" th:id="daypart" style="background-color:
+                        <input th:with="datepart=${schedule.getId()}" type="${schedule}" class="daypart" NAME="daypart" th:data-ID="${schedule.getId()}" th:id="daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
                                readonly/>
                     </td>
@@ -133,7 +132,7 @@
 
     $(".checkButton").click(function(e) {
         e.preventDefault();
-        var thisId = $(this).data("id");
+        thisId = $(this).data("id");
         console.log("CHECKBUTTON_ID = :" + thisId);
 
         var textBoxId=thisId-1;
@@ -147,12 +146,12 @@
             type: "POST",
             url: "/generateCohortSchedule/check/",
             data: {
-                "cohortnr":cohortnr,
-                "dateDay":dateDay,
-                "day":day,
-                "daypart":daypart,
-                "subjectnr" :subjectnr,
-                "teachernr":teachernr
+                "cohortnr":document.getElementsByClassName("cohort")[textBoxId].value,
+                "dateDay":document.getElementsByClassName("date")[textBoxId].value,
+                "day":document.getElementsByClassName("day")[textBoxId].value,
+                "daypart":document.getElementsByClassName("daypart")[textBoxId].value,
+                "subjectnr" :document.getElementsByClassName("subject")[textBoxId].value,
+                "teachernr":document.getElementsByClassName("teacher")[textBoxId].value
             },
             success: function(result) {
                 if(result=="OK"){
@@ -179,29 +178,6 @@
         });
     });
 
-    <!--
-            var checkSubject= [[${checkSubject}]];
-            var checkAvail= [[${checkAvailbility}]];
-            var checkOverlap= [[${checkOverlap}]];
-            var checkHours= [[${checkHours}]];
-            var cohortSchedule=[[${cohortSchedule}]];
-            var subjectToSet=[[${selectedSubject}]];
-            var teacherToSet=[[${selectedTeacher}]];
-            var roomToSet=[[${selectedRoom}]];
-            function SelectElement(id, valueToSelect){
-                document.getElementById(id).value =valueToSelect;
-                console.log(document.getElementById(id).value);   }
-            function insertText(){
-                if (checkSubject !== null) {
-                    document.getElementById("tempVariable").style.background = "red";
-                    document.getElementById("tempVariable").innerHTML = checkSubject + " " + checkHours;
-                }
-                SelectElement("someVariable" + "subjectMenu", subjectToSet);
-                SelectElement("someVariable" +"teacherMenu", teacherToSet);
-                SelectElement("someVariable" +"roomMenu", roomToSet);
-            }
-
-            -->
 
 </script>
 </html>
