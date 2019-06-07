@@ -151,15 +151,15 @@
                     document.getElementById("textBox").innerHTML = "0 conflicten";}
                 else if(result=="NOK"){
                     document.getElementById("textBox").style.background = "red";
-                    document.getElementById("textBox").innerHTML ="2 conflicten:" + "<br>" +"- Docenturen overschreden" + "<br>" + "- Docent niet aanwezig" ;
+                    document.getElementById("textBox").innerHTML ="2 conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
                 }
                 else if(result=="UrenNOK"){
                     document.getElementById("textBox").style.background = "red";
-                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "- Docenturen overschreden";
+                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "*Docenturen overschreden";
                 }
                 else{
                     document.getElementById("textBox").style.background = "red";
-                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "- Docent niet aanwezig";
+                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "*Docent niet aanwezig";
 
                 }
 
