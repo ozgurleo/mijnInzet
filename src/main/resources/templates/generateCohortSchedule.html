@@ -37,7 +37,7 @@
             </thead>
         </tablehead>
         <tablebody>
-            <tr th:each="schedule:${cohortschedule}" >
+            <tr th:each="schedule:${cohortschedule}" th:data-ID="${schedule.getId()}" th:id="tr_tag">
                 <form id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
                       th:object="${cohortschedule}"
                       method="post">
@@ -62,26 +62,26 @@
                     <td>
                         <form>
                             <div>
-                                <select th:id="subjectVariable" class="subject">
+                                <select th:id="subjectVariable" class="subject" th:data-ID="${schedule.getId()}">
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
                                 </select>
                             </div>
                             <div>
-                                <select th:id="teacherVariable" class="teacher">
+                                <select th:id="teacherVariable" class="teacher" th:data-ID="${schedule.getId()}">
                                     <option>selecteer docent</option>
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
                                 </select>
                             </div>
                             <div>
-                                <select th:id="roomVariable" class="room">
+                                <select th:id="roomVariable" class="room" th:data-ID="${schedule.getId()}">
                                     <option>selecteer lokaal</option>
                                     <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[0]}">
                                 </select>
                             </div>
                         </form>
                     </td>
-                    <td th:with ="textBox=${schedule.getId()}" th:id="textBox" class="Box">
+                    <td th:with ="textBox=${schedule.getId()}" th:id="textBox" th:data-ID="${schedule.getId()}"class="Box">
                         <div>
                             <form th:name="constraint" >
                             </form>
@@ -89,7 +89,7 @@
                     </td>
                     <td >
                         <div>
-                            <button th:id="${schedule.getId()}" type="submit" class="checkButton" th:value="check" name="check"
+                            <button th:id="checkButton" type="submit" th:data-ID="${schedule.getId()}" class="checkButton" th:value="check" name="check"
                                      th:form="${schedule.getId()}">check
                             </button>
                         </div>
@@ -133,6 +133,17 @@
 
     $(".checkButton").click(function(e) {
         e.preventDefault();
+        var thisId = $(this).data("id");
+
+        var temp = $("#checkButton").data('id');
+        console.log("CHECKBUTTON_ID = :" + thisId);
+
+        var childElement=temp-1;
+        console.log("childElement = :" + childElement);
+        var x = document.getElementsByClassName("Box")[childElement];
+        console.log("elementBYClassName : " + x);
+
+
         console.log(e)
         $.ajax({
             type: "POST",
@@ -147,19 +158,19 @@
             },
             success: function(result) {
                 if(result=="OK"){
-                    document.getElementById("textBox").style.background = "green";
-                    document.getElementById("textBox").innerHTML = "0 conflicten";}
+                    x.style.background = "green";
+                    x.innerHTML = "kan opgeslagen worden";}
                 else if(result=="NOK"){
-                    document.getElementById("textBox").style.background = "red";
-                    document.getElementById("textBox").innerHTML ="2 conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
+                    x.style.background = "red";
+                    x.innerHTML ="2 conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
                 }
                 else if(result=="UrenNOK"){
-                    document.getElementById("textBox").style.background = "red";
-                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "*Docenturen overschreden";
+                    x.style.background = "red";
+                    x.innerHTML = "1 conflict:" + "<br>" + "*Docenturen overschreden";
                 }
                 else{
-                    document.getElementById("textBox").style.background = "red";
-                    document.getElementById("textBox").innerHTML = "1 conflict:" + "<br>" + "*Docent niet aanwezig";
+                    x.style.background = "red";
+                    x.innerHTML = "1 conflict:" + "<br>" + "*Docent niet aanwezig";
 
                 }
 
