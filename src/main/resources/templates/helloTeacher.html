@@ -3,49 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"-->
+<!--            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"-->
+<!--            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"-->
+<!--            crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
 </head>
+
 
 <body>
 
 
-<!-- Navigatie-menu -->
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloTeacher">HOME</a>
-    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>
-    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
-    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
-    <!--<a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>-->
-    <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" style="color: #b8d1f3">
-            MIJN VAK & ROOSTER VOORKEUREN
-        </a>
+<!--&lt;!&ndash; Navigatie-menu &ndash;&gt;-->
+<!--<nav class="navbar navbar-dark bg-dark">-->
+<!--    <a class="navbar-brand" href="/helloTeacher">HOME</a>-->
+<!--    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>-->
+<!--    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
+<!--    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>-->
+<!--    &lt;!&ndash;<a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>&ndash;&gt;-->
+<!--    <div class="dropdown show">-->
+<!--        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"-->
+<!--           aria-haspopup="true" aria-expanded="false" style="color: #b8d1f3">-->
+<!--            MIJN VAK & ROOSTER VOORKEUREN-->
+<!--        </a>-->
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/schedule/listCohort">Mijn roostervoorkeuren</a>
-            <a class="dropdown-item" href="/showSubjects">Mijn vak voorkeuren</a>
-        </div>
-    </div>
-    <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false">MIJN INCIDENTEN</a>
-    <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
-    </form>
-</nav>
-<!-- Hoofdtekst  -->
+<!--        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--            <a class="dropdown-item" href="/schedule/listCohort">Mijn roostervoorkeuren</a>-->
+<!--            <a class="dropdown-item" href="/showSubjects">Mijn vak voorkeuren</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false">MIJN INCIDENTEN</a>-->
+<!--    &lt;!&ndash;<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>&ndash;&gt;-->
+<!--    <form th:action="@{/logout}" method="post">-->
+<!--        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
+<!--        &lt;!&ndash;    <a class="nav-link" type="submit">UITLOGGEN</a>&ndash;&gt;-->
+<!--    </form>-->
+<!--</nav>-->
+<!--&lt;!&ndash; Hoofdtekst  &ndash;&gt;-->
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloTeacher">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/users/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/showTasks">VACATURBEHEER</a></li>
+                    <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
+                    <li class="dropdown">
+                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MIJN VAK & ROOSTER VOORKEUREN <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
+                            <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/list">INCIDENTEN</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
 
 <br><br><br>
 
@@ -55,7 +96,8 @@
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
-                <h1 class="masthead-brand">Mijn Inzet</h1>
+<!--                <h1 class="masthead-brand">Mijn Inzet</h1>-->
+                <img th:src="@{/images/logomyinzet.png}"/>
             </div>
         </div>
     </header>

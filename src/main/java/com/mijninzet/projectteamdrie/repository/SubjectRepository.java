@@ -11,6 +11,9 @@ import java.util.ArrayList;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
+    @Query(value = "SELECT subject_id FROM mijn_inzet.subject where subject_name = :subject_name", nativeQuery = true)
+    int getSubjectIdByName(@Param("subject_name")String subject_name);
+
     //Brahim Code: get all subject names
     @Query(value="SELECT * FROM mijn_inzet.subject;", nativeQuery = true)
     ArrayList<Object[]> getSubjects();
