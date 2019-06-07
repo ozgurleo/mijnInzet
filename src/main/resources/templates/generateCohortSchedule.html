@@ -37,7 +37,7 @@
             </thead>
         </tablehead>
         <tablebody>
-            <tr th:each="schedule:${cohortschedule}">
+            <tr th:each="schedule:${cohortschedule}" >
                 <form id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
                       th:object="${cohortschedule}"
                       method="post">
@@ -97,7 +97,7 @@
                     <<td>
                     <div>
                         <button th:id="saveButton" type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
-                                 th:form="${schedule.getId()}">opslaan
+                                th:data-id="${schedule.getId()}" th:form="${schedule.getId()}">opslaan
                         </button>
                     </div>
                 </td>
@@ -133,7 +133,7 @@
 
     $(".checkButton").click(function(e) {
         e.preventDefault();
-
+        console.log(e)
         $.ajax({
             type: "POST",
             url: "/generateCohortSchedule/check/",
