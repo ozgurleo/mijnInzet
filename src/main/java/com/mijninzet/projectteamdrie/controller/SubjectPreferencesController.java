@@ -38,6 +38,7 @@ public class SubjectPreferencesController {
     @RequestMapping(value = "/submitPreferences", method = RequestMethod.POST)
     public String submitPreferences(HttpServletRequest request, Model model) {
         Enumeration paramNames = request.getParameterNames();
+        System.out.println("enums" + paramNames);
 //        test(request);
         while (paramNames.hasMoreElements()) {
             String subjectName = (String) paramNames.nextElement();
@@ -45,15 +46,11 @@ public class SubjectPreferencesController {
             System.out.println("-- Dit is de opgehaalde subjectname: " + subjectName);
             System.out.println("-- De opgehaalde subjectpreference: " + paramValues[0]);
             int subjectPreference;
-            if (!subjectName.equals("subjectform")) {
-                subjectPreference = Integer.parseInt(paramValues[0]);
-                int subjectID = subjectRepository.getSubjectIdByName(subjectName);
-                int userId = UserSingleton.getInstance().getId();
-                System.out.printf("subjectpref: %d, subject id %d, user id: %d\n", subjectPreference, subjectID, userId);
-                subjectPreferenceRepository.insertPreference(subjectPreference, subjectID, userId);
-            } else {
-                break;
-            }
+            subjectPreference = Integer.parseInt(paramValues[0]);
+            int subjectID = subjectRepository.getSubjectIdByName(subjectName);
+            int userId = UserSingleton.getInstance().getId();
+            System.out.printf("subjectpref: %d, subject id %d, user id: %d\n", subjectPreference, subjectID, userId);
+            subjectPreferenceRepository.insertPreference(subjectPreference, subjectID, userId);
         }
         return "teacherSubjectPreferences";
     }
