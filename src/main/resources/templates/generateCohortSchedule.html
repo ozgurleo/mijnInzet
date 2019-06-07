@@ -134,13 +134,11 @@
     $(".checkButton").click(function(e) {
         e.preventDefault();
         var thisId = $(this).data("id");
-
-        var temp = $("#checkButton").data('id');
         console.log("CHECKBUTTON_ID = :" + thisId);
 
-        var childElement=temp-1;
-        console.log("childElement = :" + childElement);
-        var x = document.getElementsByClassName("Box")[thisId];
+        var textBoxId=thisId-1;
+        console.log("childElement = :" + textBoxId);
+        var x = document.getElementsByClassName("Box")[textBoxId];
         console.log("elementBYClassName : " + x);
 
 
