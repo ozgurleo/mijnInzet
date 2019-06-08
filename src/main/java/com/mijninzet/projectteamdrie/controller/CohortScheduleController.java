@@ -190,83 +190,83 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
-
-    @PostMapping(value = "/generateCohortSchedule")
-    public String insertSchedule(HttpServletRequest request, Model model) {
-        System.out.println("POST METHOD IS AANGEROEPEN:");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("daypart = :" + request.getParameter("daypart"));
-        System.out.println("day = :" + request.getParameter("day"));
-        System.out.println("date = : " + request.getParameter("date"));
-        System.out.println("onderwerp = : " + request.getParameter("subjectMenu"));
-        System.out.println("docent = : " + request.getParameter("teacherMenu"));
-        System.out.println("lokaal = : " + request.getParameter("roomMenu"));
-        System.out.println("check = : " + request.getParameter("check"));
-        System.out.println("opslaan = : " + request.getParameter("opslaan"));
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------");
-
-        // Brahim code:  tbv checken welke parameterNamen met POST worden verstuurd:
-//        Enumeration paramNames = request.getParameterNames();
-//        while(paramNames.hasMoreElements()) {
-//            String paramName = (String)paramNames.nextElement();
-//            System.out.println("<tr><td>" + paramName + "</td>\n<td>");
-//            String[] paramValues = request.getParameterValues(paramName);
 //
-//            // Read single valued data
-//            if (paramValues.length == 1) {
-//                String paramValue = paramValues[0];
-//                if (paramValue.length() == 0)
-//                    System.out.println("<i>No Value</i>");
-//                else
-//                    System.out.println(paramValue);
-//            } else {
-//                // Read multiple valued data
-//                System.out.println("<ul>");
+//    @PostMapping(value = "/generateCohortSchedule")
+//    public String insertSchedule(HttpServletRequest request, Model model) {
+//        System.out.println("POST METHOD IS AANGEROEPEN:");
+//        System.out.println("-------------------------------------------------------------");
+//        System.out.println("-------------------------------------------------------------");
+//        System.out.println("daypart = :" + request.getParameter("daypart"));
+//        System.out.println("day = :" + request.getParameter("day"));
+//        System.out.println("date = : " + request.getParameter("date"));
+//        System.out.println("onderwerp = : " + request.getParameter("subjectMenu"));
+//        System.out.println("docent = : " + request.getParameter("teacherMenu"));
+//        System.out.println("lokaal = : " + request.getParameter("roomMenu"));
+//        System.out.println("check = : " + request.getParameter("check"));
+//        System.out.println("opslaan = : " + request.getParameter("opslaan"));
+//        System.out.println("-------------------------------------------------------------");
+//        System.out.println("-------------------------------------------------------------");
 //
-//                for(int i = 0; i < paramValues.length; i++) {
-//                    System.out.println("<li>" + paramValues[i]);
-//                }
-//                System.out.println("</ul>");
-//            }
-//        }
-//        System.out.println("</tr>\n</table>\n</body></html>");
-        // End code
-
-        // take date and split it up based on "-" and store in array of String-->
-        // then convert Strings to int and set the LocalDate using the ints.
-        String[] arrOfDate = request.getParameter("date").split("-", 0);
-        int year = Integer.parseInt(arrOfDate[0]);
-        int month = Integer.parseInt(arrOfDate[1]);
-        int day = Integer.parseInt(arrOfDate[2]);
-        LocalDate date = LocalDate.of(year, month, day);
-        String selectedSubject = request.getParameter("subjectMenu");
-        String selectedTeacher = request.getParameter("teacherMenu");
-        String selectedRoom = request.getParameter("roomMenu");
-
-
-        // add selection of the checkboxes to the modelAttribute
-        model.addAttribute("selectedSubject", selectedSubject);
-        model.addAttribute("selectedTeacher", selectedTeacher);
-        model.addAttribute("selectedRoom", selectedRoom);
-
-
-        //add result of contraints check to the modelAttribute
-        model.addAttribute("checkSubject", checkSubjectPreference(6, 1));
-        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend",date));
-        model.addAttribute("checkOverlap", checkCohortOverlap(6, date, "ochtend"));
-        model.addAttribute("checkHours", checkTeacherHours(Integer.parseInt(request.getParameter("teacherMenu")), Integer.parseInt(request.getParameter("subjectMenu"))));
-
-        model.addAttribute("subjects", subjectRepo.getSubjects());
-        model.addAttribute("teachers", userRepo.getTeachers());
-        model.addAttribute("rooms", subjectRepo.getRooms());
-        model.addAttribute("preferences", subjectRepo.getPreferences());
-        model.addAttribute("cohorts", cohortScheduleRepo.getCohorts());
-        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
-        System.out.println("DIT IS NA HET OPHALEN VD LASTCOHORTSCHEDULE!!!");
-        return "generateCohortSchedule";
-    }
+//        // Brahim code:  tbv checken welke parameterNamen met POST worden verstuurd:
+////        Enumeration paramNames = request.getParameterNames();
+////        while(paramNames.hasMoreElements()) {
+////            String paramName = (String)paramNames.nextElement();
+////            System.out.println("<tr><td>" + paramName + "</td>\n<td>");
+////            String[] paramValues = request.getParameterValues(paramName);
+////
+////            // Read single valued data
+////            if (paramValues.length == 1) {
+////                String paramValue = paramValues[0];
+////                if (paramValue.length() == 0)
+////                    System.out.println("<i>No Value</i>");
+////                else
+////                    System.out.println(paramValue);
+////            } else {
+////                // Read multiple valued data
+////                System.out.println("<ul>");
+////
+////                for(int i = 0; i < paramValues.length; i++) {
+////                    System.out.println("<li>" + paramValues[i]);
+////                }
+////                System.out.println("</ul>");
+////            }
+////        }
+////        System.out.println("</tr>\n</table>\n</body></html>");
+//        // End code
+//
+//        // take date and split it up based on "-" and store in array of String-->
+//        // then convert Strings to int and set the LocalDate using the ints.
+//        String[] arrOfDate = request.getParameter("date").split("-", 0);
+//        int year = Integer.parseInt(arrOfDate[0]);
+//        int month = Integer.parseInt(arrOfDate[1]);
+//        int day = Integer.parseInt(arrOfDate[2]);
+//        LocalDate date = LocalDate.of(year, month, day);
+//        String selectedSubject = request.getParameter("subjectMenu");
+//        String selectedTeacher = request.getParameter("teacherMenu");
+//        String selectedRoom = request.getParameter("roomMenu");
+//
+//
+//        // add selection of the checkboxes to the modelAttribute
+//        model.addAttribute("selectedSubject", selectedSubject);
+//        model.addAttribute("selectedTeacher", selectedTeacher);
+//        model.addAttribute("selectedRoom", selectedRoom);
+//
+//
+//        //add result of contraints check to the modelAttribute
+//        model.addAttribute("checkSubject", checkSubjectPreference(6, 1));
+//        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend",date));
+//        model.addAttribute("checkOverlap", checkCohortOverlap(6, date, "ochtend"));
+//        model.addAttribute("checkHours", checkTeacherHours(Integer.parseInt(request.getParameter("teacherMenu")), Integer.parseInt(request.getParameter("subjectMenu"))));
+//
+//        model.addAttribute("subjects", subjectRepo.getSubjects());
+//        model.addAttribute("teachers", userRepo.getTeachers());
+//        model.addAttribute("rooms", subjectRepo.getRooms());
+//        model.addAttribute("preferences", subjectRepo.getPreferences());
+//        model.addAttribute("cohorts", cohortScheduleRepo.getCohorts());
+//        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
+//        System.out.println("DIT IS NA HET OPHALEN VD LASTCOHORTSCHEDULE!!!");
+//        return "generateCohortSchedule";
+//    }
 
 
 }
