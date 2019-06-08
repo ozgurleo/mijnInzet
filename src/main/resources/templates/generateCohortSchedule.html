@@ -66,6 +66,7 @@
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}" th:text="${subject[2]}">
                                 </select>
                             </div>
+                            <br>
                             <div>
                                 <select th:id="teacherVariable" class="teacher" th:data-ID="${schedule.getId()}">
                                     <option>selecteer docent</option>
@@ -84,7 +85,7 @@
                     <td >
                         <div>
                             <button th:id="checkButton" type="submit" th:data-ID="${schedule.getId()}" class="checkButton" th:value="check" name="check"
-                                     th:form="${schedule.getId()}">check
+                                     th:form="${schedule.getId()}">check conflict
                             </button>
                         </div>
                     </td>
@@ -111,6 +112,7 @@
     console.log(day);
     daypart=$('#daypart').val();
     console.log(daypart);
+
 
     <!--Select only the value that is selected in the dropdownmenu -->
     $(".subject").on('change', function(){
@@ -146,7 +148,8 @@
                 "day":document.getElementsByClassName("day")[textBoxId].value,
                 "daypart":document.getElementsByClassName("daypart")[textBoxId].value,
                 "subjectnr" :document.getElementsByClassName("subject")[textBoxId].value,
-                "teachernr":document.getElementsByClassName("teacher")[textBoxId].value
+                "teachernr":document.getElementsByClassName("teacher")[textBoxId].value,
+                "button": "check"
             },
             success: function(result) {
                 if(result=="OK"){
@@ -195,7 +198,8 @@
                 "day":document.getElementsByClassName("day")[textBoxId].value,
                 "daypart":document.getElementsByClassName("daypart")[textBoxId].value,
                 "subjectnr" :document.getElementsByClassName("subject")[textBoxId].value,
-                "teachernr":document.getElementsByClassName("teacher")[textBoxId].value
+                "teachernr":document.getElementsByClassName("teacher")[textBoxId].value,
+                "button": "save"
             },
             success: function(result) {
                 if(result=="OK"){

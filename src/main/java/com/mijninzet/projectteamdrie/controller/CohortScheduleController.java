@@ -152,6 +152,7 @@ public class CohortScheduleController {
     @PostMapping(value = "/generateCohortSchedule/check")
     public @ResponseBody String checkSchedule(HttpServletRequest request){
         System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
+        System.out.println("Button cliked = : " + request.getParameter("button") );
         System.out.println("  cohortnr =" + request.getParameter("cohortnr"));
         System.out.println("  datum = " + request.getParameter("dateDay"));
         System.out.println("  dag = " + request.getParameter("day"));
