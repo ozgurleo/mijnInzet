@@ -3,36 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>genereer rooster</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
     <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
     </form>
+            </div>
+    </div>
 </nav>
-<br>
-<br>
+</div>
+
 <div class="table-responsive col-sm-10">
     <table id="generateSchedule" class="table table-bordered">
         <tablehead>
             <thead class="thead-dark">
+
             <tr>
-                <th>Cohort</th>
-                <th>DATUM</th>
-                <th>DAG</th>
-                <th>DAGDEEL</th>
-                <th>PLANNING</th>
-                <th>           check              </th>
-                <th>       </th>
-                <th>       </th>
+                <th>cohort</th>
+                <th>datum</th>
+                <th>dag</th>
+                <th>dagdeel</th>
+                <th>planning</th>
+                <th>resultaat check/opslag</th>
+                <th>check op conflict</th>
+                <th>planning opslaan</th>
+
             </tr>
+            </div>
             </thead>
         </tablehead>
         <tablebody>
@@ -40,24 +48,29 @@
                 <form id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
                       th:object="${cohortschedule}"
                       method="post">
+
                     <td>
                         <input th:with="cohort=${schedule.getCohort().getCohortId()}"type="${schedule}" class="cohort" NAME="cohort" th:data-ID="${schedule.getId()}" th:id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
+
                     <td>
                         <input th:with="dateDay=${schedule.getId()}" type="${schedule}" class="date" NAME="date" th:data-ID="${schedule.getId()}" th:id="dateDay" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
+
                     <td>
                         <input th:with="day=${schedule.getId()}"type="${schedule}" class="day" NAME="day" th:data-ID="${schedule.getId()}" th:id="day" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
                     </td>
+
                     <td>
                         <input th:with="datepart=${schedule.getId()}" type="${schedule}" class="daypart" NAME="daypart" th:data-ID="${schedule.getId()}" th:id="daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
                                readonly/>
                     </td>
+
                     <td>
                         <form>
                             <div>
@@ -76,25 +89,30 @@
 
                         </form>
                     </td>
+
+>
                     <td th:with ="textBox=${schedule.getId()}" th:id="textBox" th:data-ID="${schedule.getId()}"class="Box">
                         <div>
                             <form th:name="constraint" >
                             </form>
                         </div>
                     </td>
+
+
                     <td >
                         <div>
                             <button th:id="checkButton" type="submit" th:data-ID="${schedule.getId()}" class="checkButton" th:value="check" name="check"
-                                     th:form="${schedule.getId()}">check conflict
+                                     th:form="${schedule.getId()}">check
                             </button>
                         </div>
                     </td>
-                    <<td>
-                    <div>
+
+                    <td>
+
                         <button th:id="saveButton" type="submit" th:data-ID="${schedule.getId()}" class="saveButton" th:value="opslaan" name="opslaan"
                                  th:form="${schedule.getId()}">opslaan
                         </button>
-                    </div>
+
                 </td>
                 </form>
             </tr>
@@ -156,22 +174,22 @@
                     x.style.background = "PaleGreen";
                     x.innerHTML = "kan opgeslagen worden";}
                 else if(result=="NOK"){
-                    x.style.background = "#ff4d4d";
+                    x.style.background = "#ff8000";
                     x.innerHTML ="2 conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
                 }
                 else if(result=="UrenNOK"){
-                    x.style.background = "#ff4d4d";
+                    x.style.background = "#ff8000";
                     x.innerHTML = "1 conflict:" + "<br>" + "*Docenturen overschreden";
                 }
                 else{
-                    x.style.background = "#ff4d4d";
+                    x.style.background = "#ff8000";
                     x.innerHTML = "1 conflict:" + "<br>" + "*Docent niet aanwezig";
 
                 }
 
                            },
             error: function(result) {
-                alert('error');
+                alert('selecteer docent/vak');
             }
         });
     });
@@ -206,22 +224,22 @@
                     x.style.background = "SpringGreen";
                     x.innerHTML = "opgeslagen";}
                 else if(result=="NOK"){
-                    x.style.background = "#ff4d4d";
+                    x.style.background = "#ff4000";
                     x.innerHTML ="opgeslagen met conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
                 }
                 else if(result=="UrenNOK"){
-                    x.style.background = "#ff4d4d";
+                    x.style.background = "#ff4000";
                     x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docenturen overschreden";
                 }
                 else{
-                    x.style.background = "#ff4d4d";
+                    x.style.background = "#ff4000";
                     x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docent niet aanwezig";
 
                 }
 
             },
             error: function(result) {
-                alert('error');
+                alert('selecteer docent/vak');
             }
         });
     });
