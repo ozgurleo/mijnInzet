@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <title>Manage Subject</title>
 </head>
@@ -15,7 +18,8 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -31,7 +35,9 @@
                     <li><a href="/showTasks">VACATURBEHEER</a></li>
                     <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
                     <li class="dropdown">
-                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MIJN VAK & ROOSTER VOORKEUREN <span class="caret"></span></a>
+                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle"
+                           data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MIJN VAK &
+                            ROOSTER VOORKEUREN <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
                             <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
@@ -50,7 +56,7 @@
 
 
 <h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
-<form name="subjectform" th:id="submitbutton" action="#" th:action="@{/submitPreferences}" method="post">
+<form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">
     <div class="row">
         <div class="table-responsive col-sm-6">
             <table id="SubjectTable" class="table table-striped">
@@ -67,20 +73,21 @@
                     <td th:text="${subject.estimatedHours}">-1</td>
                     <td th:text="${subject.yearsToExpiryDate}">-1</td>
                     <td>
-                        <form>
-                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="no"> ik geef dit vak liever
-                            niet.<br>
-                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="maybe"> ja, dit vak wil ik
-                            geven.<br>
-                            <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}" value="yes"> ja, Ik heb het vak al
-                            eerder gegeven.
-                        </form>
+                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                               value="1"> ik geef dit vak liever
+                        niet.<br>
+                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                               value="2"> ja, dit vak wil ik
+                        geven.<br>
+                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                               value="3"> ja, Ik heb het vak al
+                        eerder gegeven.
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-    <button type="submit" th:id="submitbutton" name="subjectform" class="btn btn-lg btn-success">Submit Preference
+    <button type="submit" form="myForm" class="btn btn-lg btn-success">Submit Preference
     </button>
 </form>
 </body>

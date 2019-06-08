@@ -6,12 +6,16 @@ import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.repository.*;
 
+import com.sun.net.httpserver.HttpContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Enumeration;
@@ -34,25 +38,46 @@ public class CohortScheduleController {
 
     public static final int DAYS_IN_WEEK = 7;
 
+    //hier worden het aantal weken in een cohort bepaalt
+    public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate) {
+        int cohortWeeks = 0;
+        //get nr off days in a cohort
+        long days = ChronoUnit.DAYS.between(beginDate, endDate);
+        // convert nr of days into whole weeks (ROUND UP)
+        if (days % DAYS_IN_WEEK > 0) {
+            cohortWeeks = (int) (days / DAYS_IN_WEEK) + 1;
+        } else {
+            cohortWeeks = (int) (days / DAYS_IN_WEEK);
+        }
+        System.out.println(" getNumberOfCohortWeeks method is aangeroepen in de taskController");
+        System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
+        return cohortWeeks;
+    }
+
+    public String checkAvailability(int teacherId, String day, String dayPart, LocalDate dayDate) {
+        return "availNOK";
+    }
+
+    public String checkCohortOverlap(int teacherId, LocalDate datePlanned, String dayPart) {
+        return "overlapNOK";
+    }
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
         String output = "NO OUTPUT VALUE";
         int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
 
         if (preference == 1) {
-            output = "preference is ok";
+            output = "PrefOK";
 
         } else if (preference == 2) {
-            output = "preference is partly OK";
+            output = "prefPartlyOK";
         } else if (preference == 3) {
-            output = "preference is NOK";
+            output = "PrefNOK";
         }
         return output;
     }
 
-    public String checkAvailability(int teacherId, String day, String dayPart) {
-        return "availabilityNOK";
-    }
+
 
     public String checkTeacherHours(int teacherId, int subjectId) {
 
@@ -64,9 +89,9 @@ public class CohortScheduleController {
         if (teacherHours != null) {
             if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId)) {
                 if (teacherHours.getTeachingHoursLeft() < 8)
-                    return "docUrenOp";
+                    return "UrenNOK";
                 else {
-                    return "UrenOk";
+                    return "UrenOK";
                 }
             } else {
                 int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
@@ -79,14 +104,15 @@ public class CohortScheduleController {
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
-                    return "UrenNietOk";
+                    return "UrenNOK";
                 }
             }
-            return "UrenOk";
+            return "UrenOK";
         } else {
             return "IetsofIemandNietBekend";
         }
     }
+
 
     public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId) {
 
@@ -102,11 +128,8 @@ public class CohortScheduleController {
     }
 
     public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId) {
-
         int numberOfYearsExperience;
-
         List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
-
         if (cohortScheduleList.size() == 1) {
             numberOfYearsExperience = 1;
         } else if (cohortScheduleList.size() == 2) {
@@ -117,27 +140,37 @@ public class CohortScheduleController {
         return numberOfYearsExperience;
     }
 
-    public String checkCohortOverlap(int teacherId, LocalDate datePlanned, String dayPart) {
-        return "overlapNOK";
-    }
 
 
-    //hier worden het aantal weken in een cohort bepaalt
-    public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate) {
-        int cohortWeeks = 0;
-        //get nr off days in a cohort
-        long days = ChronoUnit.DAYS.between(beginDate, endDate);
 
-        // convert nr of days into whole weeks (ROUND UP)
-        if (days % DAYS_IN_WEEK > 0) {
-            cohortWeeks = (int) (days / DAYS_IN_WEEK) + 1;
-        } else {
-            cohortWeeks = (int) (days / DAYS_IN_WEEK);
-        }
 
-        System.out.println(" getNumberOfCohortWeeks method is aangeroepen in de taskController");
-        System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
-        return cohortWeeks;
+
+    @PostMapping(value = "/generateCohortSchedule/check")
+    public @ResponseBody String checkSchedule(HttpServletRequest request){
+        System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
+        System.out.println("  cohortnr =" + request.getParameter("cohortnr"));
+        System.out.println("  datum = " + request.getParameter("dateDay"));
+        System.out.println("  dag = " + request.getParameter("day"));
+        System.out.println("  dagdeel = " + request.getParameter("daypart"));
+        System.out.println("  subjectId = " + request.getParameter("subjectnr"));
+        System.out.println("  teacherId = " + request.getParameter("teachernr"));
+
+        int cohortId=Integer.parseInt(request.getParameter("cohortnr"));
+        String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
+        int year = Integer.parseInt(arrOfDate[0]);
+        int month = Integer.parseInt(arrOfDate[1]);
+        int day = Integer.parseInt(arrOfDate[2]);
+        LocalDate dayDate = LocalDate.of(year, month, day);
+
+        String weekDay=request.getParameter("day");
+        String dayPart= request.getParameter("daypart");
+        int subjectId=Integer.parseInt(request.getParameter("subjectnr"));
+       int teacherId= Integer.parseInt(request.getParameter("teachernr"));
+
+
+        String result="NOK";
+
+        return result;
     }
 
     public List<CohortSchedule> getAllSchedulesInCohort(int cohortId) {
@@ -228,7 +261,7 @@ public class CohortScheduleController {
 
         //add result of contraints check to the modelAttribute
         model.addAttribute("checkSubject", checkSubjectPreference(6, 1));
-        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend"));
+        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend",date));
         model.addAttribute("checkOverlap", checkCohortOverlap(6, date, "ochtend"));
         model.addAttribute("checkHours", checkTeacherHours(Integer.parseInt(request.getParameter("teacherMenu")), Integer.parseInt(request.getParameter("subjectMenu"))));
 

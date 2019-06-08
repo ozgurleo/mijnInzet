@@ -3,26 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloAdmin">MIJN INZET HOME</a>
-    <!--<a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
-    <a class="nav-link" href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a>
-    <a class="nav-link" href="/register">NIEUWE GEBRUIKER</a>
-    <a class ="nav-link" href="/cohort/createCohort">BEHEER COHORTEN</a>
-    <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
-    </form>
-</nav>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloAdmin">HOME</a>
+            </div>
 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a></li>
+                    <li><a href="/register">NIEUWE GEBRUIKER</a></li>
+                    <li><a href="/cohort/createCohort">BEHEER COHORTEN</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
 
 
 <br><br><br>
@@ -31,7 +49,8 @@
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
-            <h1 class="masthead-brand">Mijn Inzet</h1>
+<!--            <h1 class="masthead-brand">Mijn Inzet</h1>-->
+                <img th:src="@{/images/logomyinzet.png}"/>
             </div>
             <nav class="nav nav-masthead justify-content-center">
                 <!--<a class="nav-link active" href="#">link</a>-->
