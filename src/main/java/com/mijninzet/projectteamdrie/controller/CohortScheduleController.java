@@ -33,6 +33,13 @@ public class CohortScheduleController {
     SubjectRepository subjectRepo;
     @Autowired
     TeacherHoursRepository teacherHoursRepository;
+    @Autowired
+    CohortRepository cohortRepo;
+    @Autowired
+    StaffAvailibilityRepository stafAvailRepo;
+
+    @Autowired
+    ExceptionRepository exceptionRepo;
 
     public static final int DAYS_IN_WEEK = 7;
 
@@ -52,7 +59,86 @@ public class CohortScheduleController {
         return cohortWeeks;
     }
 
-    public String checkAvailability(int teacherId, String day, String dayPart, LocalDate dayDate) {
+    public String generalAvail(int teacherId, String day, String dayPart, int cohortId) {
+        String output = "NEE";
+        String generalAvail = "NOK";
+        String dayDaypart = day + "_" + dayPart;
+        switch (dayDaypart) {
+            case "maandag_ochtend":
+                output = stafAvailRepo.getMondayMorning(cohortId, teacherId);
+                break;
+            case "maandag_middag":
+                output = stafAvailRepo.getMondayNoon(cohortId, teacherId);
+                break;
+            case "dinsdag_ochtend":
+                output = stafAvailRepo.getTuesdayMorning(cohortId, teacherId);
+                break;
+            case "dinsdag_middag":
+                output = stafAvailRepo.getTuesdayNoon(cohortId, teacherId);
+                break;
+            case "woensdag_ochtend":
+                output = stafAvailRepo.getWednesdayMorning(cohortId, teacherId);
+                break;
+            case "woensdag_middag":
+                output = stafAvailRepo.getWednesdayNoon(cohortId, teacherId);
+                break;
+            case "donderdag_ochtend":
+                output = stafAvailRepo.getThursdayMorning(cohortId, teacherId);
+                break;
+            case "donderdag_middag":
+                output = stafAvailRepo.getThursdayNoon(cohortId, teacherId);
+                break;
+            case "vrijdag_ochtend":
+                output = stafAvailRepo.getFridayMorning(cohortId, teacherId);
+                break;
+            case "vrijdag_middag":
+                output = stafAvailRepo.getFridayNoon(cohortId, teacherId);
+                break;
+        }
+
+        if (output == "NEE") {
+            generalAvail = "NOK";
+        } else {
+            generalAvail = "OK";
+        }
+
+        return generalAvail;
+    }
+
+    public String cohortOverlap(int teacherId, LocalDate dayDate, int currentCohortId, String dayPart) {
+        String overlap = "NOK";
+        int firstIndex = 1;
+        int previousCohort = currentCohortId - 1;
+        int retrievedCohort = cohortScheduleRepo.getCohortOverlap(teacherId, dayPart, dayDate, previousCohort);
+        if (retrievedCohort == 0) {
+            // retrievedohort =0 means no overlap that date/daypart, so "OK" to be planned
+            overlap = "OK";
+        }
+        return overlap;
+    }
+
+    public String checkIncident(int teacherId, String day, String dayPart, LocalDate dayDate) {
+String output="NOK";
+       String incident= exceptionRepo.getIncident(teacherId,dayDate);
+        if(incident=="JA"){
+            output="OK";
+        }else if(incident=="NEE"){
+            output="NOK";
+        }else{
+            output="GEEN";
+        }
+        return output;
+    }
+
+
+    public String checkAvailability(int teacherId, String day, String dayPart, LocalDate dayDate, int cohortId) {
+        // check general availability;
+        generalAvail(teacherId, day, dayPart, cohortId);
+        //check cohortOverlap;
+        cohortOverlap(teacherId, dayDate, cohortId, dayPart);
+        //check exception;
+        checkIncident(teacherId, day, dayPart, dayDate);
+
         return "availNOK";
     }
 
@@ -74,7 +160,6 @@ public class CohortScheduleController {
         }
         return output;
     }
-
 
 
     public String checkTeacherHours(int teacherId, int subjectId) {
@@ -116,7 +201,6 @@ public class CohortScheduleController {
     }
 
 
-
     public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId) {
 
         boolean experience = false;
@@ -145,35 +229,45 @@ public class CohortScheduleController {
     }
 
 
-
-
-
-
     @PostMapping(value = "/generateCohortSchedule/check")
-    public @ResponseBody String checkSchedule(HttpServletRequest request){
+    public @ResponseBody
+    String checkSchedule(HttpServletRequest request) {
+        String result = "NOK";
+
         System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
-        System.out.println("Button cliked = : " + request.getParameter("button") );
+        System.out.println("CohortScheduleID = : " + request.getParameter("scheduleId"));
+        System.out.println("Button cliked = : " + request.getParameter("button"));
         System.out.println("  cohortnr =" + request.getParameter("cohortnr"));
         System.out.println("  datum = " + request.getParameter("dateDay"));
         System.out.println("  dag = " + request.getParameter("day"));
         System.out.println("  dagdeel = " + request.getParameter("daypart"));
         System.out.println("  subjectId = " + request.getParameter("subjectnr"));
         System.out.println("  teacherId = " + request.getParameter("teachernr"));
-
-        int cohortId=Integer.parseInt(request.getParameter("cohortnr"));
+        String buttonClicked = request.getParameter("button");
+        int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
         String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
         int year = Integer.parseInt(arrOfDate[0]);
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate dayDate = LocalDate.of(year, month, day);
+        String weekDay = request.getParameter("day");
+        String dayPart = request.getParameter("daypart");
+        int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
+        int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+        int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
-        String weekDay=request.getParameter("day");
-        String dayPart= request.getParameter("daypart");
-        int subjectId=Integer.parseInt(request.getParameter("subjectnr"));
-       int teacherId= Integer.parseInt(request.getParameter("teachernr"));
+        String checkHours = checkTeacherHours(teacherId, subjectId);
 
 
-        String result="NOK";
+        if (request.getParameter("button") == "check") {
+
+
+            result = " ";
+        } else if (request.getParameter("button") == "save") {
+            cohortScheduleRepo.storeSchedule(teacherId, scheduleId);
+        } else {
+            result = " ";
+        }
 
         return result;
     }

@@ -23,32 +23,14 @@
                     <li><a class="nav-link" href=#></a></li>
                     <li><a class="nav-link" href=#></a></li>
                     <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
-                    <li><a class="nav-link" href=#></a></li>
                 </ul>
-
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
 
             </div>
         </div>
@@ -160,7 +142,6 @@
 </div>
 </body>
 <script th:inline="javascript">
-
     cohortnr = $('#cohort').val();
     console.log(cohortnr);
     dateDay = $('#dateDay').val();
@@ -205,6 +186,7 @@
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
                 "subjectnr": document.getElementsByClassName("subject")[textBoxId].value,
                 "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
+                "scheduleId": thisId,
                 "button": "check"
             },
             success: function (result) {
@@ -253,6 +235,7 @@
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
                 "subjectnr": document.getElementsByClassName("subject")[textBoxId].value,
                 "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
+                "scheduleId": thisId,
                 "button": "save"
             },
             success: function (result) {
@@ -261,13 +244,13 @@
                     x.innerHTML = "opgeslagen";
                 } else if (result == "NOK") {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen met conflicten:" + "<br>" + "*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig";
+                    x.innerHTML = "opgeslagen met conflicten:" + "<br>" + "*Docenturen overschreden" + "<br>" + "*Docent niet beschikbaar";
                 } else if (result == "UrenNOK") {
                     x.style.background = "#ff4000";
                     x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docenturen overschreden";
                 } else {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docent niet aanwezig";
+                    x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docent niet beschikbaar";
 
                 }
 
