@@ -18,7 +18,7 @@ public interface ExceptionRepository extends CrudRepository<Exception,Integer>{
     //SELECT IE.color_option FROM mijn_inzet.exception IE where user_id=: teacherId AND :dayDate BETWEEN IE.start_date AND IE.end_date;
     //Brahim code: get specific Day/daypart availability
     @Query(value = "SELECT IE.color_option FROM mijn_inzet.exception IE " +
-            "where user_id=: teacherId AND :dayDate BETWEEN IE.start_date AND IE.end_date", nativeQuery = true)
+            "where IE.user_id=:teacherId AND :dayDate BETWEEN IE.start_date AND IE.end_date", nativeQuery = true)
     String getIncident(@Param("teacherId") Integer teacherId, @Param("dayDate") LocalDate dayDate);
 
 

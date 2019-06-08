@@ -117,7 +117,7 @@ public class CohortScheduleController {
         return overlap;
     }
 
-    public String checkIncident(int teacherId, String day, String dayPart, LocalDate dayDate) {
+    public String checkIncident(int teacherId,LocalDate dayDate) {
 String output="NOK";
        String incident= exceptionRepo.getIncident(teacherId,dayDate);
         if(incident=="JA"){
@@ -131,15 +131,36 @@ String output="NOK";
     }
 
 
-    public String checkAvailability(int teacherId, String day, String dayPart, LocalDate dayDate, int cohortId) {
+    public String checkAvail(int teacherId, String day, String dayPart, LocalDate dayDate, int cohortId, int subjectId) {
+        String output="NOK";
         // check general availability;
-        generalAvail(teacherId, day, dayPart, cohortId);
+        String avail=generalAvail(teacherId, day, dayPart, cohortId);
         //check cohortOverlap;
-        cohortOverlap(teacherId, dayDate, cohortId, dayPart);
+        String overlap =cohortOverlap(teacherId, dayDate, cohortId, dayPart);
         //check exception;
-        checkIncident(teacherId, day, dayPart, dayDate);
+        String incident=checkIncident(teacherId,dayDate);
+        //check preference;
+        String preference= checkSubjectPreference(teacherId,subjectId);
+        // check remaining teacherHours
+         String hours = checkTeacherHours(teacherId,subjectId);
 
-        return "availNOK";
+        if(incident=="NOK"){
+            output="NotAvailable";
+        }else if(incident=="OK"|| incident=="GEEN"){
+            if(avail=="NOK"){
+                output="NotAvailable";
+            }else if (overlap=="NOK"){
+                output="NotAvailable";
+            }else if(preference=="NOK"){
+                output="NotAvailable";
+            }else if (hours=="NOK"){
+                output="NotAvailable";
+            }else{
+                output="OK";
+            }
+        }
+
+        return output;
     }
 
     public String checkCohortOverlap(int teacherId, LocalDate datePlanned, String dayPart) {
@@ -151,12 +172,12 @@ String output="NOK";
         int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
 
         if (preference == 1) {
-            output = "PrefOK";
+            output = "OK";
 
         } else if (preference == 2) {
-            output = "prefPartlyOK";
+            output = "NOK";
         } else if (preference == 3) {
-            output = "PrefNOK";
+            output = "NOK";
         }
         return output;
     }
@@ -173,9 +194,9 @@ String output="NOK";
         if (teacherHours != null) {
             if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId)) {
                 if (teacherHours.getTeachingHoursLeft() < 8)
-                    return "UrenNOK";
+                    return "NOK";
                 else {
-                    return "UrenOK";
+                    return "OK";
                 }
             } else {
                 int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
@@ -191,10 +212,10 @@ String output="NOK";
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
-                    return "UrenNOK";
+                    return "NOK";
                 }
             }
-            return "UrenOK";
+            return "OK";
         } else {
             return "docentNietBekend";
         }
@@ -256,13 +277,10 @@ String output="NOK";
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
         int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
-        String checkHours = checkTeacherHours(teacherId, subjectId);
-
 
         if (request.getParameter("button") == "check") {
+          result= checkAvail(teacherId,weekDay, dayPart,dayDate,cohortId,subjectId);
 
-
-            result = " ";
         } else if (request.getParameter("button") == "save") {
             cohortScheduleRepo.storeSchedule(teacherId, scheduleId);
         } else {
