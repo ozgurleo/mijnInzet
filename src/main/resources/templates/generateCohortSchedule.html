@@ -72,12 +72,7 @@
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[0]}" th:text="${teacher[3]}">
                                 </select>
                             </div>
-                            <div>
-                                <select th:id="roomVariable" class="room" th:data-ID="${schedule.getId()}">
-                                    <option>selecteer lokaal</option>
-                                    <option th:each="room: ${rooms}" th:value="${room[0]}" th:text="${room[0]}">
-                                </select>
-                            </div>
+
                         </form>
                     </td>
                     <td th:with ="textBox=${schedule.getId()}" th:id="textBox" th:data-ID="${schedule.getId()}"class="Box">
@@ -95,8 +90,8 @@
                     </td>
                     <<td>
                     <div>
-                        <button th:id="saveButton" type="submit" class="btn btn-info" th:value="opslaan" name="opslaan"
-                                th:data-id="${schedule.getId()}" th:form="${schedule.getId()}">opslaan
+                        <button th:id="saveButton" type="submit" th:data-ID="${schedule.getId()}" class="saveButton" th:value="opslaan" name="opslaan"
+                                 th:form="${schedule.getId()}">opslaan
                         </button>
                     </div>
                 </td>
@@ -155,18 +150,18 @@
             },
             success: function(result) {
                 if(result=="OK"){
-                    x.style.background = "green";
+                    x.style.background = "PaleGreen";
                     x.innerHTML = "kan opgeslagen worden";}
                 else if(result=="NOK"){
-                    x.style.background = "red";
+                    x.style.background = "#ff4d4d";
                     x.innerHTML ="2 conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
                 }
                 else if(result=="UrenNOK"){
-                    x.style.background = "red";
+                    x.style.background = "#ff4d4d";
                     x.innerHTML = "1 conflict:" + "<br>" + "*Docenturen overschreden";
                 }
                 else{
-                    x.style.background = "red";
+                    x.style.background = "#ff4d4d";
                     x.innerHTML = "1 conflict:" + "<br>" + "*Docent niet aanwezig";
 
                 }
@@ -177,6 +172,57 @@
             }
         });
     });
+
+
+    $(".saveButton").click(function(e) {
+        e.preventDefault();
+        thisId = $(this).data("id");
+        console.log("SAVEBUTTON_ID = :" + thisId);
+
+        var textBoxId=thisId-1;
+        console.log("childElement = :" + textBoxId);
+        var x = document.getElementsByClassName("Box")[textBoxId];
+        console.log("elementBYClassName : " + x);
+
+
+        console.log(e)
+        $.ajax({
+            type: "POST",
+            url: "/generateCohortSchedule/check/",
+            data: {
+                "cohortnr":document.getElementsByClassName("cohort")[textBoxId].value,
+                "dateDay":document.getElementsByClassName("date")[textBoxId].value,
+                "day":document.getElementsByClassName("day")[textBoxId].value,
+                "daypart":document.getElementsByClassName("daypart")[textBoxId].value,
+                "subjectnr" :document.getElementsByClassName("subject")[textBoxId].value,
+                "teachernr":document.getElementsByClassName("teacher")[textBoxId].value
+            },
+            success: function(result) {
+                if(result=="OK"){
+                    x.style.background = "SpringGreen";
+                    x.innerHTML = "opgeslagen";}
+                else if(result=="NOK"){
+                    x.style.background = "#ff4d4d";
+                    x.innerHTML ="opgeslagen met conflicten:" + "<br>" +"*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig" ;
+                }
+                else if(result=="UrenNOK"){
+                    x.style.background = "#ff4d4d";
+                    x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docenturen overschreden";
+                }
+                else{
+                    x.style.background = "#ff4d4d";
+                    x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docent niet aanwezig";
+
+                }
+
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+    });
+
+
 
 
 </script>

@@ -172,7 +172,7 @@ public class CohortScheduleController {
        int teacherId= Integer.parseInt(request.getParameter("teachernr"));
 
 
-        String result="NOK";
+        String result="OK";
 
         return result;
     }
