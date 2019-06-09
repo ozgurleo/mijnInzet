@@ -102,10 +102,7 @@ public class TaskApplicationController {
         LocalDate begin= LocalDate.of(2018,01,01);
         LocalDate end= LocalDate.of(2018,01,16);
 
-        cohortSchedTest.getNumberOfCohortWeeks(begin,end);
-
-
-        //haal de userId op vd loggedin user uit de Singleton
+               //haal de userId op vd loggedin user uit de Singleton
         final int userId = UserSingleton.getInstance().getId();
 
         //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
