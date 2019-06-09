@@ -38,7 +38,7 @@ void storeSchedule(@Param("teacherId") Integer teacherId,@Param("scheduleId") In
 //Brahim code: get cohortId which is overlapping with given date/userId
 @Query(value = "SELECT CS.cohort_cohort_id FROM mijn_inzet.cohort_schedule CS WHERE CS.user_user_id= :teacherId " +
         "AND CS.daypart=:dayPart AND CS.date= :dayDate AND CS.cohort_cohort_id=:cohortId", nativeQuery = true)
-int getCohortOverlap(
+Integer getCohortOverlap(
         @Param("teacherId") Integer teacherId,
         @Param("dayPart") String dayPart,
         @Param("dayDate") LocalDate dayDate,

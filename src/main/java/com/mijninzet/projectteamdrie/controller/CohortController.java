@@ -57,12 +57,12 @@ public class CohortController {
         if(exists){
             return "createCohortError";
         }
+
         cohortRepository.save(cohort);
         return ("redirect:/cohort/createCohort");
     }
 
     //hier wordt het aantal weken in een cohort bepaalt
-
     public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate){
         int cohortWeeks=0;
         //get nr off days in a cohort
@@ -74,7 +74,7 @@ public class CohortController {
         }else{
             cohortWeeks=(int) (days/DAYS_IN_WEEK);        }
 
-        System.out.println(" getNumberOfCohortWeeks method is aangeroepen in de taskController");
+        System.out.println(" getNumberOfCohortWeeks method is aangeroepen");
         System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
         return cohortWeeks;
     }

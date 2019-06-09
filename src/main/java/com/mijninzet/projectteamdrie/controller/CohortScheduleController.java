@@ -41,97 +41,100 @@ public class CohortScheduleController {
     @Autowired
     ExceptionRepository exceptionRepo;
 
-    public static final int DAYS_IN_WEEK = 7;
-
-    //hier worden het aantal weken in een cohort bepaalt
-    public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate) {
-        int cohortWeeks = 0;
-        //get nr off days in a cohort
-        long days = ChronoUnit.DAYS.between(beginDate, endDate);
-        // convert nr of days into whole weeks (ROUND UP)
-        if (days % DAYS_IN_WEEK > 0) {
-            cohortWeeks = (int) (days / DAYS_IN_WEEK) + 1;
-        } else {
-            cohortWeeks = (int) (days / DAYS_IN_WEEK);
-        }
-        System.out.println(" getNumberOfCohortWeeks method is aangeroepen in de taskController");
-        System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
-        return cohortWeeks;
-    }
 
     public String generalAvail(int teacherId, String day, String dayPart, int cohortId) {
-        String output = "NEE";
-        String generalAvail = "NOK";
+        System.out.println("CHECK METHODE generalAvail is aangeroepen");
+        String output = "default";
+        String generalAvail="default";
         String dayDaypart = day + "_" + dayPart;
+
         switch (dayDaypart) {
             case "maandag_ochtend":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getMondayMorning(cohortId, teacherId);
                 break;
             case "maandag_middag":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getMondayNoon(cohortId, teacherId);
                 break;
             case "dinsdag_ochtend":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getTuesdayMorning(cohortId, teacherId);
                 break;
             case "dinsdag_middag":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getTuesdayNoon(cohortId, teacherId);
                 break;
             case "woensdag_ochtend":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getWednesdayMorning(cohortId, teacherId);
                 break;
             case "woensdag_middag":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getWednesdayNoon(cohortId, teacherId);
                 break;
             case "donderdag_ochtend":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getThursdayMorning(cohortId, teacherId);
                 break;
             case "donderdag_middag":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getThursdayNoon(cohortId, teacherId);
                 break;
             case "vrijdag_ochtend":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getFridayMorning(cohortId, teacherId);
                 break;
             case "vrijdag_middag":
+                System.out.println("te checken dagdeel is : " + dayDaypart);
                 output = stafAvailRepo.getFridayNoon(cohortId, teacherId);
                 break;
         }
 
-        if (output == "NEE") {
+        if (output.equals("NEE")){
             generalAvail = "NOK";
-        } else {
+        } else if (output.equals("JA")) {
             generalAvail = "OK";
+        } else if(output==null){
+            System.out.println("avaialbility is niet opgegegeven");
+        }
+
+        else{
+            generalAvail="er gaat iets fout";
         }
 
         return generalAvail;
     }
 
     public String cohortOverlap(int teacherId, LocalDate dayDate, int currentCohortId, String dayPart) {
+        System.out.println("CHECK METHODE cohortOverlap is aangeroepen");
         String overlap = "NOK";
-        int firstIndex = 1;
         int previousCohort = currentCohortId - 1;
-        int retrievedCohort = cohortScheduleRepo.getCohortOverlap(teacherId, dayPart, dayDate, previousCohort);
-        if (retrievedCohort == 0) {
-            // retrievedohort =0 means no overlap that date/daypart, so "OK" to be planned
+        Integer retrievedCohort = cohortScheduleRepo.getCohortOverlap(teacherId, dayPart, dayDate, previousCohort);
+        if (retrievedCohort == null) {
+            // retrievedohort =null means no overlap that date/daypart, so "OK" to be planned
             overlap = "OK";
         }
         return overlap;
     }
 
     public String checkIncident(int teacherId,LocalDate dayDate) {
-String output="NOK";
+        System.out.println("CHECK METHODE checkIncident is aangeroepen");
+String output;
        String incident= exceptionRepo.getIncident(teacherId,dayDate);
-        if(incident=="JA"){
+        if(incident.equals("JA")||incident==null){
             output="OK";
-        }else if(incident=="NEE"){
+        }else if(incident.equals("NEE")){
             output="NOK";
-        }else{
-            output="GEEN";
+        }else {
+            output="er gaat iets fout";
         }
         return output;
     }
 
 
     public String checkAvail(int teacherId, String day, String dayPart, LocalDate dayDate, int cohortId, int subjectId) {
+        System.out.println("METHODE checkAvail is aangeroepen");
         String output="NOK";
         // check general availability;
         String avail=generalAvail(teacherId, day, dayPart, cohortId);
@@ -144,17 +147,22 @@ String output="NOK";
         // check remaining teacherHours
          String hours = checkTeacherHours(teacherId,subjectId);
 
-        if(incident=="NOK"){
+        if(incident.equals("NOK")){
+            System.out.println("INCIDENT = NOK");
             output="NotAvailable";
-        }else if(incident=="OK"|| incident=="GEEN"){
-            if(avail=="NOK"){
+        }else if(incident.equals("OK")|| incident.equals("GEEN")){
+            if(avail.equals("NOK")){
+                System.out.println("AVAILABILITY = NOK");
                 output="NotAvailable";
-            }else if (overlap=="NOK"){
+            }else if (overlap.equals("NOK")){
+                System.out.println("OVERLAP = NOK");
                 output="NotAvailable";
-            }else if(preference=="NOK"){
-                output="NotAvailable";
-            }else if (hours=="NOK"){
-                output="NotAvailable";
+            }else if(hours.equals("NOK")){
+                System.out.println("HOURS = NOK");
+                output="NoHoursLeft";
+            }else if (preference.equals("NOK")){
+                System.out.println("PREFERENCE = NOK");
+                output="NotPrefered";
             }else{
                 output="OK";
             }
@@ -163,21 +171,19 @@ String output="NOK";
         return output;
     }
 
-    public String checkCohortOverlap(int teacherId, LocalDate datePlanned, String dayPart) {
-        return "overlapNOK";
-    }
+
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
         String output = "NO OUTPUT VALUE";
-        int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
-
-        if (preference == 1) {
-            output = "OK";
-
+        Integer preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
+        if(preference==null){
+            output="preference niet opgegeven";
+        } else if (preference == 1) {
+            output = "NOK";
         } else if (preference == 2) {
-            output = "NOK";
+            output = "OK";
         } else if (preference == 3) {
-            output = "NOK";
+            output = "OK";
         }
         return output;
     }
@@ -253,11 +259,10 @@ String output="NOK";
     @PostMapping(value = "/generateCohortSchedule/check")
     public @ResponseBody
     String checkSchedule(HttpServletRequest request) {
-        String result = "NOK";
-
+        String result="default";
         System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
-        System.out.println("CohortScheduleID = : " + request.getParameter("scheduleId"));
-        System.out.println("Button cliked = : " + request.getParameter("button"));
+        System.out.println("CohortScheduleID : " + request.getParameter("scheduleId"));
+        System.out.println("Button clicked=:" + request.getParameter("button"));
         System.out.println("  cohortnr =" + request.getParameter("cohortnr"));
         System.out.println("  datum = " + request.getParameter("dateDay"));
         System.out.println("  dag = " + request.getParameter("day"));
@@ -265,6 +270,7 @@ String output="NOK";
         System.out.println("  subjectId = " + request.getParameter("subjectnr"));
         System.out.println("  teacherId = " + request.getParameter("teachernr"));
         String buttonClicked = request.getParameter("button");
+        System.out.println("button clicked check ---> it equals " + buttonClicked );
         int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
         String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
         int year = Integer.parseInt(arrOfDate[0]);
@@ -278,15 +284,16 @@ String output="NOK";
         int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
 
-        if (request.getParameter("button") == "check") {
+        if(buttonClicked.equals("check")){
+            System.out.println("CHECK METHODE IS AANGEROEPEN");
           result= checkAvail(teacherId,weekDay, dayPart,dayDate,cohortId,subjectId);
 
-        } else if (request.getParameter("button") == "save") {
+        } else if (buttonClicked.equals("save")) {
             cohortScheduleRepo.storeSchedule(teacherId, scheduleId);
         } else {
-            result = " ";
+            result = "default";
         }
-
+        System.out.println("Result dat teruggestuurd wordt via AJAX: " + result);
         return result;
     }
 

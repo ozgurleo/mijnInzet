@@ -193,15 +193,15 @@
                 if (result == "OK") {
                     x.style.background = "PaleGreen";
                     x.innerHTML = "kan opgeslagen worden";
-                } else if (result == "NOK") {
+                } else if (result == "NotAvailable") {
                     x.style.background = "#ff8000";
-                    x.innerHTML = "2 conflicten:" + "<br>" + "*Docenturen overschreden" + "<br>" + "*Docent niet aanwezig";
-                } else if (result == "UrenNOK") {
+                    x.innerHTML ="Docent is dit dagdeel" + "<br>" + "niet beschikbaar";
+                } else if (result == "NoHoursLeft") {
                     x.style.background = "#ff8000";
-                    x.innerHTML = "1 conflict:" + "<br>" + "*Docenturen overschreden";
+                    x.innerHTML = "Docenturen zijn overschreden";
                 } else {
                     x.style.background = "#ff8000";
-                    x.innerHTML = "1 conflict:" + "<br>" + "*Docent niet aanwezig";
+                    x.innerHTML = "Docent geeft dit vak liever niet";
 
                 }
 
@@ -242,15 +242,15 @@
                 if (result == "OK") {
                     x.style.background = "SpringGreen";
                     x.innerHTML = "opgeslagen";
-                } else if (result == "NOK") {
+                } else if (result == "NotAvailable") {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen met conflicten:" + "<br>" + "*Docenturen overschreden" + "<br>" + "*Docent niet beschikbaar";
-                } else if (result == "UrenNOK") {
+                    x.innerHTML = "opgeslagen"+ "<br>"+ "Docent niet beschikbaar";
+                } else if (result == "UrenNOK") {"NoHoursLeft"
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docenturen overschreden";
+                    x.innerHTML = "opgeslagen" + "<br>"+ "Docenturen overschreden";
                 } else {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen met conflict:" + "<br>" + "*Docent niet beschikbaar";
+                    x.innerHTML = "opgeslagen" + "<br>" + "Docent geeft dit vak liever niet";
 
                 }
 
