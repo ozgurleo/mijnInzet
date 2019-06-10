@@ -32,8 +32,12 @@
         <input type="date" id="enddate" th:field="*{endDate}"
                class="form-control mb-4 col-4" placeholder="End Date">
 
-        <input type="text" th:field="*{colorOption}"
-               class="form-control mb-4 col-4" placeholder="Color">
+
+        <select class="mdb-select md-form" th:field="*{colorOption}" required="required">
+            <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+            <option value="JA">JA</option>
+            <option value="NEE">NEE</option>
+        </select>
 
         <button type="submit" class="btn btn-success col-2">Save</button>
 
