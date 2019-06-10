@@ -13,9 +13,7 @@ public class Exception {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int Id;
-    @JsonFormat(pattern="dd-MM-yyyy")
     private String endDate;
-    @JsonFormat(pattern="yyyy-MM-dd")
     private String startDate;
     private String colorOption;
 
@@ -42,14 +40,6 @@ public class Exception {
         this.user = new User(userID);
     }
 
-//    public Exception(String endDate, String startDate, String colorOption) {
-//        this.endDate = endDate;
-//        this.startDate = startDate;
-//        this.colorOption = colorOption;
-//        final int userId = UserSingleton.getInstance().getId();
-//        this.user = new User(userId);
-//
-//    }
 
     public int getId() {
         return Id;

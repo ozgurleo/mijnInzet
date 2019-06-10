@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            var $subjects = $('#new-subject');
+            var $name = $('#name');
+            var $explanation =$('#explanation');
+            var $hour=$('#hour');
+
+         $.ajax({
+             type:'GET',
+             url:'/vak/lijst',
+             dataType:'json',
+             success:[
+                 function (data) {
+                 $.each(data,function (key,val) {
+                     $subjects.append('<li> Naam: '+val.subjectName+', geschatteuur: '+ val.estimatedHours
+                         +', beschrijving: '+ val.explanation)
+                     
+                 })
+                 /*
+                 var items =[];
+                 $.each(subjects,function (key, val) {
+                    items.push("<tr>");
+                    items.push("<td id=''"+key+"''>"+val.subjectName+"</td>");
+                    items.push("<td id=''"+key+"''>"+val.estimatedHours+"</td>");
+                    items.push("<td id=''"+key+"''>"+val.explanation+"</td>");
+                    items.push("</tr>");
+                 });
+                 $("<tbody/>",{html:items.join("")}).appendTo("table");*/
+
+             }
+             ],
+             error:
+                 function () {
+                 alert("Error:"+error().text)
+
+             }
+         });
+         $('#add-subject').on('click', function () {
+
+             var subject={
+                 subjectName:$name.val(),
+                 explanation:$explanation.val(),
+                 estimatedHours:$hour.val()
+             }
+             $.ajax({
+                 headers: {
+                     'Accept': 'application/json',
+                     'Content-Type': 'application/json'
+                 },
+                 type:'POST',
+                 url:'/vak/addSubject',
+                 dataType:"json",
+                 data:JSON.stringify(subject),
+                 success:function (newOrder) {
+                     $subjects.append('<li> Naam: '+newOrder.subjectName+', geschatteuur: '+ newOrder.estimatedHours
+                         +', beschrijving: '+ newOrder.explanation)
+                 },
+                 error:function () {
+                     alert("error saving subject")
+                 }
+             })
+
+
+         });
+        });
+    </script>
+
+
+    <title>Subject Directory</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Vak Directory</h1>
+        <h2>Vakken</h2>
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Geschatte Uur</th>
+                <th>Beschirjving</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <ul id="new-subject">
+
+        </ul>
+        <h4>add Niuewe Vak</h4>
+        <p>Naam:<input type="text" id="name"></p>
+        <p>Beschrijving:<input type="text" id="explanation"></p>
+        <p>Uur:<input type="number" id="hour"></p>
+        <button id="add-subject">Toevoeg</button>
+    </div>
+
+</body>
+</html>
