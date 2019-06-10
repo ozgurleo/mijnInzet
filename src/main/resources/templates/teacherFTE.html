@@ -87,16 +87,32 @@
 
 <div class="container">
     <div class="row">
-            <form class="form-group md-6">
-                <div class="col-md-3">
-                <label mr-sm-4><h3>  Kies cohort </h3> </label>
-                <select id="cohortId" class="form-control md-6">
-                    <option class="col-md-6" th:each="cohort: ${cohorts}" th:text="${cohort.toString()}"></option>
-                </select>
-                    <br>
-                <button type="submit" onclick="fillSchedule()" class="btn btn-success">kies</button>
-                </div>
-            </form>
+            <!--<form class="form-group md-6">-->
+                <!--<div class="col-md-3">-->
+                <!--<label mr-sm-4><h3>  Kies cohort </h3> </label>-->
+                <!--<select id="cohortId" name="cohortId" class="form-control md-6">-->
+                    <!--<option class="col-md-6" th:each="cohort: ${cohorts}" th:value="${cohort.cohortId}" th:text="${cohort.toString()}" th:id="cohortId"></option>-->
+                <!--</select>-->
+                    <!--<br>-->
+                <!--<button type="submit" onclick="fillSchedule()" class="btn btn-success">kies</button>-->
+                <!--</div>-->
+            <!--</form>-->
+
+        <div>
+        <form th:action="${'/teacherFTE/getSchedule'}" method="get">
+            <div>
+                <title>Title</title>
+                <input type="date" th:name="begindate" />
+            </div>
+            <div>
+                <title>Info</title>
+                <input type="date" th:name="enddate"/>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        </div>
     </div>
     <hr>
 </div>
@@ -130,10 +146,10 @@
                     <th scope="col"> Maandag</th>
                 </tr>
                 <tr>
-                    <td th:text="${cohortSchedule.get(1).getSubject().getSubjectName()}"></td>
+                    <!--<td th:text="${cohortSchedule.get(1).getSubject().getSubjectName()}"></td>-->
                 </tr>
                 <tr>
-                    <td th:text="${cohortSchedule.get(2).getSubject().getSubjectName()}"></td>
+                    <!--<td th:text="${cohortSchedule.get(2).getSubject().getSubjectName()}"></td>-->
                 </tr>
 
             </table>
@@ -144,7 +160,7 @@
                 <tr>
                     <th scope="col">Dinsdag</th>
                 </tr>
-                <td th:text="${cohortSchedule.get(3).getSubject().getSubjectName()}"></td>
+                <!--<td th:text="${cohortSchedule.get(3).getSubject().getSubjectName()}"></td>-->
 
 
                 </tr>
@@ -154,10 +170,9 @@
         <div class="col-md-2">
             <table class="table table-hover">
                 <tr>
-                    <th scope="col">Woensdag</th>
+                    <th scope="col">testmaandag</th>
                 </tr>
-                <!--<tr th:each="woensdag:${woensdag}">-->
-                <!--<td th:text="${woensdag.colorOption}">Woensdag</td>-->
+                <td th:text="${cohortScheduleMonday}"></td>
                 </tr>
             </table>
 
@@ -165,10 +180,10 @@
         <div class="col-md-2">
             <table class="table table-hover" id="TaskTable4">
                 <tr>
-                    <th scope="col">Donderdag</th>
+                    <th scope="col">testoverigedagen</th>
                 </tr>
-                <!--<tr th:each="donderdag:${donderdag}">-->
-                <!--<td th:text="${donderdag.colorOption}">Donderdag</td>-->
+                <td th:text="${cohortScheduleOther}"></td>
+
                 </tr>
             </table>
         </div>
@@ -188,12 +203,10 @@
     </div>
 </div>
 
-<script>
-
-    let request = new XMLHttpRequest();
 
 
-</script>
+
+
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import com.mijninzet.projectteamdrie.model.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     List<CohortSchedule> getCohortScheduleByCohort_CohortIdAndUser_Id(int cohortId, int userId);
 
     List<CohortSchedule> getCohortScheduleByUser_Id(int userId);
+
+    List<CohortSchedule> getCohortSchedulesByDateIsBetween(LocalDate begindate, LocalDate enddate);
 
 
 }
