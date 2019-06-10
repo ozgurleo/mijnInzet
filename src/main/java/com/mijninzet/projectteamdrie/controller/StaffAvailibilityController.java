@@ -29,15 +29,6 @@ public class StaffAvailibilityController {
     private CohortService cohortService;
 
     private List<StaffAvailability>schedule;
-//
-//    @RequestMapping("/list")
-//    public String listAllStaffAvailibility(Model model){
-//        int userId=UserSingleton.getInstance().getId();
-//        schedule=staffAvailibilityService.findByUserId(userId);
-//        model.addAttribute("schedule",schedule);
-//        return ("schedule/list-schedule");
-//    }
-
 
     @RequestMapping("/list/{cohort}")
     public String listStaffAvailibilityByCohort(Model model,@PathVariable int cohort){

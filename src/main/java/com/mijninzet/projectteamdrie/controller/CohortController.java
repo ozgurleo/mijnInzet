@@ -1,7 +1,9 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
+import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
+import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,18 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.ITemplateEngine;
-import org.thymeleaf.context.WebContext;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.util.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Map;
 
 
 @Controller
@@ -35,6 +31,9 @@ public class CohortController {
     CohortRepository cohortRepository;
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CohortScheduleRepository cohortSchedlRepo;
 
     public static final int DAYS_IN_WEEK=7;
 
@@ -57,26 +56,84 @@ public class CohortController {
         if(exists){
             return "createCohortError";
         }
+
         cohortRepository.save(cohort);
+        // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
+        makeDefaultCohortSchedule(cohort.getBeginDate(),cohort.getEndDate(),cohort.getCohortId());
         return ("redirect:/cohort/createCohort");
     }
 
-    //hier wordt het aantal weken in een cohort bepaalt
+    //hier cohortSchedule (default rooster) aangemaakt voor de nieuwe Cohort
+    public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId){
+        for (LocalDate date = beginDate; date.isBefore(endDate); date = date.plusDays(1)) {
+            CohortSchedule CsMorning = new CohortSchedule();
+            CohortSchedule CsNoon = new CohortSchedule();
+            DayOfWeek dayOfWeek = date.getDayOfWeek();
+            String dayOfWeekName = dayOfWeek.name();
+            switch (dayOfWeekName){
+                case "MONDAY":
+                    CsMorning.setDay("maandag");
+                    CsMorning.setDaypart("ochtend");
+                    CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsMorning.setDate(date);
+                    cohortSchedlRepo.save(CsMorning);
+                    CsNoon.setDay("maandag");
+                    CsNoon.setDaypart("middag");
+                    CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsNoon.setDate(date);
+                    cohortSchedlRepo.save(CsNoon);
+                    break;
+                case "TUESAY":
+                    CsMorning.setDay("dinsdag");
+                    CsMorning.setDaypart("ochtend");
+                    CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsMorning.setDate(date);
+                    cohortSchedlRepo.save(CsMorning);
+                    CsNoon.setDay("dinsdag");
+                    CsNoon.setDaypart("middag");
+                    CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsNoon.setDate(date);
+                    cohortSchedlRepo.save(CsNoon);
+                    break;
+                case "WEDNESDAY":
+                    CsMorning.setDay("woensdag");
+                    CsMorning.setDaypart("ochtend");
+                    CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsMorning.setDate(date);
+                    cohortSchedlRepo.save(CsMorning);
+                    CsNoon.setDay("woensdag");
+                    CsNoon.setDaypart("middag");
+                    CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsNoon.setDate(date);
+                    cohortSchedlRepo.save(CsNoon);
+                    break;
+                case "THURSDAY":
+                    CsMorning.setDay("donderdag");
+                    CsMorning.setDaypart("ochtend");
+                    CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsMorning.setDate(date);
+                    cohortSchedlRepo.save(CsMorning);
+                    CsNoon.setDay("donderdag");
+                    CsNoon.setDaypart("middag");
+                    CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsNoon.setDate(date);
+                    cohortSchedlRepo.save(CsNoon);
+                    break;
+                case "FRIDAY":
+                    CsMorning.setDay("vrijdag");
+                    CsMorning.setDaypart("ochtend");
+                    CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsMorning.setDate(date);
+                    cohortSchedlRepo.save(CsMorning);
+                    CsNoon.setDay("vrijdag");
+                    CsNoon.setDaypart("middag");
+                    CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
+                    CsNoon.setDate(date);
+                    cohortSchedlRepo.save(CsNoon);
+                    break;
+            }
+        }
 
-    public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate){
-        int cohortWeeks=0;
-        //get nr off days in a cohort
-        long days = ChronoUnit.DAYS.between(beginDate, endDate);
-
-        // convert nr of days into whole weeks (ROUND UP)
-        if(days%DAYS_IN_WEEK>0){
-            cohortWeeks=(int) (days/DAYS_IN_WEEK) + 1;
-        }else{
-            cohortWeeks=(int) (days/DAYS_IN_WEEK);        }
-
-        System.out.println(" getNumberOfCohortWeeks method is aangeroepen in de taskController");
-        System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
-        return cohortWeeks;
     }
 
 

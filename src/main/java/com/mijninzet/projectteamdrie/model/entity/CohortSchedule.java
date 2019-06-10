@@ -2,14 +2,13 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 public class CohortSchedule {
    @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private int id;
    private String day;
    private String daypart;
