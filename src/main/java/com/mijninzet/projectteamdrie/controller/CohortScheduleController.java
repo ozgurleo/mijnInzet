@@ -47,45 +47,49 @@ public class CohortScheduleController {
         String result = "default";
         String hours;
         String avail = checkGeneralAvail(teacherId, weekDay, dayPart, cohortId);
-        String overlap= checkCohortOverlap(cohortId, teacherId, dayDate, dayPart);
-        String incident= checkTeacherException(teacherId, dayDate);
+        String overlap = checkCohortOverlap(cohortId, teacherId, dayDate, dayPart);
+        String incident = checkTeacherException(teacherId, dayDate);
         String dayAvail;
-        String subjectPref=checkSubjectPreference(teacherId, subjectId);;
-
-        String checkHours = checkTeacherHours(teacherId, subjectId);
-        if(checkHours.equals("OK")||checkHours.equals("NON")){
-            hours="OK";
-        }else{
-            hours="NOK";
+        String subjectPref = checkSubjectPreference(teacherId, subjectId);
+                String checkHours = checkTeacherHours(teacherId, subjectId);
+        if (checkHours.equals("OK") || checkHours.equals("NON")) {
+            hours = "OK";
+        } else {
+            hours = "NOK";
         }
-    //check if availability is OK or NOK
-        if((avail.equals("NOK")&& incident.equals("OK")&& overlap.equals("OK")) ||
-                (avail.equals("OK")&&((incident.equals("OK")||
-                        incident.equals("NON"))&& overlap.equals("OK")))){
-            dayAvail="OK";
-        }else {
-            dayAvail="NOK"; }
+        //check if availability is OK or NOK
+        if ((avail.equals("NOK") && incident.equals("OK") && overlap.equals("OK")) ||
+                (avail.equals("OK") && ((incident.equals("OK") ||
+                        incident.equals("NON")) && overlap.equals("OK")))) {
+            dayAvail = "OK";
+        } else {
+            dayAvail = "NOK";
+        }
+
+        System.out.println("RESULT OF THE dayAvail = " + dayAvail);
 
         String total = hours + "-" + dayAvail + "-" + subjectPref;
 
-        if(total.equals("OK-OK-OK")){
-            result ="OK";
-        } else if (total.equals("NOK-NOK-NOK")){
-            result= "NOK";
-        } else if(total.equals("NOK-OK-OK")){
+        if (total.equals("OK-OK-OK")) {
+            result = "OK";
+        } else if (total.equals("NOK-NOK-NOK")) {
+            result = "NOK";
+        } else if (total.equals("NOK-OK-OK")) {
             result = "hourNOK_restOK";
-        }else if(total.equals("OK-NOK-OK")){
+        } else if (total.equals("OK-NOK-OK")) {
             result = "availNOK_restOK";
-        }else if(total.equals("OK-OK-NOK")) {
+        } else if (total.equals("OK-OK-NOK")) {
             result = "subjectNOK_restOK";
-        }else if(total.equals("NOK-NOK-OK")) {
+        } else if (total.equals("NOK-NOK-OK")) {
             result = "hoursNOK_availNOK_OK";
-        }else if(total.equals("OK-NOK-NOK")) {
+        } else if (total.equals("OK-NOK-NOK")) {
             result = "OK_availNOK_prefNOK";
-        }else if(total.equals("NOK-OK-NOK")) {
+        } else if (total.equals("NOK-OK-NOK")) {
             result = "hoursNOK_OK_prefNOK";
         }
 
+
+        System.out.println("RESULT OF TOTAL CHECK = " + result);
         return result;
     }
 
@@ -134,36 +138,46 @@ public class CohortScheduleController {
             result = "NON";
         }
 
+        System.out.println("RESULT OF THE GENERAL AVAILABILITY = " + result);
+
         return result;
     }
 
     public String checkCohortOverlap(int cohortId, int teacherId, LocalDate datePlanned, String dayPart) {
         String result = "default";
-        int scheduleId = cohortScheduleRepo.getDateDaypartOverlap(cohortId, datePlanned, dayPart, teacherId);
+        int scheduleId=0;
+        String tempId = cohortScheduleRepo.getDateDaypartOverlap(cohortId, datePlanned, dayPart, teacherId);
+        if(tempId==null){
+            scheduleId=0;
+        }else{
+            scheduleId=Integer.parseInt(tempId);
+        }
+
         if (scheduleId > 0) {
             result = "NOK";
         } else {
-            result ="OK";
+            result = "OK";
         }
-
+        System.out.println("RESULT OF THE COHORT OVERLAP = " + result);
         return result;
     }
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
-        String output = "default";
-        int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
+        String result = "default";
+        String preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
+if (preference==null){
+    result = "NON";
+}else if (preference.equals( "1")){
+            result = "OK";
 
-        if (preference == 1) {
-            output = "OK";
+        } else if (preference.equals( "2")) {
+            result = "OK";
+        } else if (preference.equals( "3")){
+    result = "NOK";
+}
 
-        } else if (preference == 2) {
-            output = "OK";
-        } else if (preference == 3) {
-            output = "NOK";
-        } else if (preference == 0) {
-            output = "NON";
-        }
-        return output;
+        System.out.println("RESULT OF THE SUBJECT PREFERENCE = " + result);
+        return result;
     }
 
 
@@ -171,14 +185,15 @@ public class CohortScheduleController {
         String result = "default";
 
         String incidentText = exceptionRepo.getIncident(teacherId, datePlanned);
-        if (incidentText.equals("JA")) {
-            result = "OK";
-        } else if (incidentText.equals("NEE")) {
-            result = "NOK";
-        } else {
+        if(incidentText==null){
             result = "NON";
+        } else  if (incidentText.equals("JA")) {
+            result = "OK";
         }
-
+         else if (incidentText.equals("NEE")) {
+            result = "NOK";
+        }
+        System.out.println("RESULT OF THE TEACHER INCIDENT = " + result);
         return result;
     }
 
@@ -247,14 +262,17 @@ public class CohortScheduleController {
     @PostMapping(value = "/generateCohortSchedule/check")
     public @ResponseBody
     String checkSchedule(HttpServletRequest request) {
-        System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
-        System.out.println("  cohortnr =" + request.getParameter("cohortnr"));
-        System.out.println("  datum = " + request.getParameter("dateDay"));
-        System.out.println("  dag = " + request.getParameter("day"));
-        System.out.println("  dagdeel = " + request.getParameter("daypart"));
-        System.out.println("  subjectId = " + request.getParameter("subjectnr"));
-        System.out.println("  teacherId = " + request.getParameter("teachernr"));
 
+        System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
+        System.out.println("button clicked =" + request.getParameter("button"));
+        System.out.println("cohortnr =" + request.getParameter("cohortnr"));
+        System.out.println("datum = " + request.getParameter("dateDay"));
+        System.out.println("dag = " + request.getParameter("day"));
+        System.out.println("dagdeel = " + request.getParameter("daypart"));
+        System.out.println("subjectId = " + request.getParameter("subjectnr"));
+        System.out.println("teacherId = " + request.getParameter("teachernr"));
+
+        String buttonClicked = request.getParameter("button");
         int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
         String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
         int year = Integer.parseInt(arrOfDate[0]);
@@ -267,11 +285,29 @@ public class CohortScheduleController {
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
         int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
+        String result="";
+        if (buttonClicked.equals("check")) {
+            result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+            System.out.println("RESULT AFTER CHECK = " + result);
 
-        String result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+            return result;
+        }
+        if (buttonClicked.equals("save")) {
+            CohortSchedule newCS= new CohortSchedule();
+            newCS.setClassRoom("");
+            newCS.setDay(weekDay);
+            newCS.setDaypart(dayPart);
+            newCS.setDate(dayDate);
+            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
+            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
+            newCS.setUser(userRepo.findUserById(teacherId));
+            cohortScheduleRepo.save(newCS);
 
-
+           result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
         return result;
+        }
+        return result;
+
     }
 
 
