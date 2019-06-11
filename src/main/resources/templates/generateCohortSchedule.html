@@ -53,7 +53,7 @@
                 <th>dag</th>
                 <th>dagdeel</th>
                 <th>planning</th>
-                <th>resultaat check/opslag</th>
+                <th>  resultaat  </th>
                 <th>check op conflict</th>
                 <th>planning opslaan</th>
             </tr>
@@ -201,7 +201,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
             success: function (result) {
                 if (result == "OK") {
                     x.style.background = "PaleGreen";
-                    x.innerHTML = "kan opgeslagen worden";
+                    x.innerHTML = "CHECK: OK";
                 } else if (result == "NotAvailable") {
                     x.style.background = "#ff8000";
                     x.innerHTML ="Docent is dit dagdeel" + "<br>" + "niet beschikbaar";
@@ -250,7 +250,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
             success: function (result) {
                 if (result == "OK") {
                     x.style.background = "SpringGreen";
-                    x.innerHTML = "opgeslagen";
+                    x.innerHTML = "OPGESLAGEN";
                 } else if (result == "NotAvailable") {
                     x.style.background = "#ff4000";
                     x.innerHTML = "opgeslagen -->"+ "<br>"+ "LET OP: Docent niet beschikbaar";
