@@ -8,6 +8,7 @@ import com.mijninzet.projectteamdrie.repository.*;
 
 import com.sun.net.httpserver.HttpContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,27 +36,57 @@ public class CohortScheduleController {
     TeacherHoursRepository teacherHoursRepository;
     @Autowired
     CohortRepository cohortRepository;
-
     @Autowired
     StaffAvailibilityRepository staffAvailrepo;
 
+    @Autowired
+    ExceptionRepository exceptionRepo;
 
-    public static final int DAYS_IN_WEEK = 7;
 
-    //hier worden het aantal weken in een cohort bepaalt
-    public int getNumberOfCohortWeeks(LocalDate beginDate, LocalDate endDate) {
-        int cohortWeeks = 0;
-        //get nr off days in a cohort
-        long days = ChronoUnit.DAYS.between(beginDate, endDate);
-        // convert nr of days into whole weeks (ROUND UP)
-        if (days % DAYS_IN_WEEK > 0) {
-            cohortWeeks = (int) (days / DAYS_IN_WEEK) + 1;
-        } else {
-            cohortWeeks = (int) (days / DAYS_IN_WEEK);
+    private String totalCheck(int cohortId, int teacherId, LocalDate dayDate, String dayPart, String weekDay, int subjectId) {
+        String result = "default";
+        String hours;
+        String avail = checkGeneralAvail(teacherId, weekDay, dayPart, cohortId);
+        String overlap= checkCohortOverlap(cohortId, teacherId, dayDate, dayPart);
+        String incident= checkTeacherException(teacherId, dayDate);
+        String dayAvail;
+        String subjectPref=checkSubjectPreference(teacherId, subjectId);;
+
+        String checkHours = checkTeacherHours(teacherId, subjectId);
+        if(checkHours.equals("OK")||checkHours.equals("NON")){
+            hours="OK";
+        }else{
+            hours="NOK";
         }
-        System.out.println(" getNumberOfCohortWeeks method is aangeroepen in de taskController");
-        System.out.println("Aantal DAGEN : " + days + "---> zijn in totaal " + cohortWeeks + " cohortWEKEN");
-        return cohortWeeks;
+    //check if availability is OK or NOK
+        if((avail.equals("NOK")&& incident.equals("OK")&& overlap.equals("OK")) ||
+                (avail.equals("OK")&&((incident.equals("OK")||
+                        incident.equals("NON"))&& overlap.equals("OK")))){
+            dayAvail="OK";
+        }else {
+            dayAvail="NOK"; }
+
+        String total = hours + "-" + dayAvail + "-" + subjectPref;
+
+        if(total.equals("OK-OK-OK")){
+            result ="OK";
+        } else if (total.equals("NOK-NOK-NOK")){
+            result= "NOK";
+        } else if(total.equals("NOK-OK-OK")){
+            result = "hourNOK_restOK";
+        }else if(total.equals("OK-NOK-OK")){
+            result = "availNOK_restOK";
+        }else if(total.equals("OK-OK-NOK")) {
+            result = "subjectNOK_restOK";
+        }else if(total.equals("NOK-NOK-OK")) {
+            result = "hoursNOK_availNOK_OK";
+        }else if(total.equals("OK-NOK-NOK")) {
+            result = "OK_availNOK_prefNOK";
+        }else if(total.equals("NOK-OK-NOK")) {
+            result = "hoursNOK_OK_prefNOK";
+        }
+
+        return result;
     }
 
     public String checkGeneralAvail(int teacherId, String day, String dayPart, int cohortId) {
@@ -100,31 +131,56 @@ public class CohortScheduleController {
         } else if (result.equals("NEE")) {
             result = "NOK";
         } else {
-            result = "availNotInDB";
+            result = "NON";
         }
 
         return result;
     }
 
-    public String checkCohortOverlap(int teacherId, LocalDate datePlanned, String dayPart) {
-        return "overlapNOK";
+    public String checkCohortOverlap(int cohortId, int teacherId, LocalDate datePlanned, String dayPart) {
+        String result = "default";
+        int scheduleId = cohortScheduleRepo.getDateDaypartOverlap(cohortId, datePlanned, dayPart, teacherId);
+        if (scheduleId > 0) {
+            result = "NOK";
+        } else {
+            result ="OK";
+        }
+
+        return result;
     }
 
     public String checkSubjectPreference(int teacherId, int subjectId) {
-        String output = "NO OUTPUT VALUE";
+        String output = "default";
         int preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
 
         if (preference == 1) {
             output = "OK";
 
         } else if (preference == 2) {
-            output = "prefPartlyOK";
+            output = "OK";
         } else if (preference == 3) {
             output = "NOK";
+        } else if (preference == 0) {
+            output = "NON";
         }
         return output;
     }
 
+
+    public String checkTeacherException(int teacherId, LocalDate datePlanned) {
+        String result = "default";
+
+        String incidentText = exceptionRepo.getIncident(teacherId, datePlanned);
+        if (incidentText.equals("JA")) {
+            result = "OK";
+        } else if (incidentText.equals("NEE")) {
+            result = "NOK";
+        } else {
+            result = "NON";
+        }
+
+        return result;
+    }
 
     public String checkTeacherHours(int teacherId, int subjectId) {
 
@@ -136,9 +192,9 @@ public class CohortScheduleController {
         if (teacherHours != null) {
             if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId)) {
                 if (teacherHours.getTeachingHoursLeft() < 8)
-                    return "UrenNOK";
+                    return "NOK";
                 else {
-                    return "UrenOK";
+                    return "OK";
                 }
             } else {
                 int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
@@ -151,12 +207,12 @@ public class CohortScheduleController {
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
-                    return "UrenNOK";
+                    return "NOK";
                 }
             }
-            return "UrenOK";
+            return "OK";
         } else {
-            return "IetsofIemandNietBekend";
+            return "NON";
         }
     }
 
@@ -212,10 +268,12 @@ public class CohortScheduleController {
         int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
 
-        String result = "OK";
+        String result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+
 
         return result;
     }
+
 
     public List<CohortSchedule> getAllSchedulesInCohort(int cohortId) {
 
