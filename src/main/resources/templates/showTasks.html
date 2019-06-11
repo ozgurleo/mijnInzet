@@ -52,50 +52,94 @@
 </div>
 
 
-    <div class="table-responsive col-sm-8">
-        <table id="taskTable" class="table table-bordered">
-            <h3 class="Vacatures">VACATURES</h3>
-            <tablehead>
-                <thead class="thead-dark">
-                <tr>
-                    <th>Vacature_nr</th>
-                    <th> VacatureOmschrijving</th>
-                    <th>Begrootte Uren</th>
-                    <th>Geldigheidsduur</th>
-                    <th>Geef jouw uren op</th>
-                    <th>   Solliciteer   </th>
-                </tr>
-                </thead>
-            </tablehead>
+<!--    <div class="table-responsive col-sm-8">-->
+<!--        <table id="taskTable" class="table table-bordered">-->
+<!--            <h3 class="Vacatures">VACATURES</h3>-->
+<!--            <tablehead>-->
+<!--                <thead class="thead-dark">-->
+<!--                <tr>-->
+<!--                    <th>Vacature_nr</th>-->
+<!--                    <th> VacatureOmschrijving</th>-->
+<!--                    <th>Begrootte Uren</th>-->
+<!--                    <th>Geldigheidsduur</th>-->
+<!--                    <th>Geef jouw uren op</th>-->
+<!--                    <th>   Solliciteer   </th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--            </tablehead>-->
 
-            <tablebody>
-                <tr th:each="task:${showTasks}">
+<!--            <tablebody>-->
+<!--                <tr th:each="task:${showTasks}">-->
 
-                    <form th:id="${task.taskId}" th:action="@{/taskApplications/taskId/availableHours}" method="post">
-                        <td>
-                        <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color:
-                        transparent;border: #FF1C19" th:value="${task.taskId}" size="4" readonly/>
-                        </td>
-                        <td th:text="${task.taskName}">Taak</td>
-                        <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-                        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
-                        <td>
-                        <input TYPE="text" NAME ="availableHours" id= "availableHours"
-                               th:value="${task.estimatedHours}" SIZE="11" th:form = "${task.taskId}" style="background-color: transparent;
-                           border-color: brown;border-style:solid;text-align: center"  />
-                        </td>
+<!--                    <form th:id="${task.taskId}" th:action="@{/taskApplications/taskId/availableHours}" method="post">-->
+<!--                        <td>-->
+<!--                        <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color:-->
+<!--                        transparent;border: #FF1C19" th:value="${task.taskId}" size="4" readonly/>-->
+<!--                        </td>-->
+<!--                        <td th:text="${task.taskName}">Taak</td>-->
+<!--                        <td th:text="${task.estimatedHours}">Begrootte Uren</td>-->
+<!--                        <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>-->
+<!--                        <td>-->
+<!--                        <input TYPE="text" NAME ="availableHours" id= "availableHours"-->
+<!--                               th:value="${task.estimatedHours}" SIZE="11" th:form = "${task.taskId}" style="background-color: transparent;-->
+<!--                           border-color: brown;border-style:solid;text-align: center"  />-->
+<!--                        </td>-->
 
-                        <td>
-                        <div>
-                            <button type="submit" class="btn btn-info" th:value="${task.taskId}"
+<!--                        <td>-->
+<!--                        <div>-->
+<!--                            <button type="submit" class="btn btn-info" th:value="${task.taskId}"-->
+<!--                                th:id="${task.taskId}" th:form = "${task.taskId}"> klik hier </button>-->
+<!--                        </div>-->
+<!--                        </td>-->
+<!--                    </form>-->
+<!--                   </tr>-->
+<!--            </tablebody>-->
+<!--        </table>-->
+<!--    </div>-->
+<div class="container">
+    <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+        <h3 class="Vacatures">VACATURES</h3>
+
+        <thead class="thead-dark">
+        <tr>
+            <th>Vacature_nr</th>
+            <th> VacatureOmschrijving</th>
+            <th>Begrootte Uren</th>
+            <th>Geldigheidsduur</th>
+            <th>Geef jouw uren op</th>
+            <th>   Solliciteer   </th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        <tr th:each="task:${showTasks}">
+
+            <form th:id="${task.taskId}" th:action="@{/taskApplications/taskId/availableHours}" method="post">
+                <td>
+                    <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color:
+                    transparent;border: #FF1C19" th:value="${task.taskId}" size="4" readonly/>
+                </td>
+                <td th:text="${task.taskName}">Taak</td>
+                <td th:text="${task.estimatedHours}">Begrootte Uren</td>
+                <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
+                <td>
+                    <input type="text" name ="availableHours" id= "availableHours"
+                           th:value="${task.estimatedHours}" size="11" th:form = "${task.taskId}" style="background-color: transparent;
+                       border-color: brown;border-style:solid;text-align: center"  />
+                </td>
+
+                <td>
+                    <div>
+                        <button type="submit" class="btn btn-info" th:value="${task.taskId}"
                                 th:id="${task.taskId}" th:form = "${task.taskId}"> klik hier </button>
-                        </div>
-                        </td>
-                    </form>
-                   </tr>
-            </tablebody>
-        </table>
-    </div>
+                    </div>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

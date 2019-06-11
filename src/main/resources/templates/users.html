@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Thymeleaf Demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
 </head>
 <body>
 <div class="container">
@@ -30,7 +32,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a></li>
                     <li><a href="/register">NIEUWE GEBRUIKER</a></li>
-                    <li><a href="/cohort/createCohort">BEHEER COHORTEN</a></li>
+                    <li ><a href="/cohort/createCohort">BEHEER COHORTEN</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-primary">Log Out</button>
@@ -45,8 +47,8 @@
     <hr>
     <!-- Add Employee -->
     <a th:href="@{/users/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add User</a>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+    <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+        <thead>
         <tr>
 
             <th>First Name</th>
@@ -55,7 +57,7 @@
             <th>Action</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody >
         <tr th:each="user: ${users}">
             <td th:text="${user.name}"/>
             <td th:text="${user.lastName}"/>

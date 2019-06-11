@@ -43,82 +43,148 @@
 
 <br><br>
 
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="container">-->
+<!--            <div class="col-sm-12">-->
+<!--                <br>-->
+<!--                <h3>Geef nieuw cohort op  </h3>-->
+<!--                <hr>-->
+
+<!--                <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">-->
+
+<!--                    <label class="form-group ">-->
+<!--                        <label class="control-label"/> Cohort </label>-->
+<!--                    <div class="input-group">-->
+<!--                        <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"-->
+<!--                               th:field="*{cohortId}"/>-->
+<!--                    </div>-->
+<!--                    </label>-->
+<!--                  <label class="form-group  ">-->
+<!--                        <label class="control-label" th:text="begindatum">Begindatum</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="date" class="form-control mb-4 col-12" id="beginDate" name="beginDate"-->
+<!--                                   placeholder="MM/DD/YYY" th:field="*{beginDate}"/>-->
+<!--                        </div>-->
+<!--                    </label>-->
+
+<!--                    <label class="form-group  ">-->
+<!--                        <label class="control-label" th:text="einddatum">Einddatum</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="date" class="form-control mb-4 col-12" id="ëndDate" name="ëndDate"-->
+<!--                                   placeholder="MM/DD/YYY" th:field="*{endDate}"/>-->
+<!--                        </div>-->
+<!--                    </label>-->
+<!--                    <div class="form-group ">-->
+<!--                        <button class="btn btn-succes col-2" onclick="f()" name="submit" type="submit">-->
+<!--                            Submit-->
+<!--                        </button>-->
+<!--                        <br>-->
+
+<!--                    </div>-->
+
+<!--                </form>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="container">
-    <div class="row">
-        <div class="container">
-            <div class="col-sm-12">
-                <br>
-                <h3>Geef nieuw cohort op  </h3>
-                <hr>
 
-                <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
+    <br>
+    <h3>Geef nieuw cohort op  </h3>
+    <hr>
 
-                    <label class="form-group ">
-                        <label class="control-label"/> Cohort </label>
-                    <div class="input-group">
-                        <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"
-                               th:field="*{cohortId}"/>
-                    </div>
-                    </label>
-                  <label class="form-group  ">
-                        <label class="control-label" th:text="begindatum">Begindatum</label>
-                        <div class="input-group">
-                            <input type="date" class="form-control mb-4 col-12" id="beginDate" name="beginDate"
-                                   placeholder="MM/DD/YYY" th:field="*{beginDate}"/>
-                        </div>
-                    </label>
+    <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
 
-                    <label class="form-group  ">
-                        <label class="control-label" th:text="einddatum">Einddatum</label>
-                        <div class="input-group">
-                            <input type="date" class="form-control mb-4 col-12" id="ëndDate" name="ëndDate"
-                                   placeholder="MM/DD/YYY" th:field="*{endDate}"/>
-                        </div>
-                    </label>
-                    <div class="form-group ">
-                        <button class="btn btn-succes col-2" onclick="f()" name="submit" type="submit">
-                            Submit
-                        </button>
-                        <br>
-
-                    </div>
-
-                </form>
-
-            </div>
+        <label class="form-group ">
+            <label class="control-label"/> Cohort </label>
+        <div class="input-group">
+            <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"
+                   th:field="*{cohortId}"/>
         </div>
-    </div>
+        </label>
+        <label class="form-group  ">
+            <label class="control-label" th:text="begindatum">Begindatum</label>
+            <div class="input-group">
+                <input type="date" class="form-control mb-4 col-12" id="beginDate" name="beginDate"
+                       placeholder="MM/DD/YYY" th:field="*{beginDate}"/>
+            </div>
+        </label>
+
+        <label class="form-group  ">
+            <label class="control-label" th:text="einddatum">Einddatum</label>
+            <div class="input-group">
+                <input type="date" class="form-control mb-4 col-12" id="ëndDate" name="ëndDate"
+                       placeholder="MM/DD/YYY" th:field="*{endDate}"/>
+            </div>
+        </label>
+        <div class="form-group ">
+            <button class="btn btn-lg btn-primary" onclick="f()" name="submit" type="submit">
+                Submit
+            </button>
+
+            <br>
+
+        </div>
+
+    </form>
+
 </div>
+
 
 
 <br><br>
-<div class="row">
-    <div class="container">
-        <div class="table-responsive col-sm-12">
-            <table id="CohortTable2" class="table table-bordered">
-                <h3>Bestaande Cohorten</h3>
-                <tablehead>
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>Cohort</th>
-                        <th> Begindatum</th>
-                        <th> Einddatum</th>
-                    </tr>
-                    </thead>
-                </tablehead>
+<!--<div class="row">-->
+<!--    <div class="container">-->
+<!--        <div class="table-responsive col-sm-12">-->
+<!--            <table id="CohortTable2" class="table table-bordered">-->
+<!--                <h3>Bestaande Cohorten</h3>-->
+<!--                <tablehead>-->
+<!--                    <thead class="thead-dark">-->
+<!--                    <tr>-->
+<!--                        <th>Cohort</th>-->
+<!--                        <th> Begindatum</th>-->
+<!--                        <th> Einddatum</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                </tablehead>-->
 
-                <tablebody>
-                    <tr th:each="cohort:${allCohorts}">
-                        <td th:text="${cohort.cohortId}">cohortid</td>
-                        <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
-                        <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
-                    </tr>
-                </tablebody>
-            </table>
-        </div>
+<!--                <tablebody>-->
+<!--                    <tr th:each="cohort:${allCohorts}">-->
+<!--                        <td th:text="${cohort.cohortId}">cohortid</td>-->
+<!--                        <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>-->
+<!--                        <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>-->
+<!--                    </tr>-->
+<!--                </tablebody>-->
+<!--            </table>-->
+<!--        </div>-->
 
-    </div>
-</div>
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="container">
+<table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+    <h3>Bestaande Cohorten</h3>
+
+    <thead >
+    <tr>
+        <th>Cohort</th>
+        <th> Begindatum</th>
+        <th> Einddatum</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cohort:${allCohorts}">
+        <td th:text="${cohort.cohortId}">cohortid</td>
+        <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
+        <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
+    </tr>
+    </tbody>
+</table>
+
+
 </div>
 
 

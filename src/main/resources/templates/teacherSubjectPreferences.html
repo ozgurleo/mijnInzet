@@ -55,40 +55,81 @@
 </div>
 
 
-<h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
-<form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">
-    <div class="row">
-        <div class="table-responsive col-sm-6">
-            <table id="SubjectTable" class="table table-striped">
-                <tr>
-                    <th>Vaknummer</th>
-                    <th>Vak</th>
-                    <th>Begrootte Uren</th>
-                    <th>Geldigheidsduur (jaren)</th>
-                    <th>Geef voorkeur op</th>
-                </tr>
-                <tr th:each="subject:${showSubjects}">
-                    <td th:text="${subject.subjectId}">-1</td>
-                    <td th:text="${subject.subjectName}">-1</td>
-                    <td th:text="${subject.estimatedHours}">-1</td>
-                    <td th:text="${subject.yearsToExpiryDate}">-1</td>
-                    <td>
-                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
-                               value="1"> ik geef dit vak liever
-                        niet.<br>
-                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
-                               value="2"> ja, dit vak wil ik
-                        geven.<br>
-                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
-                               value="3"> ja, Ik heb het vak al
-                        eerder gegeven.
-                    </td>
-                </tr>
-            </table>
-        </div>
+<!--<h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>-->
+<!--<form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">-->
+<!--    <div class="row">-->
+<!--        <div class="table-responsive col-sm-6">-->
+<!--            <table id="SubjectTable" class="table table-striped">-->
+<!--                <tr>-->
+<!--                    <th>Vaknummer</th>-->
+<!--                    <th>Vak</th>-->
+<!--                    <th>Begrootte Uren</th>-->
+<!--                    <th>Geldigheidsduur (jaren)</th>-->
+<!--                    <th>Geef voorkeur op</th>-->
+<!--                </tr>-->
+<!--                <tr th:each="subject:${showSubjects}">-->
+<!--                    <td th:text="${subject.subjectId}">-1</td>-->
+<!--                    <td th:text="${subject.subjectName}">-1</td>-->
+<!--                    <td th:text="${subject.estimatedHours}">-1</td>-->
+<!--                    <td th:text="${subject.yearsToExpiryDate}">-1</td>-->
+<!--                    <td>-->
+<!--                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
+<!--                               value="1"> ik geef dit vak liever-->
+<!--                        niet.<br>-->
+<!--                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
+<!--                               value="2"> ja, dit vak wil ik-->
+<!--                        geven.<br>-->
+<!--                        <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
+<!--                               value="3"> ja, Ik heb het vak al-->
+<!--                        eerder gegeven.-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <button type="submit" form="myForm" class="btn btn-lg btn-success">Submit Preference-->
+<!--    </button>-->
+<!--</form>-->
+
+
+    <div class="container">
+        <form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">
+        <h5 class="Vakkenvoorkeur">Klik op de buttons om je voorkeur op te geven</h5>
+        <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+            <thead class="thead-dark">
+            <tr>
+                <th>Vaknummer</th>
+                <th>Vak</th>
+                <th>Begrootte Uren</th>
+                <th>Geldigheidsduur (jaren)</th>
+                <th>Geef voorkeur op</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="subject:${showSubjects}">
+                <td th:text="${subject.subjectId}">-1</td>
+                <td th:text="${subject.subjectName}">-1</td>
+                <td th:text="${subject.estimatedHours}">-1</td>
+                <td th:text="${subject.yearsToExpiryDate}">-1</td>
+                <td>
+                    <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                           value="1"> ik geef dit vak liever
+                    niet.<br>
+                    <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                           value="2"> ja, dit vak wil ik
+                    geven.<br>
+                    <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"
+                           value="3"> ja, Ik heb het vak al
+                    eerder gegeven.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </form>
+        <button type="submit" form="myForm" class="btn btn-lg btn-success">Submit Preference
+        </button>
     </div>
-    <button type="submit" form="myForm" class="btn btn-lg btn-success">Submit Preference
-    </button>
-</form>
+
+
 </body>
 </html>
