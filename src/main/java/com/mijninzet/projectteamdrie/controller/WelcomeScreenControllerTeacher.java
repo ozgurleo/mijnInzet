@@ -28,7 +28,7 @@ public class WelcomeScreenControllerTeacher {
     public String welcomeTeacher(Model model, User user){
        User usercurrent = userRepo.findUserById(user.getCurrentUserId());
         model.addAttribute("user", usercurrent);
-        return "helloTeacher";
+        return "dashboard/dashboard";
     }
 
 }
