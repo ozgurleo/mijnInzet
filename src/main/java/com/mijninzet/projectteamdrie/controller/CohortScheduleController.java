@@ -51,12 +51,19 @@ public class CohortScheduleController {
         String incident = checkTeacherException(teacherId, dayDate);
         String dayAvail;
         String subjectPref = checkSubjectPreference(teacherId, subjectId);
-                String checkHours = checkTeacherHours(teacherId, subjectId);
+        if (subjectPref.equals("NON")) {
+            subjectPref = "OK";
+        }
+        System.out.println("RESULT OF PREFERENCE = " + subjectPref);
+
+        String checkHours = checkTeacherHours(teacherId, subjectId);
         if (checkHours.equals("OK") || checkHours.equals("NON")) {
             hours = "OK";
         } else {
             hours = "NOK";
         }
+        System.out.println("RESULT OF TEACHER HOURS = " + hours);
+
         //check if availability is OK or NOK
         if ((avail.equals("NOK") && incident.equals("OK") && overlap.equals("OK")) ||
                 (avail.equals("OK") && ((incident.equals("OK") ||
@@ -145,12 +152,12 @@ public class CohortScheduleController {
 
     public String checkCohortOverlap(int cohortId, int teacherId, LocalDate datePlanned, String dayPart) {
         String result = "default";
-        int scheduleId=0;
+        int scheduleId = 0;
         String tempId = cohortScheduleRepo.getDateDaypartOverlap(cohortId, datePlanned, dayPart, teacherId);
-        if(tempId==null){
-            scheduleId=0;
-        }else{
-            scheduleId=Integer.parseInt(tempId);
+        if (tempId == null) {
+            scheduleId = 0;
+        } else {
+            scheduleId = Integer.parseInt(tempId);
         }
 
         if (scheduleId > 0) {
@@ -165,16 +172,16 @@ public class CohortScheduleController {
     public String checkSubjectPreference(int teacherId, int subjectId) {
         String result = "default";
         String preference = subjectRepo.getSingleTeacherSubjectPref(teacherId, subjectId);
-if (preference==null){
-    result = "NON";
-}else if (preference.equals( "1")){
+        if (preference == null) {
+            result = "NON";
+        } else if (preference.equals("1")) {
             result = "OK";
 
-        } else if (preference.equals( "2")) {
+        } else if (preference.equals("2")) {
             result = "OK";
-        } else if (preference.equals( "3")){
-    result = "NOK";
-}
+        } else if (preference.equals("3")) {
+            result = "NOK";
+        }
 
         System.out.println("RESULT OF THE SUBJECT PREFERENCE = " + result);
         return result;
@@ -185,12 +192,12 @@ if (preference==null){
         String result = "default";
 
         String incidentText = exceptionRepo.getIncident(teacherId, datePlanned);
-        if(incidentText==null){
+
+        if (incidentText == null) {
             result = "NON";
-        } else  if (incidentText.equals("JA")) {
+        } else if (incidentText.equals("JA")) {
             result = "OK";
-        }
-         else if (incidentText.equals("NEE")) {
+        } else if (incidentText.equals("NEE")) {
             result = "NOK";
         }
         System.out.println("RESULT OF THE TEACHER INCIDENT = " + result);
@@ -285,7 +292,7 @@ if (preference==null){
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
         int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
-        String result="";
+        String result = "";
         if (buttonClicked.equals("check")) {
             result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
             System.out.println("RESULT AFTER CHECK = " + result);
@@ -293,7 +300,7 @@ if (preference==null){
             return result;
         }
         if (buttonClicked.equals("save")) {
-            CohortSchedule newCS= new CohortSchedule();
+            CohortSchedule newCS = new CohortSchedule();
             newCS.setClassRoom("");
             newCS.setDay(weekDay);
             newCS.setDaypart(dayPart);
@@ -303,8 +310,8 @@ if (preference==null){
             newCS.setUser(userRepo.findUserById(teacherId));
             cohortScheduleRepo.save(newCS);
 
-           result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
-        return result;
+            result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+            return result;
         }
         return result;
 

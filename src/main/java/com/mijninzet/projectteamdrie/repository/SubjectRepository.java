@@ -23,11 +23,11 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     ArrayList<Object[]> getRooms();
 
     //Brahim Code: get list of teacher/subject preferences
-    @Query(value="SELECT * FROM mijn_inzet.temp_subject_preference;", nativeQuery = true)
+    @Query(value="SELECT * FROM mijn_inzet.subject_preference;", nativeQuery = true)
     ArrayList<Object[]> getPreferences();
 
     //Brahim Code: get teacher with single teacher preference for one subject
-    @Query(value="SELECT preference FROM mijn_inzet.temp_subject_preference where user_id=:userId AND subject_id=:subjectId", nativeQuery = true)
+    @Query(value="SELECT preference FROM mijn_inzet.subject_preference where user_user_id=:userId AND subject_subject_id=:subjectId ", nativeQuery = true)
     String getSingleTeacherSubjectPref(@Param("userId") Integer userId, @Param("subjectId") Integer subjectId);
 
     Subject getBySubjectId(int subjectId);
