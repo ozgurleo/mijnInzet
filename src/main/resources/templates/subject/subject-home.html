@@ -17,29 +17,29 @@
             var $name = $('#name');
             var $explanation =$('#explanation');
             var $hour=$('#hour');
+            var tbody=$('#subjectBody')
+
 
          $.ajax({
              type:'GET',
              url:'/vak/lijst',
              dataType:'json',
              success:[
-                 function (data) {
-                 $.each(data,function (key,val) {
-                     $subjects.append('<li> Naam: '+val.subjectName+', geschatteuur: '+ val.estimatedHours
-                         +', beschrijving: '+ val.explanation)
+                 function (subjects) {
+                 // $.each(data,function (key,val) {
+                 //     $subjects.append('<li> Naam: '+val.subjectName+', geschatteuur: '+ val.estimatedHours
+                 //         +', beschrijving: '+ val.explanation)
+                 //
+                 // })
 
-                 })
-                 /*
-                 var items =[];
+
                  $.each(subjects,function (key, val) {
-                    items.push("<tr>");
-                    items.push("<td id=''"+key+"''>"+val.subjectName+"</td>");
-                    items.push("<td id=''"+key+"''>"+val.estimatedHours+"</td>");
-                    items.push("<td id=''"+key+"''>"+val.explanation+"</td>");
-                    items.push("</tr>");
+                     tbody.append($("<tr>")
+                         .append($("<td>").append(val.subjectName))
+                         .append($("<td>").append(val.estimatedHours))
+                         .append($("<td>").append(val.explanation))
+                     );
                  });
-                 $("<tbody/>",{html:items.join("")}).appendTo("table");*/
-
              }
              ],
              error:
@@ -64,9 +64,13 @@
                  url:'/vak/addSubject',
                  dataType:"json",
                  data:JSON.stringify(subject),
-                 success:function (newOrder) {
-                     $subjects.append('<li> Naam: '+newOrder.subjectName+', geschatteuur: '+ newOrder.estimatedHours
-                         +', beschrijving: '+ newOrder.explanation)
+                 success:function (newSubject) {
+                     console.log(newSubject)
+                     tbody.append($("<tr>")
+                         .append($("<td>").append(newSubject.subjectName))
+                         .append($("<td>").append(newSubject.estimatedHours))
+                         .append($("<td>").append(newSubject.explanation)));
+
                  },
                  error:function () {
                      alert("error saving subject")
@@ -85,25 +89,32 @@
     <div class="container">
         <h1>Vak Directory</h1>
         <h2>Vakken</h2>
-        <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
-            <thead>
+        <table id="subjectTable" class="table table-bordered table-striped table-hover" style="background-color:white">
+            <thead style="background-color: mediumpurple">
             <tr>
                 <th>Naam</th>
                 <th>Geschatte Uur</th>
                 <th>Beschirjving</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="subjectBody">
             </tbody>
         </table>
         <ul id="new-subject">
 
         </ul>
-        <h4>add Niuewe Vak</h4>
-        <p>Naam:<input type="text" id="name"></p>
-        <p>Beschrijving:<input type="text" id="explanation"></p>
-        <p>Uur:<input type="number" id="hour"></p>
-        <button id="add-subject">Toevoeg</button>
+        <form>
+            <h4>Voeg Niuewe Vak Toe</h4>
+            <div class="form-group">
+                <p><input type="text" id="name" placeholder="Naam van Subject"></p>
+                <p><input type="text" id="explanation" placeholder="Beschrijving"></p>
+                <p><input type="number" id="hour" placeholder="Geschatte Uren"></p>
+                <button id="add-subject">Toevoeg</button>
+            </div>
+
+
+        </form>
+
     </div>
 
 </body>
