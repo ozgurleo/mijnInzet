@@ -28,7 +28,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
     //Brahim Code: get teacher with single teacher preference for one subject
     @Query(value="SELECT preference FROM mijn_inzet.temp_subject_preference where user_id=:userId AND subject_id=:subjectId", nativeQuery = true)
-    Integer getSingleTeacherSubjectPref(@Param("userId") Integer userId, @Param("subjectId") Integer subjectId);
+    String getSingleTeacherSubjectPref(@Param("userId") Integer userId, @Param("subjectId") Integer subjectId);
 
     Subject getBySubjectId(int subjectId);
 

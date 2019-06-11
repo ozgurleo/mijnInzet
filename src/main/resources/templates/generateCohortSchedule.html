@@ -53,7 +53,7 @@
                 <th>dag</th>
                 <th>dagdeel</th>
                 <th>planning</th>
-                <th>resultaat check/opslag</th>
+                <th>  resultaat  </th>
                 <th>check op conflict</th>
                 <th>planning opslaan</th>
             </tr>
@@ -201,18 +201,36 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
             success: function (result) {
                 if (result == "OK") {
                     x.style.background = "PaleGreen";
-                    x.innerHTML = "kan opgeslagen worden";
-                } else if (result == "NotAvailable") {
+                    x.innerHTML = "check:" + "<br>" + "OK.";
+                } else if (result == "NOK") {
                     x.style.background = "#ff8000";
-                    x.innerHTML ="Docent is dit dagdeel" + "<br>" + "niet beschikbaar";
-                } else if (result == "NoHoursLeft") {
+                    x.innerHTML ="check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden."+ "<br>" +"*Docent geeft dit vak liever niet.";
+                } else if (result == "hourNOK_restOK") {
                     x.style.background = "#ff8000";
-                    x.innerHTML = "Docenturen zijn overschreden";
-                } else {
+                    x.innerHTML ="check:"+ "<br>"+ "*Docenturen overschreden.";
+                } else if(result =="availNOK_restOK"){
                     x.style.background = "#ff8000";
-                    x.innerHTML = "Docent geeft dit vak liever niet";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar.";
 
-                }
+                }else if(result=="subjectNOK_restOK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent geeft dit vak liever niet beschikbaar.";
+
+                }else if(result=="hoursNOK_availNOK_OK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden";}
+
+                else if(result=="OK_availNOK_prefNOK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
+
+                else if(result=="hoursNOK_OK_prefNOK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docenturen overschreden."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
 
             },
             error: function (result) {
@@ -223,6 +241,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
 
     $(".saveButton").click(function (e) {
+        console.log("DIT IS DE 3E STATIC VALUE : " + staticValue);
         e.preventDefault();
         thisId = $(this).data("id");
         console.log("SAVEBUTTON_ID = :" + thisId);
@@ -250,18 +269,47 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
             success: function (result) {
                 if (result == "OK") {
                     x.style.background = "SpringGreen";
-                    x.innerHTML = "opgeslagen";
-                } else if (result == "NotAvailable") {
+                    x.innerHTML = "OPGESLAGEN";
+                } else if (result == "NOK") {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen -->"+ "<br>"+ "LET OP: Docent niet beschikbaar";
-                } else if (result == "UrenNOK") {"NoHoursLeft"
+                    x.innerHTML = "opgeslagen met conflict:" + "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden."+ "<br>" +
+                        "*Docent geeft dit vak liever niet.";
+                } else if (result == "hourNOK_restOK") {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen --> " + "<br>"+ "LET OP: Docenturen overschreden";
-                } else {
+                    x.innerHTML ="opgeslagen met conflict:"+ "<br>"+
+                        "*Docenturen overschreden.";
+                } else if(result =="availNOK_restOK"){
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen -->" + "<br>" + "LET OP: Docent geeft dit vak liever niet";
+                    x.innerHTML = "opgeslagen met conflict:"+ "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar.";
 
-                }
+                }else if(result=="subjectNOK_restOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "opgeslagen met conflict:"+ "<br>"+
+                        "*Docent geeft dit vak liever niet beschikbaar.";
+
+                }else if(result=="hoursNOK_availNOK_OK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "opgeslagen met conflict:"+ "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden";}
+
+                else if(result=="OK_availNOK_prefNOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "opgeslagen met conflict:"+ "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
+
+                else if(result=="hoursNOK_OK_prefNOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "opgeslagen met conflict:"+ "<br>"+
+                        "*Docenturen overschreden."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
+
+
+
 
             },
             error: function (result) {
