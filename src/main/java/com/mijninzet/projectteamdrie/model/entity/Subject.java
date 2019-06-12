@@ -2,6 +2,8 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "subject")
@@ -14,30 +16,19 @@ public class Subject {
     private int yearsToExpiryDate;
     private String explanation;
 
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "cohort_subject", joinColumns = @JoinColumn(name = "subject_id"), inverseJoinColumns = @JoinColumn(name = "cohort_id"))
-    private Set<Cohort> cohort;
-
-
     public Subject() {
-        this(-1, "", -1, -1);
+        this.yearsToExpiryDate=3;
     }
 
-    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate) {
-        this.subjectId = subjectId;
-        this.subjectName = subjectName;
-        this.estimatedHours = estimatedHours;
-        this.yearsToExpiryDate = yearsToExpiryDate;
-    }
-
-    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate, String explanation, Set<Cohort> cohort) {
+    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate, String explanation) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.estimatedHours = estimatedHours;
         this.yearsToExpiryDate = yearsToExpiryDate;
         this.explanation = explanation;
-        this.cohort = cohort;
+
     }
+
 
     public String getExplanation() {
         return explanation;
@@ -81,7 +72,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject{" +
+        return "******Subject{" +
                 "subjectId=" + subjectId +
                 ", subjectName='" + subjectName + '\'' +
                 ", estimatedHours=" + estimatedHours +

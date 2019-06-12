@@ -2,8 +2,11 @@ package com.mijninzet.projectteamdrie.controller;
 
 import javax.validation.Valid;
 
+import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
+import com.mijninzet.projectteamdrie.repository.RoleRepository;
 import com.mijninzet.projectteamdrie.service.UserService;
+import com.mijninzet.projectteamdrie.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 public class AuthenticationController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public ModelAndView login() {
@@ -30,23 +38,11 @@ public class AuthenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("register"); // resources/template/register.html
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("helloTeacher");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView adminHome() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register"); // resources/template/admin.html
+        List<Role> rolelist = roleRepository.findAll();
+        modelAndView.addObject("roles", rolelist);
+        modelAndView.addObject("user", new User());
+        modelAndView.setViewName("registerUser"); // resources/template/registerUser.html
+        System.out.println("! ViewName from ModelandView from registermethod: " + modelAndView.getViewName());
         return modelAndView;
     }
 
@@ -64,12 +60,30 @@ public class AuthenticationController {
         // we will save the user if, no binding errors
         else {
             userService.saveUser(user);
+//            userServiceImp.saveUser(user);
             modelAndView.addObject("successMessage", "User is registered successfully!");
         }
+        List<Role> rolelist = roleRepository.findAll();
+        modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("register");
+        modelAndView.setViewName("registerUser");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("helloTeacher");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public ModelAndView adminHome() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("registerUser"); // resources/template/admin.html
+        return modelAndView;
+    }
+
 }
 
 

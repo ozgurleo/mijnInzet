@@ -20,7 +20,6 @@ public class ExceptionController {
     @RequestMapping("/list")
     public String listException(Model model){
         exceptions=exceptionService.findByUserId();
-
         model.addAttribute("exceptions",exceptions);
         return "exception/list-exceptions";
     }
@@ -35,6 +34,7 @@ public class ExceptionController {
 
     @GetMapping("/updateException")
     public String updateException(@RequestParam("exceptionId") int theId, Model model){
+
         Exception theException=exceptionService.findById(theId);
         model.addAttribute("exception",theException);
         return "exception/exception-form";

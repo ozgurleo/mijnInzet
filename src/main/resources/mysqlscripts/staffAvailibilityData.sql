@@ -1,6 +1,6 @@
 ALTER TABLE `mijn_inzet`.`staff_availability`
 CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
-insert into user(role,id,password,username) values ("teacher",2,"1","twee");
+insert into user(roleName,id,password,username) values ("teacher",2,"1","twee");
 insert into staff_availability(cohort,color_option,day,day_part,user_id) values ("15","ROOD","Maandag","Ochtend",1);
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GEEL","Maandag","Middag",1);
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Maandag","Avond",1);

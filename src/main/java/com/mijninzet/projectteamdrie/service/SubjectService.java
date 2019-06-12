@@ -13,15 +13,25 @@ public class SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
+
     public List<Subject>findAll(){
         List<Subject>subjects=new ArrayList<>();
-        subjects=subjectRepository.findAll();
+        subjectRepository.findAll()
+                .forEach(subjects::add);
         return subjects;
 
     }
 
     public void addSubject(Subject subject){
         subjectRepository.save(subject);
+    }
+
+    public void deleteSubjectById(int id){
+        subjectRepository.deleteById(id);
+    }
+
+    public Subject findById(int id){
+        return subjectRepository.findSubjectBySubjectId(id);
     }
 
 }

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UserServiceImp implements UserService {
 
@@ -22,42 +21,13 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    static double ONE_FTE_IN_HOUR_ = 1658;
-
-
     @Override
     public void saveUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus("VERIFIED");
-        user.setRoles(new HashSet<Role>(Arrays.asList(selectRole())));
+        System.out.println("gegevens User: " + user.getName() + "Roles: " + user.getRolesOfUser());
+        user.setRolesOfUser(new ArrayList<>(user.getRolesOfUser()));
         userRepository.save(user);
-    }
-
-    private Role selectRole() {
-        // needs to be connected to frondend with dropdown menu with available roles
-        String roleDescriptor = "TEACHER";
-        Role userRole;
-        switch (roleDescriptor) {
-            case "TEACHER":
-                userRole = roleRepository.findByRole(RoleEnum.TEACHER.getRoleDescriptor());
-                break;
-            case "ADMIN":
-                userRole = roleRepository.findByRole(RoleEnum.ADMINISTRATOR.getRoleDescriptor());
-                break;
-            case "MANAGER":
-                userRole = roleRepository.findByRole(RoleEnum.MANAGER.getRoleDescriptor());
-                break;
-            case "SCHEDULER":
-                userRole = roleRepository.findByRole(RoleEnum.SCHEDULER.getRoleDescriptor());
-                break;
-            case "COORDINATOR":
-                userRole = roleRepository.findByRole(RoleEnum.COORDINATOR.getRoleDescriptor());
-                break;
-            default:
-                userRole = roleRepository.findByRole(RoleEnum.DEFAULT.getRoleDescriptor());
-                break;
-        }
-        return userRole;
     }
 
     public User findByEmail(String email){
@@ -78,17 +48,12 @@ public class UserServiceImp implements UserService {
 
 
     public List<User> getAllUsers() {
-
-        List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add);
-        return users;
-
+        return new ArrayList<>(userRepository.findAll());
     }
+
     public User findById(int id){
-
         Optional<User> result = userRepository.findById(id);
-        User theUser=null;
-
+        User theUser;
         if(result.isPresent()){
             theUser= result.get();
         }else {
@@ -97,21 +62,15 @@ public class UserServiceImp implements UserService {
         return theUser;
     }
 
-
-
     //calculate total available teaching hours of teacher (percentage of fte in hours minus 20% overhead)
     public double calculateTotalAvailableHours(int userId) {
-        double totalhoursMinusOverhead;
-
+        final double ONE_FTE_IN_HOUR = 1658;
 //        double percentage = userRepository.getOne(userId).getFte();
-        double totalhours =  ONE_FTE_IN_HOUR_* 1.0;
+        double totalhours =  ONE_FTE_IN_HOUR * 1.0;
         System.out.println("totalhours in methode calculatetotalavailablehours is " + totalhours);
-        totalhoursMinusOverhead = totalhours * 0.8;
-
+        double totalhoursMinusOverhead = ONE_FTE_IN_HOUR * 0.8;
         return totalhoursMinusOverhead;
     }
-
-
 
     public Optional<User> getUser(int id) {
         return userRepository.findById(id);

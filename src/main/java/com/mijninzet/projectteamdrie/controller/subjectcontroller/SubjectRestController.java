@@ -3,10 +3,7 @@ package com.mijninzet.projectteamdrie.controller.subjectcontroller;
 import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,13 @@ public class SubjectRestController {
     }
 
     @PostMapping("/addSubject")
-    public void addSubject(@RequestBody Subject subject){
+    public Subject addSubject(@RequestBody Subject subject){
         subjectService.addSubject(subject);
+        return subject;
+    }
+    @DeleteMapping("/deleteSubject/{id}")
+    public void deleteSubject(@PathVariable int id){
+        subjectService.deleteSubjectById(id);
     }
 
 

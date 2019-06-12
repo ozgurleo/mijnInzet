@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Thymeleaf Demo</title>
+    <title>Overview Users</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -43,18 +43,17 @@
     </nav>
 </div>
 <div class="container">
-    <h3>User Directory</h3>
+    <h3>Overzicht Gebruikers</h3>
     <hr>
     <!-- Add Employee -->
-    <a th:href="@{/users/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add User</a>
+    <a th:href="@{/users/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Voeg gebruiker toe</a>
     <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
         <thead>
         <tr>
-
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Voornaam</th>
+            <th>Achternaam</th>
             <th>Email</th>
-            <th>Action</th>
+            <th>Actie</th>
         </tr>
         </thead>
         <tbody >

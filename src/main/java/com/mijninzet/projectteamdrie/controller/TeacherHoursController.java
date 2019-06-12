@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 public class TeacherHoursController {
 
-    UserSingleton userSingleton;
+
 
     @Autowired
     TeacherHoursRepository teacherHoursRepository;
