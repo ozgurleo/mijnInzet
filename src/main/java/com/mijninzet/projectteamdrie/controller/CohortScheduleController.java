@@ -371,6 +371,9 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
+//    @GetMapping("subjectKopelen")
+//    public void getAllCohortSchedule()
+
 
 
 }

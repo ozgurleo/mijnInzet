@@ -44,8 +44,8 @@
                          .append($("<td>").append(val.subjectName))
                          .append($("<td>").append(val.estimatedHours))
                          .append($("<td>").append(val.explanation))
-                         .append($("<td>").append("<button data-id='{{subjectId}}' class='glyphicon glyphicon-remove delete'></button>"))
-                         .append($("<td>").append("<button data-id='{{subjectId}}' class='glyphicon glyphicon-pencil edit'></button>"))
+                         .append($("<td>").append("<button  class='glyphicon glyphicon-remove delete'></button>"))
+                         .append($("<td>").append("<button data-id='{$subjectId}' class='glyphicon glyphicon-pencil edit'></button>"))
                      );
                  });
              }
@@ -88,12 +88,12 @@
              })
          });
          tbody.delegate('.delete','click',function () {
+             alert("offf")
              var $li =$(this).closest('li')
 
-             console.log(typeof $id);
              $.ajax({
                  type:'DELETE',
-                 url:'vak/deleteSubject/'+$(this).data("id"),
+                 url:'vak/deleteSubject/'+'37',
                  success:function () {
                      $li.remove();
 

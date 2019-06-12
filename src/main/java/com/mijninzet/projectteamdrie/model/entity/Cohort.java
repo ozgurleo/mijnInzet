@@ -22,9 +22,6 @@ public class Cohort {
     private LocalDate beginDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Subject> subjects;
-
 
     public Cohort() {}
 
@@ -56,15 +53,6 @@ public class Cohort {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
-    }
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
     }
 
     @Override
