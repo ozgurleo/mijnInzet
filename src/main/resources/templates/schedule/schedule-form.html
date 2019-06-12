@@ -32,7 +32,7 @@
     <h3>Nieuw Rooster</h3>
     <hr>
 
-    <p class="h4 mb-4">Rooster Beschickbaarheid Toevoegenn</p>
+    <p class="h4 mb-4">Rooster Beschikbaarheid Toevoegen</p>
 
     <form action="#" th:action="@{/schedule/save}"
           th:object="${schedule}" method="POST">
@@ -48,7 +48,8 @@
 
                     <!--<input type="text" th:field="*{cohort}" placeholder="Cohort" required="required"/>-->
                 </div>
-                <table class="table table-dark ">
+                <div class="container">
+                <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
 
                     <thead>
                     <tr>
@@ -170,12 +171,13 @@
 
                     </tbody>
                 </table>
+                </div>
                 <P>
                     <input type="Submit" value="Submit" name="B1"/>
                 </P>
             </div>
         </div>
-    </form>
+    
 
     <hr>
     <a class="btn btn-secondary" th:href="@{/schedule/listCohort}">Terug Naar Exception List</a>

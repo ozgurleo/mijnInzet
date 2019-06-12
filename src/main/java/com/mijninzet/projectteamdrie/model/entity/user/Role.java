@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -18,7 +19,7 @@ public class Role {
     private int id;
 
     @Column(name = "role_name")
-    private String role;
+    private String roleName;
 
     @Column(name = "role_desc")
     private String desc;
@@ -31,12 +32,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getDesc() {
@@ -47,7 +48,14 @@ public class Role {
         this.desc = desc;
     }
 
-
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                ", desc='" + desc + '\'' +
+                '}';
+    }
 }
 
 
@@ -99,7 +107,7 @@ public class Role {
 //        this.webPages = webPages;
 //    }
 //
-//    public static Role[] getRoles() {
+//    public static Role[] getRolesOfUser() {
 //         Role[] roles = {TEACHER, ADMINISTRATOR, COORDINATOR, SCHEDULER, MANAGER};
 //        return roles;
 //    }

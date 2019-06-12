@@ -1,6 +1,6 @@
 package com.mijninzet.projectteamdrie.model.entity.user;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,21 +44,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
-
     @Column(name = "status")
     private String status;
-
 
     @Column(name="fte")
     private Double fte = 1.0;
 
-
-
     @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-
-
+    private List<Role> rolesOfUser;
 
     // Brahim Code: current user ID wordt hier bepaalt ingesteld;
     // dit is geen onderdeel vd Bean! en mag niet in een constructor
@@ -70,9 +64,7 @@ public class User {
     }
     // Brahim Code end ------
 
-    public User() {
-    }
-
+    public User() { }
 
     public User(int id) {
         this.id = id;
@@ -126,12 +118,12 @@ public class User {
         this.status = status;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public List<Role> getRolesOfUser() {
+        return rolesOfUser;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRolesOfUser(List<Role> rolesOfUser) {
+        this.rolesOfUser = rolesOfUser;
     }
 
     public Double getFte() {
@@ -206,11 +198,11 @@ public class User {
 //        return password;
 //    }
 //
-////    public Role getRole() {
+////    public Role getRoleName() {
 ////        return role;
 ////    }
 ////
-////        public void setRole(Role role) {
+////        public void setRoleName(Role role) {
 ////        this.role = role;
 ////    }
 //    public int getId() {

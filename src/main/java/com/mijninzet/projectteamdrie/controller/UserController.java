@@ -14,15 +14,21 @@ package com.mijninzet.projectteamdrie.controller;
 //import java.util.List;
 //import java.util.Optional;
 
-import com.mijninzet.projectteamdrie.model.entity.user.CurrentUser;
+import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
+import com.mijninzet.projectteamdrie.repository.RoleRepository;
 import com.mijninzet.projectteamdrie.service.UserService;
 import com.mijninzet.projectteamdrie.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -32,44 +38,85 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private UserServiceImp userServiceImp;
+    private RoleRepository roleRepository;
 
 
     public UserController(UserService userService) {
-        this.userService=userService;
+        this.userService = userService;
     }
-    //}
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute("user") User theUser){
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public ModelAndView update(@ModelAttribute("user") User theUser) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Role> rolelist = roleRepository.findAll();
+        modelAndView.addObject("roles", rolelist);
+        modelAndView.addObject("user", theUser);
+        modelAndView.setViewName("updateUser"); // resources/template/registerUser.html
+        System.out.println("! ViewName from ModelandView from updatemethod: " + modelAndView.getViewName());
+        return modelAndView;
+    }
 
-        userService.saveUser(theUser);
+    @RequestMapping(value="/update", method=RequestMethod.POST)
+    public String registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
+        ModelAndView modelAndView = new ModelAndView();
+        // Check for the validations
+        if(bindingResult.hasErrors()) {
+            modelAndView.addObject("successMessage", "Please correct the errors in form!");
+            modelMap.addAttribute("bindingResult", bindingResult);
+        }
+        else if(userService.isUserAlreadyPresent(user)){
+            modelAndView.addObject("successMessage", "user already exists!");
+        }
+        // we will update the user if, no binding errors
+        else {
+            userService.saveUser(user);
+            modelAndView.addObject("successMessage", "User is updated successfully!");
+        }
+        modelAndView.setViewName("updateUser");
         return "redirect:/users/list";
     }
-    //
+
+//    @PostMapping("/save")
+//    public String save(@ModelAttribute("user") User theUser, Model model) {
+//        userService.saveUser(theUser);
+//        return "redirect:/users/list";
+//    }
+//
+//    @RequestMapping(value = "/roles", method = RequestMethod.GET)
+//    public String getAllRoles(Model model) {
+//        List<Role> rolelist = roleRepository.findAll();
+//        model.addAttribute("roles", rolelist);
+//        return ("registerUser");
+//    }
+
     @RequestMapping("/list")
-    public String getAllUsers(Model model){
+    public String getAllUsers(Model model) {
+        List<Role> rolelist = roleRepository.findAll();
+        model.addAttribute("roles", rolelist);
         model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
+
     @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model model){
-        User theUser=new User();
-
-        model.addAttribute("user",theUser);
-       // return "user-form";
-        return "register";
+    public String showFormForAdd(Model model) {
+        User theUser = new User();
+        List<Role> rolelist = roleRepository.findAll();
+        model.addAttribute("roles", rolelist);
+        model.addAttribute("user", theUser);
+        // return "user-form";
+        return "registerUser";
 
     }
+
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("userId") int theId,Model model){
-        User theUser=userService.findById(theId);
-        model.addAttribute("user",theUser);
-        return "user-form";
+    public String showFormForUpdate(@RequestParam("userId") int theId, Model model) {
+        User theUser = userService.findById(theId);
+        model.addAttribute("user", theUser);
+        return "updateUser";
 
     }
 
-//
+    //
 //
 //    @RequestMapping("/users/{id}")
 //    public Optional<User> getUser(@PathVariable int id){

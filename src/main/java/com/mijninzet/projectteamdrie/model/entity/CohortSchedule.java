@@ -4,6 +4,8 @@ import com.mijninzet.projectteamdrie.model.entity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 
 @Entity
 public class CohortSchedule {
@@ -13,7 +15,7 @@ public class CohortSchedule {
    private String day;
    private String daypart;
    private LocalDate date;
-
+private int weeknr;
 
    @ManyToOne
    User user;
@@ -30,7 +32,7 @@ public class CohortSchedule {
       super();
    }
 
-   public CohortSchedule(int id, LocalDate date, String day, String daypart, User user, Subject subject, String classRoom, Cohort cohort) {
+   public CohortSchedule(int id, LocalDate date, String day, String daypart, User user, Subject subject, String classRoom, Cohort cohort, int weeknr) {
       this.id = id;
       this.classRoom = classRoom;
       this.day = day;
@@ -39,6 +41,8 @@ public class CohortSchedule {
       this.user = user;
       this.subject = subject;
       this.cohort = cohort;
+      WeekFields weekFields = WeekFields.of(Locale.getDefault());
+      this.weeknr=date.get(weekFields.weekOfWeekBasedYear());
    }
 
    public int getId() {
@@ -103,6 +107,14 @@ public class CohortSchedule {
 
    public void setCohort(Cohort cohort) {
       this.cohort = cohort;
+   }
+
+   public int getWeeknr() {
+      return weeknr;
+   }
+
+   public void setWeeknr(int weeknr) {
+      this.weeknr = weeknr;
    }
 
    @Override

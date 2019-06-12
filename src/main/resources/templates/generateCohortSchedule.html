@@ -53,7 +53,7 @@
                 <th>dag</th>
                 <th>dagdeel</th>
                 <th>planning</th>
-                <th>resultaat check/opslag</th>
+                <th>  resultaat  </th>
                 <th>check op conflict</th>
                 <th>planning opslaan</th>
             </tr>
@@ -95,11 +95,13 @@
                     <td>
                         <form>
                             <div>
-                                <select th:id="subjectVariable" class="subject" th:data-ID="${schedule.getId()}">
-                                    <option>selecteer vak</option>
-                                    <option th:each="subject: ${subjects}" th:value="${subject[0]}"
-                                            th:text="${subject[2]}">
-                                </select>
+
+                        <input th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
+                               th:data-ID="${schedule.getId()}" style="background-color:transparent;border: #FF1C19"
+                               th:data-value="${schedule.getSubject().getSubjectId()}" th:value="${schedule.getSubject().getSubjectName()}"
+                               th:field="${schedule.getSubject().getSubjectName()}"
+                               readonly/>
+
                             </div>
                             <br>
                             <div>
@@ -156,15 +158,17 @@
     console.log(day);
     daypart = $('#daypart').val();
     console.log(daypart);
+    const subjectField =document.querySelector(".subjectField");
+
+    subjectnr = subjectField.dataset.value;
+    subjectname=$(".subjectField").val();
+    console.log("DIT IS HET SUBJECT NUMMER: " + subjectnr);
+    console.log("DIT IS DE SUBJECTNAAM: " + subjectname);
 
 const staticValue = document.querySelector('#cohort').dataset.id
 console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
     <!--Select only the value that is selected in the dropdownmenu -->
-    $(".subject").on('change', function () {
-        subjectnr = $(this).val();
-        console.log(subjectnr);
-    });
 
     $(".teacher").on('change', function () {
         teachernr = $(this).val();
@@ -173,7 +177,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
 
     $(".checkButton").click(function (e) {
-        console.log("DIT IS DE 2E STATIC VALUE : " + staticValue);
+        console.log("DIT IS DE 1E STATIC VALUE : " + staticValue);
         e.preventDefault();
         thisId = $(this).data("id");
         console.log("CHECKBUTTON_ID = :" + thisId);
@@ -193,7 +197,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 "dateDay": document.getElementsByClassName("date")[textBoxId].value,
                 "day": document.getElementsByClassName("day")[textBoxId].value,
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": document.getElementsByClassName("subject")[textBoxId].value,
+                "subjectnr": document.querySelector(".subjectField").dataset.value,
                 "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
                 "scheduleId": thisId,
                 "button": "check"
@@ -201,18 +205,36 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
             success: function (result) {
                 if (result == "OK") {
                     x.style.background = "PaleGreen";
-                    x.innerHTML = "kan opgeslagen worden";
-                } else if (result == "NotAvailable") {
+                    x.innerHTML = "check:" + "<br>" + "OK.";
+                } else if (result == "NOK") {
                     x.style.background = "#ff8000";
-                    x.innerHTML ="Docent is dit dagdeel" + "<br>" + "niet beschikbaar";
-                } else if (result == "NoHoursLeft") {
+                    x.innerHTML ="check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden."+ "<br>" +"*Docent geeft dit vak liever niet.";
+                } else if (result == "hourNOK_restOK") {
                     x.style.background = "#ff8000";
-                    x.innerHTML = "Docenturen zijn overschreden";
-                } else {
+                    x.innerHTML ="check:"+ "<br>"+ "*Docenturen overschreden.";
+                } else if(result =="availNOK_restOK"){
                     x.style.background = "#ff8000";
-                    x.innerHTML = "Docent geeft dit vak liever niet";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar.";
 
-                }
+                }else if(result=="subjectNOK_restOK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent geeft dit vak liever niet beschikbaar.";
+
+                }else if(result=="hoursNOK_availNOK_OK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden";}
+
+                else if(result=="OK_availNOK_prefNOK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
+
+                else if(result=="hoursNOK_OK_prefNOK"){
+                    x.style.background = "#ff8000";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docenturen overschreden."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
 
             },
             error: function (result) {
@@ -223,6 +245,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
 
     $(".saveButton").click(function (e) {
+        console.log("DIT IS DE 3E STATIC VALUE : " + staticValue);
         e.preventDefault();
         thisId = $(this).data("id");
         console.log("SAVEBUTTON_ID = :" + thisId);
@@ -242,7 +265,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 "dateDay": document.getElementsByClassName("date")[textBoxId].value,
                 "day": document.getElementsByClassName("day")[textBoxId].value,
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": document.getElementsByClassName("subject")[textBoxId].value,
+                "subjectnr": document.querySelector(".subjectField").dataset.value,
                 "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
                 "scheduleId": thisId,
                 "button": "save"
@@ -250,18 +273,47 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
             success: function (result) {
                 if (result == "OK") {
                     x.style.background = "SpringGreen";
-                    x.innerHTML = "opgeslagen";
-                } else if (result == "NotAvailable") {
+                    x.innerHTML = "OPGESLAGEN";
+                } else if (result == "NOK") {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen -->"+ "<br>"+ "LET OP: Docent niet beschikbaar";
-                } else if (result == "UrenNOK") {"NoHoursLeft"
+                    x.innerHTML = "OPGESLAGEN MET CONFLICT:" + "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden."+ "<br>" +
+                        "*Docent geeft dit vak liever niet.";
+                } else if (result == "hourNOK_restOK") {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen --> " + "<br>"+ "LET OP: Docenturen overschreden";
-                } else {
+                    x.innerHTML ="OPGESLAGEN MET CONFLICT:"+ "<br>"+
+                        "*Docenturen overschreden.";
+                } else if(result =="availNOK_restOK"){
                     x.style.background = "#ff4000";
-                    x.innerHTML = "opgeslagen -->" + "<br>" + "LET OP: Docent geeft dit vak liever niet";
+                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar.";
 
-                }
+                }else if(result=="subjectNOK_restOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
+                        "*Docent geeft dit vak liever niet beschikbaar.";
+
+                }else if(result=="hoursNOK_availNOK_OK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "OPGESLAGEN MET CONFLICT:" + "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docenturen overschreden";}
+
+                else if(result=="OK_availNOK_prefNOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
+                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
+
+                else if(result=="hoursNOK_OK_prefNOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
+                        "*Docenturen overschreden."+ "<br>" +
+                        "*Docent geeft dit vak liever niet beschikbaar.";}
+
+
+
 
             },
             error: function (result) {
