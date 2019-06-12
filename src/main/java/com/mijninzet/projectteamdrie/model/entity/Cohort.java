@@ -3,10 +3,14 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Cohort {
@@ -18,6 +22,9 @@ public class Cohort {
     private LocalDate beginDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Subject> subjects;
+
 
     public Cohort() {}
 
@@ -49,6 +56,15 @@ public class Cohort {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     @Override

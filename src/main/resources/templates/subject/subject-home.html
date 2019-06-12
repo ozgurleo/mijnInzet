@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -17,8 +20,18 @@
             var $name = $('#name');
             var $explanation =$('#explanation');
             var $hour=$('#hour');
-            var tbody=$('#subjectBody')
-
+            var tbody=$('#subjectBody');
+            var table=$('#subjectTable');
+            var $revove=$('.gly')
+            // var template=""+
+            //         "<li>"+
+            //         "<p>{{subjectName}}</p>"+
+            //         "<button data-id='{{subjectId}}' class='remove'>X</button>"+
+            //         "<button data-id='{{subjectId}}' class='glyphicon glyphicon-pencil'></button>"+
+            //         "</li>";
+            // function addSubject(subject){
+            //     $subjects.append(Mustache.render(template,subject))
+            // }
 
          $.ajax({
              type:'GET',
@@ -26,18 +39,13 @@
              dataType:'json',
              success:[
                  function (subjects) {
-                 // $.each(data,function (key,val) {
-                 //     $subjects.append('<li> Naam: '+val.subjectName+', geschatteuur: '+ val.estimatedHours
-                 //         +', beschrijving: '+ val.explanation)
-                 //
-                 // })
-
-
                  $.each(subjects,function (key, val) {
                      tbody.append($("<tr>")
                          .append($("<td>").append(val.subjectName))
                          .append($("<td>").append(val.estimatedHours))
                          .append($("<td>").append(val.explanation))
+                         .append($("<td>").append("<button data-id='{{subjectId}}' class='glyphicon glyphicon-remove delete'></button>"))
+                         .append($("<td>").append("<button data-id='{{subjectId}}' class='glyphicon glyphicon-pencil edit'></button>"))
                      );
                  });
              }
@@ -69,16 +77,31 @@
                      tbody.append($("<tr>")
                          .append($("<td>").append(newSubject.subjectName))
                          .append($("<td>").append(newSubject.estimatedHours))
-                         .append($("<td>").append(newSubject.explanation)));
-
+                         .append($("<td>").append(newSubject.explanation))
+                         .append($("<td>").append("<button data-id='{{subjectID}}' class='glyphicon glyphicon-remove '></button>"))
+                         .append($("<td>").append("<button data-id='{{subjectID}}' class='glyphicon glyphicon-pencil '></button>"))
+                     );
                  },
                  error:function () {
                      alert("error saving subject")
                  }
              })
-
-
          });
+         tbody.delegate('.delete','click',function () {
+             var $li =$(this).closest('li')
+
+             console.log(typeof $id);
+             $.ajax({
+                 type:'DELETE',
+                 url:'vak/deleteSubject/'+$(this).data("id"),
+                 success:function () {
+                     $li.remove();
+
+                 }
+             })
+         })
+
+
         });
     </script>
 
@@ -95,6 +118,7 @@
                 <th>Naam</th>
                 <th>Geschatte Uur</th>
                 <th>Beschirjving</th>
+                <th>###</th>
             </tr>
             </thead>
             <tbody id="subjectBody">

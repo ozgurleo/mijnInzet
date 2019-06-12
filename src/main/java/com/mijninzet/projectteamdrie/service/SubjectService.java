@@ -24,4 +24,8 @@ public class SubjectService {
         subjectRepository.save(subject);
     }
 
+    public void deleteSubjectById(int id){
+        subjectRepository.deleteById(id);
+    }
+
 }
