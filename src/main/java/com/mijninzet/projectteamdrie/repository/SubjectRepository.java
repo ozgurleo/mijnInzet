@@ -31,6 +31,9 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     String getSingleTeacherSubjectPref(@Param("userId") Integer userId, @Param("subjectId") Integer subjectId);
 
     Subject getBySubjectId(int subjectId);
+    Subject findSubjectBySubjectId(int id);
+
+
 
 
 
