@@ -95,11 +95,13 @@
                     <td>
                         <form>
                             <div>
-                                <select th:id="subjectVariable" class="subject" th:data-ID="${schedule.getId()}">
-                                    <option>selecteer vak</option>
-                                    <option th:each="subject: ${subjects}" th:value="${subject[0]}"
-                                            th:text="${subject[2]}">
-                                </select>
+
+                        <input th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
+                               th:data-ID="${schedule.getId()}" style="background-color:transparent;border: #FF1C19"
+                               th:data-value="${schedule.getSubject().getSubjectId()}" th:value="${schedule.getSubject().getSubjectName()}"
+                               th:field="${schedule.getSubject().getSubjectName()}"
+                               readonly/>
+
                             </div>
                             <br>
                             <div>
@@ -156,15 +158,17 @@
     console.log(day);
     daypart = $('#daypart').val();
     console.log(daypart);
+    const subjectField =document.querySelector(".subjectField");
+
+    subjectnr = subjectField.dataset.value;
+    subjectname=$(".subjectField").val();
+    console.log("DIT IS HET SUBJECT NUMMER: " + subjectnr);
+    console.log("DIT IS DE SUBJECTNAAM: " + subjectname);
 
 const staticValue = document.querySelector('#cohort').dataset.id
 console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
     <!--Select only the value that is selected in the dropdownmenu -->
-    $(".subject").on('change', function () {
-        subjectnr = $(this).val();
-        console.log(subjectnr);
-    });
 
     $(".teacher").on('change', function () {
         teachernr = $(this).val();
@@ -173,7 +177,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
 
     $(".checkButton").click(function (e) {
-        console.log("DIT IS DE 2E STATIC VALUE : " + staticValue);
+        console.log("DIT IS DE 1E STATIC VALUE : " + staticValue);
         e.preventDefault();
         thisId = $(this).data("id");
         console.log("CHECKBUTTON_ID = :" + thisId);
@@ -193,7 +197,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 "dateDay": document.getElementsByClassName("date")[textBoxId].value,
                 "day": document.getElementsByClassName("day")[textBoxId].value,
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": document.getElementsByClassName("subject")[textBoxId].value,
+                "subjectnr": document.querySelector(".subjectField").dataset.value,
                 "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
                 "scheduleId": thisId,
                 "button": "check"
@@ -261,7 +265,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 "dateDay": document.getElementsByClassName("date")[textBoxId].value,
                 "day": document.getElementsByClassName("day")[textBoxId].value,
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": document.getElementsByClassName("subject")[textBoxId].value,
+                "subjectnr": document.querySelector(".subjectField").dataset.value,
                 "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
                 "scheduleId": thisId,
                 "button": "save"
