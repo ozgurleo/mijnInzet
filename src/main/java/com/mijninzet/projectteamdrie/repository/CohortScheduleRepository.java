@@ -22,8 +22,6 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
                          @Param("dayPart") String dayPart,@Param("teacherId") Integer teacherId);
 
 
-
-
     //Brahim Code: get all teachers Names by Role=teacher
     @Query(value="SELECT * FROM mijn_inzet.cohort;", nativeQuery = true)
     ArrayList<Object[]> getCohorts();
