@@ -22,7 +22,7 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
 
-   static double ONE_FTE_IN_HOUR_ = 1658;
+    static double ONE_FTE_IN_HOUR_ = 1658;
 
 
     @Override
