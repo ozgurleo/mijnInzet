@@ -54,16 +54,16 @@ INSERT INTO subject  VALUES ('12', '20', 'Thymeleaf', '2');
 
 
 
-INSERT INTO role (role_id, role_name, role_desc) VALUES (1,'ADMIN','This user has admin rights for administrative work');
-INSERT INTO role (role_id, role_name, role_desc) VALUES (2,'TEACHER','teacher');
-INSERT INTO role (role_id, role_name, role_desc) VALUES (3,'COORDINATOR','coordinator');
-INSERT INTO role (role_id, role_name, role_desc) VALUES (4,'SCHEDULER','This user has admin rights for administrative work');
-INSERT INTO role (role_id, role_name, role_desc) VALUES (5,'MANAGER','This user has admin rights for administrative work');
+INSERT INTO roleName (role_id, role_name, role_desc) VALUES (1,'ADMIN','This user has admin rights for administrative work');
+INSERT INTO roleName (role_id, role_name, role_desc) VALUES (2,'TEACHER','teacher');
+INSERT INTO roleName (role_id, role_name, role_desc) VALUES (3,'COORDINATOR','coordinator');
+INSERT INTO roleName (role_id, role_name, role_desc) VALUES (4,'SCHEDULER','This user has admin rights for administrative work');
+INSERT INTO roleName (role_id, role_name, role_desc) VALUES (5,'MANAGER','This user has admin rights for administrative work');
 
 insert into user (user_id,first_name,last_name,email,password,status) values (1,'hans','zuidervaart','admin@gmail.com','$2a$10$DD/FQ0hTIprg3fGarZl1reK1f7tzgM4RuFKjAKyun0Si60w6g3v5i','VERIFIED');
 insert into user_role (user_id, role_id) values ('1','1');
 
-insert into user(role,id,password,username) values ("teacher",2,"1","twee");
+insert into user(roleName,id,password,username) values ("teacher",2,"1","twee");
 insert into staff_availability(cohort,color_option,day,day_part,user_id) values ("15","ROOD","Maandag","Ochtend",1);
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GEEL","Maandag","Middag",1);
 insert into staff_availability (cohort,color_option,day,day_part,user_id) values ("15","GROEN","Maandag","Avond",1);

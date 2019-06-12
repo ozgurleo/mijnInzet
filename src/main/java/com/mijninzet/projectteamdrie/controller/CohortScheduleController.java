@@ -78,7 +78,6 @@ public class CohortScheduleController {
     }
 
 
-
     public String checkTeacherHours(int teacherId, int subjectId) {
 
         Subject subject = subjectRepo.getBySubjectId(subjectId);
@@ -141,12 +140,9 @@ public class CohortScheduleController {
     }
 
 
-
-
-
-
     @PostMapping(value = "/generateCohortSchedule/check")
-    public @ResponseBody String checkSchedule(HttpServletRequest request){
+    public @ResponseBody
+    String checkSchedule(HttpServletRequest request) {
         System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
         System.out.println("  cohortnr =" + request.getParameter("cohortnr"));
         System.out.println("  datum = " + request.getParameter("dateDay"));
@@ -155,34 +151,34 @@ public class CohortScheduleController {
         System.out.println("  subjectId = " + request.getParameter("subjectnr"));
         System.out.println("  teacherId = " + request.getParameter("teachernr"));
 
-        int cohortId=Integer.parseInt(request.getParameter("cohortnr"));
+        int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
         String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
         int year = Integer.parseInt(arrOfDate[0]);
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate dayDate = LocalDate.of(year, month, day);
 
-        String weekDay=request.getParameter("day");
-        String dayPart= request.getParameter("daypart");
-        int subjectId=Integer.parseInt(request.getParameter("subjectnr"));
-       int teacherId= Integer.parseInt(request.getParameter("teachernr"));
+        String weekDay = request.getParameter("day");
+        String dayPart = request.getParameter("daypart");
+        int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+        int teacherId = Integer.parseInt(request.getParameter("teachernr"));
 
 
-        String result="NOK";
+        String result = "NOK";
 
         return result;
     }
 
     public List<CohortSchedule> getAllSchedulesInCohort(int cohortId) {
 
-       List<CohortSchedule> listCohortSchedulesByCohortid = cohortScheduleRepo.getAllByCohort_CohortId(cohortId);
+        List<CohortSchedule> listCohortSchedulesByCohortid = cohortScheduleRepo.getAllByCohort_CohortId(cohortId);
 
-       Cohort cohort = cohortRepository.getByCohortId(cohortId);
+        Cohort cohort = cohortRepository.getByCohortId(cohortId);
 
-       LocalDate beginDate = cohort.getBeginDate();
-       LocalDate endDate = cohort.getEndDate();
+        LocalDate beginDate = cohort.getBeginDate();
+        LocalDate endDate = cohort.getEndDate();
 
-       return listCohortSchedulesByCohortid;
+        return listCohortSchedulesByCohortid;
 
     }
 
@@ -261,7 +257,7 @@ public class CohortScheduleController {
 
         //add result of contraints check to the modelAttribute
         model.addAttribute("checkSubject", checkSubjectPreference(6, 1));
-        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend",date));
+        model.addAttribute("checkAvailbility", checkAvailability(6, "monday", "ochtend", date));
         model.addAttribute("checkOverlap", checkCohortOverlap(6, date, "ochtend"));
         model.addAttribute("checkHours", checkTeacherHours(Integer.parseInt(request.getParameter("teacherMenu")), Integer.parseInt(request.getParameter("subjectMenu"))));
 
@@ -274,6 +270,4 @@ public class CohortScheduleController {
         System.out.println("DIT IS NA HET OPHALEN VD LASTCOHORTSCHEDULE!!!");
         return "generateCohortSchedule";
     }
-
-
 }

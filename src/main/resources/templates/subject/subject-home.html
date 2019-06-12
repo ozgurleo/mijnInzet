@@ -6,116 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-        $(function(){
+        $(function () {
             var $subjects = $('#new-subject');
             var $name = $('#name');
-            var $explanation =$('#explanation');
-            var $hour=$('#hour');
-            var tbody=$('#subjectBody')
+            var $explanation = $('#explanation');
+            var $hour = $('#hour');
+            var tbody = $('#subjectBody')
 
 
-         $.ajax({
-             type:'GET',
-             url:'/vak/lijst',
-             dataType:'json',
-             success:[
-                 function (subjects) {
-                 // $.each(data,function (key,val) {
-                 //     $subjects.append('<li> Naam: '+val.subjectName+', geschatteuur: '+ val.estimatedHours
-                 //         +', beschrijving: '+ val.explanation)
-                 //
-                 // })
+            $.ajax({
+                type: 'GET',
+                url: '/vak/lijst',
+                dataType: 'json',
+                success: [
+                    function (subjects) {
+                        // $.each(data,function (key,val) {
+                        //     $subjects.append('<li> Naam: '+val.subjectName+', geschatteuur: '+ val.estimatedHours
+                        //         +', beschrijving: '+ val.explanation)
+                        //
+                        // })
 
 
-                 $.each(subjects,function (key, val) {
-                     tbody.append($("<tr>")
-                         .append($("<td>").append(val.subjectName))
-                         .append($("<td>").append(val.estimatedHours))
-                         .append($("<td>").append(val.explanation))
-                     );
-                 });
-             }
-             ],
-             error:
-                 function () {
-                 alert("Error:"+error().text)
+                        $.each(subjects, function (key, val) {
+                            tbody.append($("<tr>")
+                                .append($("<td>").append(val.subjectName))
+                                .append($("<td>").append(val.estimatedHours))
+                                .append($("<td>").append(val.explanation))
+                            );
+                        });
+                    }
+                ],
+                error:
+                    function () {
+                        alert("Error:" + error().text)
 
-             }
-         });
-         $('#add-subject').on('click', function () {
+                    }
+            });
+            $('#add-subject').on('click', function () {
 
-             var subject={
-                 subjectName:$name.val(),
-                 explanation:$explanation.val(),
-                 estimatedHours:$hour.val()
-             }
-             $.ajax({
-                 headers: {
-                     'Accept': 'application/json',
-                     'Content-Type': 'application/json'
-                 },
-                 type:'POST',
-                 url:'/vak/addSubject',
-                 dataType:"json",
-                 data:JSON.stringify(subject),
-                 success:function (newSubject) {
-                     console.log(newSubject)
-                     tbody.append($("<tr>")
-                         .append($("<td>").append(newSubject.subjectName))
-                         .append($("<td>").append(newSubject.estimatedHours))
-                         .append($("<td>").append(newSubject.explanation)));
+                var subject = {
+                    subjectName: $name.val(),
+                    explanation: $explanation.val(),
+                    estimatedHours: $hour.val()
+                }
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: 'POST',
+                    url: '/vak/addSubject',
+                    dataType: "json",
+                    data: JSON.stringify(subject),
+                    success: function (newSubject) {
+                        console.log(newSubject)
+                        tbody.append($("<tr>")
+                            .append($("<td>").append(newSubject.subjectName))
+                            .append($("<td>").append(newSubject.estimatedHours))
+                            .append($("<td>").append(newSubject.explanation)));
 
-                 },
-                 error:function () {
-                     alert("error saving subject")
-                 }
-             })
+                    },
+                    error: function () {
+                        alert("error saving subject")
+                    }
+                })
 
 
-         });
+            });
         });
     </script>
 
-
-    <title>Subject Directory</title>
+    <title>Vakkenbeheer</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Vak Directory</h1>
-        <h2>Vakken</h2>
-        <table id="subjectTable" class="table table-bordered table-striped table-hover" style="background-color:white">
-            <thead style="background-color: mediumpurple">
-            <tr>
-                <th>Naam</th>
-                <th>Geschatte Uur</th>
-                <th>Beschirjving</th>
-            </tr>
-            </thead>
-            <tbody id="subjectBody">
-            </tbody>
-        </table>
-        <ul id="new-subject">
+<div class="container">
+    <h1>Vakenbeheer</h1>
+    <h2>Vakken</h2>
+    <table id="subjectTable" class="table table-bordered table-striped table-hover" style="background-color:white">
+        <thead style="background-color: mediumpurple">
+        <tr>
+            <th>Naam</th>
+            <th>Geschatte uren</th>
+            <th>Beschirjving</th>
+        </tr>
+        </thead>
+        <tbody id="subjectBody">
+        </tbody>
+    </table>
+    <ul id="new-subject">
 
-        </ul>
-        <form>
-            <h4>Voeg Niuewe Vak Toe</h4>
-            <div class="form-group">
-                <p><input type="text" id="name" placeholder="Naam van Subject"></p>
-                <p><input type="text" id="explanation" placeholder="Beschrijving"></p>
-                <p><input type="number" id="hour" placeholder="Geschatte Uren"></p>
-                <button id="add-subject">Toevoeg</button>
-            </div>
-
-
-        </form>
-
-    </div>
-
+    </ul>
+    <form>
+        <h4>Voeg een nieuw vak toe</h4>
+        <div class="form-group">
+            <p><input type="text" id="name" placeholder="Naam van Subject"></p>
+            <p><input type="text" id="explanation" placeholder="Beschrijving"></p>
+            <p><input type="number" id="hour" placeholder="Geschatte Uren"></p>
+            <button id="add-subject">voeg vak toe</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

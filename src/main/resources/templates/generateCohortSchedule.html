@@ -14,9 +14,6 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 
-
-
-
 </head>
 <body>
 <div class="container">
@@ -95,7 +92,7 @@
                     <td>
                         <form>
                             <div>
-                                <select th:id="subjectVariable" class="subject" th:data-ID="${schedule.getId()}">
+                                <select th:id="subjectVariable"  class="subject" th:data-ID="${schedule.getId()}">
                                     <option>selecteer vak</option>
                                     <option th:each="subject: ${subjects}" th:value="${subject[0]}"
                                             th:text="${subject[2]}">
