@@ -33,5 +33,8 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
 
     List<CohortSchedule> getCohortSchedulesByDateIsBetween(LocalDate begindate, LocalDate enddate);
 
+    List<CohortSchedule> getAllByDayAndDaypart(String day, String daypart);
+    List<CohortSchedule> getAllByDay(String day);
+
 
 }

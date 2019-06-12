@@ -77,8 +77,6 @@ public class CohortScheduleController {
         return output;
     }
 
-
-
     public String checkTeacherHours(int teacherId, int subjectId) {
 
         Subject subject = subjectRepo.getBySubjectId(subjectId);
@@ -128,7 +126,7 @@ public class CohortScheduleController {
     }
 
     public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId) {
-        int numberOfYearsExperience;
+        int numberOfYearsExperience ;
         List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
         if (cohortScheduleList.size() == 1) {
             numberOfYearsExperience = 1;
