@@ -56,7 +56,7 @@ public class CohortScheduleController {
         }
         System.out.println("RESULT OF PREFERENCE = " + subjectPref);
 
-        String checkHours = checkTeacherHours(teacherId, subjectId);
+        String checkHours = checkTeacherHours(teacherId, subjectId,cohortId);
         if (checkHours.equals("OK") || checkHours.equals("NON")) {
             hours = "OK";
         } else {
@@ -204,7 +204,7 @@ public class CohortScheduleController {
         return result;
     }
 
-    public String checkTeacherHours(int teacherId, int subjectId) {
+    public String checkTeacherHours(int teacherId, int subjectId, int cohortId) {
 
         Subject subject = subjectRepo.getBySubjectId(subjectId);
         String subjectname = subject.getSubjectName();
@@ -212,14 +212,14 @@ public class CohortScheduleController {
         int realTeacherHours = 4;
 
         if (teacherHours != null) {
-            if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId)) {
+            if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId,cohortId)) {
                 if (teacherHours.getTeachingHoursLeft() < 8)
                     return "NOK";
                 else {
                     return "OK";
                 }
             } else {
-                int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId);
+                int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId,cohortId);
                 switch (yearsOfExperience) {
                     case 1:
                         realTeacherHours = 6;
@@ -239,11 +239,11 @@ public class CohortScheduleController {
     }
 
 
-    public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId) {
+    public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId,int cohortId) {
 
         boolean experience = false;
 
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(teacherId, subjectId,cohortId);
         if (cohortScheduleList.size() > 0) {
             experience = true;
         } else {
@@ -252,9 +252,9 @@ public class CohortScheduleController {
         return experience;
     }
 
-    public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId) {
+    public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId, int cohortId) {
         int numberOfYearsExperience;
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectId(teacherId, subjectId);
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(teacherId, subjectId,cohortId);
         if (cohortScheduleList.size() == 1) {
             numberOfYearsExperience = 1;
         } else if (cohortScheduleList.size() == 2) {

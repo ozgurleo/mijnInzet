@@ -36,7 +36,7 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
 
     List<CohortSchedule> getAllByCohort_CohortId(int cohortId);
 
-    List<CohortSchedule> getAllByUserIdAndSubject_SubjectId(int userId, int subjectId);
+    List<CohortSchedule> getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(int userId, int subjectId,int cohortId);
 
     List<CohortSchedule> getCohortScheduleByCohort_CohortIdAndUser_Id(int cohortId, int userId);
 
