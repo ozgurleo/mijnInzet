@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Subject Toevoegen</title>
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+    <p class="h4 mb-4">Subject Toeveogen</p>
+
+    <form action="#" th:action="@{/subject/save}"
+          th:object="${subject}" method="POST">
+
+        <input type="hidden" th:field="*{subjectId}" />
+
+        <input type="text" id="namw" th:field="*{subjectName}"
+               class="form-control mb-4 col-4" placeholder="Naam" required="required">
+
+        <input type="text" id="estimatedHours" th:field="*{estimatedHours}"
+               class="form-control mb-4 col-4" placeholder="Geschatte Uren" required="required">
+
+        <input type="text" id="explatanation" th:field="*{explanation}"
+               class="form-control mb-4 col-4" placeholder="Beschrijving" required="required">
+
+        <button type="submit" class="btn btn-success col-2">Toevoeg</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/subject/list}">Terug Naar Vak Lijst</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
