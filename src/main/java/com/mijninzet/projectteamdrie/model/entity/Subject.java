@@ -2,6 +2,8 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "subject")
@@ -30,12 +32,21 @@ public class Subject {
         this.yearsToExpiryDate = yearsToExpiryDate;
     }
 
-    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate, String explanation, Set<Cohort> cohort) {
+    public Subject(int subjectId, String subjectName, int estimatedHours, int yearsToExpiryDate, String explanation, Cohort...cohorts) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.estimatedHours = estimatedHours;
         this.yearsToExpiryDate = yearsToExpiryDate;
         this.explanation = explanation;
+        this.cohort = Stream.of(cohorts).collect(Collectors.toSet());
+        this.cohort.forEach(x-> x.getSubjects().add(this));
+    }
+
+    public Set<Cohort> getCohort() {
+        return cohort;
+    }
+
+    public void setCohort(Set<Cohort> cohort) {
         this.cohort = cohort;
     }
 
