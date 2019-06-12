@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
+import java.time.temporal.WeekFields;
 import java.util.*;
 
 import java.time.LocalDate;
@@ -65,6 +66,8 @@ public class CohortController {
 
     //hier cohortSchedule (default rooster) aangemaakt voor de nieuwe Cohort
     public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId){
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+
         for (LocalDate date = beginDate; date.isBefore(endDate); date = date.plusDays(1)) {
             CohortSchedule CsMorning = new CohortSchedule();
             CohortSchedule CsNoon = new CohortSchedule();
@@ -76,11 +79,13 @@ public class CohortController {
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsMorning.setDate(date);
+                    CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("maandag");
                     CsNoon.setDaypart("middag");
                     CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsNoon.setDate(date);
+                    CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
                 case "TUESAY":
@@ -88,11 +93,13 @@ public class CohortController {
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsMorning.setDate(date);
+                    CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("dinsdag");
                     CsNoon.setDaypart("middag");
                     CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsNoon.setDate(date);
+                    CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
                 case "WEDNESDAY":
@@ -100,11 +107,13 @@ public class CohortController {
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsMorning.setDate(date);
+                    CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("woensdag");
                     CsNoon.setDaypart("middag");
                     CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsNoon.setDate(date);
+                    CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
                 case "THURSDAY":
@@ -112,11 +121,13 @@ public class CohortController {
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsMorning.setDate(date);
+                    CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("donderdag");
                     CsNoon.setDaypart("middag");
                     CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsNoon.setDate(date);
+                    CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
                 case "FRIDAY":
@@ -124,11 +135,13 @@ public class CohortController {
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsMorning.setDate(date);
+                    CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("vrijdag");
                     CsNoon.setDaypart("middag");
                     CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsNoon.setDate(date);
+                    CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
             }
