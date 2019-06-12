@@ -21,7 +21,6 @@ import java.util.List;
 @Controller
 public class AuthenticationController {
 
-    UserServiceImp userServiceImp;
     @Autowired
     UserService userService;
 
@@ -42,7 +41,7 @@ public class AuthenticationController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("register"); // resources/template/register.html
+        modelAndView.setViewName("registerUser"); // resources/template/registerUser.html
         System.out.println("! ViewName from ModelandView from registermethod: " + modelAndView.getViewName());
         return modelAndView;
     }
@@ -50,7 +49,6 @@ public class AuthenticationController {
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
-        userToSave = user;
         // Check for the validations
         if(bindingResult.hasErrors()) {
             modelAndView.addObject("successMessage", "Please correct the errors in form!");
@@ -68,7 +66,7 @@ public class AuthenticationController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("register");
+        modelAndView.setViewName("registerUser");
         return modelAndView;
     }
 
@@ -82,15 +80,10 @@ public class AuthenticationController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register"); // resources/template/admin.html
+        modelAndView.setViewName("registerUser"); // resources/template/admin.html
         return modelAndView;
     }
 
-    private User userToSave;
-
-    public User getUserToSave() {
-        return userToSave;
-    }
 }
 
 
