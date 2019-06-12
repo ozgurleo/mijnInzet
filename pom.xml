@@ -46,7 +46,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -67,26 +66,19 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-java8time</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-
         </dependency>
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -95,6 +87,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -2,9 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registration Form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
 
 </head>
@@ -14,7 +17,8 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -44,16 +48,16 @@
     <div class="row col-lg-4 col-lg-offset-4"
          style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
         <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post"
-              class="form-signin" role="form">
-            <h3 class="form-signin-heading">Registration Form</h3>
+              class="form-signin" roleName="form">
+            <h3 class="form-signin-heading">Registratie Formulier</h3>
             <div class="form-group">
                 <div class="">
-                    <input type="text" th:field="*{name}" placeholder="Name" class="form-control"/>
+                    <input type="text" th:field="*{name}" placeholder="Voornaam" class="form-control"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="">
-                    <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control"/>
+                    <input type="text" th:field="*{lastName}" placeholder="Achternaam" class="form-control"/>
                 </div>
             </div>
             <div class="form-group">
@@ -63,12 +67,21 @@
             </div>
             <div class="form-group">
                 <div class="">
-                    <input type="password" th:field="*{password}" placeholder="Password" class="form-control"/>
+                    <input type="password" th:field="*{password}" placeholder="Wachtwoord" class="form-control"/>
                 </div>
             </div>
             <div class="form-group">
+<!--                <select type="role" th:field="*{rolesOfUser}" class="form-control">-->
+                <select th:field="*{rolesOfUser}" class="form-control">
+<!--                    <option>Gebruikersrol</option>-->
+                    <option th:each="role: ${roles}" th:value="${role.getId()}" th:text="${role.getRoleName()}">
+<!--                    <option th:each="rolesOfUser: ${}" th:value="${subject[0]}"-->
+<!--                            th:text="${subject[2]}">-->
+                </select>
+            </div>
+            <div class="form-group">
                 <div class="">
-                    <button type="submit" class="btn btn-primary btn-block">Register User</button>
+                    <button type="submit" class="btn btn-primary btn-block">Registreer nieuwe gebruiker</button>
                 </div>
             </div>
             <span th:utext="${successMessage}"></span>
@@ -82,7 +95,7 @@
                 </ul>
             </div>
             <hr>
-            <a th:href="@{/users/list}" >Back to List</a>
+            <a th:href="@{/users/list}">Overzicht gebruikers</a>
         </form>
     </div>
 </div>
