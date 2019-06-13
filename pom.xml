@@ -67,13 +67,12 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< Updated upstream
-=======
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
->>>>>>> Stashed changes
+
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
