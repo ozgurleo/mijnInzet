@@ -15,7 +15,7 @@ public class CohortSchedule {
    private String day;
    private String daypart;
    private LocalDate date;
-private int weeknr;
+    private int weeknr;
 
    @ManyToOne
    User user;

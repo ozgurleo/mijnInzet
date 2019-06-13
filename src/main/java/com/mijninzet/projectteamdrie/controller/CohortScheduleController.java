@@ -205,15 +205,16 @@ public class CohortScheduleController {
     }
 
     public String checkTeacherHours(int teacherId, int subjectId, int cohortId) {
-
         Subject subject = subjectRepo.getBySubjectId(subjectId);
         String subjectname = subject.getSubjectName();
+
         TeacherHours teacherHours = teacherHoursRepository.findByUserId(teacherId);
         int realTeacherHours = 4;
 
         if (teacherHours != null) {
             if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId,cohortId)) {
-                if (teacherHours.getTeachingHoursLeft() < 8)
+                System.out.println("checkTeacherHours is AANGEROEPEN");
+                if (teacherHours.getTeachingHoursLeft() < 6)
                     return "NOK";
                 else {
                     return "OK";
@@ -222,10 +223,10 @@ public class CohortScheduleController {
                 int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId,cohortId);
                 switch (yearsOfExperience) {
                     case 1:
-                        realTeacherHours = 6;
+                        realTeacherHours = 8;
                         break;
                     case 2:
-                        realTeacherHours = 4;
+                        realTeacherHours = 6;
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
@@ -243,7 +244,7 @@ public class CohortScheduleController {
 
         boolean experience = false;
 
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(teacherId, subjectId,cohortId);
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(teacherId, subjectId,cohortId);
         if (cohortScheduleList.size() > 0) {
             experience = true;
         } else {
@@ -254,7 +255,7 @@ public class CohortScheduleController {
 
     public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId, int cohortId) {
         int numberOfYearsExperience;
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(teacherId, subjectId,cohortId);
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(teacherId, subjectId,cohortId);
         if (cohortScheduleList.size() == 1) {
             numberOfYearsExperience = 1;
         } else if (cohortScheduleList.size() == 2) {
@@ -296,10 +297,63 @@ public class CohortScheduleController {
         if (buttonClicked.equals("check")) {
             result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
             System.out.println("RESULT AFTER CHECK = " + result);
-
+            System.out.println("CHECKS CALLED BY THE CHECK-button ARE FINISHED");
+            System.out.println("----------------------------------------------------");
             return result;
         }
         if (buttonClicked.equals("save")) {
+            int previousTeacher;
+            result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+            String tempPreviousTeacher=cohortScheduleRepo.getTeacherAtDateAndDayPart(dayDate,dayPart,teacherId);
+            if(tempPreviousTeacher==null){
+             previousTeacher=0;
+            }else{
+                previousTeacher=Integer.parseInt(tempPreviousTeacher);
+            }
+
+            if(previousTeacher==teacherId){
+            result="sameTeacher";
+            }else if(result.equals("NOK") || result.equals("hourNOK_restOK") ||
+                    result.equals("hoursNOK_availNOK_OK") ||result.equals("hoursNOK_OK_prefNOK")){
+                result="hoursNOK";
+            }else if(previousTeacher!=0) {
+                // 1) check of previoususer geen 0 is indien niet 0 dan
+                // 2) zet uren terug voor de previous teacher.
+                int hoursToSubract=0;
+                int oldYearsOfExperience = howManyYearsExperienceDoesTeacherHave(previousTeacher, subjectId,cohortId);
+                switch (oldYearsOfExperience) {
+                    case 1:
+                        hoursToSubract = 8;
+                        break;
+                    case 2:
+                        hoursToSubract = 6;
+                        break;
+                }
+
+                TeacherHours oldTeacherHours=new TeacherHours();
+                oldTeacherHours.setTeachingHoursLeft(oldTeacherHours.getTeachingHoursLeft()+hoursToSubract);
+               oldTeacherHours.setTeachingHoursUsed(oldTeacherHours.getTeachingHoursUsed()-hoursToSubract);
+                oldTeacherHours.setUserId(previousTeacher);
+                teacherHoursRepository.save(oldTeacherHours);
+
+                // 3) verreken de uren voor de huidige teacher
+                hoursToSubract=0;
+                int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId,cohortId);
+                switch (newYearsOfExperience) {
+                    case 1:
+                        hoursToSubract = 6;
+                        break;
+                    case 2:
+                        hoursToSubract = 4;
+                        break;
+                }
+
+                TeacherHours newTeacherHours=new TeacherHours();
+                newTeacherHours.setTeachingHoursLeft(newTeacherHours.getTeachingHoursLeft()-hoursToSubract);
+                newTeacherHours.setTeachingHoursUsed(newTeacherHours.getTeachingHoursUsed()+hoursToSubract);
+                newTeacherHours.setUserId(teacherId);
+                teacherHoursRepository.save(newTeacherHours);
+
             CohortSchedule newCS = new CohortSchedule();
             newCS.setClassRoom("");
             newCS.setDay(weekDay);
@@ -310,7 +364,38 @@ public class CohortScheduleController {
             newCS.setUser(userRepo.findUserById(teacherId));
             cohortScheduleRepo.save(newCS);
 
-            result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+            }else{
+                int hoursToSubract=0;
+                int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId,cohortId);
+                switch (newYearsOfExperience) {
+                    case 1:
+                        hoursToSubract = 6;
+                        break;
+                    case 2:
+                        hoursToSubract = 4;
+                        break;
+                }
+
+                TeacherHours newTeacherHours=new TeacherHours();
+                newTeacherHours.setTeachingHoursLeft(newTeacherHours.getTeachingHoursLeft()-hoursToSubract);
+                newTeacherHours.setTeachingHoursUsed(newTeacherHours.getTeachingHoursUsed()+hoursToSubract);
+                newTeacherHours.setUserId(teacherId);
+                teacherHoursRepository.save(newTeacherHours);
+
+                CohortSchedule newCS = new CohortSchedule();
+                newCS.setClassRoom("");
+                newCS.setDay(weekDay);
+                newCS.setDaypart(dayPart);
+                newCS.setDate(dayDate);
+                newCS.setCohort(cohortRepository.getByCohortId(cohortId));
+                newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
+                newCS.setUser(userRepo.findUserById(teacherId));
+                cohortScheduleRepo.save(newCS);
+
+
+            }
+
+
             return result;
         }
 

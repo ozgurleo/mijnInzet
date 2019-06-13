@@ -21,24 +21,27 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     String getDateDaypartOverlap(@Param("cohortId") Integer cohortId, @Param("dateDay") LocalDate dateDay,
                          @Param("dayPart") String dayPart,@Param("teacherId") Integer teacherId);
 
-
     //Brahim Code: get all teachers Names by Role=teacher
     @Query(value="SELECT * FROM mijn_inzet.cohort;", nativeQuery = true)
     ArrayList<Object[]> getCohorts();
 
+    //SELECT user_user_id FROM mijn_inzet.cohort_schedule where date= :dayDate AND daypart= :dayPart AND cohort_cohort_id= :teacherId;
     //Brahim Code: get all teachers Names by Role=teacher
+    @Query(value="SELECT user_user_id FROM mijn_inzet.cohort_schedule where date= :dayDate AND " +
+            "daypart= :dayPart AND cohort_cohort_id= :teacherId ", nativeQuery = true)
+    String getTeacherAtDateAndDayPart(@Param("dayDate") LocalDate dayDate, @Param("dayPart") String dayPart, @Param("teacherId") Integer teacherId);
+
+    //Brahim Code: get schedule belonging to the latest cohort
     @Query(value="SELECT * FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id IN (select MAX(cohort_cohort_id) FROM mijn_inzet.cohort_schedule) ;", nativeQuery = true)
+    List<CohortSchedule> getScheduleLastCohort();
 
-
-            List<CohortSchedule> getScheduleLastCohort();
 
     List<CohortSchedule> getAllByCohort_CohortId(int cohortId);
 
-    List<CohortSchedule> getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(int userId, int subjectId,int cohortId);
+    List<CohortSchedule> getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(int userId, int subjectId,int cohortId);
 
     List<CohortSchedule> getCohortScheduleByCohort_CohortIdAndUser_Id(int cohortId, int userId);
 
     List<CohortSchedule> getCohortScheduleByUser_Id(int userId);
-
 
 }
