@@ -50,6 +50,9 @@ public class User {
     @Column(name="fte")
     private Double fte = 1.0;
 
+
+    private boolean isEnabled;
+
     @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> rolesOfUser;
@@ -132,6 +135,14 @@ public class User {
 
     public void setFte(Double fte) {
         this.fte = fte;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     @Override

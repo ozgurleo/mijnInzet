@@ -45,6 +45,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // URLs matching for access rights
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/confirm").permitAll()
+                .antMatchers("/forgot-password").permitAll()
+                .antMatchers("/confirm-reset").permitAll()
+                .antMatchers("/reset-password").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/home/**").hasAnyAuthority( "ADMIN","TEACHER","COORDINATOR","SCHEDULAR","MANAGER")
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")

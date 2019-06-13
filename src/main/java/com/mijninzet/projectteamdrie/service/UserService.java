@@ -12,14 +12,16 @@ import java.util.Optional;
 
 public interface UserService {
      void saveUser(User user);
-      User findByEmail(String email);
+       User findByEmail(String email);
+
 
      boolean isUserAlreadyPresent(User user);
 
      List<User> getAllUsers();
      void addUser(User user);
      Optional<User> getUser(int id);
-    void updateUser(int id,User user);
+    //void updateUser(int id,User user);
+    void updateUser(User user);
 
     void deleteUserById(int theId);
 

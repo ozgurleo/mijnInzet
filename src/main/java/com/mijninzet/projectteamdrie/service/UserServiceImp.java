@@ -80,11 +80,13 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
 
-    public void updateUser(int id, User user) {
+    public void updateUser( User user) {
         userRepository.save(user);
     }
 
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
     }
+
+
 }
