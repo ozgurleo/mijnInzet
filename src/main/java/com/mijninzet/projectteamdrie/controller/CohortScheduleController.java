@@ -337,7 +337,7 @@ public class CohortScheduleController {
                 int hoursToSubract = 0;
 
                 int oldYearsOfExperience = howManyYearsExperienceDoesTeacherHave(previousTeacher, subjectId, cohortId);
-                if(oldYearsOfExperience==0 || oldYearsOfExperience==1){
+                if(oldYearsOfExperience<=1){
                     hoursToSubract = 8;
                 }else {
                     hoursToSubract = 6;
@@ -355,7 +355,7 @@ public class CohortScheduleController {
                 // 3) verreken de uren voor de huidige teacher
                int newHoursToSubract = 0;
                 int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
-                if(newYearsOfExperience==0 || newYearsOfExperience==1){
+                if(newYearsOfExperience<=1){
                     newHoursToSubract = 8;
                 }else {
                     newHoursToSubract = 6;
@@ -375,7 +375,7 @@ public class CohortScheduleController {
             } else {
                 int newHoursToSubract = 0;
                 int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
-                if(newYearsOfExperience==0 || newYearsOfExperience==1){
+                if(newYearsOfExperience<=1){
                     newHoursToSubract = 8;
                 }else {
                     newHoursToSubract = 6;
