@@ -235,6 +235,9 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                     x.style.background = "#ff8000";
                     x.innerHTML = "check:"+ "<br>"+ "*Docenturen overschreden."+ "<br>" +
                         "*Docent geeft dit vak liever niet beschikbaar.";}
+                else if(result=="sameTeacher"){
+                    x.style.background = "#ADD8E6";
+                    x.innerHTML ="Docent is dit dagdeel al ingepland";}
 
             },
             error: function (result) {

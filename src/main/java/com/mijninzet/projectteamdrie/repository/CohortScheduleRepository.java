@@ -4,8 +4,10 @@ import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
 import com.mijninzet.projectteamdrie.model.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,12 +30,19 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     //SELECT user_user_id FROM mijn_inzet.cohort_schedule where date= :dayDate AND daypart= :dayPart AND cohort_cohort_id= :teacherId;
     //Brahim Code: get all teachers Names by Role=teacher
     @Query(value="SELECT user_user_id FROM mijn_inzet.cohort_schedule where date= :dayDate AND " +
-            "daypart= :dayPart AND cohort_cohort_id= :teacherId ", nativeQuery = true)
-    String getTeacherAtDateAndDayPart(@Param("dayDate") LocalDate dayDate, @Param("dayPart") String dayPart, @Param("teacherId") Integer teacherId);
+            "daypart= :dayPart AND cohort_cohort_id= :cohortId ", nativeQuery = true)
+    String getTeacherAtDateAndDayPart(@Param("dayDate") LocalDate dayDate, @Param("dayPart") String dayPart, @Param("cohortId") Integer cohortId);
 
     //Brahim Code: get schedule belonging to the latest cohort
     @Query(value="SELECT * FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id IN (select MAX(cohort_cohort_id) FROM mijn_inzet.cohort_schedule) ;", nativeQuery = true)
     List<CohortSchedule> getScheduleLastCohort();
+
+
+    @Modifying
+    @Query(value = "UPDATE mijn_inzet.cohort_schedule SET user_user_id = :teacherId  WHERE daypart= :dayPart AND date= :dayDate ", nativeQuery = true)
+    @Transactional
+    void assignTeacherToSubject(@Param("teacherId") Integer teacherId, @Param("dayPart") String dayPart, @Param("dayDate") LocalDate dayDate);
+
 
 
     List<CohortSchedule> getAllByCohort_CohortId(int cohortId);

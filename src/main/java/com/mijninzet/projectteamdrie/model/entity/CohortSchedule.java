@@ -41,8 +41,7 @@ public class CohortSchedule {
       this.user = user;
       this.subject = subject;
       this.cohort = cohort;
-      WeekFields weekFields = WeekFields.of(Locale.getDefault());
-      this.weeknr=date.get(weekFields.weekOfWeekBasedYear());
+      this.weeknr=weeknr;
    }
 
    public int getId() {
