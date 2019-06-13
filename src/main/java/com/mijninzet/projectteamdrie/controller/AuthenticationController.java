@@ -147,7 +147,7 @@ public class AuthenticationController {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(existingUser.getEmail());
             mailMessage.setSubject("Complete Password Reset!");
-            mailMessage.setFrom("semihkasimoglu@gmail.com");
+            mailMessage.setFrom("nopressure532@gmail.com");
             mailMessage.setText("To complete the password reset process, please click here: "
                     +"http://localhost:8081/confirm-reset?token="+confirmationToken.getConfirmationToken());
 
