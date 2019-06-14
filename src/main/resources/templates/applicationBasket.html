@@ -129,7 +129,7 @@
 
         <tbody>
         <tr th:each="appl:${applicationBasket}">
-            <form th:id="${appl[0]}" th:action="@{/taskApplications/taskId/fullName/availHours}" method="post">
+            <form name="applicationForm" th:id="${appl[0]}" th:action="@{/taskApplications/taskId/fullName/availHours}" method="post" onsubmit="return validate()">
 
                 <td>
                     <input type="${appl[0]}" NAME ="taskId" id= "taskId" style="background-color:
@@ -164,7 +164,7 @@
 
     </table>
 </div>
-
+</script>
 
 </body>
 </html>
