@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-//@RequestMapping("subject")
+
 public class SubjectWebController {
     @Autowired
     SubjectService subjectService;
@@ -30,7 +30,7 @@ public class SubjectWebController {
         return "subject/subject-home";
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/subject/list")
     public String listSubject(Model model){
         subjectList=subjectService.findAll();
         cohortList=cohortService.findAll();
@@ -38,18 +38,18 @@ public class SubjectWebController {
         model.addAttribute("AAA",cohortList);
         return "subject/list-subject";
     }
-    @GetMapping("/addSubject")
+    @GetMapping("/subject/addSubject")
     public String addSubject(Model model){
         Subject subject = new Subject();
         model.addAttribute("subject",subject);
         return "subject/subject-form";
     }
-    @PostMapping("/save")
+    @PostMapping("/subject/save")
     public String saveSubject(@ModelAttribute("subject") Subject subject){
         subjectService.addSubject(subject);
         return ("redirect:/subject/list");
     }
-    @GetMapping("/updateSubject")
+    @GetMapping("/subject/updateSubject")
     public String updateSubject(@RequestParam("subjectId") int subjectId,  Model model){
         Subject subject= subjectService.findById(subjectId);
         model.addAttribute("subject", subject);
@@ -61,17 +61,14 @@ public class SubjectWebController {
         subjectService.deleteSubjectById(subjectId);
         return ("redirect:/subject/list");
     }
-    @GetMapping("/subjectCohortKopelen/{cohortId}")
-    public String getAllCohortSchedule(Model model, @PathVariable String cohortId){
 
-        System.out.println(" DE VALUE OPF ~COHORTID = " + cohortId);
-        System.out.println(cohortId.getClass().getName());
-        Integer tempCohortId = Integer.parseInt(cohortId);
-        System.out.println(tempCohortId.getClass().getName());
-
-        List<CohortSchedule>cohortSchedules=cohortScheduleRepository.findByCohort(tempCohortId);
+    @GetMapping("/subject/subjectCohortKopelen/{cohortId}")
+    public String getAllCohortSchedule(Model model, @PathVariable Integer cohortId){
+        subjectList=subjectService.findAll();
+        List<CohortSchedule>cohortSchedules=cohortScheduleRepository.getAllByCohort_CohortId(cohortId);
         model.addAttribute("cohortsSchedules",cohortSchedules);
-        return("subject/subject-form");
+        model.addAttribute("subjects",subjectList);
+        return("list-cohortSchedule");
     }
 
 

@@ -22,7 +22,8 @@
                 console.log(typeof cohort);
 
 
-                window.location.href='/subjectCohortKopelen/'+cohort;
+                window.location.href='/subject/subjectCohortKopelen/'+cohort;
+                console.log("cohort"+cohort)
             })
         })
     </script>
@@ -75,7 +76,7 @@
 
     <select id="cohort-dropdown">
         <option value="">Kies Cohort</option>
-        <option th:each="tempCohorts:${AAA}" th:text="${tempCohorts.cohortId}">
+        <option th:each="tempCohort:${AAA}" th:text="${tempCohort.cohortId}">
         </option>
     </select>
 

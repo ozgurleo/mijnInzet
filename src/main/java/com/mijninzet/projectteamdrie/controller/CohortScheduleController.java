@@ -371,14 +371,37 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
+    @PostMapping(value = "/subjectCohortCoupeling")
+    public @ResponseBody
+    void subjectCohortCoupeling(HttpServletRequest request) {
+
+//        String buttonClicked = request.getParameter("button");
+        int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
+        String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
+        int year = Integer.parseInt(arrOfDate[0]);
+        int month = Integer.parseInt(arrOfDate[1]);
+        int day = Integer.parseInt(arrOfDate[2]);
+        LocalDate dayDate = LocalDate.of(year, month, day);
+
+        String weekDay = request.getParameter("day");
+        String dayPart = request.getParameter("daypart");
+        int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+        String result = "";
+
+            CohortSchedule newCS = new CohortSchedule();
+            newCS.setClassRoom("");
+            newCS.setDay(weekDay);
+            newCS.setDaypart(dayPart);
+            newCS.setDate(dayDate);
+            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
+            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
+
+            cohortScheduleRepo.save(newCS);
 
 
-    @PostMapping("/SubjectCoupeling")
-        public String coupleSubjectWithCohort(@ModelAttribute("cohortSchedule") CohortSchedule cs){
-        cohortScheduleRepo.save(cs);
-        return ("redirect:/list-cohort");
+    }
 
-        }
+
 
 
 }

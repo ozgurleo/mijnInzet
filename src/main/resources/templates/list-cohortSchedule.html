@@ -10,6 +10,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
@@ -52,8 +53,8 @@
                 <th>datum</th>
                 <th>dag</th>
                 <th>dagdeel</th>
-                <th>subject</th>
-
+                <th>planning</th>
+                <th>koppelen</th>
             </tr>
             </thead>
         </tablehead>
@@ -65,26 +66,26 @@
                       method="post">
 
                     <td>
-                        <input th:with="cohort=${schedule.getCohort().getCohortId()}" type="${schedule}" class="cohort"
+                        <input th:with="cohort=${schedule.getCohort().getCohortId()}" class="cohort"
                                NAME="cohort" th:data-ID="${schedule.getId()}" th:id="cohort" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
                                th:field="${cohort}" readonly/>
                     </td>
 
                     <td>
-                        <input th:with="dateDay=${schedule.getId()}" type="${schedule}" class="date" NAME="date"
+                        <input th:with="dateDay=${schedule.getId()}"  class="date" NAME="date"
                                th:data-ID="${schedule.getId()}" th:id="dateDay" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
                     </td>
 
                     <td>
-                        <input th:with="day=${schedule.getId()}" type="${schedule}" class="day" NAME="day"
+                        <input th:with="day=${schedule.getId()}" class="day" NAME="day"
                                th:data-ID="${schedule.getId()}" th:id="day" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
                     </td>
 
                     <td>
-                        <input th:with="datepart=${schedule.getId()}" type="${schedule}" class="daypart" NAME="daypart"
+                        <input th:with="datepart=${schedule.getId()}" class="daypart" NAME="daypart"
                                th:data-ID="${schedule.getId()}" th:id="daypart" style="background-color:
                         transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
                                readonly/>
@@ -93,26 +94,22 @@
                     <td>
                         <form>
                             <div>
-
-                                <input th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
-                                       th:data-ID="${schedule.getId()}" style="background-color:transparent;border: #FF1C19"
-                                       th:data-value="${schedule.getSubject().getSubjectId()}" th:value="${schedule.getSubject().getSubjectName()}"
-                                       th:field="${schedule.getSubject().getSubjectName()}"/>
-
+                                <select th:id="teacherVariable" class="teacher" th:data-ID="${schedule.getId()}">
+                                    <option>selecteer docent</option>
+                                    <option th:each="teacher: ${subjects}" th:value="${teacher.subjectId}"
+                                            th:text="${teacher.subjectName}">
+                                </select>
                             </div>
-                            <br>
+
                         </form>
                     </td>
+                    <td>
+                        <button th:id="saveButton" type="submit" th:data-ID="${schedule.getId()}" class="saveButton"
+                                th:value="opslaan" name="opslaan"
+                                th:form="${schedule.getId()}">opslaan
+                        </button>
 
-
-                    <td th:with="textBox=${schedule.getId()}" th:id="textBox" th:data-ID="${schedule.getId()}"
-                        class="Box">
-                        <div>
-                            <form th:name="constraint">
-                            </form>
-                        </div>
                     </td>
-
                 </form>
             </tr>
         </tablebody>
@@ -120,7 +117,6 @@
 </div>
 </body>
 <script th:inline="javascript">
-
     cohortnr = $('#cohort').val();
     console.log(cohortnr);
     dateDay = $('#dateDay').val();
@@ -129,14 +125,11 @@
     console.log(day);
     daypart = $('#daypart').val();
     console.log(daypart);
-    const subjectField =document.querySelector(".subjectField");
 
-    subjectnr = subjectField.dataset.value;
-    subjectname=$(".subjectField").val();
     console.log("DIT IS HET SUBJECT NUMMER: " + subjectnr);
     console.log("DIT IS DE SUBJECTNAAM: " + subjectname);
 
-    const staticValue = document.querySelector('#cohort').dataset.id
+    var staticValue = document.querySelector('#cohort').dataset.id
     console.log("DIT IS DE STATIC VALUE : " + staticValue);
 
     <!--Select only the value that is selected in the dropdownmenu -->
@@ -292,7 +285,5 @@
             }
         });
     });
-
-
 </script>
 </html>
