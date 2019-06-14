@@ -36,7 +36,8 @@
                     <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
                     <li class="dropdown">
                         <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle"
-                           data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK &
+                           data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK
+                            &
                             ROOSTER VOORKEUREN <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
@@ -121,22 +122,37 @@
 <!--</div>-->
 
 
-<div class="container" th:each="ma:${maandag}">
+<div class="container">
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">##</th>
             <th scope="col">Maandag</th>
+            <th scope="col">Dinsdag</th>
+            <th scope="col">Woensdag</th>
+            <th scope="col">Donderdag</th>
+            <th scope="col">Vrijdag</th>
+
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="dag:${maandagmorgen}">
-            <th scope="row">Ochtend</th>
-            <td th:text="${dag.getSubject().getSubjectName()}"></td>
+        <tr>
+            <th scope = "row">Ochtend</th>
+            <td th:text="${mondaymorning}"></td>
+            <td th:text="${tuesdaymorning}"></td>
+            <td th:text="${wednesdaymorning}"></td>
+            <td th:text="${thursdaymorning}"></td>
+            <td th:text="${fridaymorning}"></td>
         </tr>
-        <tr th:each="dag:${maandagmiddag}">
-            <th scope="row">Middag</th>
-            <td th:text="${dag.getSubject().getSubjectName()}"></td>
+
+        <tr>
+            <th scope = "row">Middag</th>
+            <td th:text="${mondayafternoon}"></td>
+            <td th:text="${tuesdayafternoon}"></td>
+            <td th:text="${wednesdayafternoon}"></td>
+            <td th:text="${thursdayafternoon}"></td>
+            <td th:text="${fridayafternoon}"></td>
         </tr>
 
         </tbody>

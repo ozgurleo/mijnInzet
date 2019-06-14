@@ -59,7 +59,6 @@ public class TeacherHoursController {
         model.addAttribute("achternaam", currentUser.getLastName());
         model.addAttribute("fte", userFTE);
         model.addAttribute("beschikbareUren", availableHours);
-        model.addAttribute("cohortScheduleList", cohortScheduleList);
         model.addAttribute("cohorts", cohorts);
 
         return "teacherFTE";
@@ -67,78 +66,34 @@ public class TeacherHoursController {
 
     @RequestMapping(value = "teacherSchedule", method = RequestMethod.GET)
     public String getTeacherSchedule(@RequestParam("cohortId") Integer cohortId, User user, Model model) {
-        User currentUser = userService.findById(user.getCurrentUserId());
-        List<CohortSchedule> cohortScheduleListByCohortAndUser = cohortScheduleRepository.getCohortScheduleByCohort_CohortIdAndUser_Id(cohortId, currentUser.getId());
-        List<CohortSchedule> nrOfMondays = cohortScheduleRepository.getAllByDay("Monday");
-        List<CohortSchedule> mondayMorningList = cohortScheduleRepository.getAllByDayAndDaypart("Monday", "morning");
-        List<CohortSchedule> mondayAfternoonList = cohortScheduleRepository.getAllByDayAndDaypart("Monday", "afternoon");
-        List<CohortSchedule> tuesdayMorningList = cohortScheduleRepository.getAllByDayAndDaypart("Tuesday", "morning");
-        List<CohortSchedule> tuesdayAfternoonlist = cohortScheduleRepository.getAllByDayAndDaypart("Tuesday", "afternoon");
-        List<CohortSchedule> wednesdayMorningList = cohortScheduleRepository.getAllByDayAndDaypart("Wednesday", "morning");
-        List<CohortSchedule> wednesdayAfternoonList = cohortScheduleRepository.getAllByDayAndDaypart("Wednesday", "afternoon");
-        List<CohortSchedule> thursdayMorningList = cohortScheduleRepository.getAllByDayAndDaypart("Thursday", "morning");
-        List<CohortSchedule> thursdayAfternoonList = cohortScheduleRepository.getAllByDayAndDaypart("Thursday", "afternoon");
-        model.addAttribute("cohortScheduleList", cohortScheduleListByCohortAndUser);
-        model.addAttribute("maandag", nrOfMondays);
-        model.addAttribute("maandagmorgen", mondayMorningList);
-        model.addAttribute("maandagmiddag", mondayAfternoonList);
+
+        int weeknr = 1;
+
+        CohortSchedule mondaymorning = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId, weeknr, "morning", "Monday");
+        CohortSchedule mondayafternoon = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "afternoon", "Monday");
+        CohortSchedule tuesdaymorning = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "morning", "Tuesday");
+        CohortSchedule tuesdayafternoon = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "afternoon", "Tuesday");
+        CohortSchedule wednesdaymorning = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "morning", "Wednesday");
+        CohortSchedule wednesdayafternoon = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "afternoon", "Wednesday");
+        CohortSchedule thursdaymorning = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "morning", "Thursday");
+        CohortSchedule thursdayafternoon = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "afternoon", "Thursday");
+        CohortSchedule fridaymorning = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "morning", "Friday");
+        CohortSchedule fridayafternoon = cohortScheduleRepository.findByCohort_CohortIdAndWeeknrAndDaypartAndDay(cohortId,weeknr, "afternoon", "Friday");
 
 
-//       List<TeacherSchedule> teacherSchedule = teacherScheduleRepository.getAllByCohort_CohortId(cohortId);
-//        getTeacherFte(currentUser, model);
-//
-//        Long numberOfWeeksInCohort = cohortService.getWeeksInCohort(cohortId);
-//
-//      int intNumberOfWeeksInCohort =  numberOfWeeksInCohort.intValue();
-//
-//      TeacherSchedule[] teacherSchedules = new TeacherSchedule[intNumberOfWeeksInCohort];
-//
-//
-//        for (CohortSchedule cohortschedule : cohortScheduleListByCohortAndUser) {
-//            if (cohortschedule.getDay().equalsIgnoreCase("Monday") && cohortschedule.getDaypart().equalsIgnoreCase("morning")) {
-//                for(int i =0; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setMaandagOchtend(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Monday") && cohortschedule.getDaypart().equalsIgnoreCase("afternoon")) {
-//                for(int i = 0 ; i< teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setMaandagMiddag(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Tuesday") && cohortschedule.getDaypart().equalsIgnoreCase("morning")) {
-//                for(int i = 0 ; i< teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setDinsdagOchtend(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Tuesday") && cohortschedule.getDaypart().equalsIgnoreCase("afternoon")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setDinsdagMiddag(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Wednesday") && cohortschedule.getDaypart().equalsIgnoreCase("morning")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setWoensdagOchtend(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Wednesday") && cohortschedule.getDaypart().equalsIgnoreCase("afternoon")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setWoensdagMiddag(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Thursday") && cohortschedule.getDaypart().equalsIgnoreCase("morning")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setDonderdagOchtend(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Thursday") && cohortschedule.getDaypart().equalsIgnoreCase("afternoon")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setDonderdagMiddag(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Friday") && cohortschedule.getDaypart().equalsIgnoreCase("morning")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setVrijdagOchtend(cohortschedule.getSubject().getSubjectName());
-//                }
-//            } else if (cohortschedule.getDay().equalsIgnoreCase("Friday") && cohortschedule.getDaypart().equalsIgnoreCase("afternoon")) {
-//                for(int i = 0 ; i<teacherSchedules.length; i++) {
-//                    teacherSchedules[i].setVrijdagMiddag(cohortschedule.getSubject().getSubjectName());
-//                }
-//            }
-//        }
-//        model.addAttribute("teacherSchedules", teacherSchedules);
-//
+        model.addAttribute("mondaymorning", mondaymorning.getUser().getLastName());
+        model.addAttribute("mondayafternoon", mondayafternoon.getSubject().getSubjectName());
+        model.addAttribute("tuesdaymorning", tuesdaymorning.getSubject().getSubjectName());
+        model.addAttribute("tuesdayafternoon", tuesdayafternoon.getSubject().getSubjectName());
+        model.addAttribute("wednesdaymorning", wednesdaymorning.getSubject().getSubjectName());
+        model.addAttribute("wednesdayafternoon", wednesdayafternoon.getSubject().getSubjectName());
+        model.addAttribute("thursdaymorning", thursdaymorning.getSubject().getSubjectName());
+        model.addAttribute("thursdayafternoon", thursdayafternoon.getSubject().getSubjectName());
+        model.addAttribute("fridaymorning", fridaymorning.getSubject().getSubjectName());
+        model.addAttribute("fridayafternoon", fridayafternoon.getSubject().getSubjectName());
+
+
+
         return "teacherFTE";
     }
 //

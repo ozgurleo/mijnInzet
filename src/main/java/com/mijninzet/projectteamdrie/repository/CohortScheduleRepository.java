@@ -40,10 +40,11 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
 
     List<CohortSchedule> getCohortScheduleByUser_Id(int userId);
 
-    List<CohortSchedule> getCohortSchedulesByDateIsBetween(LocalDate begindate, LocalDate enddate);
+    List<CohortSchedule> findByCohort_CohortId(int cohortId);
+    CohortSchedule findByCohort_CohortIdAndWeeknrAndDaypartAndDay (int cohortId, int weeknr, String daypart, String day);
 
-    List<CohortSchedule> getAllByDayAndDaypart(String day, String daypart);
-    List<CohortSchedule> getAllByDay(String day);
+
+
 
 
 }
