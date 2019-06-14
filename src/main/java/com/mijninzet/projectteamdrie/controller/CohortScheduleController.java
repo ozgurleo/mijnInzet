@@ -384,9 +384,7 @@ public class CohortScheduleController {
                 int newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
                 int newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
-
                 cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
-
 
             }
             return result;

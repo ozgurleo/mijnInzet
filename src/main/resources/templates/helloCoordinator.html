@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welkomstscherm</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<!-- Navigatie-menu -->
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/helloCoordinator">HOME</a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    </form>
+</nav>
+
+<!-- Hoofdtekst  -->
+
+<br><br><br>
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <div class="jumbotron">
+            <h1 class="masthead-brand">Mijn Inzet</h1>
+            </div>
+        </div>
+    </header>
+
+    <main roleName="main" class="inner cover">
+        <h2 class="cover-heading">Welkom </h2>
+        <br>
+        <h3 STYLE="color: blue"><span th:text="${user.toString()}"></span></h3>
+        <br>
+
+        <h3>Je hebt toegangsrechten voor :  </h3>
+
+        <h3> hier komt button1  </h3>
+        <h3> hier komt button2  </h3>
+        <h3> hier komt button....  </h3>
+
+        <nav class="nav nav-masthead justify-content-center">
+            <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+        </nav>
+        <br>
+
+        <p class="lead">Ga naar vakkenbeheer </p>
+        <p class="lead">
+            <a href="/generateCohortSchedule" class="btn btn-lg btn-primary">VAKKENBEHEER</a>
+        </p>
+    </main>
+
+</div>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <br><br>
+        <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
+    </div>
+</footer>
+</body>
+
+<!-- Onderteken en dateer de pagina, wees beleefd! -->
+
+<!--<form th:action="@{/logout}" method="post">-->
+<!--    <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
+<!--</form>-->
+<script>
+    // JavaScript popup window function
+    function basicPopup(url) {
+        popupWindow = window.open(url,'popUpWindow','height=70000,width=500,left=50,top=50,resizable=yes,' +
+            'scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
+    }
+
+</script>
+</body>
+</html>
