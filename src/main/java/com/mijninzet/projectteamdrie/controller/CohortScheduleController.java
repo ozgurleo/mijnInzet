@@ -371,9 +371,14 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
-//    @GetMapping("subjectKopelen")
-//    public void getAllCohortSchedule()
 
+
+    @PostMapping("/SubjectCoupeling")
+        public String coupleSubjectWithCohort(@ModelAttribute("cohortSchedule") CohortSchedule cs){
+        cohortScheduleRepo.save(cs);
+        return ("redirect:/list-cohort");
+
+        }
 
 
 }
