@@ -18,8 +18,6 @@ public interface CohortRepository extends JpaRepository<Cohort, Integer> {
 
     List<Cohort> findAll();
     List<Cohort> findAllByCohortIdAfter(int cohortId);
-
-
     Cohort getByCohortId(int cohortId);
 
 

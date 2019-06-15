@@ -13,23 +13,16 @@ public class TeacherSchedule {
     private int id;
     private String maandagOchtend;
     private String maandagMiddag;
-    private String maandagAvond;
     private String dinsdagOchtend;
     private String dinsdagMiddag;
-    private String dinsdagAvond;
     private String woensdagOchtend;
     private String woensdagMiddag;
-    private String woensdagAvond;
     private String donderdagOchtend;
     private String donderdagMiddag;
-    private String donderdagAvond;
     private String vrijdagOchtend;
     private String vrijdagMiddag;
-    private String vrijdagAvond;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cohort")
-    private Cohort cohort;
+    private int weeknr;
+    private int cohortId;
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
@@ -41,26 +34,22 @@ public class TeacherSchedule {
         this.user = new User(userId);
     }
 
-    public TeacherSchedule(String maandagOchtend, String maandagMiddag, String maandagAvond, String dinsdagOchtend,
-                           String dinsdagMiddag, String dinsdagAvond, String woensdagOchtend, String woensdagMiddag,
-                           String woensdagAvond, String donderdagOchtend, String donderdagMiddag, String donderdagAvond,
-                           String vrijdagOchtend, String vrijdagMiddag, String vrijdagAvond, Cohort cohort, User user) {
+    public TeacherSchedule(String maandagOchtend, String maandagMiddag, String dinsdagOchtend,
+                           String dinsdagMiddag,  String woensdagOchtend, String woensdagMiddag,
+                            String donderdagOchtend, String donderdagMiddag,
+                           String vrijdagOchtend, String vrijdagMiddag,  int weeknr, int cohortId , User user) {
         this.maandagOchtend = maandagOchtend;
         this.maandagMiddag = maandagMiddag;
-        this.maandagAvond = maandagAvond;
         this.dinsdagOchtend = dinsdagOchtend;
         this.dinsdagMiddag = dinsdagMiddag;
-        this.dinsdagAvond = dinsdagAvond;
         this.woensdagOchtend = woensdagOchtend;
         this.woensdagMiddag = woensdagMiddag;
-        this.woensdagAvond = woensdagAvond;
         this.donderdagOchtend = donderdagOchtend;
         this.donderdagMiddag = donderdagMiddag;
-        this.donderdagAvond = donderdagAvond;
         this.vrijdagOchtend = vrijdagOchtend;
         this.vrijdagMiddag = vrijdagMiddag;
-        this.vrijdagAvond = vrijdagAvond;
-        this.cohort = cohort;
+        this.cohortId = cohortId;
+        this.weeknr = weeknr;
         this.user = user;
     }
 
@@ -88,14 +77,6 @@ public class TeacherSchedule {
         this.maandagMiddag = maandagMiddag;
     }
 
-    public String getMaandagAvond() {
-        return maandagAvond;
-    }
-
-    public void setMaandagAvond(String maandagAvond) {
-        this.maandagAvond = maandagAvond;
-    }
-
     public String getDinsdagOchtend() {
         return dinsdagOchtend;
     }
@@ -110,14 +91,6 @@ public class TeacherSchedule {
 
     public void setDinsdagMiddag(String dinsdagMiddag) {
         this.dinsdagMiddag = dinsdagMiddag;
-    }
-
-    public String getDinsdagAvond() {
-        return dinsdagAvond;
-    }
-
-    public void setDinsdagAvond(String dinsdagAvond) {
-        this.dinsdagAvond = dinsdagAvond;
     }
 
     public String getWoensdagOchtend() {
@@ -136,14 +109,6 @@ public class TeacherSchedule {
         this.woensdagMiddag = woensdagMiddag;
     }
 
-    public String getWoensdagAvond() {
-        return woensdagAvond;
-    }
-
-    public void setWoensdagAvond(String woensdagAvond) {
-        this.woensdagAvond = woensdagAvond;
-    }
-
     public String getDonderdagOchtend() {
         return donderdagOchtend;
     }
@@ -158,14 +123,6 @@ public class TeacherSchedule {
 
     public void setDonderdagMiddag(String donderdagMiddag) {
         this.donderdagMiddag = donderdagMiddag;
-    }
-
-    public String getDonderdagAvond() {
-        return donderdagAvond;
-    }
-
-    public void setDonderdagAvond(String donderdagAvond) {
-        this.donderdagAvond = donderdagAvond;
     }
 
     public String getVrijdagOchtend() {
@@ -184,20 +141,20 @@ public class TeacherSchedule {
         this.vrijdagMiddag = vrijdagMiddag;
     }
 
-    public String getVrijdagAvond() {
-        return vrijdagAvond;
+    public int getCohortId() {
+        return cohortId;
     }
 
-    public void setVrijdagAvond(String vrijdagAvond) {
-        this.vrijdagAvond = vrijdagAvond;
+    public void setCohortId(int cohortId) {
+        this.cohortId = cohortId;
     }
 
-    public Cohort getCohort() {
-        return cohort;
+    public int getWeeknr() {
+        return weeknr;
     }
 
-    public void setCohort(Cohort cohort) {
-        this.cohort = cohort;
+    public void setWeeknr(int weeknr) {
+        this.weeknr = weeknr;
     }
 
     public User getUser() {
@@ -210,24 +167,20 @@ public class TeacherSchedule {
 
     @Override
     public String toString() {
-        return "StaffAvailability{" +
+        return "TeacherSchedule{" +
                 "id=" + id +
                 ", maandagOchtend='" + maandagOchtend + '\'' +
                 ", maandagMiddag='" + maandagMiddag + '\'' +
-                ", maandagAvond='" + maandagAvond + '\'' +
                 ", dinsdagOchtend='" + dinsdagOchtend + '\'' +
                 ", dinsdagMiddag='" + dinsdagMiddag + '\'' +
-                ", dinsdagAvond='" + dinsdagAvond + '\'' +
                 ", woensdagOchtend='" + woensdagOchtend + '\'' +
                 ", woensdagMiddag='" + woensdagMiddag + '\'' +
-                ", woensdagAvond='" + woensdagAvond + '\'' +
                 ", donderdagOchtend='" + donderdagOchtend + '\'' +
                 ", donderdagMiddag='" + donderdagMiddag + '\'' +
-                ", donderdagAvond='" + donderdagAvond + '\'' +
                 ", vrijdagOchtend='" + vrijdagOchtend + '\'' +
                 ", vrijdagMiddag='" + vrijdagMiddag + '\'' +
-                ", vrijdagAvond='" + vrijdagAvond + '\'' +
-                ", cohort=" + cohort +
+                ", cohortId=" + cohortId +'\''+
+                ", weeknr =" + weeknr + '\''+
                 ", user=" + user +
                 '}';
     }

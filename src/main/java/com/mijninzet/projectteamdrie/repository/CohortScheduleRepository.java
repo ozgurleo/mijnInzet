@@ -15,7 +15,6 @@ import java.util.List;
 
 public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, Integer> {
 
-    List<CohortSchedule> findByCohort(int cohortId);
 
     //Brahim Code: get id that from date/daprt that is overlapping with other cohort
     @Query(value = " SELECT id FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id!= :cohortId " +
@@ -43,18 +42,16 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     @Transactional
     void assignTeacherToSubject(@Param("teacherId") Integer teacherId, @Param("dayPart") String dayPart, @Param("dayDate") LocalDate dayDate);
 
+    @Query(value= "SELECT DISTINCT weeknr FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id=:cohortId ", nativeQuery = true)
+    List<Integer> getDistinctWeeknumbersWhereCohortIdIs(@Param("cohortId") Integer cohortId);
 
-
+    @Query(value= "SELECT DISTINCT weeknr FROM mijn_inzet.cohort_schedule;", nativeQuery = true)
+    List<Integer> getDistinctWeeknumbers();
     List<CohortSchedule> getAllByCohort_CohortId(int cohortId);
-
     List<CohortSchedule> getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(int userId, int subjectId,int cohortId);
+    List<CohortSchedule> getAllByWeeknr(int weeknr);
 
-    List<CohortSchedule> getCohortScheduleByCohort_CohortIdAndUser_Id(int cohortId, int userId);
 
-    List<CohortSchedule> getCohortScheduleByUser_Id(int userId);
-
-    List<CohortSchedule> findByCohort_CohortId(int cohortId);
-    CohortSchedule findByCohort_CohortIdAndWeeknrAndDaypartAndDay (int cohortId, int weeknr, String daypart, String day);
 
 
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TeacherScheduleRepository extends JpaRepository<TeacherSchedule, Integer> {
 
-    List<TeacherSchedule> getAllByCohort_CohortId(int cohortId);
+    List<TeacherSchedule> getAllByCohortId(int cohortId);
 
 
 }
