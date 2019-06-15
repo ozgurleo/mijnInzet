@@ -420,9 +420,10 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
-    @PostMapping(value = "/subjectCohortCoupeling")
+    @PostMapping(value ="/subjectCohortCoupeling")
     public @ResponseBody
-    void subjectCohortCoupeling(HttpServletRequest request) {
+    String subjectCohortCoupeling(HttpServletRequest request) {
+        System.out.println("OZGUR METHODE IS AANGEROEPEN!!!");
 
 //        String buttonClicked = request.getParameter("button");
         int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
@@ -437,15 +438,16 @@ public class CohortScheduleController {
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
         String result = "";
 
-            CohortSchedule newCS = new CohortSchedule();
-            newCS.setClassRoom("");
-            newCS.setDay(weekDay);
-            newCS.setDaypart(dayPart);
-            newCS.setDate(dayDate);
-            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
-            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
+        CohortSchedule newCS = new CohortSchedule();
+        newCS.setClassRoom("");
+        newCS.setDay(weekDay);
+        newCS.setDaypart(dayPart);
+        newCS.setDate(dayDate);
+        newCS.setCohort(cohortRepository.getByCohortId(cohortId));
+        newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
 
-            cohortScheduleRepo.save(newCS);
+        cohortScheduleRepo.save(newCS);
+        return "OK";
 
 
     }
