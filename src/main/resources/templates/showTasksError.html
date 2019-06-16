@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
-
 </head>
 
 <body>
-
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -30,9 +27,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/users/teacherFTE">MIJN URENOVERZICHT</a></li>
                     <li><a href="/showTasks">VACATURBEHEER</a></li>
-                    <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
+                    <li><a href="/applicationBasket">SOLLICITATIES</a></li>
                     <li class="dropdown">
                         <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle" data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK & ROOSTER VOORKEUREN <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -40,7 +37,7 @@
                             <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
                         </ul>
                     </li>
-                    <li><a href="/applicationBasket">INCIDENTEN</a></li>
+
                 </ul>
                 <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-primary">Log Out</button>
@@ -50,52 +47,18 @@
         </div><!-- /.container-fluid -->
     </nav>
 </div>
+<div class ="container">
+<h3>Oeps! invoer is geen getal</h3>
 
-
-<div class="container">
-    <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
-        <h3 class="Vacatures">VACATURES</h3>
-
-        <thead class="thead-dark">
-        <tr>
-            <th>Vacature_nr</th>
-            <th> VacatureOmschrijving</th>
-            <th>Begrootte Uren</th>
-            <th>Geldigheidsduur</th>
-            <th>Geef jouw uren op</th>
-            <th>   Solliciteer   </th>
-        </tr>
-        </thead>
-
-
-        <tbody>
-        <tr th:each="task:${showTasks}">
-
-            <form th:id="${task.taskId}" th:action="@{/taskApplications/taskId/availableHours}" method="post">
-                <td>
-                    <input type="${task.taskId}" NAME ="taskId" id= "taskId" style="background-color:
-                    transparent;border: #FF1C19" th:value="${task.taskId}" size="4" readonly/>
-                </td>
-                <td th:text="${task.taskName}">Taak</td>
-                <td th:text="${task.estimatedHours}">Begrootte Uren</td>
-                <td th:text="${task.yearsToExpiryDate}">Geldigheidsduur</td>
-                <td>
-                    <input type="text" name ="availableHours" id= "availableHours"
-                           th:value="${task.estimatedHours}" size="11" th:form = "${task.taskId}" style="background-color: transparent;
-                       border-color: brown;border-style:solid;text-align: center"  />
-                </td>
-
-                <td>
-                    <div>
-                        <button type="submit" class="btn btn-info" th:value="${task.taskId}"
-                                th:id="${task.taskId}" th:form = "${task.taskId}"> klik hier </button>
-                    </div>
-                </td>
-            </form>
-        </tr>
-        </tbody>
-    </table>
+<button type="button" class="btn btn-secondary btn-lg" onclick=goBack()>TERUG NAAR VACATUREBEHEER</button>
+    
 </div>
 
 </body>
+<script>
+    function goBack()
+    {
+        location.href = "/showTasks";
+    }
+</script>
 </html>

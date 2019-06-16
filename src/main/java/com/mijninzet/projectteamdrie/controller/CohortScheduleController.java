@@ -337,7 +337,7 @@ public class CohortScheduleController {
                 int hoursToSubract = 0;
 
                 int oldYearsOfExperience = howManyYearsExperienceDoesTeacherHave(previousTeacher, subjectId, cohortId);
-                if(oldYearsOfExperience==0 || oldYearsOfExperience==1){
+                if(oldYearsOfExperience<=1){
                     hoursToSubract = 8;
                 }else {
                     hoursToSubract = 6;
@@ -355,7 +355,7 @@ public class CohortScheduleController {
                 // 3) verreken de uren voor de huidige teacher
                int newHoursToSubract = 0;
                 int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
-                if(newYearsOfExperience==0 || newYearsOfExperience==1){
+                if(newYearsOfExperience<=1){
                     newHoursToSubract = 8;
                 }else {
                     newHoursToSubract = 6;
@@ -375,7 +375,7 @@ public class CohortScheduleController {
             } else {
                 int newHoursToSubract = 0;
                 int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
-                if(newYearsOfExperience==0 || newYearsOfExperience==1){
+                if(newYearsOfExperience<=1){
                     newHoursToSubract = 8;
                 }else {
                     newHoursToSubract = 6;
@@ -384,9 +384,7 @@ public class CohortScheduleController {
                 int newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
                 int newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
-
                 cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
-
 
             }
             return result;
@@ -422,8 +420,38 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
-//    @GetMapping("subjectKopelen")
-//    public void getAllCohortSchedule()
+    @PostMapping(value ="/subjectCohortCoupeling")
+    public @ResponseBody
+    String subjectCohortCoupeling(HttpServletRequest request) {
+        System.out.println("OZGUR METHODE IS AANGEROEPEN!!!");
+
+//        String buttonClicked = request.getParameter("button");
+        int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
+        String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
+        int year = Integer.parseInt(arrOfDate[0]);
+        int month = Integer.parseInt(arrOfDate[1]);
+        int day = Integer.parseInt(arrOfDate[2]);
+        LocalDate dayDate = LocalDate.of(year, month, day);
+
+        String weekDay = request.getParameter("day");
+        String dayPart = request.getParameter("daypart");
+        int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+        String result = "";
+
+        CohortSchedule newCS = new CohortSchedule();
+        newCS.setClassRoom("");
+        newCS.setDay(weekDay);
+        newCS.setDaypart(dayPart);
+        newCS.setDate(dayDate);
+        newCS.setCohort(cohortRepository.getByCohortId(cohortId));
+        newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
+
+        cohortScheduleRepo.save(newCS);
+        return "OK";
+
+
+    }
+
 
 
 }
