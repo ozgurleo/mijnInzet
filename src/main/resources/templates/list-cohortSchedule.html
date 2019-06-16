@@ -54,13 +54,14 @@
                 <th>dagdeel</th>
                 <th>planning</th>
                 <th>planning opslaan</th>
+                <th>resultaat</th>
             </tr>
             </thead>
         </tablehead>
 
         <tablebody>
             <tr th:each="schedule:${cohortsSchedules}" th:data-ID="${schedule.getId()}" th:id="tr_tag">
-                <form id="${schedule.getId()}" action="#" th:action="@{/generateCohortSchedule}"
+                <form id="${schedule.getId()}" action="#" th:action="@{/subjectCohortCoupeling}"
                       th:object="${cohortsSchedules}"
                       method="post">
 
@@ -93,7 +94,7 @@
                     <td>
                         <form>
                             <div>
-                                <select th:id="teacherVariable" class="teacher" th:data-ID="${schedule.getId()}">
+                                <select th:id="subjectVariable" class="subjectField" th:data-id="${schedule.getId()}">
                                     <option>selecteer vak</option>
                                     <option th:each="teacher: ${subjects}" th:value="${teacher.subjectId}"
                                             th:text="${teacher.subjectName}">
@@ -104,11 +105,19 @@
                     </td>
                     <td>
 
-                        <button th:id="saveButton" type="submit" th:data-ID="${schedule.getId()}" class="saveButton"
+                        <button th:id="saveButton" type="submit" th:data-id="${schedule.getId()}" class="saveButton"
                                 th:value="opslaan" name="opslaan"
                                 th:form="${schedule.getId()}">opslaan
                         </button>
 
+                    </td>
+
+                    <td th:with="textBox=${schedule.getId()}" th:id="textBox" th:data-id="${schedule.getId()}"
+                        class="Box">
+                        <div>
+                            <form th:name="resultaat">
+                            </form>
+                        </div>
                     </td>
                 </form>
             </tr>
@@ -127,10 +136,9 @@
     daypart = $('#daypart').val();
     console.log(daypart);
     const subjectField =document.querySelector(".subjectField");
-
-    subjectnr = subjectField.dataset.value;
+    rownumber = subjectField.dataset.id;
     subjectname=$(".subjectField").val();
-    console.log("DIT IS HET SUBJECT NUMMER: " + subjectnr);
+    console.log("DIT rownumber: " + rownumber);
     console.log("DIT IS DE SUBJECTNAAM: " + subjectname);
 
     const staticValue = document.querySelector('#cohort').dataset.id
@@ -138,82 +146,14 @@
 
     <!--Select only the value that is selected in the dropdownmenu -->
 
-    $(".teacher").on('change', function () {
-        teachernr = $(this).val();
-        console.log(teachernr);
-    });
-
-
-    $(".checkButton").click(function (e) {
-        console.log("DIT IS DE 1E STATIC VALUE : " + staticValue);
-        e.preventDefault();
-        thisId = $(this).data("id");
-        console.log("CHECKBUTTON_ID = :" + thisId);
-
-        var textBoxId = thisId - staticValue;
-        console.log("childElement = :" + textBoxId);
-        var x = document.getElementsByClassName("Box")[textBoxId];
-        console.log("elementBYClassName : " + x);
-
-
-        console.log(e)
-        $.ajax({
-            type: "POST",
-            url: "/generateCohortSchedule/check/",
-            data: {
-                "cohortnr": document.getElementsByClassName("cohort")[textBoxId].value,
-                "dateDay": document.getElementsByClassName("date")[textBoxId].value,
-                "day": document.getElementsByClassName("day")[textBoxId].value,
-                "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": document.querySelector(".subjectField").dataset.value,
-                "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
-                "scheduleId": thisId,
-                "button": "check"
-            },
-            success: function (result) {
-                if (result == "OK") {
-                    x.style.background = "PaleGreen";
-                    x.innerHTML = "check:" + "<br>" + "OK.";
-                } else if (result == "NOK") {
-                    x.style.background = "#ff8000";
-                    x.innerHTML ="check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
-                        "*Docenturen overschreden."+ "<br>" +"*Docent geeft dit vak liever niet.";
-                } else if (result == "hourNOK_restOK") {
-                    x.style.background = "#ff8000";
-                    x.innerHTML ="check:"+ "<br>"+ "*Docenturen overschreden.";
-                } else if(result =="availNOK_restOK"){
-                    x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar.";
-
-                }else if(result=="subjectNOK_restOK"){
-                    x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent geeft dit vak liever niet beschikbaar.";
-
-                }else if(result=="hoursNOK_availNOK_OK"){
-                    x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
-                        "*Docenturen overschreden";}
-
-                else if(result=="OK_availNOK_prefNOK"){
-                    x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
-                        "*Docent geeft dit vak liever niet beschikbaar.";}
-
-                else if(result=="hoursNOK_OK_prefNOK"){
-                    x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docenturen overschreden."+ "<br>" +
-                        "*Docent geeft dit vak liever niet beschikbaar.";}
-
-            },
-            error: function (result) {
-                alert('selecteer docent/vak');
-            }
-        });
+    $(".subjectField").on('change', function () {
+        subjectnumber = $(this).val();
+        console.log("The subjectnumber = "+ subjectnumber);
     });
 
 
     $(".saveButton").click(function (e) {
-        console.log("DIT IS DE 3E STATIC VALUE : " + staticValue);
+        console.log("DIT IS DE 2E STATIC VALUE : " + staticValue);
         e.preventDefault();
         thisId = $(this).data("id");
         console.log("SAVEBUTTON_ID = :" + thisId);
@@ -227,14 +167,13 @@
         console.log(e)
         $.ajax({
             type: "POST",
-            url: "/generateCohortSchedule/check/",
+            url: "/subjectCohortCoupeling",
             data: {
                 "cohortnr": document.getElementsByClassName("cohort")[textBoxId].value,
                 "dateDay": document.getElementsByClassName("date")[textBoxId].value,
                 "day": document.getElementsByClassName("day")[textBoxId].value,
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": document.querySelector(".subjectField").dataset.value,
-                "teachernr": document.getElementsByClassName("teacher")[textBoxId].value,
+                "subjectnr": subjectnumber,
                 "scheduleId": thisId,
                 "button": "save"
             },
@@ -242,50 +181,15 @@
                 if (result == "OK") {
                     x.style.background = "SpringGreen";
                     x.innerHTML = "OPGESLAGEN";
-                } else if (result == "NOK") {
+                } else  {
                     x.style.background = "#ff4000";
-                    x.innerHTML = "OPGESLAGEN MET CONFLICT:" + "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
-                        "*Docenturen overschreden."+ "<br>" +
-                        "*Docent geeft dit vak liever niet.";
-                } else if (result == "hourNOK_restOK") {
-                    x.style.background = "#ff4000";
-                    x.innerHTML ="OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docenturen overschreden.";
-                } else if(result =="availNOK_restOK"){
-                    x.style.background = "#ff4000";
-                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar.";
-
-                }else if(result=="subjectNOK_restOK"){
-                    x.style.background = "#ff4000";
-                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docent geeft dit vak liever niet beschikbaar.";
-
-                }else if(result=="hoursNOK_availNOK_OK"){
-                    x.style.background = "#ff4000";
-                    x.innerHTML = "OPGESLAGEN MET CONFLICT:" + "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
-                        "*Docenturen overschreden";}
-
-                else if(result=="OK_availNOK_prefNOK"){
-                    x.style.background = "#ff4000";
-                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
-                        "*Docent geeft dit vak liever niet beschikbaar.";}
-
-                else if(result=="hoursNOK_OK_prefNOK"){
-                    x.style.background = "#ff4000";
-                    x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docenturen overschreden."+ "<br>" +
-                        "*Docent geeft dit vak liever niet beschikbaar.";}
-
-
+                    x.innerHTML = "iets anders dan ok";
+                }
 
 
             },
             error: function (result) {
-                alert('selecteer docent/vak');
+                alert('Er gaat iets fout');
             }
         });
     });
