@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welkomstscherm</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navigatie-menu -->
+
+<nav class="navbar navbar-dark bg-dark">
+
+
+    <a class="navbar-brand" href="/helloCoordinator">HOME</a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <a class="nav-link" href=#> </a>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    </form>
+</nav>
+
+<!-- Hoofdtekst  -->
+
+<br><br><br>
+<body class="text-center" onload="showButton()">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <div class="jumbotron">
+                <h1 class="masthead-brand">Mijn Inzet</h1>
+            </div>
+        </div>
+    </header>
+
+    <main roleName="main" class="inner cover">
+        <h2 class="cover-heading">Welkom </h2>
+        <h2 STYLE="color: blue"><span th:text="${user.toString()}"></span></h2>
+        <br>
+
+        <h4>selecteer een scherm: </h4>
+        <nav class="nav nav-masthead justify-content-center">
+        </nav>
+
+
+        <div class="container">
+
+                <p class="COORDINATORButton">
+                    <a th:id="COORDINATOR" href="/subject/list" class="btn btn-lg btn-primary" style="display:none">COORDINATOR</a>
+                </p>
+
+                <p class="TEACHERButton">
+                    <a th:id="TEACHER" href="/showTasks" class="btn btn-lg btn-primary" style="display:none">DOCENT</a>
+                </p>
+
+                <p class="ADMINButton">
+                    <a th:id="ADMIN" href="/users/list" class="btn btn-lg btn-primary" style="display:none">ADMINISTRATEUR</a>
+                </p>
+
+                <p class="SCHEDULERButton">
+                    <a th:id="SCHEDULER" href="/generateCohortSchedule" class="btn btn-lg btn-primary" style="display:none">ROOSTERAAR</a>
+                </p>
+
+
+
+        </div>
+
+    </main>
+
+</div>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <br><br>
+        <p>
+        <address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address>
+        </p>
+    </div>
+</footer>
+<script th:inline="javascript">
+    var roleArray = [[${roles}]];
+    var arrayLength = roleArray.length;
+
+    function showButton() {
+
+        for (var i = 0; i < arrayLength; i++) {
+            console.log(roleArray[i]);
+
+            if (roleArray[i] == "ADMIN") {
+
+                document.getElementById("ADMIN").style.display = "block";
+
+            } else if (roleArray[i] == "SCHEDULER") {
+
+                document.getElementById("SCHEDULER").style.display = "block";
+
+            } else if (roleArray[i] == "COORDINATOR" || roleArray[i] == "MANAGER") {
+
+                document.getElementById("COORDINATOR").style.display = "block";
+
+            } else if (roleArray[i] == "TEACHER") {
+
+                document.getElementById("TEACHER").style.display = "block";
+            }
+        }
+
+    }
+</script>
+</body>
+</body>
+
+</html>
