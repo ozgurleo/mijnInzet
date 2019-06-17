@@ -61,7 +61,8 @@
     <h3>Docent Uren Overzicht</h3>
     <hr>
     <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+
+        <thead>
         <tr>
 
             <th>Voornaam</th>
@@ -108,8 +109,7 @@
 
     <table class="table table-striped">
 
-
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th scope="col">DATUM</th>
             <th scope="col">DAG</th>
@@ -125,7 +125,7 @@
             <td th:text="${cohortscheduleline.getDay()}">dag</td>
             <td th:text="${cohortscheduleline.getDaypart()}">dagdeel</td>
             <td th:text="${cohortscheduleline.getUser().getLastName()}">user</td>
-            <td th:text="${cohortscheduleline.getSubject().getSubjectName()}">onderwerp</td>
+            <td th:text="${cohortscheduleline.getSubject().getSubjectName()}" th:id="subject">onderwerp</td>
         </tr>
 
         </tbody>
@@ -133,6 +133,108 @@
     <hr>
     <br>
 </div>
+
+
+<br>
+
+<div class="container">
+
+    <div class="row">
+        <form class="form-group md-6">
+            <div class="col-md-3">
+                <label mr-sm-4><h3> Kies Vak </h3></label>
+                <select id="subjectId" name="subjectId" class="form-control md-6" onchange="subjectSelect()">
+                    <option class="col-md-10" th:each="vak: ${vakkenSelectAjax}" th:value="${vak.getSubjectId()}"
+                            th:text="${vak.getSubjectName()}"></option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-success">kies</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="container">
+    <br>
+
+    <table class="table table-striped" style="" table id="subjectTable">
+
+
+        <thead>
+        <tr>
+            <th scope="col">DATUM</th>
+            <th scope="col">DAG</th>
+            <th scope="col">DAGDEEL</th>
+            <th scope="col">DOCENT</th>
+            <th scope="col">VAK</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <td>datum</td>
+        <td>dag</td>
+        <td>dagdeel</td>
+        <td>user</td>
+        <td>onderwerp</td>
+        </tr>
+
+        </tbody>
+    </table>
+    <hr>
+    <br>
+</div>
+<script th:inline="javascript">
+
+
+
+    function subjectSelect() {
+
+        //get the selected id
+        var subjectId = $('#subjectId').val();
+
+        //get the url for the ajax call
+        var url = "/subject/" + subjectId;
+
+        //do the ajax call
+        $.get(url, populateSubjects);
+    }
+
+    function populateSubjects(data) {
+        var status = data.responseStatus;
+
+        //check the response to make sure it's ok
+        if (status == "Ok") {
+            var response = data.response;
+            console.log(response);
+
+            //get the JSON data
+            var subjectName = response.subjectName;
+            var responseString = response.toString();
+            console.log(subjectName.valueOf());
+            console.log(responseString);
+
+
+            //set the profile badge values
+            // $('#employeePic').attr("src", imageFile);
+            // $('#employeeName').html(firstName + ' ' + lastName);
+            // $('#employeeDepartment').html(department);
+
+            //set the input field values
+            // $('#employeeFirstName').val(firstName);
+            // $('#employeeLastName').val(lastName);
+            // $('#employeeDept').val(department);
+            // $('#employeeId').val(employeeId);
+            // $('#employeeHours').val(hoursPerWeek);
+
+            //show the hidden elements
+            $('#profileRow').css('visibility','visible');
+        }
+
+
+    }
+
+</script>
 
 </body>
 </html>

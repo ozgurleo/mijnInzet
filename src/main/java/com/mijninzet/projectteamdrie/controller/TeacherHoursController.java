@@ -42,6 +42,8 @@ public class TeacherHoursController {
     CohortService cohortService;
     @Autowired
     TeacherScheduleRepository teacherScheduleRepository;
+    @Autowired
+    SubjectRepository subjectRepository;
 
 
     public TeacherSchedule getTeacherScheduleByWeeknr(int cohortId, int weeknr) {
@@ -122,6 +124,7 @@ public class TeacherHoursController {
         double userFTE = user.getFte();
         List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(10);
         List<Integer> weeknrs = cohortScheduleRepository.getDistinctWeeknumbers();
+        List<Subject> subjects = subjectRepository.findAll();
 
 
         model.addAttribute("voornaam", currentUser.getName());
@@ -131,6 +134,7 @@ public class TeacherHoursController {
         model.addAttribute("beschikbareUren", availableHours);
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("weeknrs", weeknrs);
+        model.addAttribute("vakkenSelectAjax", subjects);
 
 
         return "teacherFTE";
@@ -156,5 +160,16 @@ public class TeacherHoursController {
         model.addAttribute("week",cohortScheduleWeek);
 
         return "teacherFTE";
+    }
+
+    @RequestMapping(value="/subject/{subjectId}")
+    public @ResponseBody Subject getSubject(@PathVariable Integer subjectId) {
+
+        System.out.println("MIJN ajax methode is aangeroepen");
+        Subject subject = new Subject();
+        subject = subjectRepository.findSubjectBySubjectId(subjectId);
+        System.out.println("IN SUBJECT ZIT  " +subject );
+        return subject;
+
     }
 }
