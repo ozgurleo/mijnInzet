@@ -72,24 +72,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <select th:field="*{rolesOfUser}" class="form-control">
+                <select multiple th:field="*{rolesOfUser}" class="form-control">
                     <option th:each="role: ${roles}" th:value="${role.getId()}" th:text="${role.getRoleName()}">
                 </select>
             </div>
-<!--            <div>-->
-<!--                <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
-<!--                       value="1"> Administrateur.-->
-<!--                <br>-->
-<!--                <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
-<!--                       value="2"> Leraar.-->
-<!--                <br>-->
-<!--                <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
-<!--                       value="3"> Coordinator.-->
-<!--                <br>-->
-<!--                <input type="radio" th:name="${subject.getSubjectName()}" th:id="${subject.getSubjectId()}"-->
-<!--                       value="3"> Roosteraar.-->
-<!--                <br>-->
-<!--            </div>-->
             <div class="form-group">
                 <div class="">
                     <button type="submit" class="btn btn-primary btn-block"
