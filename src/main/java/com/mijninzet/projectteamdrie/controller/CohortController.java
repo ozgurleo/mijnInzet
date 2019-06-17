@@ -88,7 +88,6 @@ public class CohortController {
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsMorning.setDate(date);
-                    CsMorning.setSubject(new Subject());
                     CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("maandag");
@@ -96,7 +95,6 @@ public class CohortController {
                     CsNoon.setCohort(cohortRepository.getByCohortId(cohortId));
                     CsNoon.setDate(date);
                     CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
-                    CsNoon.setSubject(new Subject());
                     cohortSchedlRepo.save(CsNoon);
                     break;
                 case "TUESDAY":
