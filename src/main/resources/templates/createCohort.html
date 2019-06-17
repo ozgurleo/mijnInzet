@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
 
 </head>
 <body>
@@ -46,7 +47,7 @@
 <div class="container">
 
     <br>
-    <h3>Geef nieuw cohort op  </h3>
+    <h3 style="color:#2E3279 ">Geef nieuw cohort op  </h3>
     <hr>
 
     <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
@@ -91,10 +92,10 @@
 <br><br>
 
 <div class="container">
-<table class="table table-bordered table-striped" style="background-color: #d7e2e9">
-    <h3>Bestaande Cohorten</h3>
+<table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
+    <h3 style="color:#2E3279 ">Bestaande Cohorten</h3>
 
-    <thead >
+    <thead style="background-color: #555D9C;color: white;!important;" >
     <tr>
         <th>Cohort</th>
         <th> Begindatum</th>
