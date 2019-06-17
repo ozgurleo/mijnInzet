@@ -20,7 +20,7 @@ public class CohortSchedule {
    @ManyToOne
    User user;
 
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
    Subject subject;
 
    private String classRoom;

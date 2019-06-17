@@ -94,7 +94,7 @@
 
                     <td>
                         <form>
-                            <div>
+                            <div >
 
                         <input th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
                                th:data-ID="${schedule.getId()}" style="background-color:transparent;border: #FF1C19"
@@ -104,9 +104,10 @@
 
                             </div>
                             <br>
-                            <div>
+                            <div th:switch="${schedule.getUser()}">
                                 <select th:id="teacherVariable" class="teacher" th:data-ID="${schedule.getId()}">
-                                    <option>selecteer docent</option>
+                                    <option th:case="null" selected="selected">selecteer docent</option>
+                                    <option th:case="*" th:text="${schedule.getUser().getName()}" th:value="${schedule.getUser().getId()}" selected="selected">
                                     <option th:each="teacher: ${teachers}" th:value="${teacher[0]}"
                                             th:text="${teacher[3]}">
                                 </select>

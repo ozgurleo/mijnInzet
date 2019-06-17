@@ -31,7 +31,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/teacherFTE">MIJN ROOSTER</a></li>
                     <li><a href="/showTasks">VACATURBEHEER</a></li>
                     <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
                     <li class="dropdown">
@@ -44,7 +44,7 @@
                             <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
                         </ul>
                     </li>
-                    <li><a href="/applicationBasket">INCIDENTEN</a></li>
+                    <li><a href="/exception/list">INCIDENTEN</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-primary">Log Out</button>
@@ -58,11 +58,11 @@
 
 <div class="container">
     <br><br>
-    <h3>Docent Uren Overzicht</h3>
+    <h3 style="color:#2E3279 ">Docent Uren Overzicht</h3>
     <hr>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
 
-        <thead>
+        <thead style="background-color: #555D9C;color: white;!important;">
         <tr>
 
             <th>Voornaam</th>
@@ -107,9 +107,9 @@
 <div class="container">
     <br>
 
-    <table class="table table-striped">
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
 
-        <thead class="thead-dark">
+        <thead style="background-color: #555D9C;color: white;!important;">
         <tr>
             <th scope="col">DATUM</th>
             <th scope="col">DAG</th>
@@ -158,10 +158,10 @@
 <div class="container">
     <br>
 
-    <table class="table table-striped" style="" table id="subjectTable">
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black" table id="subjectTable">
 
 
-        <thead>
+        <thead style="background-color: #555D9C;color: white;!important;">
         <tr>
             <th scope="col">DATUM</th>
             <th scope="col">DAG</th>
