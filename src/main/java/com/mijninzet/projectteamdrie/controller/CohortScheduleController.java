@@ -436,19 +436,19 @@ public class CohortScheduleController {
         String weekDay = request.getParameter("day");
         String dayPart = request.getParameter("daypart");
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+        System.out.println("DIT IS DE OPGESLAGEN NUMMER VH SUBJECT/VAK IN DE OZGUR CODE: "+ subjectId);
         String result = "";
 
-        CohortSchedule newCS = new CohortSchedule();
-        newCS.setClassRoom("");
-        newCS.setDay(weekDay);
-        newCS.setDaypart(dayPart);
-        newCS.setDate(dayDate);
-        newCS.setCohort(cohortRepository.getByCohortId(cohortId));
-        newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
+            CohortSchedule newCS = new CohortSchedule();
+            newCS.setClassRoom("");
+            newCS.setDay(weekDay);
+            newCS.setDaypart(dayPart);
+            newCS.setDate(dayDate);
+            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
+            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
 
-        cohortScheduleRepo.save(newCS);
-        return "OK";
-
+            cohortScheduleRepo.save(newCS);
+return "OK";
 
     }
 
