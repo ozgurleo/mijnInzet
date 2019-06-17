@@ -96,7 +96,7 @@ public class CohortController {
                     CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
-                case "TUESAY":
+                case "TUESDAY":
                     CsMorning.setDay("dinsdag");
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
