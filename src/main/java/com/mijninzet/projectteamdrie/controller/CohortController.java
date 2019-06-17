@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ import java.time.temporal.WeekFields;
 import java.util.*;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
 
 
 @Controller
@@ -59,13 +58,22 @@ public class CohortController {
         }
 
         cohortRepository.save(cohort);
+
+
+
         // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
+        System.out.println("De begindateum= " + cohort.getBeginDate() );
+        System.out.println("De begindateum= " + cohort.getEndDate() );
+        System.out.println("De cohort= " + cohort.getCohortId() );
         makeDefaultCohortSchedule(cohort.getBeginDate(),cohort.getEndDate(),cohort.getCohortId());
         return ("redirect:/cohort/createCohort");
     }
 
     //hier cohortSchedule (default rooster) aangemaakt voor de nieuwe Cohort
     public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId){
+
+
+
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
 
         for (LocalDate date = beginDate; date.isBefore(endDate); date = date.plusDays(1)) {

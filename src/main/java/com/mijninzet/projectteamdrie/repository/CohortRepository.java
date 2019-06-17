@@ -1,6 +1,7 @@
 package com.mijninzet.projectteamdrie.repository;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
+import org.joda.time.Weeks;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,8 +17,7 @@ import java.util.List;
 public interface CohortRepository extends JpaRepository<Cohort, Integer> {
 
     List<Cohort> findAll();
-    Date findByBeginDate(Date date);
-
+    List<Cohort> findAllByCohortIdAfter(int cohortId);
     Cohort getByCohortId(int cohortId);
 
 

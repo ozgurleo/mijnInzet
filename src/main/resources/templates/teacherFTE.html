@@ -36,7 +36,8 @@
                     <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
                     <li class="dropdown">
                         <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle"
-                           data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK &
+                           data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK
+                            &
                             ROOSTER VOORKEUREN <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
@@ -60,11 +61,13 @@
     <h3>Docent Uren Overzicht</h3>
     <hr>
     <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+
+        <thead>
         <tr>
 
             <th>Voornaam</th>
             <th>Achternaam</th>
+            <th>Email</th>
             <th>FTE</th>
             <th>Beschikbare onderwijsuren</th>
         </tr>
@@ -73,125 +76,163 @@
         <tr>
             <td th:text="${voornaam}"/>
             <td th:text="${achternaam}"/>
+            <td th:text="${email}"/>
             <td th:text="${fte}"/>
             <td th:text="${beschikbareUren}"/>
         </tr>
-
-        <!--<a th:href="@{/users/showFormForUpdate(userId=${user.id})}" class="btn btn-info btn-sm">Update</a>-->
-        <!--<a th:href="@{/users/delete(userId=${user.id})}" class="btn btn-danger btn-sm" onclick="if(!(confirm('Are you sure you want to delete this user?')) ) return false">Delete</a>-->
-        <!--</td>-->
         </tbody>
     </table>
     <hr>
 </div>
 
 <div class="container">
+
     <div class="row">
-            <form class="form-group md-6">
-                <div class="col-md-3">
-                <label mr-sm-4><h3>  Kies cohort </h3> </label>
-                <select id="cohortId" class="form-control md-6">
-                    <option class="col-md-6" th:each="cohort: ${cohorts}" th:text="${cohort.toString()}"></option>
+        <form class="form-group md-6" th:action="@{/teacherSchedule/week}">
+            <div class="col-md-3">
+                <label mr-sm-4><h3> Kies week </h3></label>
+                <select id="weeknr" name="weeknr" class="form-control md-6">
+                    <option class="col-md-10" th:each="week: ${weeknrs}" th:value="${week}"
+                            th:text="${week}"></option>
                 </select>
-                    <br>
-                <button type="submit" onclick="fillSchedule()" class="btn btn-success">kies</button>
-                </div>
-            </form>
+                <br>
+                <button type="submit" class="btn btn-success">kies</button>
+            </div>
+        </form>
     </div>
-    <hr>
 </div>
+
+<br><br>
 
 <div class="container">
+    <br>
+
+    <table class="table table-striped">
+
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">DATUM</th>
+            <th scope="col">DAG</th>
+            <th scope="col">DAGDEEL</th>
+            <th scope="col">DOCENT</th>
+            <th scope="col">VAK</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="cohortscheduleline:${week}">
+            <td th:text="${#temporals.format(cohortscheduleline.getDate(),'dd/MMM/yyyy')}">datum</td>
+            <td th:text="${cohortscheduleline.getDay()}">dag</td>
+            <td th:text="${cohortscheduleline.getDaypart()}">dagdeel</td>
+            <td th:text="${cohortscheduleline.getUser().getLastName()}">user</td>
+            <td th:text="${cohortscheduleline.getSubject().getSubjectName()}" th:id="subject">onderwerp</td>
+        </tr>
+
+        </tbody>
+    </table>
+    <hr>
+    <br>
+</div>
+
+
+<br>
+
+<div class="container">
+
     <div class="row">
-        <div class="col-md-2">
-            <table class="table table-hover" id="teacher-schedule">
-                <thead>
-                <tr>
-                    <th scope="col">Dagdeel</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">Ochtend</th>
-                </tr>
-                <tr>
-                    <th scope="row">Middag</th>
-                </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-
-        <div class="col-md-2">
-            <table class="table table-hover">
-                <tr>
-                    <th scope="col"> Maandag</th>
-                </tr>
-                <tr>
-                    <td th:text="${cohortSchedule.get(1).getSubject().getSubjectName()}"></td>
-                </tr>
-                <tr>
-                    <td th:text="${cohortSchedule.get(2).getSubject().getSubjectName()}"></td>
-                </tr>
-
-            </table>
-        </div>
-
-        <div class="col-md-2">
-            <table class="table table-hover">
-                <tr>
-                    <th scope="col">Dinsdag</th>
-                </tr>
-                <td th:text="${cohortSchedule.get(3).getSubject().getSubjectName()}"></td>
-
-
-                </tr>
-            </table>
-        </div>
-
-        <div class="col-md-2">
-            <table class="table table-hover">
-                <tr>
-                    <th scope="col">Woensdag</th>
-                </tr>
-                <!--<tr th:each="woensdag:${woensdag}">-->
-                <!--<td th:text="${woensdag.colorOption}">Woensdag</td>-->
-                </tr>
-            </table>
-
-        </div>
-        <div class="col-md-2">
-            <table class="table table-hover" id="TaskTable4">
-                <tr>
-                    <th scope="col">Donderdag</th>
-                </tr>
-                <!--<tr th:each="donderdag:${donderdag}">-->
-                <!--<td th:text="${donderdag.colorOption}">Donderdag</td>-->
-                </tr>
-            </table>
-        </div>
-
-        <div class="col-md-2">
-            <table class="table table-hover" id="TaskTable5">
-                <tr>
-                    <th scope="col">Vrijdag</th>
-                </tr>
-                <!--<tr th:each="vrijdag:${vrijdag}">-->
-                <!--<td th:text="${vrijdag.colorOption}">vrijdag</td>-->
-                </tr>
-
-            </table>
-
-        </div>
+        <form class="form-group md-6">
+            <div class="col-md-3">
+                <label mr-sm-4><h3> Kies Vak </h3></label>
+                <select id="subjectId" name="subjectId" class="form-control md-6" onchange="subjectSelect()">
+                    <option class="col-md-10" th:each="vak: ${vakkenSelectAjax}" th:value="${vak.getSubjectId()}"
+                            th:text="${vak.getSubjectName()}"></option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-success">kies</button>
+            </div>
+        </form>
     </div>
 </div>
 
-<script>
 
-    let request = new XMLHttpRequest();
+<div class="container">
+    <br>
 
+    <table class="table table-striped" style="" table id="subjectTable">
+
+
+        <thead>
+        <tr>
+            <th scope="col">DATUM</th>
+            <th scope="col">DAG</th>
+            <th scope="col">DAGDEEL</th>
+            <th scope="col">DOCENT</th>
+            <th scope="col">VAK</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <td>datum</td>
+        <td>dag</td>
+        <td>dagdeel</td>
+        <td>user</td>
+        <td>onderwerp</td>
+        </tr>
+
+        </tbody>
+    </table>
+    <hr>
+    <br>
+</div>
+<script th:inline="javascript">
+
+
+
+    function subjectSelect() {
+
+        //get the selected id
+        var subjectId = $('#subjectId').val();
+
+        //get the url for the ajax call
+        var url = "/subject/" + subjectId;
+
+        //do the ajax call
+        $.get(url, populateSubjects);
+    }
+
+    function populateSubjects(data) {
+        var status = data.responseStatus;
+
+        //check the response to make sure it's ok
+        if (status == "Ok") {
+            var response = data.response;
+            console.log(response);
+
+            //get the JSON data
+            var subjectName = response.subjectName;
+            var responseString = response.toString();
+            console.log(subjectName.valueOf());
+            console.log(responseString);
+
+
+            //set the profile badge values
+            // $('#employeePic').attr("src", imageFile);
+            // $('#employeeName').html(firstName + ' ' + lastName);
+            // $('#employeeDepartment').html(department);
+
+            //set the input field values
+            // $('#employeeFirstName').val(firstName);
+            // $('#employeeLastName').val(lastName);
+            // $('#employeeDept').val(department);
+            // $('#employeeId').val(employeeId);
+            // $('#employeeHours').val(hoursPerWeek);
+
+            //show the hidden elements
+            $('#profileRow').css('visibility','visible');
+        }
+
+
+    }
 
 </script>
 

@@ -235,6 +235,9 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                     x.style.background = "#ff8000";
                     x.innerHTML = "check:"+ "<br>"+ "*Docenturen overschreden."+ "<br>" +
                         "*Docent geeft dit vak liever niet beschikbaar.";}
+                else if(result=="sameTeacher"){
+                    x.style.background = "#ADD8E6";
+                    x.innerHTML ="Docent is dit dagdeel al ingepland";}
 
             },
             error: function (result) {
@@ -311,6 +314,15 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                     x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
                         "*Docenturen overschreden."+ "<br>" +
                         "*Docent geeft dit vak liever niet beschikbaar.";}
+                else if(result=="hoursNOK"){
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "KAN NIET OPSLAAN:"+ "<br>"+
+                        "*Docenturen overschreden." + "<br>" +
+                    "Selecteer een ander docent!";}
+                else if(result=="sameTeacher"){
+                    x.style.background = "#ADD8E6";
+                    x.innerHTML ="KAN NIET OPSLAAN:"+ "<br>"+
+                        "Docent is dit dagdeel al ingepland";}
 
 
 
