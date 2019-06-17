@@ -432,22 +432,26 @@ public class CohortScheduleController {
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate dayDate = LocalDate.of(year, month, day);
+        String tempId = request.getParameter("scheduleId");
+        int id = Integer.parseInt(tempId);
 
         String weekDay = request.getParameter("day");
         String dayPart = request.getParameter("daypart");
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+
+        System.out.println();
+
+
         System.out.println("DIT IS DE OPGESLAGEN NUMMER VH SUBJECT/VAK IN DE OZGUR CODE: "+ subjectId);
+        System.out.println("sechedule id is " +id);
         String result = "";
+        System.out.println("subjetc id is : "+subjectId);
+        System.out.println("day is : "+weekDay);
+        System.out.println("dayPart is : "+dayPart);
+        System.out.println("dayDate is : "+dayDate);
 
-            CohortSchedule newCS = new CohortSchedule();
-            newCS.setClassRoom("");
-            newCS.setDay(weekDay);
-            newCS.setDaypart(dayPart);
-            newCS.setDate(dayDate);
-            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
-            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
 
-            cohortScheduleRepo.save(newCS);
+            cohortScheduleRepo.assignSubjectToCohort(subjectId,id);
 return "OK";
 
     }
