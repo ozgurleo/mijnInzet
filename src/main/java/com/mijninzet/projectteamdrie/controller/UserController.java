@@ -18,7 +18,6 @@ import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.RoleRepository;
 import com.mijninzet.projectteamdrie.service.UserService;
-import com.mijninzet.projectteamdrie.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +50,7 @@ public class UserController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", theUser);
-        modelAndView.setViewName("updateUser"); // resources/template/registerUser.html
+        modelAndView.setViewName("updateUser"); // resources/template/newUser.html
         System.out.println("! ViewName from ModelandView from updatemethod: " + modelAndView.getViewName());
         return modelAndView;
     }
@@ -104,7 +103,7 @@ public class UserController {
         model.addAttribute("roles", rolelist);
         model.addAttribute("user", theUser);
         // return "user-form";
-        return "registerUser";
+        return "newUser";
 
     }
 

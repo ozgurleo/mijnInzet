@@ -35,7 +35,7 @@ public class SubjectPreferencesController {
     }
 
 
-    @RequestMapping(value = "/submitPreferences", method = RequestMethod.POST)
+    @RequestMapping(value = "/submitPreferences", method = RequestMethod.PUT)
     public String submitPreferences(HttpServletRequest request, Model model) {
         Enumeration paramNames = request.getParameterNames();
         System.out.println("enums" + paramNames);

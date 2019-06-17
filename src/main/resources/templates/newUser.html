@@ -52,7 +52,8 @@
             <h3 class="form-signin-heading">Voeg nieuwe gebruiker toe</h3>
             <div class="form-group">
                 <div class="">
-                    <input type="text" th:field="*{name}" placeholder="Voornaam" class="form-control" style="font-weight: bold;color: black"/>
+                    <input type="text" th:field="*{name}" placeholder="Voornaam" class="form-control"
+                           style="font-weight: bold;color: black"/>
                 </div>
             </div>
             <div class="form-group">
@@ -71,17 +72,15 @@
                 </div>
             </div>
             <div class="form-group">
-<!--                <select type="role" th:field="*{rolesOfUser}" class="form-control">-->
-                <select th:field="*{rolesOfUser}" class="form-control">
-<!--                    <option>Gebruikersrol</option>-->
+                <select multiple th:field="*{rolesOfUser}" class="form-control">
                     <option th:each="role: ${roles}" th:value="${role.getId()}" th:text="${role.getRoleName()}">
-<!--                    <option th:each="rolesOfUser: ${}" th:value="${subject[0]}"-->
-<!--                            th:text="${subject[2]}">-->
                 </select>
             </div>
             <div class="form-group">
                 <div class="">
-                    <button type="submit" class="btn btn-primary btn-block" style="background-color: #2C3485;!important;color: white">Registreer nieuwe gebruiker</button>
+                    <button type="submit" class="btn btn-primary btn-block"
+                            style="background-color: #2C3485;!important;color: white">Registreer nieuwe gebruiker
+                    </button>
                 </div>
             </div>
             <span th:utext="${successMessage}"></span>
