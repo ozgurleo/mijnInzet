@@ -101,19 +101,19 @@
         for (var i = 0; i < arrayLength; i++) {
             console.log(roleArray[i]);
 
-            if (roleArray[i] == "ADMIN") {
+            if (roleArray[i] === "ADMIN") {
 
                 document.getElementById("ADMIN").style.display = "block";
 
-            } else if (roleArray[i] == "SCHEDULER") {
+            } else if (roleArray[i] === "SCHEDULER") {
 
                 document.getElementById("SCHEDULER").style.display = "block";
 
-            } else if (roleArray[i] == "COORDINATOR" || roleArray[i] == "MANAGER") {
+            } else if (roleArray[i] === "COORDINATOR" || roleArray[i] === "MANAGER") {
 
                 document.getElementById("COORDINATOR").style.display = "block";
 
-            } else if (roleArray[i] == "TEACHER") {
+            } else if (roleArray[i] === "TEACHER") {
 
                 document.getElementById("TEACHER").style.display = "block";
             }
