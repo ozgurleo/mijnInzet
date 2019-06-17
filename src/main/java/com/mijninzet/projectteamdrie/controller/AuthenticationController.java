@@ -57,7 +57,7 @@ public class AuthenticationController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("registerUser"); // resources/template/registerUser.html
+        modelAndView.setViewName("newUser"); // resources/template/newUser.html
         System.out.println("! ViewName from ModelandView from registermethod: " + modelAndView.getViewName());
         return modelAndView;
     }
@@ -81,7 +81,7 @@ public class AuthenticationController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("registerUser");
+        modelAndView.setViewName("newUser");
         return modelAndView;
     }
 
@@ -95,7 +95,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("registerUser"); // resources/template/admin.html
+        modelAndView.setViewName("newUser"); // resources/template/admin.html
         return modelAndView;
     }
 
