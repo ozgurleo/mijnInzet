@@ -18,7 +18,7 @@
 
 
 
-    <p class="h4 mb-4">Subject Toeveogen</p>
+    <p class="h4 mb-4">Een vak toevoegen</p>
 
     <form action="#" th:action="@{/subject/save}"
           th:object="${subject}" method="POST">
@@ -34,12 +34,12 @@
         <input type="text" id="explatanation" th:field="*{explanation}"
                class="form-control mb-4 col-4" placeholder="Beschrijving" required="required">
 
-        <button type="submit" class="btn btn-success col-2">Toevoeg</button>
+        <button type="submit" class="btn btn-success col-2">Voeg toe</button>
 
     </form>
 
     <hr>
-    <a th:href="@{/subject/list}">Terug Naar Vak Lijst</a>
+    <a th:href="@{/subject/list}">Ga terug naar de lijst met vakken</a>
 
 </div>
 </body>

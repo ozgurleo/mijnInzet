@@ -417,8 +417,13 @@ public class CohortScheduleController {
         model.addAttribute("rooms", subjectRepo.getRooms());
         model.addAttribute("preferences", subjectRepo.getPreferences());
         model.addAttribute("cohorts", cohortScheduleRepo.getCohorts());
-        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
 
+        if(cohortScheduleRepo.getScheduleLastCohort()!=null){
+        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
+        }else{
+            CohortSchedule tempCS = new CohortSchedule();
+            model.addAttribute("cohortschedule", tempCS);
+        }
         return "generateCohortSchedule";
     }
 
