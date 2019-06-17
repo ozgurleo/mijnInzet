@@ -2,7 +2,7 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
-// this class is needed to have Model for opbatining data from multiple tables within mysqlDB
+
 @Entity
 public class ApplicationBasket {
     @Id

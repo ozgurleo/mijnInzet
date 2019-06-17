@@ -96,8 +96,8 @@
                             <div>
                                 <select th:id="subjectVariable" class="subjectField" th:data-id="${schedule.getId()}">
                                     <option>selecteer vak</option>
-                                    <option th:each="teacher: ${subjects}" th:value="${teacher.subjectId}"
-                                            th:text="${teacher.subjectName}">
+                                    <option th:each="subject: ${subjects}" th:value="${subject.subjectId}"
+                                            th:text="${subject.subjectName}">
                                 </select>
                             </div>
 
@@ -149,6 +149,7 @@
     $(".subjectField").on('change', function () {
         subjectnumber = $(this).val();
         console.log("The subjectnumber = "+ subjectnumber);
+
     });
 
 
@@ -158,7 +159,7 @@
         thisId = $(this).data("id");
         console.log("SAVEBUTTON_ID = :" + thisId);
 
-        var textBoxId = thisId - staticValue;
+        var textBoxId = thisId-staticValue;
         console.log("childElement = :" + textBoxId);
         var x = document.getElementsByClassName("Box")[textBoxId];
         console.log("elementBYClassName : " + x);
@@ -173,7 +174,7 @@
                 "dateDay": document.getElementsByClassName("date")[textBoxId].value,
                 "day": document.getElementsByClassName("day")[textBoxId].value,
                 "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
-                "subjectnr": subjectnumber,
+                "subjectnr": document.getElementsByClassName("subjectField")[textBoxId].value,
                 "scheduleId": thisId,
                 "button": "save"
             },
