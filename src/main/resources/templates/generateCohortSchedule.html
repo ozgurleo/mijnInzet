@@ -94,14 +94,17 @@
 
                     <td>
                         <form>
-                            <div >
+                            <div th:switch="${schedule.getSubject()}" >
 
-                        <input th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
+                        <input th:case = "null" th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
                                th:data-ID="${schedule.getId()}" style="background-color:transparent;border: #FF1C19"
-                               th:data-value="${schedule.getSubject().getSubjectId()}" th:value="${schedule.getSubject().getSubjectName()}"
-                               th:field="${schedule.getSubject().getSubjectName()}"
-                               readonly/>
-
+                               th:data-value="0" value="geen vak gepland"
+                               field="geen vak gepland" readonly/>
+                        <input th:case = "*" th:with="subject=${schedule.getId()}" type="${schedule}" class="subjectField" NAME="subject"
+                                       th:data-ID="${schedule.getId()}" style="background-color:transparent;border: #FF1C19"
+                                       th:data-value="${schedule.getSubject().getSubjectId()}" th:value="${schedule.getSubject().getSubjectName()}"
+                                       th:field="${schedule.getSubject().getSubjectName()}"
+                                       readonly/>
                             </div>
                             <br>
                             <div th:switch="${schedule.getUser()}">
