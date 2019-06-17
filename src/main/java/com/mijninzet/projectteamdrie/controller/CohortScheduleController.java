@@ -287,6 +287,8 @@ public class CohortScheduleController {
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate dayDate = LocalDate.of(year, month, day);
+        String schedId=request.getParameter("scheduleId");
+        int scheduledId=Integer.parseInt(schedId);
 
         String weekDay = request.getParameter("day");
         String dayPart = request.getParameter("daypart");
@@ -364,7 +366,7 @@ public class CohortScheduleController {
                 newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
                 newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
-                cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
+                cohortScheduleRepo.assignTeacherToSubject(teacherId,scheduledId);
                 System.out.println("uren op te tellen of af te trekken --> " + newHoursToSubract);
                 System.out.println(" oude uren over nieuwe leraar" +teacherHoursRepository.getHoursLeft(teacherId) );
                 System.out.println("nieuwe uren over nieuwe leraar : " + newHoursLeft);
@@ -384,7 +386,7 @@ public class CohortScheduleController {
                 int newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
                 int newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
-                cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
+                cohortScheduleRepo.assignTeacherToSubject(teacherId,scheduledId);
 
             }
             return result;
