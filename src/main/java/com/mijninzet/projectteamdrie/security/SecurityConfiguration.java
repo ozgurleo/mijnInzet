@@ -54,6 +54,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/exception/**").hasAnyAuthority("TEACHER")
                 .antMatchers("/schedule/**").hasAnyAuthority("TEACHER")
+                .antMatchers("/subject/**").hasAnyAuthority("COORDINATOR")
+                .antMatchers("/cohort/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/generateCohortSchedule").hasAnyAuthority("SCHEDULER")
                 .anyRequest().authenticated()
                 .and()
                 // form login
