@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class WelcomeScreenControllerCoordinator {
+public class WelcomeScreenController {
 
     @Autowired
     UserRepository userRepo;
@@ -17,14 +17,14 @@ public class WelcomeScreenControllerCoordinator {
     RoleRepository roleRepo;
 
 
-    @RequestMapping("/helloCoordinator")
+    @RequestMapping("/welcomeScreen")
     public String welcomeTeacher(Model model, User user){
        User usercurrent = userRepo.findUserById(user.getCurrentUserId());
 
         if(roleRepo.findRoleNameByUserId(user.getCurrentUserId()).length>0){
         model.addAttribute("roles",roleRepo.findRoleNameByUserId(user.getCurrentUserId()));}
         model.addAttribute("user", usercurrent);
-        return "helloCoordinator";
+        return "welcomeScreen";
     }
 
 }
