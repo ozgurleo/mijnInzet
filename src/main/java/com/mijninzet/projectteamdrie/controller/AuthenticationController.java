@@ -43,7 +43,7 @@ public class AuthenticationController {
     @Autowired
     BCryptPasswordEncoder encoder;
 
-    @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -57,20 +57,19 @@ public class AuthenticationController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("registerUser"); // resources/template/registerUser.html
+        modelAndView.setViewName("newUser"); // resources/template/newUser.html
         System.out.println("! ViewName from ModelandView from registermethod: " + modelAndView.getViewName());
         return modelAndView;
     }
 
-    @RequestMapping(value="/register", method=RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
         // Check for the validations
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             modelAndView.addObject("successMessage", "Please correct the errors in form!");
             modelMap.addAttribute("bindingResult", bindingResult);
-        }
-        else if(userService.isUserAlreadyPresent(user)){
+        } else if (userService.isUserAlreadyPresent(user)) {
             modelAndView.addObject("successMessage", "user already exists!");
         }
         // we will save the user if, no binding errors
@@ -82,7 +81,7 @@ public class AuthenticationController {
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("registerUser");
+        modelAndView.setViewName("newUser");
         return modelAndView;
     }
 
@@ -96,34 +95,32 @@ public class AuthenticationController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("registerUser"); // resources/template/admin.html
+        modelAndView.setViewName("newUser"); // resources/template/admin.html
         return modelAndView;
     }
 
     // Confirm registration
-    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token")String confirmationToken) {
+    @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
-        if(token != null)
-        {
+        if (token != null) {
             User user = userService.findByEmail(token.getUser().getEmail());
             user.setEnabled(true);
             userService.saveUser(user);
             modelAndView.setViewName("accountVerified");
-        }
-        else
-        {
-            modelAndView.addObject("message","The link is invalid or broken!");
+        } else {
+            modelAndView.addObject("message", "The link is invalid or broken!");
             modelAndView.setViewName("error1");
         }
 
         return modelAndView;
     }
+
     /**
      * Display the forgot password page and form
      */
-    @RequestMapping(value="/forgot-password", method = RequestMethod.GET)
+    @RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
     public ModelAndView displayResetPassword(ModelAndView modelAndView, User user) {
         modelAndView.addObject("user", user);
         modelAndView.setViewName("forgotPassword");
@@ -133,10 +130,10 @@ public class AuthenticationController {
     /**
      * Receive email of the user, create token and send it via email to the user
      */
-    @RequestMapping(value="/forgot-password", method = RequestMethod.POST)
+    @RequestMapping(value = "/forgot-password", method = RequestMethod.POST)
     public ModelAndView forgotUserPassword(ModelAndView modelAndView, User user) {
         User existingUser = userService.findByEmail(user.getEmail());
-        if(existingUser != null) {
+        if (existingUser != null) {
             // create token
             ConfirmationToken confirmationToken = new ConfirmationToken(existingUser);
 
@@ -149,7 +146,7 @@ public class AuthenticationController {
             mailMessage.setSubject("Complete Password Reset!");
             mailMessage.setFrom("nopressure532@gmail.com");
             mailMessage.setText("To complete the password reset process, please click here: "
-                    +"http://localhost:8081/confirm-reset?token="+confirmationToken.getConfirmationToken());
+                    + "http://localhost:8081/confirm-reset?token=" + confirmationToken.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
 
@@ -165,12 +162,11 @@ public class AuthenticationController {
     }
 
 
-    @RequestMapping(value="/confirm-reset", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView validateResetToken(ModelAndView modelAndView, @RequestParam("token")String confirmationToken)
-    {
+    @RequestMapping(value = "/confirm-reset", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView validateResetToken(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
-        if(token != null) {
+        if (token != null) {
             User user = userService.findByEmail(token.getUser().getEmail());
             user.setEnabled(true);
             userService.saveUser(user);
@@ -192,7 +188,7 @@ public class AuthenticationController {
     public ModelAndView resetUserPassword(ModelAndView modelAndView, User user) {
         // ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
-        if(user.getEmail() != null) {
+        if (user.getEmail() != null) {
             // use email to find user
             User tokenUser = userService.findByEmail(user.getEmail());
             tokenUser.setEnabled(true);
@@ -202,7 +198,7 @@ public class AuthenticationController {
             modelAndView.addObject("message", "Password successfully reset. You can now log in with the new credentials.");
             modelAndView.setViewName("successResetPassword");
         } else {
-            modelAndView.addObject("message","The link is invalid or broken!");
+            modelAndView.addObject("message", "The link is invalid or broken!");
             modelAndView.setViewName("error1");
         }
 
