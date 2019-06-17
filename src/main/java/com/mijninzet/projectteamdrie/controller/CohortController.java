@@ -157,12 +157,4 @@ public class CohortController {
 
     }
 
-
-    @GetMapping(value="/generateCohortSchedule")
-    public String generateCohortSchedule(){
-
-    return "generateCohortSchedule";
-    }
-
-
 }

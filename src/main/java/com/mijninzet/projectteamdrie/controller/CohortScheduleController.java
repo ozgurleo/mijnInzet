@@ -431,8 +431,6 @@ public class CohortScheduleController {
     public @ResponseBody
     String subjectCohortCoupeling(HttpServletRequest request) {
         System.out.println("OZGUR METHODE IS AANGEROEPEN!!!");
-
-//        String buttonClicked = request.getParameter("button");
         int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
         String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
         int year = Integer.parseInt(arrOfDate[0]);
@@ -446,20 +444,9 @@ public class CohortScheduleController {
         String dayPart = request.getParameter("daypart");
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
 
-        System.out.println();
 
-
-        System.out.println("DIT IS DE OPGESLAGEN NUMMER VH SUBJECT/VAK IN DE OZGUR CODE: "+ subjectId);
-        System.out.println("sechedule id is " +id);
-        String result = "";
-        System.out.println("subjetc id is : "+subjectId);
-        System.out.println("day is : "+weekDay);
-        System.out.println("dayPart is : "+dayPart);
-        System.out.println("dayDate is : "+dayDate);
-
-
-            cohortScheduleRepo.assignSubjectToCohort(subjectId,id);
-return "OK";
+        cohortScheduleRepo.assignSubjectToCohort(subjectId,id);
+        return "OK";
 
     }
 
