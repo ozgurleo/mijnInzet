@@ -56,7 +56,7 @@ public class SubjectWebController {
         return "subject/subject-form";
     }
 
-    @GetMapping("/deleteSubject")
+    @GetMapping("subject/deleteSubject")
     public String deleteSubject(@RequestParam("subjectId") int subjectId, Model model){
         subjectService.deleteSubjectById(subjectId);
         return ("redirect:/subject/list");

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>genereer rooster</title>
+    <title>Subject Cohort Koppelen</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -22,7 +22,7 @@
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">COHORT-ROOSTER BEHEER </a>
+            <a class="navbar-brand" href="#">VAK COHORT KOPPELEN </a>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a class="nav-link" href=#></a></li>
@@ -43,8 +43,8 @@
 </div>
 
 <div class="table-responsive col-sm-10">
-    <table id="generateSchedule" class="table table-bordered">
-        <h3 class="cohortBeheerTable">COHORT ROOSTER PLANNING</h3>
+    <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+        <h3 class="cohortBeheerTable">COHORT SUBJECT PLANNING</h3>
         <tablehead>
             <thead class="thead-dark">
             <tr>
@@ -93,9 +93,10 @@
 
                     <td>
                         <form>
-                            <div>
+                            <div th:switch="${schedule.getSubject()}">
                                 <select th:id="subjectVariable" class="subjectField" th:data-id="${schedule.getId()}">
-                                    <option>selecteer vak</option>
+                                    <option th:case="null" selected="selected">selecteer vak</option>
+                                    <option th:case="*" th:text="${schedule.getSubject().subjectName}" th:value="${schedule.getSubject().subjectId}" selected="selected">
                                     <option th:each="subject: ${subjects}" th:value="${subject.subjectId}"
                                             th:text="${subject.subjectName}">
                                 </select>
@@ -105,7 +106,7 @@
                     </td>
                     <td>
 
-                        <button th:id="saveButton" type="submit" th:data-id="${schedule.getId()}" class="saveButton"
+                        <button th:id="saveButton" type="submit" th:data-id="${schedule.getId()}" class="saveButton btn btn-success col-2"
                                 th:value="opslaan" name="opslaan"
                                 th:form="${schedule.getId()}">opslaan
                         </button>
@@ -123,6 +124,8 @@
             </tr>
         </tablebody>
     </table>
+    <a th:href="@{/subject/list-subject.html}" style="color:#2E3279;font-weight: bolder " >Terug Naar Vak Lijst</a>
+
 </div>
 </body>
 <script th:inline="javascript">
