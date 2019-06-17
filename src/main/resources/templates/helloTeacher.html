@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logo.css}"/>
 </head>
 
 
@@ -64,23 +65,24 @@
 <br><br><br>
 
 
-<body class="text-center">
+<body  class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
 <!--                <h1 class="masthead-brand">Mijn Inzet</h1>-->
-                <img th:src="@{/images/logomyinzet.png}"/>
+
+                <img th:src="@{/images/logoo.jpg} " th:width="200px" th:height="200px" >
             </div>
         </div>
     </header>
 
     <main roleName="main" class="inner cover">
-        <h2 class="cover-heading">Welkom </h2>
+        <h2 style="color:black; font-weight: bold " class="cover-heading">Welkom </h2>
         <br>
-        <h3 STYLE="color: blue"><span th:text="${user.toString()}"></span></h3>
+        <h3 STYLE="color: #555D9C"><span th:text="${user.toString()}"></span></h3>
         <br>
-        <h3>Je bent ingelogd als leraar</h3>
+        <h3 style="color: 	#2C3485" >Je bent ingelogd als leraar</h3>
 
         <nav class="nav nav-masthead justify-content-center">
             <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
