@@ -46,13 +46,13 @@
 <div class="container-fluid" style="margin-top: 30px;">
 
     <div class="row col-lg-4 col-lg-offset-4"
-         style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+         style="margin-top: 40px; background-color: #D7D7D7;!important; padding: 20px; border: solid 1px #ddd;">
         <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post"
               class="form-signin" roleName="form">
             <h3 class="form-signin-heading">Voeg nieuwe gebruiker toe</h3>
             <div class="form-group">
                 <div class="">
-                    <input type="text" th:field="*{name}" placeholder="Voornaam" class="form-control"/>
+                    <input type="text" th:field="*{name}" placeholder="Voornaam" class="form-control" style="font-weight: bold;color: black"/>
                 </div>
             </div>
             <div class="form-group">
@@ -81,7 +81,7 @@
             </div>
             <div class="form-group">
                 <div class="">
-                    <button type="submit" class="btn btn-primary btn-block">Registreer nieuwe gebruiker</button>
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color: #2C3485;!important;color: white">Registreer nieuwe gebruiker</button>
                 </div>
             </div>
             <span th:utext="${successMessage}"></span>
@@ -95,7 +95,7 @@
                 </ul>
             </div>
             <hr>
-            <a th:href="@{/users/list}">Overzicht gebruikers</a>
+            <a th:href="@{/users/list} " style="color: #2C3485; font-weight: bold">Overzicht gebruikers</a>
         </form>
     </div>
 </div>
