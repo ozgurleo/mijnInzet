@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Overview Users</title>
+    <meta charset="UTF-8">
+    <title>Vacature Overzicht</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
 </head>
+
 <body>
 <div class="container">
     <nav class="navbar navbar-default">
@@ -24,15 +21,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/helloAdmin">HOME</a>
+                <a class="navbar-brand" href="/helloTeacher">HOME</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a></li>
-                    <li><a href="/register">NIEUWE GEBRUIKER</a></li>
-                    <li ><a href="/cohort/createCohort">BEHEER COHORTEN</a></li>
+                    <li><a href="/users/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/showTasks">VACATURBEHEER</a></li>
+                    <li><a href="/applicationBasket">SOLLICITATIES</a></li>
+                    <li class="dropdown">
+                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle" data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK & ROOSTER VOORKEUREN <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
+                            <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-primary">Log Out</button>
@@ -42,34 +47,18 @@
         </div><!-- /.container-fluid -->
     </nav>
 </div>
-<div class="container">
-    <h3 style="color:#2E3279 ">Overzicht Gebruikers</h3>
-    <hr>
-    <!-- Add Employee -->
-    <a th:href="@{/users/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Voeg gebruiker toe</a>
-    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
-        <thead style="background-color: #555D9C;color: white;!important;">
-        <tr>
-            <th>Voornaam</th>
-            <th>Achternaam</th>
-            <th>Email</th>
-            <th>Actie</th>
-        </tr>
-        </thead>
-        <tbody >
-        <tr th:each="user: ${users}">
-            <td th:text="${user.name}"/>
-            <td th:text="${user.lastName}"/>
-            <td th:text="${user.email}"/>
+<div class ="container">
+<h3>Oeps! invoer is geen getal</h3>
 
-            <td>
-                <a th:href="@{/users/showFormForUpdate(userId=${user.id})}" class="btn btn-info btn-sm">Update</a>
-                <a th:href="@{/users/delete(userId=${user.id})}" class="btn btn-danger btn-sm" onclick="if(!(confirm('Are you sure you want to delete this user?')) ) return false">Delete</a>
-            </td>
-        </tbody>
-    </table>
-    <hr>
-    <a th:href="@{/helloAdmin}" style="color:#2E3279;font-weight: bolder " >Back to Home</a>
+<button type="button" class="btn btn-secondary btn-lg" onclick=goBack()>TERUG NAAR SOLLICITATIES </button>
+
 </div>
+
 </body>
+<script>
+    function goBack()
+    {
+        location.href = "/applicationBasket";
+    }
+</script>
 </html>

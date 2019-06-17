@@ -1,29 +1,26 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.UserSingleton;
-import com.mijninzet.projectteamdrie.model.entity.Cohort;
-import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
-import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
+import com.mijninzet.projectteamdrie.model.entity.*;
+import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
-import com.mijninzet.projectteamdrie.repository.CohortRepository;
-import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
-import com.mijninzet.projectteamdrie.repository.TeacherHoursRepository;
-import com.mijninzet.projectteamdrie.repository.UserRepository;
+import com.mijninzet.projectteamdrie.repository.*;
+import com.mijninzet.projectteamdrie.service.CohortService;
 import com.mijninzet.projectteamdrie.service.UserService;
 import com.mijninzet.projectteamdrie.service.UserServiceImp;
+import org.joda.time.Weeks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class TeacherHoursController {
-
 
 
     @Autowired
@@ -41,55 +38,138 @@ public class TeacherHoursController {
     CohortScheduleController cohortScheduleController;
     @Autowired
     CohortRepository cohortRepository;
+    @Autowired
+    CohortService cohortService;
+    @Autowired
+    TeacherScheduleRepository teacherScheduleRepository;
+    @Autowired
+    SubjectRepository subjectRepository;
 
-    //Bereken beschikbare uren adhv FTE user
-    public double calculateAvailableHoursTeacher(int userId) {
-        User currentUser = userRepository.findUserById(userId);
-        Double currentUserHoursTotal = userServiceImp.calculateTotalAvailableHours(userId);
-        return currentUserHoursTotal;
+
+    public TeacherSchedule getTeacherScheduleByWeeknr(int cohortId, int weeknr) {
+
+        TeacherSchedule ts = new TeacherSchedule();
+
+
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepository.getAllByWeeknr(weeknr);
+
+        for (CohortSchedule cs : cohortScheduleList) {
+
+            String dag = cs.getDay();
+            String dagdeel = cs.getDaypart();
+
+
+            switch (dag) {
+                case "Monday":
+                    switch (dagdeel) {
+                        case "morning":
+                            ts.setMaandagOchtend(cs.getSubject().getSubjectName());
+                            break;
+                        case "afternoon":
+                            ts.setMaandagMiddag(cs.getSubject().getSubjectName());
+                            break;
+                    }
+                case "Tuesday":
+                    switch (dagdeel) {
+                        case "morning":
+                            ts.setDinsdagOchtend(cs.getSubject().getSubjectName());
+                            break;
+                        case "afternoon":
+                            ts.setDinsdagMiddag(cs.getSubject().getSubjectName());
+                            break;
+                    }
+                case "Wednesday":
+                    switch (dagdeel) {
+                        case "morning":
+                            ts.setWoensdagOchtend(cs.getSubject().getSubjectName());
+                            break;
+                        case "afternoon":
+                            ts.setWoensdagMiddag(cs.getSubject().getSubjectName());
+                            break;
+                    }
+                case "Thursday":
+                    switch (dagdeel) {
+                        case "morning":
+                            ts.setDonderdagOchtend(cs.getSubject().getSubjectName());
+                            break;
+                        case "afternoon":
+                            ts.setDonderdagMiddag(cs.getSubject().getSubjectName());
+                            break;
+                    }
+                case "Friday":
+                    switch (dagdeel) {
+                        case "morning":
+                            ts.setVrijdagOchtend(cs.getSubject().getSubjectName());
+                            break;
+                        case "afternoon":
+                            ts.setVrijdagMiddag(cs.getSubject().getSubjectName());
+                            break;
+                    }
+
+            }
+            ts.setCohortId(cohortId);
+            ts.setWeeknr(weeknr);
+            teacherScheduleRepository.save(ts);
+        }
+
+        return ts;
     }
 
-    //Update beschikbare uren docent
-    public double updateAvailableHoursTeacher(int userId, double hoursUsed) {
-        TeacherHours teacherHours = new TeacherHours();
-        Double teachingHoursLeft = teacherHours.getTeachingHoursLeft();
-        teachingHoursLeft = teachingHoursLeft - hoursUsed;
 
-        return teachingHoursLeft;
-    }
-
-    @GetMapping("/teacherFTE")
+    @GetMapping("teacherFTE")
     public String getTeacherFte(User user, Model model) {
 
         User currentUser = userService.findById(user.getCurrentUserId());
-        List<Cohort> cohorts = cohortRepository.findAll();
         double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
         double userFTE = user.getFte();
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepository.getCohortScheduleByUser_Id(currentUser.getId());
+        List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(10);
+        List<Integer> weeknrs = cohortScheduleRepository.getDistinctWeeknumbers();
+        List<Subject> subjects = subjectRepository.findAll();
+
 
         model.addAttribute("voornaam", currentUser.getName());
         model.addAttribute("achternaam", currentUser.getLastName());
+        model.addAttribute("email", currentUser.getEmail());
         model.addAttribute("fte", userFTE);
         model.addAttribute("beschikbareUren", availableHours);
         model.addAttribute("cohorts", cohorts);
-        model.addAttribute("cohortSchedule", cohortScheduleList);
+        model.addAttribute("weeknrs", weeknrs);
+        model.addAttribute("vakkenSelectAjax", subjects);
 
 
         return "teacherFTE";
-
     }
 
-    @PostMapping("/teacherfTE/{cohortId}")
-    public String getTeacherScheduleBasedOnCohort(User user, Model model, @PathVariable("cohortId") int cohortId) {
+    @RequestMapping(value = "teacherSchedule/cohort", method = RequestMethod.GET)
+    public String getTeacherSchedule(@RequestParam("cohortId") Integer cohortId, User user, Model model) {
 
-        User currentUser = userService.findById(user.getCurrentUserId());
-        List<Cohort> cohorts = cohortRepository.findAll();
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepository.getCohortScheduleByCohort_CohortIdAndUser_Id(cohortId, currentUser.getId());
+        getTeacherFte(user, model);
+        List<Integer> distinctWeeknrsFromCohort = cohortScheduleRepository.getDistinctWeeknumbersWhereCohortIdIs(cohortId);
 
-        model.addAttribute("cohortSchedule", cohortScheduleList);
-        model.addAttribute("cohorts", cohorts);
+        model.addAttribute("weken", distinctWeeknrsFromCohort);
 
         return "teacherFTE";
+    }
+
+    @RequestMapping(value = "teacherSchedule/week", method = RequestMethod.GET)
+    public String getTeacherWeekSchedule(@RequestParam("weeknr") Integer weeknr, User user, Model model) {
+
+        getTeacherFte(user, model);
+        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByWeeknr(weeknr);
+
+        model.addAttribute("week",cohortScheduleWeek);
+
+        return "teacherFTE";
+    }
+
+    @RequestMapping(value="/subject/{subjectId}")
+    public @ResponseBody Subject getSubject(@PathVariable Integer subjectId) {
+
+        System.out.println("MIJN ajax methode is aangeroepen");
+        Subject subject = new Subject();
+        subject = subjectRepository.findSubjectBySubjectId(subjectId);
+        System.out.println("IN SUBJECT ZIT  " +subject );
+        return subject;
 
     }
 }

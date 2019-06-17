@@ -19,7 +19,7 @@ import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
-    CohortScheduleController cohortSchedTest=new CohortScheduleController();
+    CohortScheduleController cohortSchedTest = new CohortScheduleController();
     @Autowired
     TaskApplicationRepository taskApplicationRepo;
     @Autowired
@@ -39,7 +39,7 @@ public class TaskApplicationController {
         //get the data from httpservletRequest and put in variable
         String tempId = request.getParameter("taskId");
         String tempHours = request.getParameter("availableHours");
-
+        if (tempHours.matches("^[0-9]+$")) {
         //Convert variable to int
         int taskId = Integer.parseInt(tempId);
         int hours = Integer.parseInt(tempHours);
@@ -57,6 +57,9 @@ public class TaskApplicationController {
         // get latest data from db en send to showtasks.html
         model.addAttribute("showTasks", taskRepository.getVacancies());
         return "showtasks";
+        }else{
+            return "showTasksError";
+        }
     }
 
     @PostMapping(value = "/taskApplications/{taskId}/{fullName}/{availHours}")
@@ -68,41 +71,48 @@ public class TaskApplicationController {
         String tempHours = request.getParameter("availHours");
         String updateAction = request.getParameter("updateAppl");
         String deleteAction = request.getParameter("removeAppl");
+        System.out.println("taskid retrieved from applicationBasket " + tempId);
+        System.out.println("name  retrieved from applicationBasket " + fullName);
+        System.out.println("nrHours retrieved from applicationBasket " + tempHours);
 
         //Convert variable to int
-        int taskId = Integer.parseInt(tempId);
-        int hours = Integer.parseInt(tempHours);
+        if (tempHours.matches("^[0-9]+$")) {
+            int taskId = Integer.parseInt(tempId);
+            int hours = Integer.parseInt(tempHours);
 
-        //haal de userId op vd loggedin user uit de Singleton
-        final int userId = UserSingleton.getInstance().getId();
+            //haal de userId op vd loggedin user uit de Singleton
+            final int userId = UserSingleton.getInstance().getId();
 
-        //take action based on which button was clicked
-        if (updateAction != null) {
+            //take action based on which button was clicked
+            if (updateAction != null) {
 
-            System.out.println("De user_id is ---> " + userId);
-            taskApplicationRepo.updateHours(hours, userId, taskId);
-            System.out.println("De UPDATE Methode is aangeroepen");
+                System.out.println("De user_id is ---> " + userId);
+                taskApplicationRepo.updateHours(hours, userId, taskId);
+                System.out.println("De UPDATE Methode is aangeroepen");
 
-        } else if (deleteAction != null) {
-            taskApplicationRepo.deleteApplication(taskId, userId);
-            System.out.println("De DELETE Methode is aangeroepen");
+            } else if (deleteAction != null) {
+                taskApplicationRepo.deleteApplication(taskId, userId);
+                System.out.println("De DELETE Methode is aangeroepen");
 
+            } else {
+                System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
+            }
+
+            model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview(userId));
+            return "applicationBasket";
         } else {
-            System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
+            return "applicationBasketError";
         }
-
-        model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview(userId));
-        return "applicationBasket";
     }
 
 
     @GetMapping(value = "/applicationBasket")
     public String fillApplicationBasket(Object object, Model model) {
 
-        LocalDate begin= LocalDate.of(2018,01,01);
-        LocalDate end= LocalDate.of(2018,01,16);
+        LocalDate begin = LocalDate.of(2018, 01, 01);
+        LocalDate end = LocalDate.of(2018, 01, 16);
 
-               //haal de userId op vd loggedin user uit de Singleton
+        //haal de userId op vd loggedin user uit de Singleton
         final int userId = UserSingleton.getInstance().getId();
 
         //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());

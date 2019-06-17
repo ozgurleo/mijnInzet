@@ -18,42 +18,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logo.css}"/>
 </head>
 
 
 <body>
 
 
-<!--&lt;!&ndash; Navigatie-menu &ndash;&gt;-->
-<!--<nav class="navbar navbar-dark bg-dark">-->
-<!--    <a class="navbar-brand" href="/helloTeacher">HOME</a>-->
-<!--    <a class="nav-link" href="/users/teacherFTE">MIJN URENOVERZICHT</a>-->
-<!--    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
-<!--    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>-->
-<!--    &lt;!&ndash;<a class="nav-link" href="/schedule">MIJN ROOSTERVOORKEUREN</a>&ndash;&gt;-->
-<!--    <div class="dropdown show">-->
-<!--        <a class="btn btn-secondary dropdown-toggle" href="#" roleName="button" id="dropdownMenuLink" data-toggle="dropdown"-->
-<!--           aria-haspopup="true" aria-expanded="false" style="color: #b8d1f3">-->
-<!--            MIJN VAK & ROOSTER VOORKEUREN-->
-<!--        </a>-->
-
-<!--        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-<!--            <a class="dropdown-item" href="/schedule/listCohort">Mijn roostervoorkeuren</a>-->
-<!--            <a class="dropdown-item" href="/showSubjects">Mijn vak voorkeuren</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <a class="nav-link" href="/exception/list" onclick="basicPopup(this.href);return false">MIJN INCIDENTEN</a>-->
-<!--    &lt;!&ndash;<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>&ndash;&gt;-->
-<!--    <form th:action="@{/logout}" method="post">-->
-<!--        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
-<!--        &lt;!&ndash;    <a class="nav-link" type="submit">UITLOGGEN</a>&ndash;&gt;-->
-<!--    </form>-->
-<!--</nav>-->
-<!--&lt;!&ndash; Hoofdtekst  &ndash;&gt;-->
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -67,7 +41,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/teacherFTE">MIJN ROOSTER</a></li>
                     <li><a href="/showTasks">VACATURBEHEER</a></li>
                     <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
                     <li class="dropdown">
@@ -91,23 +65,24 @@
 <br><br><br>
 
 
-<body class="text-center">
+<body  class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
 <!--                <h1 class="masthead-brand">Mijn Inzet</h1>-->
-                <img th:src="@{/images/logomyinzet.png}"/>
+
+                <img th:src="@{/images/logoo.jpg} " th:width="200px" th:height="200px" >
             </div>
         </div>
     </header>
 
     <main roleName="main" class="inner cover">
-        <h2 class="cover-heading">Welkom </h2>
+        <h2 style="color:black; font-weight: bold " class="cover-heading">Welkom </h2>
         <br>
-        <h3 STYLE="color: blue"><span th:text="${user.toString()}"></span></h3>
+        <h3 STYLE="color: #555D9C"><span th:text="${user.toString()}"></span></h3>
         <br>
-        <h3>Je bent ingelogd als leraar</h3>
+        <h3 style="color: 	#2C3485" >Je bent ingelogd als leraar</h3>
 
         <nav class="nav nav-masthead justify-content-center">
             <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
@@ -116,9 +91,9 @@
         </nav>
         <br>
 
-        <p class="lead">Bekijk direct je uren overzicht </p>
+        <p class="lead">Bekijk direct je rooster </p>
         <p class="lead">
-            <a href="/users/teacherFTE" class="btn btn-lg btn-primary">Mijn uren overzicht </a>
+            <a href="/teacherFTE" class="btn btn-lg btn-primary">Mijn rooster </a>
         </p>
     </main>
 

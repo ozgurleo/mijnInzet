@@ -56,7 +56,7 @@ public class CohortScheduleController {
         }
         System.out.println("RESULT OF PREFERENCE = " + subjectPref);
 
-        String checkHours = checkTeacherHours(teacherId, subjectId,cohortId);
+        String checkHours = checkTeacherHours(teacherId, subjectId, cohortId);
         if (checkHours.equals("OK") || checkHours.equals("NON")) {
             hours = "OK";
         } else {
@@ -205,27 +205,28 @@ public class CohortScheduleController {
     }
 
     public String checkTeacherHours(int teacherId, int subjectId, int cohortId) {
-
         Subject subject = subjectRepo.getBySubjectId(subjectId);
         String subjectname = subject.getSubjectName();
+
         TeacherHours teacherHours = teacherHoursRepository.findByUserId(teacherId);
         int realTeacherHours = 4;
 
         if (teacherHours != null) {
-            if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId,cohortId)) {
-                if (teacherHours.getTeachingHoursLeft() < 8)
+            if (!doesTeacherHaveExperienceWithSubject(teacherId, subjectId, cohortId)) {
+                System.out.println("checkTeacherHours is AANGEROEPEN");
+                if (teacherHours.getTeachingHoursLeft() < 6)
                     return "NOK";
                 else {
                     return "OK";
                 }
             } else {
-                int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId,cohortId);
+                int yearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
                 switch (yearsOfExperience) {
                     case 1:
-                        realTeacherHours = 6;
+                        realTeacherHours = 8;
                         break;
                     case 2:
-                        realTeacherHours = 4;
+                        realTeacherHours = 6;
                         break;
                 }
                 if (teacherHours.getTeachingHoursLeft() < realTeacherHours) {
@@ -239,11 +240,11 @@ public class CohortScheduleController {
     }
 
 
-    public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId,int cohortId) {
+    public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId, int cohortId) {
 
         boolean experience = false;
 
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(teacherId, subjectId,cohortId);
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(teacherId, subjectId, cohortId);
         if (cohortScheduleList.size() > 0) {
             experience = true;
         } else {
@@ -254,7 +255,7 @@ public class CohortScheduleController {
 
     public int howManyYearsExperienceDoesTeacherHave(int teacherId, int subjectId, int cohortId) {
         int numberOfYearsExperience;
-        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndAndCohortNot(teacherId, subjectId,cohortId);
+        List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(teacherId, subjectId, cohortId);
         if (cohortScheduleList.size() == 1) {
             numberOfYearsExperience = 1;
         } else if (cohortScheduleList.size() == 2) {
@@ -294,52 +295,100 @@ public class CohortScheduleController {
 
         String result = "";
         if (buttonClicked.equals("check")) {
-            result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
-            System.out.println("RESULT AFTER CHECK = " + result);
+            int previousTeacher;
+            String tempPreviousTeacher = cohortScheduleRepo.getTeacherAtDateAndDayPart(dayDate, dayPart, cohortId);
+            if (tempPreviousTeacher == null) {
+                previousTeacher = 0;
+            } else {
+                previousTeacher = Integer.parseInt(tempPreviousTeacher);
+            }
 
+            if (previousTeacher == teacherId) {
+                result = "sameTeacher";
+            }else {
+                result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+                System.out.println("RESULT AFTER CHECK = " + result);
+                System.out.println("CHECKS CALLED BY THE CHECK-button ARE FINISHED");
+                System.out.println("----------------------------------------------------");
+            }
             return result;
         }
         if (buttonClicked.equals("save")) {
-            CohortSchedule newCS = new CohortSchedule();
-            newCS.setClassRoom("");
-            newCS.setDay(weekDay);
-            newCS.setDaypart(dayPart);
-            newCS.setDate(dayDate);
-            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
-            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
-            newCS.setUser(userRepo.findUserById(teacherId));
-            cohortScheduleRepo.save(newCS);
 
+            int previousTeacher;
             result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
+
+            String tempPreviousTeacher = cohortScheduleRepo.getTeacherAtDateAndDayPart(dayDate, dayPart, cohortId);
+            if (tempPreviousTeacher == null) {
+                previousTeacher = 0;
+            } else {
+                previousTeacher = Integer.parseInt(tempPreviousTeacher);
+            }
+
+            if (previousTeacher == teacherId) {
+                result = "sameTeacher";
+            } else if (result.equals("NOK") || result.equals("hourNOK_restOK") ||
+                    result.equals("hoursNOK_availNOK_OK") || result.equals("hoursNOK_OK_prefNOK")) {
+                result = "hoursNOK";
+            } else if (previousTeacher != 0) {
+                // 1) check of previoususer geen 0 is indien niet 0 dan
+                // 2) zet uren terug voor de previous teacher.
+
+                int hoursToSubract = 0;
+
+                int oldYearsOfExperience = howManyYearsExperienceDoesTeacherHave(previousTeacher, subjectId, cohortId);
+                if(oldYearsOfExperience<=1){
+                    hoursToSubract = 8;
+                }else {
+                    hoursToSubract = 6;
+                }
+                int newHoursLeft = teacherHoursRepository.getHoursLeft(previousTeacher) + hoursToSubract;
+                int newHoursUsed = teacherHoursRepository.getHoursUsed(previousTeacher) - hoursToSubract;
+                teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, previousTeacher);
+                System.out.println("uren op te tellen of af te trekken --> " + hoursToSubract);
+                System.out.println(" oude uren over vorige leraar " +teacherHoursRepository.getHoursLeft(previousTeacher) );
+                System.out.println("nieuwe uren over vorige leraar : " + newHoursLeft);
+                System.out.println("oude opgemaakte uren vorige leraar" + teacherHoursRepository.getHoursUsed(previousTeacher));
+                System.out.println("nieuwe opgemaakte uren  vorige leraar" + newHoursUsed);
+                System.out.println("uren vorige leraar terug gezet");
+
+                // 3) verreken de uren voor de huidige teacher
+               int newHoursToSubract = 0;
+                int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
+                if(newYearsOfExperience<=1){
+                    newHoursToSubract = 8;
+                }else {
+                    newHoursToSubract = 6;
+                }
+
+                newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
+                newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
+                teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
+                cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
+                System.out.println("uren op te tellen of af te trekken --> " + newHoursToSubract);
+                System.out.println(" oude uren over nieuwe leraar" +teacherHoursRepository.getHoursLeft(teacherId) );
+                System.out.println("nieuwe uren over nieuwe leraar : " + newHoursLeft);
+                System.out.println("oude opgemaakte uren nieuwe leraar" + teacherHoursRepository.getHoursUsed(teacherId));
+                System.out.println("nieuwe opgemaakte uren nieuwe leraar " + newHoursUsed);
+                System.out.println("uren nieuwe leraar ge-update nieuwe leraar");
+
+            } else {
+                int newHoursToSubract = 0;
+                int newYearsOfExperience = howManyYearsExperienceDoesTeacherHave(teacherId, subjectId, cohortId);
+                if(newYearsOfExperience<=1){
+                    newHoursToSubract = 8;
+                }else {
+                    newHoursToSubract = 6;
+                }
+
+                int newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
+                int newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
+                teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
+                cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
+
+            }
             return result;
         }
-
-        // Brahim code:  tbv checken welke parameterNamen met POST worden verstuurd:
-//        Enumeration paramNames = request.getParameterNames();
-//        while(paramNames.hasMoreElements()) {
-//            String paramName = (String)paramNames.nextElement();
-//            System.out.println("<tr><td>" + paramName + "</td>\n<td>");
-//            String[] paramValues = request.getParameterValues(paramName);
-//
-//            // Read single valued data
-//            if (paramValues.length == 1) {
-//                String paramValue = paramValues[0];
-//                if (paramValue.length() == 0)
-//                    System.out.println("<i>No Value</i>");
-//                else
-//                    System.out.println(paramValue);
-//            } else {
-//                // Read multiple valued data
-//                System.out.println("<ul>");
-//
-//                for(int i = 0; i < paramValues.length; i++) {
-//                    System.out.println("<li>" + paramValues[i]);
-//                }
-//                System.out.println("</ul>");
-//            }
-//        }
-//        System.out.println("</tr>\n</table>\n</body></html>");
-        // End code
 
         return result;
 
@@ -371,8 +420,41 @@ public class CohortScheduleController {
         return "generateCohortSchedule";
     }
 
-//    @GetMapping("subjectKopelen")
-//    public void getAllCohortSchedule()
+    @PostMapping(value ="/subjectCohortCoupeling")
+    public @ResponseBody
+    String subjectCohortCoupeling(HttpServletRequest request) {
+        System.out.println("OZGUR METHODE IS AANGEROEPEN!!!");
+
+//        String buttonClicked = request.getParameter("button");
+        int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
+        String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
+        int year = Integer.parseInt(arrOfDate[0]);
+        int month = Integer.parseInt(arrOfDate[1]);
+        int day = Integer.parseInt(arrOfDate[2]);
+        LocalDate dayDate = LocalDate.of(year, month, day);
+        String tempId = request.getParameter("scheduleId");
+        int id = Integer.parseInt(tempId);
+
+        String weekDay = request.getParameter("day");
+        String dayPart = request.getParameter("daypart");
+        int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
+
+        System.out.println();
+
+
+        System.out.println("DIT IS DE OPGESLAGEN NUMMER VH SUBJECT/VAK IN DE OZGUR CODE: "+ subjectId);
+        System.out.println("sechedule id is " +id);
+        String result = "";
+        System.out.println("subjetc id is : "+subjectId);
+        System.out.println("day is : "+weekDay);
+        System.out.println("dayPart is : "+dayPart);
+        System.out.println("dayDate is : "+dayDate);
+
+
+            cohortScheduleRepo.assignSubjectToCohort(subjectId,id);
+return "OK";
+
+    }
 
 
 

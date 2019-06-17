@@ -42,7 +42,7 @@ public class StaffAvailibilityController {
     public String addSchedule(Model model){
         StaffAvailability theSA= new StaffAvailability();
         List<Cohort>cohorts=cohortService.findAll();
-        model.addAttribute("schedule", theSA);
+        model.addAttribute("schedules", theSA);
         model.addAttribute("cohorts",cohorts);
         return "schedule/schedule-form";
 
