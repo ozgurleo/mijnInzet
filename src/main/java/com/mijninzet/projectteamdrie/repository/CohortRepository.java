@@ -20,6 +20,13 @@ public interface CohortRepository extends JpaRepository<Cohort, Integer> {
     List<Cohort> findAllByCohortIdAfter(int cohortId);
     Cohort getByCohortId(int cohortId);
 
+    @Query(value = "SELECT cohort_id FROM mijn_inzet.cohort", nativeQuery = true)
+    List<Integer> getCohortIds();
+
+
+
+
+
 
 
 

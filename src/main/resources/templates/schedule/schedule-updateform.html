@@ -19,6 +19,14 @@
                     alert("Vrijdag Avond\n"+"SERIEUS??")
                 }
             })
+            $('#cohort').onkeydown(function(){
+                var cohort = $(this).val()
+                if(isNaN(cohort)){
+                    $('#numloc').innerText.text("Cohort moet nummer zijn")
+
+                }
+            })
+
         })
 
     </script>
@@ -40,7 +48,7 @@
                 <div class="input-group mb-3">
                     <input type="hidden" th:field="*{user.id}" />
                     <input type="hidden" th:field="*{id}" />
-                    <input type="text" th:field="*{cohort}" placeholder="Cohort" required="required" readonly/>
+                    <input id="cohort" type="text" th:field="*{cohort}" placeholder="Cohort" required="required" readonly/><span id="numloc"></span>
 
                 </div>
                 <table class="table table-dark ">
@@ -61,35 +69,35 @@
                         <th scope="row">Ochtend</th>
                         <td>
                             <select class="mdb-select md-form" th:field="*{maandagOchtend}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{dinsdagOchtend}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{woensdagOchtend}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{donderdagOchtend}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{vrijdagOchtend}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
@@ -99,7 +107,7 @@
                         <th scope="row">Middag</th>
                         <td>
                             <select class="mdb-select md-form" th:field="*{maandagMiddag}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
@@ -107,28 +115,28 @@
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{dinsdagMiddag}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{woensdagMiddag}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{donderdagMiddag}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{vrijdagMiddag}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
@@ -138,35 +146,35 @@
                         <th scope="row">Avond</th>
                         <td>
                             <select class="mdb-select md-form" th:field="*{maandagAvond}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{dinsdagAvond}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{woensdagAvond}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select class="mdb-select md-form" th:field="*{donderdagAvond}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
                         </td>
                         <td>
                             <select id="vrijdagAvond" class="mdb-select md-form" th:field="*{vrijdagAvond}" required="required">
-                                <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                <option selected value="NA"> Bent u beschikbaar?</option>
                                 <option value="JA">JA</option>
                                 <option value="NEE">NEE</option>
                             </select>
@@ -183,7 +191,7 @@
     </form>
 
     <hr>
-    <a class="btn btn-secondary" th:href="@{/schedule/listCohort}">Terug Naar Exception List</a>
+    <a class="btn btn-secondary" th:href="@{/schedule/listCohort}">Terug Naar Schedule List</a>
 
 
 </div>

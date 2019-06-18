@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.service;
 
+import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
@@ -26,6 +27,13 @@ public class StaffAvailibilityService {
         return sa;
     }
 
+    public List<Integer> getAllCohorts(){
+        List<Integer>cohorts=new ArrayList<>();
+        cohorts = staffAvailibilityRepository.getCohorts();
+
+        return cohorts;
+    }
+
     public List<StaffAvailability> findStaffAvailibilityByUseridAndCohort(int userId, int cohort){
         List<StaffAvailability> staffAvailabilities=new ArrayList<>();
         staffAvailibilityRepository.findByUser_IdAndCohort_CohortId(userId,cohort)
@@ -45,38 +53,16 @@ public class StaffAvailibilityService {
                 .forEach(staffAvailabilities::add);
         return staffAvailabilities;
     }
-
-//    public List<StaffAvailability> getAllStaffAvailibility(int userId){
-//        ArrayList<StaffAvailability> staffAvailabilities=new ArrayList<>();
-//        staffAvailibilityRepository.findByUserId(userId)
-//                .forEach(staffAvailabilities::add);
-//        return staffAvailabilities;
-//
-//    }
-//
-//    public List<StaffAvailability> getAllStaffAvailibilityByIdAndCohort(int userId, int cohort){
-//        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
-//        staffAvailibilityRepository.findAllByUserIdAndCohort(userId, cohort)
-//                .forEach(staffAvailabilities::add);
-//        return staffAvailabilities;
-//    }
-//
-//    public List<StaffAvailability> getAllStaffAvailibilityByCohort(String cohort){
-//        ArrayList<StaffAvailability> staffAvailabilities = new ArrayList<>();
-//        staffAvailibilityRepository.findAllByCohort( cohort)
-//                .forEach(staffAvailabilities::add);
-//        return staffAvailabilities;
-//    }
-//
     public void addStaffAvailibility(StaffAvailability sa){
         staffAvailibilityRepository.save(sa);
 
     }
-//
-//    public void updateStaffAvailibility(StaffAvailability sa){
-//        StaffAvailability sanieuw = staffAvailibilityRepository.findById(sa.getId());
-//        staffAvailibilityRepository.save(sanieuw);
-//    }
+    public boolean checkExistance(int id){
+        return staffAvailibilityRepository.existsById(id);
+    }
+
+
+
 
 
 }
