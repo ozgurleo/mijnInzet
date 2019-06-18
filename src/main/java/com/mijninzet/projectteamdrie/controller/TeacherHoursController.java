@@ -120,8 +120,9 @@ public class TeacherHoursController {
     public String getTeacherFte(User user, Model model) {
 
         User currentUser = userService.findById(user.getCurrentUserId());
-        double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
+       // double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
         double userFTE = user.getFte();
+        double availableHours = teacherHoursRepository.getHoursLeft(user.getCurrentUserId());
         List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(10);
         List<Integer> weeknrs = cohortScheduleRepository.getDistinctWeeknumbers();
         List<Subject> subjects = subjectRepository.findAll();
@@ -140,26 +141,31 @@ public class TeacherHoursController {
         return "teacherFTE";
     }
 
-    @RequestMapping(value = "teacherSchedule/cohort", method = RequestMethod.GET)
-    public String getTeacherSchedule(@RequestParam("cohortId") Integer cohortId, User user, Model model) {
+    @RequestMapping(value = "teacherSchedule/{cohortId}", method = RequestMethod.GET)
+    public @ResponseBody List<Integer> getTeacherSchedule(@PathVariable Integer cohortId, User user, Model model) {
 
         getTeacherFte(user, model);
+        System.out.println("teacherschedule/{cohortid} is aangeroepen");
         List<Integer> distinctWeeknrsFromCohort = cohortScheduleRepository.getDistinctWeeknumbersWhereCohortIdIs(cohortId);
 
-        model.addAttribute("weken", distinctWeeknrsFromCohort);
+//        model.addAttribute("weken", distinctWeeknrsFromCohort);
+        System.out.println("Uit methode komt " + distinctWeeknrsFromCohort);
 
-        return "teacherFTE";
+
+        return distinctWeeknrsFromCohort;
     }
 
-    @RequestMapping(value = "teacherSchedule/week", method = RequestMethod.GET)
-    public String getTeacherWeekSchedule(@RequestParam("weeknr") Integer weeknr, User user, Model model) {
+    @RequestMapping(value = "teacherSchedule/week/{weeknr}/{cohortId}", method = RequestMethod.GET)
+    public @ResponseBody List<CohortSchedule> getTeacherWeekSchedule(@PathVariable int weeknr, @PathVariable int cohortId, User user, Model model) {
 
         getTeacherFte(user, model);
-        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByWeeknr(weeknr);
+        System.out.println("Uit mijn requestparam komt : "+weeknr + " en cohortId " + cohortId);
+        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByCohort_CohortIdAndWeeknr(cohortId, weeknr);
+        System.out.println("uit mijn cohortscheduleweek komt " + cohortScheduleWeek);
 
-        model.addAttribute("week",cohortScheduleWeek);
+//        model.addAttribute("week",cohortScheduleWeek);
 
-        return "teacherFTE";
+        return cohortScheduleWeek;
     }
 
     @RequestMapping(value="/subject/{subjectId}")

@@ -3,10 +3,12 @@ package com.mijninzet.projectteamdrie.controller;
 import javax.validation.Valid;
 
 import com.mijninzet.projectteamdrie.model.entity.ConfirmationToken;
+import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.ConfirmationTokenRepository;
 import com.mijninzet.projectteamdrie.repository.RoleRepository;
+import com.mijninzet.projectteamdrie.repository.TeacherHoursRepository;
 import com.mijninzet.projectteamdrie.service.EmailSenderService;
 import com.mijninzet.projectteamdrie.service.UserService;
 
@@ -26,9 +28,16 @@ import java.util.List;
 
 @Controller
 public class AuthenticationController {
+    private static final int TOTAL_HOURS=1650;
+    private static final int EDUCATIONAL_PERCENTAGE=80;
+    private static final int DEFAULT_HOURS_USED=0;
+    private static final int DEFAULT_FTE=1;
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TeacherHoursRepository teacherHoursRepo;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -77,6 +86,15 @@ public class AuthenticationController {
             userService.saveUser(user);
 //            userServiceImp.saveUser(user);
             modelAndView.addObject("successMessage", "User is registered successfully!");
+            int userId=user.getId();
+            int totalHours=DEFAULT_FTE*TOTAL_HOURS*EDUCATIONAL_PERCENTAGE/100;
+            int hoursleft=totalHours;
+            int hoursUsed=DEFAULT_HOURS_USED;
+            TeacherHours newTeacherHours= new TeacherHours(userId,totalHours,hoursUsed,hoursleft);
+            teacherHoursRepo.save(newTeacherHours);
+            System.out.println("TEACHERHOURS FILL METHOD IS DONE");
+            System.out.println("uderID new user = " + userId);
+
         }
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);

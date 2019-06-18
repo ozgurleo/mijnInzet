@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Mijn Inzet: Cohort</title>
+    <title>Cohort</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -47,16 +47,16 @@
 <div class="container">
 
     <br>
-    <h3 style="color:#2E3279 ">Geef nieuw cohort op  </h3>
+    <h3 style="color:#2E3279 ">Voer nieuwe taak in  </h3>
     <hr>
 
-    <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
+    <form action="#" th:action="@{/createTask}" th:object="${task}" method="post">
 
         <label class="form-group ">
-            <label class="control-label"/> Cohort </label>
+            <label class="control-label"/> Taak </label>
         <div class="input-group">
-            <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"
-                   th:field="*{cohortId}"/>
+            <input type="number" class="form-control mb-4 col-12" id="TaskId" placeholder="Selecteer taak"
+                   th:field="*{taskId}"/>
         </div>
         </label>
         <label class="form-group  ">
@@ -100,7 +100,6 @@
         <th>Cohort</th>
         <th> Begindatum</th>
         <th> Einddatum</th>
-        <th> ###</th>
     </tr>
     </thead>
     <tbody>
@@ -108,18 +107,6 @@
         <td th:text="${cohort.cohortId}">cohortid</td>
         <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
         <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
-
-        <td>
-            <a th:href="@{/cohort/updateCohort(cohortId=${cohort.cohortId})}"
-               class="btn btn-info btn-sm" >
-                Update
-            </a>
-
-            <a th:href="@{/cohort/deleteCohort(cohortId=${cohort.cohortId})}"
-               class="btn btn-danger btn-sm" onclick="if(!(confirm('Bent u zeker?')) ) return false">
-                Verwijderen
-            </a>
-        </td>
     </tr>
     </tbody>
 </table>

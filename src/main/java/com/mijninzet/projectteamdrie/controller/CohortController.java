@@ -40,7 +40,9 @@ public class CohortController {
 
     @RequestMapping(value="/createCohort", method = RequestMethod.GET)
     public String getAllCohorts(Model model){
-        List<Cohort> cohorts = cohortRepository.findAll();
+        List<Cohort>cohorts=new ArrayList<>();
+        cohorts = cohortRepository.findAll();
+        Collections.sort(cohorts);
         Cohort cohort = new Cohort();
         model.addAttribute("allCohorts", cohorts);
         model.addAttribute("cohort", cohort);
@@ -59,9 +61,6 @@ public class CohortController {
         }
 
         cohortRepository.save(cohort);
-
-
-
         // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
         System.out.println("De begindateum= " + cohort.getBeginDate() );
         System.out.println("De begindateum= " + cohort.getEndDate() );
@@ -155,6 +154,24 @@ public class CohortController {
             }
         }
 
+    }
+    @PostMapping("/save")
+    public String saveCohort(@ModelAttribute("cohort") Cohort cohort ){
+        cohortRepository.save(cohort);
+        return ("redirect:/cohort/createCohort");
+    }
+
+    @GetMapping("/deleteCohort")
+    public String deleteSubject(@RequestParam("cohortId") int cohortId){
+        cohortRepository.deleteById(cohortId);;
+        return ("redirect:/cohort/createCohort");
+    }
+
+    @GetMapping("/updateCohort")
+    public String updateCohort(@RequestParam("cohortId") int cohortId, Model model){
+        Cohort cohort = cohortRepository.getByCohortId(cohortId);
+        model.addAttribute("cohort" , cohort);
+        return "cohortForm";
     }
 
 }

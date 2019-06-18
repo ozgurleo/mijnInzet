@@ -1,6 +1,7 @@
 package com.mijninzet.projectteamdrie.repository;
 
 
+import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public interface StaffAvailibilityRepository extends CrudRepository<StaffAvailab
     StaffAvailability findById(int id);
 
     List<StaffAvailability> findByUserId(int id);
+
+
+    @Query(value = "SELECT cohort FROM mijn_inzet.staff_availability", nativeQuery = true)
+    List<Integer> getCohorts();
 
     //Brahim code: get specific Day/daypart availability maandagOchtend
     @Query(value = "SELECT maandag_ochtend FROM mijn_inzet.staff_availability WHERE cohort=:cohortId AND user_id=:teacherId", nativeQuery = true)

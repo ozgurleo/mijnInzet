@@ -6,20 +6,13 @@ import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.repository.*;
 
-import com.sun.net.httpserver.HttpContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Enumeration;
 import java.util.List;
 
 
@@ -38,7 +31,6 @@ public class CohortScheduleController {
     CohortRepository cohortRepository;
     @Autowired
     StaffAvailibilityRepository staffAvailrepo;
-
     @Autowired
     ExceptionRepository exceptionRepo;
 
@@ -175,12 +167,12 @@ public class CohortScheduleController {
         if (preference == null) {
             result = "NON";
         } else if (preference.equals("1")) {
-            result = "OK";
+            result = "NOK";
 
         } else if (preference.equals("2")) {
             result = "OK";
         } else if (preference.equals("3")) {
-            result = "NOK";
+            result = "OK";
         }
 
         System.out.println("RESULT OF THE SUBJECT PREFERENCE = " + result);
@@ -190,7 +182,6 @@ public class CohortScheduleController {
 
     public String checkTeacherException(int teacherId, LocalDate datePlanned) {
         String result = "default";
-
         String incidentText = exceptionRepo.getIncident(teacherId, datePlanned);
 
         if (incidentText == null) {
@@ -241,7 +232,6 @@ public class CohortScheduleController {
 
 
     public boolean doesTeacherHaveExperienceWithSubject(int teacherId, int subjectId, int cohortId) {
-
         boolean experience = false;
 
         List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(teacherId, subjectId, cohortId);
@@ -387,13 +377,10 @@ public class CohortScheduleController {
                 int newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
                 cohortScheduleRepo.assignTeacherToSubject(teacherId,scheduledId);
-
             }
             return result;
         }
-
         return result;
-
     }
 
 
@@ -407,7 +394,6 @@ public class CohortScheduleController {
         LocalDate endDate = cohort.getEndDate();
 
         return listCohortSchedulesByCohortid;
-
     }
 
     @GetMapping(value = "/generateCohortSchedule")
@@ -443,12 +429,8 @@ public class CohortScheduleController {
         String dayPart = request.getParameter("daypart");
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
 
-
         cohortScheduleRepo.assignSubjectToCohort(subjectId,id);
         return "OK";
-
     }
-
-
 
 }

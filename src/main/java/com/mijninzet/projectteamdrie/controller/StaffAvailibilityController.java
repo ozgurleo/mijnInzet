@@ -12,7 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -41,7 +42,15 @@ public class StaffAvailibilityController {
     @GetMapping("/addSchedule")
     public String addSchedule(Model model){
         StaffAvailability theSA= new StaffAvailability();
-        List<Cohort>cohorts=cohortService.findAll();
+        List<Integer>cohortsId=cohortService.getCohortIds();
+        List<Integer>cohortHavingSchedule = staffAvailibilityService.getAllCohorts();
+        List<Integer>cohorts=new ArrayList<>(cohortsId);
+        cohorts.removeAll(cohortHavingSchedule);
+        Iterator iterator= cohorts.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
         model.addAttribute("schedules", theSA);
         model.addAttribute("cohorts",cohorts);
         return "schedule/schedule-form";
@@ -57,7 +66,9 @@ public class StaffAvailibilityController {
     @GetMapping("/updateSchedule")
     public String updateSchedule(@RequestParam("scheduleId") int theId, Model model){
         StaffAvailability sa =staffAvailibilityService.findById(theId);
+        List<Cohort>cohorts=cohortService.findAll();
         model.addAttribute("schedule",sa);
+        model.addAttribute("cohorts",cohorts);
         return "schedule/schedule-updateform";
     }
 
@@ -67,6 +78,8 @@ public class StaffAvailibilityController {
         model.addAttribute("cohorts", cohorts);
         return ("schedule/schedule-cohortlist");
     }
+
+
 
 
 }

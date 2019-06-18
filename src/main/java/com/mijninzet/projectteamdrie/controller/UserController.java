@@ -15,6 +15,7 @@ package com.mijninzet.projectteamdrie.controller;
 //import java.util.List;
 //import java.util.Optional;
 
+import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.RoleRepository;
@@ -33,6 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
 
     @Autowired
     private UserService userService;
