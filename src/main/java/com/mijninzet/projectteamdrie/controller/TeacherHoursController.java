@@ -155,13 +155,13 @@ public class TeacherHoursController {
         return distinctWeeknrsFromCohort;
     }
 
-    @RequestMapping(value = "teacherSchedule/week/{weeknr}", method = RequestMethod.GET)
-    public @ResponseBody List<CohortSchedule> getTeacherWeekSchedule(@PathVariable Integer weeknr, User user, Model model) {
+    @RequestMapping(value = "teacherSchedule/week/{weeknr}/{cohortId}", method = RequestMethod.GET)
+    public @ResponseBody List<CohortSchedule> getTeacherWeekSchedule(@PathVariable int weeknr, @PathVariable int cohortId, User user, Model model) {
 
         getTeacherFte(user, model);
-        System.out.println("Uit mijn requestparam komt : "+weeknr);
-        int weekint = (Integer)weeknr;
-        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByWeeknr(weekint);
+        System.out.println("Uit mijn requestparam komt : "+weeknr + " en cohortId " + cohortId);
+        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByCohort_CohortIdAndWeeknr(cohortId, weeknr);
+        System.out.println("uit mijn cohortscheduleweek komt " + cohortScheduleWeek);
 
 //        model.addAttribute("week",cohortScheduleWeek);
 

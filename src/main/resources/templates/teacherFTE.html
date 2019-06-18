@@ -140,7 +140,6 @@
 
     function cohortSelect() {
 
-
         $('#weekSelectDropdown').show();
 
         //get the selected id
@@ -186,13 +185,16 @@
 
         var weekselected = $('#dropdown').val();
         var tbody = $('#subjectBody');
+        var cohortId = $('#cohortId').val();
+
+
 
 
         let request = new XMLHttpRequest();
-        request.open('GET', '/teacherSchedule/week/' + weekselected, true);
+        request.open('GET', '/teacherSchedule/week/' + weekselected +'/' + cohortId, true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.setRequestHeader('Accept', 'application/json');
-        request.send(weekselected);
+        request.send(weekselected, cohortId);
 
         request.onload = function () {
             if (request.status == 200) { // analyze HTTP status of the response
@@ -207,14 +209,16 @@
         function getList(list) {
             tbody.empty();
             $.each(list, function (key, val) {
+                if(val.subject == null) {return;}
                 console.log("In list zit:" + list);
-                tbody.append($("<tr>")
-                    .append($("<td>").append(val.date))
-                    .append($("<td>").append(val.day))
-                    .append($("<td>").append(val.daypart))
-                    .append($("<td>").append(val.subject.subjectName))
-                    .append($("<td>").append(val.user.lastName))
-                )
+                    tbody.append($("<tr>")
+                        .append($("<td>").append(val.date))
+                        .append($("<td>").append(val.day))
+                        .append($("<td>").append(val.daypart))
+                        .append($("<td>").append(val.subject.subjectName))
+                        .append($("<td>").append(val.user.lastName))
+                    )
+
             });
         }
     }

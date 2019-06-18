@@ -50,6 +50,7 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     List<CohortSchedule> getAllByCohort_CohortId(int cohortId);
     List<CohortSchedule> getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(int userId, int subjectId,int cohortId);
     List<CohortSchedule> getAllByWeeknr(int weeknr);
+    List<CohortSchedule> getAllByCohort_CohortIdAndWeeknr(int cohortId, int weeknr);
 
     @Modifying
     @Query(value = "UPDATE mijn_inzet.cohort_schedule SET subject_subject_id = :subjectId  WHERE id = :id", nativeQuery = true)
