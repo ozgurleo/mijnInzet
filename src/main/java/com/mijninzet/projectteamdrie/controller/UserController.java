@@ -10,6 +10,7 @@ package com.mijninzet.projectteamdrie.controller;
 //import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.servlet.ModelAndView;
 //
+
 //import javax.servlet.http.HttpSession;
 //import java.util.List;
 //import java.util.Optional;
@@ -42,6 +43,11 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @RequestMapping("/userDatatable")
+    public String gohome(){
+        return "userDatatables";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
