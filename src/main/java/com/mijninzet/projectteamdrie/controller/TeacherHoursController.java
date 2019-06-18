@@ -120,8 +120,9 @@ public class TeacherHoursController {
     public String getTeacherFte(User user, Model model) {
 
         User currentUser = userService.findById(user.getCurrentUserId());
-        double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
+       // double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
         double userFTE = user.getFte();
+        double availableHours = teacherHoursRepository.getHoursLeft(user.getCurrentUserId());
         List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(10);
         List<Integer> weeknrs = cohortScheduleRepository.getDistinctWeeknumbers();
         List<Subject> subjects = subjectRepository.findAll();
@@ -154,15 +155,17 @@ public class TeacherHoursController {
         return distinctWeeknrsFromCohort;
     }
 
-    @RequestMapping(value = "teacherSchedule/week", method = RequestMethod.GET)
-    public String getTeacherWeekSchedule(@RequestParam("weeknr") Integer weeknr, User user, Model model) {
+    @RequestMapping(value = "teacherSchedule/week/{weeknr}", method = RequestMethod.GET)
+    public @ResponseBody List<CohortSchedule> getTeacherWeekSchedule(@PathVariable Integer weeknr, User user, Model model) {
 
         getTeacherFte(user, model);
-        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByWeeknr(weeknr);
+        System.out.println("Uit mijn requestparam komt : "+weeknr);
+        int weekint = (Integer)weeknr;
+        List<CohortSchedule> cohortScheduleWeek= cohortScheduleRepository.getAllByWeeknr(weekint);
 
-        model.addAttribute("week",cohortScheduleWeek);
+//        model.addAttribute("week",cohortScheduleWeek);
 
-        return "teacherFTE";
+        return cohortScheduleWeek;
     }
 
     @RequestMapping(value="/subject/{subjectId}")
