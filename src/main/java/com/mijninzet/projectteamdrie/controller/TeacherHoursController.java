@@ -140,15 +140,18 @@ public class TeacherHoursController {
         return "teacherFTE";
     }
 
-    @RequestMapping(value = "teacherSchedule/cohort", method = RequestMethod.GET)
-    public String getTeacherSchedule(@RequestParam("cohortId") Integer cohortId, User user, Model model) {
+    @RequestMapping(value = "teacherSchedule/{cohortId}", method = RequestMethod.GET)
+    public @ResponseBody List<Integer> getTeacherSchedule(@PathVariable Integer cohortId, User user, Model model) {
 
         getTeacherFte(user, model);
+        System.out.println("teacherschedule/{cohortid} is aangeroepen");
         List<Integer> distinctWeeknrsFromCohort = cohortScheduleRepository.getDistinctWeeknumbersWhereCohortIdIs(cohortId);
 
-        model.addAttribute("weken", distinctWeeknrsFromCohort);
+//        model.addAttribute("weken", distinctWeeknrsFromCohort);
+        System.out.println("Uit methode komt " + distinctWeeknrsFromCohort);
 
-        return "teacherFTE";
+
+        return distinctWeeknrsFromCohort;
     }
 
     @RequestMapping(value = "teacherSchedule/week", method = RequestMethod.GET)

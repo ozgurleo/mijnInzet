@@ -31,7 +31,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/teacherFTE">ROOSTER</a></li>
                     <li><a href="/showTasks">VACATURBEHEER</a></li>
                     <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
                     <li class="dropdown">
@@ -86,21 +86,41 @@
 </div>
 
 <div class="container">
-
+    <br><br>
+    <h3>ROOSTER</h3>
+    <hr>
     <div class="row">
-        <form class="form-group md-6" th:action="@{/teacherSchedule/week}">
-            <div class="col-md-3">
-                <label mr-sm-4><h3> Kies week </h3></label>
-                <select id="weeknr" name="weeknr" class="form-control md-6">
-                    <option class="col-md-10" th:each="week: ${weeknrs}" th:value="${week}"
-                            th:text="${week}"></option>
+        <form class="form-horizontal" th:action="@{/teacherSchedule/cohort}">
+            <div class="col-md-6">
+                <label mr-sm-4><h3> Kies Cohort </h3></label>
+                <select id="cohortId" name="cohortId" class="form-control md-6" onchange="cohortSelect()">
+                    <option class="col-md-10" th:each="cohort: ${cohorts}" th:value="${cohort.getCohortId()}"
+                            th:text="${cohort}"></option>
                 </select>
                 <br>
                 <button type="submit" class="btn btn-success">kies</button>
             </div>
         </form>
+
+        <form class="form-horizontal" th:action="@{/teacherSchedule/week}">
+            <div class="col-md-4">
+                <label mr-sm-4><h3> Kies Week </h3></label>
+                <select id="weeknr" name="weeknr" class="form-control md-6">
+                    <option class="col-md-10" th:each="week: ${weken}" th:value="${week}"
+                            th:text="${week}"></option>
+                </select>
+
+                <select id="dropdown" name="dropdown"> dropdown
+                </select>
+                <br>
+                <button type="submit" class="btn btn-success">kies</button>
+            </div>
+        </form>
+        <select id="dropdown2" name="dropdown"> dropdown
+        </select>
     </div>
 </div>
+
 
 <br><br>
 
@@ -111,6 +131,7 @@
 
         <thead class="thead-dark">
         <tr>
+            <th scope="col">COHORT</th>
             <th scope="col">DATUM</th>
             <th scope="col">DAG</th>
             <th scope="col">DAGDEEL</th>
@@ -121,6 +142,7 @@
 
         <tbody>
         <tr th:each="cohortscheduleline:${week}">
+            <td style="color: #bb0502" th:text="${cohortscheduleline.getCohort().getCohortId()}">cohort</td>
             <td th:text="${#temporals.format(cohortscheduleline.getDate(),'dd/MMM/yyyy')}">datum</td>
             <td th:text="${cohortscheduleline.getDay()}">dag</td>
             <td th:text="${cohortscheduleline.getDaypart()}">dagdeel</td>
@@ -140,7 +162,7 @@
 <div class="container">
 
     <div class="row">
-        <form class="form-group md-6">
+        <form class="form-group md-6" id="subjectList">
             <div class="col-md-3">
                 <label mr-sm-4><h3> Kies Vak </h3></label>
                 <select id="subjectId" name="subjectId" class="form-control md-6" onchange="subjectSelect()">
@@ -184,36 +206,85 @@
     <hr>
     <br>
 </div>
-<script th:inline="javascript">
+<script >
 
-
-
-    function subjectSelect() {
+    function cohortSelect() {
 
         //get the selected id
-        var subjectId = $('#subjectId').val();
+        var cohortId = $('#cohortId').val();
+        console.log("cohortId = " + cohortId);
 
-        //get the url for the ajax call
-        var url = "/subject/" + subjectId;
+        let dropdown = document.getElementById('dropdown');
+        dropdown.length = 0;
 
-        //do the ajax call
-        $.get(url, populateSubjects);
-    }
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Kies week';
 
-    function populateSubjects(data) {
-        var status = data.responseStatus;
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
 
-        //check the response to make sure it's ok
-        if (status == "Ok") {
-            var response = data.response;
-            console.log(response);
 
-            //get the JSON data
-            var subjectName = response.subjectName;
-            var responseString = response.toString();
-            console.log(subjectName.valueOf());
-            console.log(responseString);
+        let request = new XMLHttpRequest();
+        request.open('GET', '/teacherSchedule/' + cohortId, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Accept', 'application/json');
+        request.send(cohortId);
 
+        request.onload = function () {
+            if (request.status == 200) { // analyze HTTP status of the response
+
+                console.log(`Done, got ${request.response.length} bytes`);
+                // haal de data uit de request
+                let weken = JSON.parse(request.response); // de data is in ASCII format, nu nog naar object omzetten
+                let option;
+                for (let i = 0; i < weken.length; i++) {
+                    option = document.createElement('option');
+                    option.text = weken[i];
+                    option.value = weken[i];
+                    dropdown.add(option);
+                    console.log(option);
+                }
+            } else {
+                console.log("Reached the server, but it returned an error");
+            }
+
+
+                //get the url for the ajax call
+                // var url = "/teacherSchedule/" + cohortId;
+
+                //do the ajax call
+                //    $.get(url, populateSubjects);
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: "/teacherSchedule/" + cohortId,
+                //     async: true,
+                //
+                //     success: function (response) {
+                //         console.log("De weken zijn " + response.valueOf());
+                //         let listweken = JSON.parse(response.split);
+                //        console.log(listweken);
+                //     },
+                //     error: function (response) {
+                //         alert('Er ging iets mis...');
+                //     }
+                // });
+
+
+            }
+
+            // function populateSubjects(data) {
+            // var status = data.responseStatus;
+            //
+            // //check the response to make sure it's ok
+            // if (status == "Ok") {
+            //     var response = data.response;
+            //     console.log(response);
+            //
+            //     //get the JSON data
+            //     var subjectName = response.subjectId.getAttribute();
+            //     console.log(subjectName.valueOf());
+            //
 
             //set the profile badge values
             // $('#employeePic').attr("src", imageFile);
@@ -228,8 +299,8 @@
             // $('#employeeHours').val(hoursPerWeek);
 
             //show the hidden elements
-            $('#profileRow').css('visibility','visible');
-        }
+            //     $('#profileRow').css('visibility','visible');
+            // }
 
 
     }
