@@ -44,8 +44,8 @@
                     <select class="mdb-select md-form colorful-select dropdown-dark" th:field="*{cohort}"
                             required="required">
                         <option selected value="Kies Cohort"> Kies Cohort</option>
-                        <option th:each="cohorts: ${cohorts}" th:value="${cohorts.getCohortId()}"
-                                th:text="${cohorts.getCohortId()}">
+                        <option th:each="cohort: ${cohorts}" th:value="${cohort.intValue()}"
+                                th:text="${cohort.intValue()}">
                     </select>
 
                     <!--<input type="text" th:field="*{cohort}" placeholder="Cohort" required="required"/>-->

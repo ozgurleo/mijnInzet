@@ -36,4 +36,8 @@ public class CohortService {
         return weeks;
     }
 
+    public List<Integer> getCohortIds(){
+        return cohortRepository.getCohortIds();
+    }
+
 }
