@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Cohort {
+public class Cohort implements Comparable<Cohort> {
 
     @Id
     private int cohortId;
@@ -63,4 +63,9 @@ public class Cohort {
                 " tot " + endDate;
     }
 
+    @Override
+    public int compareTo(Cohort o) {
+       int result= (cohortId>o.cohortId) ? 1 : (cohortId<o.cohortId) ? -1 : 0;
+       return result;
+    }
 }

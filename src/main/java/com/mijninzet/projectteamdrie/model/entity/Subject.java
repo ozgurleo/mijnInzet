@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 @Entity
 @Table(name = "subject")
-public class Subject {
+public class Subject{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int subjectId;
@@ -79,4 +79,6 @@ public class Subject {
                 ", yearsToExpiryDate=" + yearsToExpiryDate +
                 '}';
     }
+
+
 }

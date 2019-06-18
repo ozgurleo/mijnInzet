@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.controller.subjectcontroller;
 
+import com.mijninzet.projectteamdrie.model.comparator.SubjectNameComparator;
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
 import com.mijninzet.projectteamdrie.model.entity.Subject;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -33,6 +35,7 @@ public class SubjectWebController {
     @RequestMapping("/subject/list")
     public String listSubject(Model model){
         subjectList=subjectService.findAll();
+        Collections.sort(subjectList,new SubjectNameComparator());
         cohortList=cohortService.findAll();
         model.addAttribute("subjects",subjectList);
         model.addAttribute("AAA",cohortList);
@@ -52,7 +55,7 @@ public class SubjectWebController {
     @GetMapping("/subject/updateSubject")
     public String updateSubject(@RequestParam("subjectId") int subjectId,  Model model){
         Subject subject= subjectService.findById(subjectId);
-        model.addAttribute("subject", subject);
+        model.addAttribute("sub", subject);
         return "subject/subject-form";
     }
 
