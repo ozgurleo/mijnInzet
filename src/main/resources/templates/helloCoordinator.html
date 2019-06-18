@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/logo.css}"/>
-
 </head>
 
+
 <body>
+
 
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -30,9 +31,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a></li>
-                    <li><a href="/register">NIEUWE GEBRUIKER</a></li>
-                    <li><a href="/cohort/createCohort">BEHEER COHORTEN</a></li>
+                    <li><a href="subject/list">VAKKENBEHEER</a></li>
+
                 </ul>
                 <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-primary">Log Out</button>
@@ -43,8 +43,9 @@
     </nav>
 </div>
 
+<br><br><br>
 
-<br><br>
+
 <body  class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
@@ -57,45 +58,54 @@
         </div>
     </header>
 
-<!--    <main roleName="main" class="inner cover">-->
-<!--        <h1 class="cover-heading">Welkom </h1>-->
-<!--        <span style="color: blue" th:text="${user}"></span>-->
-<!--        <h3>Je bent ingelogd als administrator</h3>-->
-
-
-<!--        <p class="lead">Je kunt hier gebruikers zien </p>-->
-<!--        <p class="lead">-->
-<!--            <a href="/users/list" class="btn btn-lg btn-primary">Overzicht gebruikers </a>-->
-<!--        </p>-->
-<!--    </main>-->
     <main roleName="main" class="inner cover">
         <h2 style="color:black; font-weight: bold " class="cover-heading">Welkom </h2>
         <br>
         <h3 STYLE="color: #555D9C"><span th:text="${user.toString()}"></span></h3>
         <br>
-        <h3 style="color: 	#2C3485" >Je bent ingelogd als Admin</h3>
+        <h3 style="color: 	#2C3485" >Je bent ingelogd als coordinator</h3>
 
+        <nav class="nav nav-masthead justify-content-center">
+            <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+        </nav>
         <br>
-<!--        <p class="lead">Bekijk direct je uren overzicht </p>-->
-<!--        <p class="lead">-->
-<!--            <a href="/users/teacherFTE" class="btn btn-lg btn-primary" style="background-color: #555D9C;!important;">Mijn uren overzicht </a>-->
-<!--        </p>-->
-        <p class="lead">Je kunt hier gebruikers zien </p>-->
-                <p class="lead">
-                    <a href="/users/list"class="btn btn-lg btn-primary" style="background-color: #555D9C;!important;">Overzicht gebruikers </a>
-                </p>
-    </main>
 
+        <p class="lead">Ga direct naar vakkenbeheer</p>
+        <p class="lead">
+            <a href="/subject/list" class="btn btn-lg btn-primary">VAKKENBEHEER</a>
+        </p>
+    </main>
 
 </div>
 
-
+<!--<footer class="mastfoot mt-auto">-->
+<!--    <div class="inner">-->
+<!--        <br><br>-->
+<!--        <p>-->
+<!--        <address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address>-->
+<!--        </p>-->
+<!--    </div>-->
+<!--</footer>-->
+<div class="container">
+    <footer class="page-footer " style="background-color: #d7e2e9;,height:50px">
+        <div class="footer-copyright text-center py-3">© Voorjaar 2019 Copyright:
+            <a href="#"> Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</a>
+        </div>
+    </footer>
+</div>
 </body>
-<footer class="mastfoot mt-auto">
-    <div class="inner">
-        <br><br>
-        <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
-    </div>
-</footer>
+
+
+<script>
+    // JavaScript popup window function
+    function basicPopup(url) {
+        popupWindow = window.open(url, 'popUpWindow', 'height=70000,width=500,left=50,top=50,resizable=yes,' +
+            'scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
+    }
+
+</script>
+
 </body>
 </html>

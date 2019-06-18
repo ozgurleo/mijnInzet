@@ -27,7 +27,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/users/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/users/teacherFTE">MIJN ROOSTER</a></li>
                     <li><a href="/showTasks">VACATURBEHEER</a></li>
                     <li><a href="/applicationBasket">SOLLICITATIES</a></li>
                     <li class="dropdown">
@@ -49,70 +49,11 @@
 </div>
 
 
-
-<!--    <div class="table-responsive col-sm-10">-->
-<!--        <table id="applicationTable" class="table table-bordered">-->
-<!--            <h3 class="Vacatures">SOLLICITATIES</h3>-->
-<!--            <tablehead>-->
-<!--                <thead class="thead-dark">-->
-<!--                <tr>-->
-<!--                    <th>Taak_ID</th>-->
-<!--                    <th>Taakbeschrijving</th>-->
-<!--                    <th>Begrootte uren</th>-->
-<!--                    <th>Naam sollicitant</th>-->
-<!--                    <th>Datum sollicitatie</th>-->
-<!--                    <th>Opgegeven uren wijzigen</th>-->
-<!--                    <th>Uren opslaan</th>-->
-<!--                    <th>Sollicitatie annuleren</th>-->
-
-<!--                </tr>-->
-<!--                </thead>-->
-<!--            </tablehead>-->
-
-<!--            <tablebody>-->
-<!--                <tr th:each="appl:${applicationBasket}">-->
-<!--                    <form th:id="${appl[0]}" th:action="@{/taskApplications/taskId/fullName/availHours}" method="post">-->
-
-<!--                        <td>-->
-<!--                    <input type="${appl[0]}" NAME ="taskId" id= "taskId" style="background-color:-->
-<!--                        transparent;border: #FF1C19" th:value="${appl[0]}" size="4" readonly/>-->
-<!--                    </td>-->
-<!--                    <td th:text="${appl[1]}">TaskName</td>-->
-<!--                    <td th:text="${appl[2]}">esthours</td>-->
-<!--                    <td>-->
-<!--                    <input type="${appl[3]}" NAME ="fullName" id= "fullName" style="background-color:-->
-<!--                        transparent;border: #FF1C19" th:value="${appl[3]}" size="20" readonly/>-->
-<!--                    </td>-->
-<!--                        <td th:text="${appl[4]}">applDate</td>-->
-<!--                    <td>-->
-<!--                    <input TYPE="text" NAME ="availHours" id="availHours" th:value="${appl[5]}" SIZE="11" th:form = "${appl[0]}" style="background-color: transparent;-->
-<!--                           border-color: brown;border-style:solid;text-align: center"  />-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <div>-->
-<!--                            <button type="submit" class="btn btn-info" th:value="updateAppl" name="updateAppl"-->
-<!--                                    th:id="${appl[0]}" th:form ="${appl[0]}">OPSLAAN</button>-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <div>-->
-<!--                            <button type="submit" class="btn btn-danger" th:value="removeAppl" name="removeAppl"-->
-<!--                                    th:id="${appl[0]}" th:form ="${appl[0]}">ANNULEER</button>-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                    </form>-->
-<!--                </tr>-->
-<!--            </tablebody>-->
-
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</form>-->
 <div class="container">
-    <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
         <h3 class="Vacatures">SOLLICITATIES</h3>
 
-        <thead class="thead-dark">
+        <thead style="background-color: #555D9C;color: white;!important;">
         <tr>
             <th>Taak_ID</th>
             <th>Taakbeschrijving</th>

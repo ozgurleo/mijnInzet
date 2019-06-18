@@ -3,27 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logo.css}"/>
 
 </head>
 
 <body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/welcomeScreen">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/generateCohortSchedule">COHORT-ROOSTER BEHEER</a></li>
+
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
 
 <!-- Navigatie-menu -->
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/helloTeacher">HOME</a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
-    </form>
-</nav>
+<!--<nav class="navbar navbar-dark bg-dark">-->
+<!--    <a class="navbar-brand" href="/welcomeScreen">HOME</a>-->
+<!--    <a class="nav-link" href=#> </a>-->
+<!--    <a class="nav-link" href=#> </a>-->
+<!--    <a class="nav-link" href=#> </a>-->
+<!--    <a class="nav-link" href=#> </a>-->
+<!--    <a class="nav-link" href=#> </a>-->
+<!--    <a class="nav-link" href=#> </a>-->
+<!--    <form th:action="@{/logout}" method="post">-->
+<!--        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
+<!--        &lt;!&ndash;    <a class="nav-link" type="submit">UITLOGGEN</a>&ndash;&gt;-->
+<!--    </form>-->
+<!--</nav>-->
 
 <!-- Hoofdtekst  -->
 
@@ -33,7 +63,7 @@
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
-            <h1 class="masthead-brand">Mijn Inzet</h1>
+                <img th:src="@{/images/logoo.jpg} " th:width="200px" th:height="200px" >
             </div>
         </div>
     </header>

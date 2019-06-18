@@ -2,6 +2,7 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
+import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
 import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
@@ -96,11 +97,10 @@ public class CohortController {
                     CsNoon.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsNoon);
                     break;
-                case "TUESAY":
+                case "TUESDAY":
                     CsMorning.setDay("dinsdag");
                     CsMorning.setDaypart("ochtend");
                     CsMorning.setCohort(cohortRepository.getByCohortId(cohortId));
-                    CsMorning.setDate(date);
                     CsMorning.setWeeknr(date.get(weekFields.weekOfWeekBasedYear()));
                     cohortSchedlRepo.save(CsMorning);
                     CsNoon.setDay("dinsdag");
@@ -156,13 +156,5 @@ public class CohortController {
         }
 
     }
-
-
-    @GetMapping(value="/generateCohortSchedule")
-    public String generateCohortSchedule(){
-
-    return "generateCohortSchedule";
-    }
-
 
 }

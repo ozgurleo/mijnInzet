@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Welkomstscherm</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logo.css}"/>
     <style type="text/css">
 
     </style>
@@ -19,23 +18,27 @@
 <body>
 
 <!-- Navigatie-menu -->
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">HOME</a>
+            </div>
 
-<nav class="navbar navbar-dark bg-dark">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
 
 
-    <a class="navbar-brand" href="/helloCoordinator">HOME</a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <a class="nav-link" href=#> </a>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
-        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
-    </form>
-</nav>
-
-<!-- Hoofdtekst  -->
 
 <br><br><br>
 <body class="text-center" onload="showButton()">
@@ -43,7 +46,8 @@
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
-                <h1 class="masthead-brand">Mijn Inzet</h1>
+
+                <img th:src="@{/images/logoo.jpg} " th:width="200px" th:height="200px" >
             </div>
         </div>
     </header>
@@ -51,29 +55,30 @@
     <main roleName="main" class="inner cover">
         <h2 class="cover-heading">Welkom </h2>
         <h2 STYLE="color: blue"><span th:text="${user.toString()}"></span></h2>
-        <br>
 
-        <h4>selecteer een scherm: </h4>
+
+        <h2 style="color:#2E3279 ">Selecteer een scherm: </h2>
         <nav class="nav nav-masthead justify-content-center">
         </nav>
 
-
         <div class="container">
 
-                <p class="COORDINATORButton">
-                    <a th:id="COORDINATOR" href="/subject/list" class="btn btn-lg btn-primary" style="display:none">COORDINATOR</a>
+            <p class="ADMINButton">
+                <a th:id="ADMIN" href="/helloAdmin" class="btn btn-lg btn-primary" style="display:none; float: left;margin-left:20%;margin-right: 10px">ADMINISTRATEUR</a>
+            </p>
+
+                <p class="COORDINATORButton" style="float: left; margin-left:10px;margin-right: 10px">
+                    <a th:id="COORDINATOR" href="/helloCoordinator" class="btn btn-lg btn-primary" style="display:none">COORDINATOR</a>
                 </p>
 
                 <p class="TEACHERButton">
-                    <a th:id="TEACHER" href="/showTasks" class="btn btn-lg btn-primary" style="display:none">DOCENT</a>
+                    <a th:id="TEACHER" href="/helloTeacher" class="btn btn-lg btn-primary" style="display:none;float: left; margin-left: 10px;margin-right: 10px">DOCENT</a>
                 </p>
 
-                <p class="ADMINButton">
-                    <a th:id="ADMIN" href="/users/list" class="btn btn-lg btn-primary" style="display:none">ADMINISTRATEUR</a>
-                </p>
+
 
                 <p class="SCHEDULERButton">
-                    <a th:id="SCHEDULER" href="/generateCohortSchedule" class="btn btn-lg btn-primary" style="display:none">ROOSTERAAR</a>
+                    <a th:id="SCHEDULER" href="/helloScheduler" class="btn btn-lg btn-primary" style="display:none; float: left; margin-left: 10px;margin-right: 10px">ROOSTERAAR</a>
                 </p>
 
 
@@ -101,19 +106,19 @@
         for (var i = 0; i < arrayLength; i++) {
             console.log(roleArray[i]);
 
-            if (roleArray[i] == "ADMIN") {
+            if (roleArray[i] === "ADMIN") {
 
                 document.getElementById("ADMIN").style.display = "block";
 
-            } else if (roleArray[i] == "SCHEDULER") {
+            } else if (roleArray[i] === "SCHEDULER") {
 
                 document.getElementById("SCHEDULER").style.display = "block";
 
-            } else if (roleArray[i] == "COORDINATOR" || roleArray[i] == "MANAGER") {
+            } else if (roleArray[i] === "COORDINATOR" || roleArray[i] === "MANAGER") {
 
                 document.getElementById("COORDINATOR").style.display = "block";
 
-            } else if (roleArray[i] == "TEACHER") {
+            } else if (roleArray[i] === "TEACHER") {
 
                 document.getElementById("TEACHER").style.display = "block";
             }

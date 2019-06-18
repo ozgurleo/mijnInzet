@@ -287,6 +287,8 @@ public class CohortScheduleController {
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate dayDate = LocalDate.of(year, month, day);
+        String schedId=request.getParameter("scheduleId");
+        int scheduledId=Integer.parseInt(schedId);
 
         String weekDay = request.getParameter("day");
         String dayPart = request.getParameter("daypart");
@@ -364,7 +366,7 @@ public class CohortScheduleController {
                 newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
                 newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
-                cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
+                cohortScheduleRepo.assignTeacherToSubject(teacherId,scheduledId);
                 System.out.println("uren op te tellen of af te trekken --> " + newHoursToSubract);
                 System.out.println(" oude uren over nieuwe leraar" +teacherHoursRepository.getHoursLeft(teacherId) );
                 System.out.println("nieuwe uren over nieuwe leraar : " + newHoursLeft);
@@ -384,7 +386,7 @@ public class CohortScheduleController {
                 int newHoursLeft = teacherHoursRepository.getHoursLeft(teacherId) - newHoursToSubract;
                 int newHoursUsed = teacherHoursRepository.getHoursUsed(teacherId) + newHoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, teacherId);
-                cohortScheduleRepo.assignTeacherToSubject(teacherId,dayPart, dayDate);
+                cohortScheduleRepo.assignTeacherToSubject(teacherId,scheduledId);
 
             }
             return result;
@@ -412,11 +414,15 @@ public class CohortScheduleController {
     public String generateCohortSchedule(Model model) {
         model.addAttribute("subjects", subjectRepo.getSubjects());
         model.addAttribute("teachers", userRepo.getTeachers());
-        model.addAttribute("rooms", subjectRepo.getRooms());
         model.addAttribute("preferences", subjectRepo.getPreferences());
         model.addAttribute("cohorts", cohortScheduleRepo.getCohorts());
-        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
 
+        if(cohortScheduleRepo.getScheduleLastCohort()!=null){
+        model.addAttribute("cohortschedule", cohortScheduleRepo.getScheduleLastCohort());
+        }else{
+            CohortSchedule tempCS = new CohortSchedule();
+            model.addAttribute("cohortschedule", tempCS);
+        }
         return "generateCohortSchedule";
     }
 
@@ -424,31 +430,22 @@ public class CohortScheduleController {
     public @ResponseBody
     String subjectCohortCoupeling(HttpServletRequest request) {
         System.out.println("OZGUR METHODE IS AANGEROEPEN!!!");
-
-//        String buttonClicked = request.getParameter("button");
         int cohortId = Integer.parseInt(request.getParameter("cohortnr"));
         String[] arrOfDate = request.getParameter("dateDay").split("-", 0);
         int year = Integer.parseInt(arrOfDate[0]);
         int month = Integer.parseInt(arrOfDate[1]);
         int day = Integer.parseInt(arrOfDate[2]);
         LocalDate dayDate = LocalDate.of(year, month, day);
+        String tempId = request.getParameter("scheduleId");
+        int id = Integer.parseInt(tempId);
 
         String weekDay = request.getParameter("day");
         String dayPart = request.getParameter("daypart");
         int subjectId = Integer.parseInt(request.getParameter("subjectnr"));
-        System.out.println("DIT IS DE OPGESLAGEN NUMMER VH SUBJECT/VAK IN DE OZGUR CODE: "+ subjectId);
-        String result = "";
 
-            CohortSchedule newCS = new CohortSchedule();
-            newCS.setClassRoom("");
-            newCS.setDay(weekDay);
-            newCS.setDaypart(dayPart);
-            newCS.setDate(dayDate);
-            newCS.setCohort(cohortRepository.getByCohortId(cohortId));
-            newCS.setSubject(subjectRepo.getBySubjectId(subjectId));
 
-            cohortScheduleRepo.save(newCS);
-return "OK";
+        cohortScheduleRepo.assignSubjectToCohort(subjectId,id);
+        return "OK";
 
     }
 

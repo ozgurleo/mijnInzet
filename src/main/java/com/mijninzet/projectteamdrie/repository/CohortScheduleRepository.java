@@ -38,9 +38,9 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
 
 
     @Modifying
-    @Query(value = "UPDATE mijn_inzet.cohort_schedule SET user_user_id = :teacherId  WHERE daypart= :dayPart AND date= :dayDate ", nativeQuery = true)
+    @Query(value = "UPDATE mijn_inzet.cohort_schedule SET user_user_id = :teacherId  WHERE id= :scheduleId ", nativeQuery = true)
     @Transactional
-    void assignTeacherToSubject(@Param("teacherId") Integer teacherId, @Param("dayPart") String dayPart, @Param("dayDate") LocalDate dayDate);
+    void assignTeacherToSubject(@Param("teacherId") Integer teacherId, @Param("scheduleId") Integer scheduleId);
 
     @Query(value= "SELECT DISTINCT weeknr FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id=:cohortId ", nativeQuery = true)
     List<Integer> getDistinctWeeknumbersWhereCohortIdIs(@Param("cohortId") Integer cohortId);
@@ -50,6 +50,12 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     List<CohortSchedule> getAllByCohort_CohortId(int cohortId);
     List<CohortSchedule> getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(int userId, int subjectId,int cohortId);
     List<CohortSchedule> getAllByWeeknr(int weeknr);
+
+    @Modifying
+    @Query(value = "UPDATE mijn_inzet.cohort_schedule SET subject_subject_id = :subjectId  WHERE id = :id", nativeQuery = true)
+    @Transactional
+    void assignSubjectToCohort(@Param("subjectId") Integer subjectId, @Param("id") Integer id);
+
 
 
 
