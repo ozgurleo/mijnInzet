@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Subject Toevoegen</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function numberCheck(){
+            var contentOfGeschatteUren = document.getElementsByName("num");
+            if(isNaN(contentOfGeschatteUren)){
+                console.log(contentOfGeschatteUren)
+              alert("Geschatte uren moeten nummer zijn")
+                return false;
+            }else {
+                return true;
+                console.log("*****")
+            }
+        }
+
+    </script>
 </head>
 
 <body>
@@ -21,7 +36,7 @@
     <p class="h4 mb-4">Een vak toevoegen</p>
 
     <form action="#" th:action="@{/subject/save}"
-          th:object="${subject}" method="POST">
+          th:object="${subject}" method="POST" name="newSubjectForm" onsubmit="return numberCheck()">
 
         <input type="hidden" th:field="*{subjectId}" />
 
@@ -29,7 +44,7 @@
                class="form-control mb-4 col-4" placeholder="Naam" required="required">
 
         <input type="text" id="estimatedHours" th:field="*{estimatedHours}"
-               class="form-control mb-4 col-4" placeholder="Geschatte Uren" required="required">
+               class="form-control mb-4 col-4" placeholder="Geschatte Uren" required="required" name="num" ><span id="numlock"></span>
 
         <input type="text" id="explatanation" th:field="*{explanation}"
                class="form-control mb-4 col-4" placeholder="Beschrijving" required="required">
