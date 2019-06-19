@@ -21,6 +21,19 @@
                     swal("Vrijdag Avond\n" + "SERIEUS??")
                 }
             })
+
+            $('#submit').on('click',function () {
+                var cohort = $('#cohort').val()
+                console.log(cohort)
+                if(cohort==="NA"){
+                    alert("U moet een cohort kiezen")
+                    return false
+                }else{
+                    return true
+                }
+
+            })
+
         })
 
     </script>
@@ -43,7 +56,7 @@
                     <input type="hidden" th:field="*{id}"/>
                     <select class="mdb-select md-form colorful-select dropdown-dark" th:field="*{cohort}"
                             required="required">
-                        <option selected value="Kies Cohort"> Kies Cohort</option>
+                        <option  id="cohort" selected value="NA"> Kies Cohort</option>
                         <option th:each="cohort: ${cohorts}" th:value="${cohort.intValue()}"
                                 th:text="${cohort.intValue()}">
                     </select>
@@ -136,28 +149,28 @@
                             <th scope="row">Avond</th>
                             <td>
                                 <select class="mdb-select md-form" th:field="*{maandagAvond}" required="required">
-                                    <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                    <option selected value="NA"> Bent u beschikbaar?</option>
                                     <option value="JA">JA</option>
                                     <option value="NEE">NEE</option>
                                 </select>
                             </td>
                             <td>
                                 <select class="mdb-select md-form" th:field="*{dinsdagAvond}" required="required">
-                                    <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                    <option selected value="NA"> Bent u beschikbaar?</option>
                                     <option value="JA">JA</option>
                                     <option value="NEE">NEE</option>
                                 </select>
                             </td>
                             <td>
                                 <select class="mdb-select md-form" th:field="*{woensdagAvond}" required="required">
-                                    <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                    <option selected value="NA"> Bent u beschikbaar?</option>
                                     <option value="JA">JA</option>
                                     <option value="NEE">NEE</option>
                                 </select>
                             </td>
                             <td>
                                 <select class="mdb-select md-form" th:field="*{donderdagAvond}" required="required">
-                                    <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                    <option selected value="NA"> Bent u beschikbaar?</option>
                                     <option value="JA">JA</option>
                                     <option value="NEE">NEE</option>
                                 </select>
@@ -165,7 +178,7 @@
                             <td>
                                 <select id="vrijdagAvond" class="mdb-select md-form" th:field="*{vrijdagAvond}"
                                         required="required">
-                                    <option selected value="Kies Cohort"> Bent u beschikbaar?</option>
+                                    <option selected value="NA"> Bent u beschikbaar?</option>
                                     <option value="JA">JA</option>
                                     <option value="NEE">NEE</option>
                                 </select>
@@ -176,7 +189,7 @@
                     </table>
                 </div>
                 <P>
-                    <input type="Submit" value="Submit" name="B1"/>
+                    <input id="submit" type="Submit" value="Submit" name="B1"/>
                 </P>
             </div>
         </div>
