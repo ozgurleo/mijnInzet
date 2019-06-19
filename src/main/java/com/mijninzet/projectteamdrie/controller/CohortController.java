@@ -59,25 +59,28 @@ public class CohortController {
         if(exists){
             return "createCohortError";
         }
-        cohort.setBeginDate(cohort.getBeginDate().plusDays(1));
-        cohort.setEndDate(cohort.getEndDate().plusDays(1));
+        cohort.setBeginDate(cohort.getBeginDate());
+        cohort.setEndDate(cohort.getEndDate());
         cohortRepository.save(cohort);
         // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
         System.out.println("De begindateum= " + cohort.getBeginDate() );
         System.out.println("De begindateum= " + cohort.getEndDate() );
         System.out.println("De cohort= " + cohort.getCohortId() );
+
+        System.out.println("De begindateum in de makeSchedule =  " + cohort.getBeginDate() );
+        System.out.println("De begindateum in de makeSchedule =  " + cohort.getEndDate() );
         makeDefaultCohortSchedule(cohort.getBeginDate(),cohort.getEndDate(),cohort.getCohortId());
         return ("redirect:/cohort/createCohort");
     }
 
     //hier cohortSchedule (default rooster) aangemaakt voor de nieuwe Cohort
     public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId){
-
-
-
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
 
         for (LocalDate date = beginDate; date.isBefore(endDate); date = date.plusDays(1)) {
+            System.out.println("DATE IN FOR LOOP IS: " + date);
+
+
             CohortSchedule CsMorning = new CohortSchedule();
             CohortSchedule CsNoon = new CohortSchedule();
             DayOfWeek dayOfWeek = date.getDayOfWeek();
