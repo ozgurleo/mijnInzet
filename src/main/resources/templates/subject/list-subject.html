@@ -13,17 +13,21 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+
         $(function () {
 
 
             $('#cohortKopolen').on('click',function () {
                 var cohort = $('#cohort-dropdown').val()
-                console.log($('#cohort-dropdown').val())
-                console.log(typeof cohort);
+                console.log(cohort)
+                if(cohort==="NA"){
+                    alert("U moet een cohort kiezen")
+                    return false
+                }else{
+                    window.location.href='/subject/subjectCohortKopelen/'+cohort;
+                    return true
+                }
 
-
-                window.location.href='/subject/subjectCohortKopelen/'+cohort;
-                console.log("cohort"+cohort)
             })
         })
     </script>
@@ -71,7 +75,7 @@
     </a>
 
     <select id="cohort-dropdown">
-        <option value="">Kies Cohort</option>
+        <option value="NA">Kies Cohort</option>
         <option th:each="tempCohort:${AAA}" th:text="${tempCohort.cohortId}">
         </option>
     </select>

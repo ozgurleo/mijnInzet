@@ -61,6 +61,7 @@ public class SubjectWebController {
 
     @GetMapping("subject/deleteSubject")
     public String deleteSubject(@RequestParam("subjectId") int subjectId, Model model){
+        cohortScheduleRepository.nullSubjectId(subjectId);
         subjectService.deleteSubjectById(subjectId);
         return ("redirect:/subject/list");
     }
