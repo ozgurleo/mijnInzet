@@ -122,8 +122,8 @@ public class TeacherHoursController {
         User currentUser = userService.findById(user.getCurrentUserId());
        // double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
         double userFTE = user.getFte();
-        double availableHours = teacherHoursRepository.getHoursLeft(user.getCurrentUserId());
-        List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(10);
+        int availableHours = teacherHoursRepository.getHoursLeft(user.getCurrentUserId());
+        List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(0);
         List<Integer> weeknrs = cohortScheduleRepository.getDistinctWeeknumbers();
         List<Subject> subjects = subjectRepository.findAll();
 
