@@ -338,7 +338,7 @@ public class CohortScheduleController {
                 int newHoursUsed = teacherHoursRepository.getHoursUsed(previousTeacher) - hoursToSubract;
                 teacherHoursRepository.updateTeacherHours(newHoursLeft, newHoursUsed, previousTeacher);
                 System.out.println("uren op te tellen of af te trekken --> " + hoursToSubract);
-                System.out.println(" oude uren over vorige leraar " +teacherHoursRepository.getHoursLeft(previousTeacher) );
+                System.out.println("oude uren over vorige leraar " +teacherHoursRepository.getHoursLeft(previousTeacher) );
                 System.out.println("nieuwe uren over vorige leraar : " + newHoursLeft);
                 System.out.println("oude opgemaakte uren vorige leraar" + teacherHoursRepository.getHoursUsed(previousTeacher));
                 System.out.println("nieuwe opgemaakte uren  vorige leraar" + newHoursUsed);
