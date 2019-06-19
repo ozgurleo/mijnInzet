@@ -13,9 +13,10 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript">
         function numberCheck(){
-            var contentOfGeschatteUren = document.getElementsByName("num");
-            if(isNaN(contentOfGeschatteUren)){
-                console.log(contentOfGeschatteUren)
+            var value , text;
+            value=document.getElementById("estimatedHours").value;
+
+            if(isNaN(value)){
               alert("Geschatte uren moeten nummer zijn")
                 return false;
             }else {
@@ -44,12 +45,12 @@
                class="form-control mb-4 col-4" placeholder="Naam" required="required">
 
         <input type="text" id="estimatedHours" th:field="*{estimatedHours}"
-               class="form-control mb-4 col-4" placeholder="Geschatte Uren" required="required" name="num" ><span id="numlock"></span>
+               class="form-control mb-4 col-4" placeholder="Geschatte Uren" required="required" >
 
         <input type="text" id="explatanation" th:field="*{explanation}"
                class="form-control mb-4 col-4" placeholder="Beschrijving" required="required">
 
-        <button type="submit" class="btn btn-success col-2">Voeg toe</button>
+        <button type="submit" class="btn btn-success col-2" onclick="numberCheck()">Voeg toe</button>
 
     </form>
 

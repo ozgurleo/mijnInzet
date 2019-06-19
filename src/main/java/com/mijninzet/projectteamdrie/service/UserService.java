@@ -20,7 +20,7 @@ public interface UserService {
      List<User> getAllUsers();
      void addUser(User user);
      Optional<User> getUser(int id);
-    //void updateUser(int id,User user);
+
     void updateUser(User user);
 
     void deleteUserById(int theId);
