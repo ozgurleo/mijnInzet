@@ -19,6 +19,7 @@
 
 <body>
 
+
 <div class="container" th:each="temSchedule:${schedule}">
 
     <h3>Employee Directory</h3>
@@ -62,7 +63,7 @@
 
         </tr>
         <tr>
-            <th scope="row">Avonds</th>
+            <th scope="row">Avond</th>
             <td th:class="${temSchedule.getMaandagAvond()}" th:text="${temSchedule.getMaandagAvond()}">...</td>
             <td th:class="${temSchedule.getDinsdagAvond()}" th:text="${temSchedule.getDinsdagAvond()}">...</td>
             <td th:class="${temSchedule.getWoensdagAvond()}" th:text="${temSchedule.getWoensdagAvond()}">...</td>
