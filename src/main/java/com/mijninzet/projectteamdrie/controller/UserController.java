@@ -15,7 +15,6 @@ package com.mijninzet.projectteamdrie.controller;
 //import java.util.List;
 //import java.util.Optional;
 
-import com.mijninzet.projectteamdrie.model.comparator.SubjectNameComparator;
 import com.mijninzet.projectteamdrie.model.comparator.UserNameComparator;
 import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.model.entity.user.Role;
@@ -50,6 +49,11 @@ public class UserController {
         this.userService = userService;
     }
 
+//    @RequestMapping("/userDatatable")
+//    public String gohome(){
+//
+//        return "users2";
+//    }
 @RequestMapping("/userDatatable")
 public String goHome(Model model) {
     List<Role> rolelist = roleRepository.findAll();
@@ -90,7 +94,7 @@ public String goHome(Model model) {
 //    }
 @RequestMapping(value="/update", method=RequestMethod.POST)
     public String update(@ModelAttribute("user") User theUser){
-        userService.addUser(theUser);
+        userService.saveUser(theUser);
         return "redirect:/users/list";
     }
 
