@@ -77,6 +77,11 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="">
+                    <input type="text" th:field="*{status}" placeholder="status" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
                 <select multiple th:field="*{rolesOfUser}" class="form-control">
                     <option th:each="role: ${roles}" th:value="${role.getId()}" th:text="${role.getRoleName()}">
                 </select>

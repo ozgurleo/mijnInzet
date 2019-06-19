@@ -56,29 +56,30 @@
         <h2 STYLE="color: blue"><span th:text="${user.toString()}"></span></h2>
 
 
-        <h2 style="color:#2E3279 ">Selecteer een rol: </h2>
+        <h2 style="color:#2E3279 ">Selecteer een scherm: </h2>
         <nav class="nav nav-masthead justify-content-center">
         </nav>
 
         <div class="container">
+            <div class="row">
+                <div class="col" >
+                    <a th:id="ADMIN" href="/helloAdmin" class="btn  btn-primary" style="display:none;">ADMINISTRATEUR</a>
+                </div>
+                <div class="col">
+                    <a th:id="COORDINATOR" href="/helloCoordinator" class="btn btn-primary" style="display:none">COORDINATOR</a>
+                </div>
 
-            <p class="ADMINButton">
-                <a th:id="ADMIN" href="/helloAdmin" class="btn btn-lg btn-primary" style="display:none; float: left;margin-left:20%;margin-right: 10px">ADMINISTRATEUR</a>
-            </p>
+                <div class="col">
+                    <a th:id="TEACHER" href="/helloTeacher" class="btn  btn-primary" style="display:none;">DOCENT</a>
 
-                <p class="COORDINATORButton" style="float: left; margin-left:10px;margin-right: 10px" >
-                    <a th:id="COORDINATOR" href="/helloCoordinator" class="btn btn-lg btn-primary" style="display:none">COORDINATOR</a>
-                </p>
+                </div>
 
-                <p class="TEACHERButton">
-                    <a th:id="TEACHER" href="/helloTeacher" class="btn btn-lg btn-primary" style="display:none;float: left; margin-left: 10px;margin-right: 10px">DOCENT</a>
-                </p>
+                <div class="col">
 
+                    <a th:id="SCHEDULER" href="/helloScheduler" class="btn  btn-primary" style="display:none;">ROOSTERAAR</a>
 
-                <p class="SCHEDULERButton">
-                    <a th:id="SCHEDULER" href="/helloScheduler" class="btn btn-lg btn-primary" style="display:none; float: left; margin-left: 10px;margin-right: 10px">ROOSTERAAR</a>
-                </p>
-
+                </div>
+            </div>
 
 
         </div>
