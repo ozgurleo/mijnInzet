@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
-    <title>Employee Directory</title>
+    <title>Docent Beschikbaarheid</title>
     <style>
         .NEE { background:red; }
         .JA { background:green; }
@@ -60,7 +60,7 @@
 
 <div class="container" th:each="temSchedule:${schedule}">
 
-    <h3>Employee Directory</h3>
+    <h3>Docent Beschikbaarheid</h3>
     <hr>
 
     <a th:href="@{/schedule/updateSchedule(scheduleId=${temSchedule.id})}"
