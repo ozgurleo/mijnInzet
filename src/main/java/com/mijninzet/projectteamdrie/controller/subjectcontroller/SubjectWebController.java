@@ -55,7 +55,7 @@ public class SubjectWebController {
     @GetMapping("/subject/updateSubject")
     public String updateSubject(@RequestParam("subjectId") int subjectId,  Model model){
         Subject subject= subjectService.findById(subjectId);
-        model.addAttribute("sub", subject);
+        model.addAttribute("subject", subject);
         return "subject/subject-form";
     }
 
