@@ -14,6 +14,7 @@ public class CohortSchedule {
    private int id;
    private String day;
    private String daypart;
+
    private LocalDate date;
     private int weeknr;
 
