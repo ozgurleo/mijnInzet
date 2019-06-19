@@ -55,25 +55,24 @@
 <!--    </form>-->
 <!--</nav>-->
 
-<!-- Hoofdtekst  -->
-
-<br><br><br>
-<body class="text-center">
+<body  class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
             <div class="jumbotron">
+                <!--                <h1 class="masthead-brand">Mijn Inzet</h1>-->
+
                 <img th:src="@{/images/logoo.jpg} " th:width="200px" th:height="200px" >
             </div>
         </div>
     </header>
 
     <main roleName="main" class="inner cover">
-        <h2 class="cover-heading">Welkom </h2>
+        <h2 style="color:black; font-weight: bold " class="cover-heading">Welkom </h2>
         <br>
-        <h3 STYLE="color: blue"><span th:text="${user.toString()}"></span></h3>
+        <h3 STYLE="color: #555D9C"><span th:text="${user.toString()}"></span></h3>
         <br>
-        <h3>Je bent ingelogd als roosteraar</h3>
+        <h3 style="color: 	#2C3485" >Je bent ingelogd als Roosteraar</h3>
 
         <nav class="nav nav-masthead justify-content-center">
             <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
@@ -90,26 +89,22 @@
 
 </div>
 
-<footer class="mastfoot mt-auto">
-    <div class="inner">
-        <br><br>
-        <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
-    </div>
-</footer>
+<div class="container">
+    <footer class="page-footer " style="background-color: #d7e2e9;,height:50px">
+        <div class="footer-copyright text-center py-3">© Voorjaar 2019 Copyright:
+            <a href="#"> Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</a>
+        </div>
+    </footer>
+</div>
 </body>
 
-<!-- Onderteken en dateer de pagina, wees beleefd! -->
 
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <button type="submit" class="btn btn-lg btn-primary">Log Out</button>-->
-<!--</form>-->
 <script>
     // JavaScript popup window function
     function basicPopup(url) {
-        popupWindow = window.open(url,'popUpWindow','height=70000,width=500,left=50,top=50,resizable=yes,' +
+        popupWindow = window.open(url, 'popUpWindow', 'height=70000,width=500,left=50,top=50,resizable=yes,' +
             'scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
     }
-
 </script>
 </body>
 </html>
