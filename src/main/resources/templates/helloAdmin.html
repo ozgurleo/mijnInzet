@@ -43,8 +43,6 @@
     </nav>
 </div>
 
-
-<br><br>
 <body  class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
@@ -57,17 +55,6 @@
         </div>
     </header>
 
-<!--    <main roleName="main" class="inner cover">-->
-<!--        <h1 class="cover-heading">Welkom </h1>-->
-<!--        <span style="color: blue" th:text="${user}"></span>-->
-<!--        <h3>Je bent ingelogd als administrator</h3>-->
-
-
-<!--        <p class="lead">Je kunt hier gebruikers zien </p>-->
-<!--        <p class="lead">-->
-<!--            <a href="/users/list" class="btn btn-lg btn-primary">Overzicht gebruikers </a>-->
-<!--        </p>-->
-<!--    </main>-->
     <main roleName="main" class="inner cover">
         <h2 style="color:black; font-weight: bold " class="cover-heading">Welkom </h2>
         <br>
@@ -75,27 +62,39 @@
         <br>
         <h3 style="color: 	#2C3485" >Je bent ingelogd als Admin</h3>
 
+        <nav class="nav nav-masthead justify-content-center">
+            <!--<a class="nav-link active" href="/users/teacherFTE">Uren overzicht</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+            <!--<a class="nav-link" href="#">link</a>-->
+        </nav>
         <br>
-<!--        <p class="lead">Bekijk direct je uren overzicht </p>-->
-<!--        <p class="lead">-->
-<!--            <a href="/users/teacherFTE" class="btn btn-lg btn-primary" style="background-color: #555D9C;!important;">Mijn uren overzicht </a>-->
-<!--        </p>-->
-        <p class="lead">Je kunt hier gebruikers zien </p>
-                <p class="lead">
-                    <a href="/users/list"class="btn btn-lg btn-primary" style="background-color: #555D9C;!important;">Overzicht gebruikers </a>
-                </p>
-    </main>
 
+        <p class="lead">Je kunt hier gebruikers zien </p>
+        <p class="lead">
+            <a href="/users/list"class="btn btn-lg btn-primary" >Overzicht gebruikers </a>
+        </p>
+    </main>
 
 </div>
 
-
+<div class="container">
+    <footer class="page-footer " style="background-color: #d7e2e9;,height:50px">
+        <div class="footer-copyright text-center py-3">© Voorjaar 2019 Copyright:
+            <a href="#"> Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</a>
+        </div>
+    </footer>
+</div>
 </body>
-<footer class="mastfoot mt-auto">
-    <div class="inner">
-        <br><br>
-        <p><address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address></p>
-    </div>
-</footer>
 </body>
 </html>
+
+
+
+<script>
+    // JavaScript popup window function
+    function basicPopup(url) {
+        popupWindow = window.open(url, 'popUpWindow', 'height=70000,width=500,left=50,top=50,resizable=yes,' +
+            'scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
+    }
+</script>
+</body>
