@@ -59,7 +59,8 @@ public class CohortController {
         if(exists){
             return "createCohortError";
         }
-
+        cohort.setBeginDate(cohort.getBeginDate().plusDays(1));
+        cohort.setEndDate(cohort.getEndDate().plusDays(1));
         cohortRepository.save(cohort);
         // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
         System.out.println("De begindateum= " + cohort.getBeginDate() );
