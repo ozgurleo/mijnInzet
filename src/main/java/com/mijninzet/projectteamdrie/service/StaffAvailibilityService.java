@@ -1,5 +1,6 @@
 package com.mijninzet.projectteamdrie.service;
 
+import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
@@ -29,8 +30,8 @@ public class StaffAvailibilityService {
 
     public List<Integer> getAllCohorts(){
         List<Integer>cohorts=new ArrayList<>();
-        cohorts = staffAvailibilityRepository.getCohorts();
-
+        final int userId = UserSingleton.getInstance().getId();
+        cohorts = staffAvailibilityRepository.getCohorts(userId);
         return cohorts;
     }
 

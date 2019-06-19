@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-public class Exception {
+public class Exception implements Comparable<Exception>{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int Id;
@@ -87,5 +87,10 @@ public class Exception {
         return "Exception{" +
                 "user=" + user +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Exception o) {
+        return 0;
     }
 }
