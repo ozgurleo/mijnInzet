@@ -21,9 +21,8 @@ import java.util.*;
 import java.time.LocalDate;
 
 
-
 @Controller
-@RequestMapping(value="/cohort")
+@RequestMapping(value = "/cohort")
 
 
 public class CohortController {
@@ -36,11 +35,11 @@ public class CohortController {
     @Autowired
     CohortScheduleRepository cohortSchedlRepo;
 
-    public static final int DAYS_IN_WEEK=7;
+    public static final int DAYS_IN_WEEK = 7;
 
-    @RequestMapping(value="/createCohort", method = RequestMethod.GET)
-    public String getAllCohorts(Model model){
-        List<Cohort>cohorts=new ArrayList<>();
+    @RequestMapping(value = "/createCohort", method = RequestMethod.GET)
+    public String getAllCohorts(Model model) {
+        List<Cohort> cohorts = new ArrayList<>();
         cohorts = cohortRepository.findAll();
         Collections.sort(cohorts);
         Cohort cohort = new Cohort();
@@ -52,28 +51,29 @@ public class CohortController {
         return "createCohort";
     }
 
-    @RequestMapping(value="/createCohort/new/", method= RequestMethod.POST)
-    public String createCohort(@ModelAttribute ("cohort") Cohort cohort, Model model){
+    @RequestMapping(value = "/createCohort/new/", method = RequestMethod.POST)
+    public String createCohort(@ModelAttribute("cohort") Cohort cohort, Model model) {
 
         boolean exists = cohortRepository.existsById(cohort.getCohortId());
-        if(exists){
+        if (exists) {
             return "createCohortError";
         }
-
+        cohort.setBeginDate(cohort.getBeginDate());
+        cohort.setEndDate(cohort.getEndDate());
         cohortRepository.save(cohort);
         // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
-        System.out.println("De begindateum= " + cohort.getBeginDate() );
-        System.out.println("De begindateum= " + cohort.getEndDate() );
-        System.out.println("De cohort= " + cohort.getCohortId() );
-        makeDefaultCohortSchedule(cohort.getBeginDate(),cohort.getEndDate(),cohort.getCohortId());
+        System.out.println("De begindateum= " + cohort.getBeginDate());
+        System.out.println("De begindateum= " + cohort.getEndDate());
+        System.out.println("De cohort= " + cohort.getCohortId());
+
+        System.out.println("De begindateum in de makeSchedule =  " + cohort.getBeginDate());
+        System.out.println("De begindateum in de makeSchedule =  " + cohort.getEndDate());
+        makeDefaultCohortSchedule(cohort.getBeginDate(), cohort.getEndDate(), cohort.getCohortId());
         return ("redirect:/cohort/createCohort");
     }
 
     //hier cohortSchedule (default rooster) aangemaakt voor de nieuwe Cohort
-    public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId){
-
-
-
+    public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId) {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
 
         for (LocalDate date = beginDate; date.isBefore(endDate); date = date.plusDays(1)) {
@@ -81,7 +81,7 @@ public class CohortController {
             CohortSchedule CsNoon = new CohortSchedule();
             DayOfWeek dayOfWeek = date.getDayOfWeek();
             String dayOfWeekName = dayOfWeek.name();
-            switch (dayOfWeekName){
+            switch (dayOfWeekName) {
                 case "MONDAY":
                     CsMorning.setDay("maandag");
                     CsMorning.setDaypart("ochtend");
@@ -156,22 +156,24 @@ public class CohortController {
         }
 
     }
+
     @PostMapping("/save")
-    public String saveCohort(@ModelAttribute("cohort") Cohort cohort ){
+    public String saveCohort(@ModelAttribute("cohort") Cohort cohort) {
         cohortRepository.save(cohort);
         return ("redirect:/cohort/createCohort");
     }
 
     @GetMapping("/deleteCohort")
-    public String deleteSubject(@RequestParam("cohortId") int cohortId){
-        cohortRepository.deleteById(cohortId);;
+    public String deleteSubject(@RequestParam("cohortId") int cohortId) {
+        cohortRepository.deleteById(cohortId);
+        ;
         return ("redirect:/cohort/createCohort");
     }
 
     @GetMapping("/updateCohort")
-    public String updateCohort(@RequestParam("cohortId") int cohortId, Model model){
+    public String updateCohort(@RequestParam("cohortId") int cohortId, Model model) {
         Cohort cohort = cohortRepository.getByCohortId(cohortId);
-        model.addAttribute("cohort" , cohort);
+        model.addAttribute("cohort", cohort);
         return "cohortForm";
     }
 

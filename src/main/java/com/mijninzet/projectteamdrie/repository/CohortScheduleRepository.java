@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, Integer> {
@@ -26,11 +27,34 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     @Query(value="SELECT * FROM mijn_inzet.cohort;", nativeQuery = true)
     ArrayList<Object[]> getCohorts();
 
-    //SELECT user_user_id FROM mijn_inzet.cohort_schedule where date= :dayDate AND daypart= :dayPart AND cohort_cohort_id= :teacherId;
-    //Brahim Code: get all teachers Names by Role=teacher
-    @Query(value="SELECT user_user_id FROM mijn_inzet.cohort_schedule where date= :dayDate AND " +
-            "daypart= :dayPart AND cohort_cohort_id= :cohortId ", nativeQuery = true)
-    String getTeacherAtDateAndDayPart(@Param("dayDate") LocalDate dayDate, @Param("dayPart") String dayPart, @Param("cohortId") Integer cohortId);
+
+    //Brahim Code: get teacher planned at date and daypart
+    @Query(value="SELECT CS.user_user_id FROM mijn_inzet.cohort_schedule CS where CS.date=:dayDate AND CS.daypart= :dayPart AND CS.cohort_cohort_id= :cohortId", nativeQuery = true)
+    @Transactional
+    Integer getTeacherAtDateAndDayPart(@Param("dayDate") LocalDate dayDate,
+                                   @Param("dayPart") String dayPart,
+                                   @Param("cohortId") Integer cohortId);
+
+    //Brahim Code: get teacher planned at date and daypart
+    @Query(value="SELECT CS.user_user_id FROM mijn_inzet.cohort_schedule CS where CS.id= :scheduleId ", nativeQuery = true)
+    @Transactional
+    Integer getTeacherAtRowId(@Param("scheduleId") Integer scheduleId);
+
+
+    //-----------test queruies start here
+    @Query(value="SELECT CS.user_user_id FROM mijn_inzet.cohort_schedule CS where CS.cohort_cohort_id= :cohortId", nativeQuery = true)
+    @Transactional
+    ArrayList<Integer> gettestbyCohortID(@Param("cohortId") Integer cohortId);
+
+    @Query(value="SELECT CS.user_user_id FROM mijn_inzet.cohort_schedule CS where CS.daypart= :dayPart", nativeQuery = true)
+    @Transactional
+    ArrayList<Integer> gettestbyDaypartD(@Param("dayPart") String dayPart);
+
+    @Query(value="SELECT CS.user_user_id FROM mijn_inzet.cohort_schedule CS where CS.date= :dayDate ", nativeQuery = true)
+    @Transactional
+    ArrayList<Integer> gettestbyDayDate(@Param("dayDate") LocalDate dayDate);
+    //----------test queries end here
+
 
     //Brahim Code: get schedule belonging to the latest cohort
     @Query(value="SELECT * FROM mijn_inzet.cohort_schedule WHERE cohort_cohort_id IN (select MAX(cohort_cohort_id) FROM mijn_inzet.cohort_schedule) ;", nativeQuery = true)

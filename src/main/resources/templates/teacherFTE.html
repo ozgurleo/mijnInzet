@@ -207,7 +207,7 @@
         function getList(list) {
             tbody.empty();
             $.each(list, function (key, val) {
-                if(val.subject == null) {return;}
+                if(val.subject == null) {alert("Let op: het rooster is nog niet rond. U krijgt inzage als de roosteraar klaar is.")}
                 console.log("In list zit:" + list);
                     tbody.append($("<tr>")
                         .append($("<td>").append(val.date))
