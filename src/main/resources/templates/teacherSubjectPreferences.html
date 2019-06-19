@@ -77,14 +77,14 @@
                     <div th:switch="${entr.getValue()}">
                         <select th:name="${entr.getKey().getSubjectName()}" class="subjectField">
                             <option th:case="0" selected="selected" th:value="0">selecteer voorkeur.</option>
-                            <option th:case="1" selected="selected" th:value="1">Ik geef dit vak liever niet.</option>
+                            <option th:case="1" selected="selected" th:value="1">Nee, ik geef dit vak liever niet.</option>
                             <option th:case="2" selected="selected" th:value="2">Ja, ik wil dit vak geven.</option>
-                            <option th:case="3" selected="selected" th:value="3">Ja graag! Ik het vak al eerder geven.
+                            <option th:case="3" selected="selected" th:value="3">Ja graag! Ik heb het vak al eerder geven.
                             </option>
 
-                            <option th:value="1">Ik geef dit vak liever niet</option>
-                            <option th:value="2">Ja, ik wil dit vak geven</option>
-                            <option th:value="3">Ja graag! Ik het vak al eerder geven.</option>
+                            <option th:value="1">Nee, ik geef dit vak liever niet.</option>
+                            <option th:value="2">Ja, ik wil dit vak geven.</option>
+                            <option th:value="3">Ja graag! Ik heb het vak al eerder geven.</option>
                         </select>
                     </div>
                 </td>
