@@ -15,6 +15,8 @@ package com.mijninzet.projectteamdrie.controller;
 //import java.util.List;
 //import java.util.Optional;
 
+import com.mijninzet.projectteamdrie.model.comparator.SubjectNameComparator;
+import com.mijninzet.projectteamdrie.model.comparator.UserNameComparator;
 import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.model.entity.user.Role;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -107,8 +110,10 @@ public String goHome(Model model) {
     @RequestMapping("/list")
     public String getAllUsers(Model model) {
         List<Role> rolelist = roleRepository.findAll();
+        List<User> userList=userService.getAllUsers();
+        Collections.sort(userList,new UserNameComparator());
         model.addAttribute("roles", rolelist);
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userList);
         return "users";
     }
 

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 @Entity
 @Table(name = "subject")
-public class Subject{
+public class Subject implements Comparable<Subject>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int subjectId;
@@ -29,6 +29,10 @@ public class Subject{
 
     }
 
+    @Override
+    public int compareTo(Subject o) {
+        return this.getSubjectId() - o.getSubjectId();
+    }
 
     public String getExplanation() {
         return explanation;

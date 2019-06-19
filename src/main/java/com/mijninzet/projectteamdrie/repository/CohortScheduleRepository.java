@@ -57,6 +57,12 @@ public interface CohortScheduleRepository extends JpaRepository<CohortSchedule, 
     @Transactional
     void assignSubjectToCohort(@Param("subjectId") Integer subjectId, @Param("id") Integer id);
 
+    @Modifying
+    @Query(value = "UPDATE mijn_inzet.cohort_schedule SET subject_subject_id = null  WHERE subject_subject_id = :subjectId", nativeQuery = true)
+    @Transactional
+    void nullSubjectId(@Param("subjectId") Integer subjectId);
+
+
 
 
 

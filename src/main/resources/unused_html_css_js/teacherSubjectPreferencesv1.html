@@ -56,7 +56,7 @@
 </div>
 <div class="container">
     <form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">
-        <h5 class="Vakkenvoorkeur">Klik op de dropdownmenu's achter het vak om je voorkeur op te geven</h5>
+        <h5 class="Vakkenvoorkeur">Klik op de buttons rechts om je voorkeur op te geven</h5>
         <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
             <thead style="background-color: #555D9C;color: white;!important;">
             <tr>
@@ -74,19 +74,19 @@
                 <td th:text="${entr.getKey().getEstimatedHours()}">-1</td>
                 <td th:text="${entr.getKey().yearsToExpiryDate}">-1</td>
                 <td>
-                    <div th:switch="${entr.getValue()}">
-                        <select th:name="${entr.getKey().getSubjectName()}" class="subjectField">
-                            <option th:case="0" selected="selected" th:value="0">selecteer voorkeur.</option>
-                            <option th:case="1" selected="selected" th:value="1">Nee, ik geef dit vak liever niet.</option>
-                            <option th:case="2" selected="selected" th:value="2">Ja, ik wil dit vak geven.</option>
-                            <option th:case="3" selected="selected" th:value="3">Ja graag! Ik heb het vak al eerder geven.
-                            </option>
-
-                            <option th:value="1">Nee, ik geef dit vak liever niet.</option>
-                            <option th:value="2">Ja, ik wil dit vak geven.</option>
-                            <option th:value="3">Ja graag! Ik heb het vak al eerder geven.</option>
-                        </select>
-                    </div>
+                    <input type="hidden" th:value="${entr.getValue()}" id="checked"/>
+                    <input type="hidden" th:value="${entr.getKey().getSubjectId()}" id="subjectId"/>
+                    <input id='optie1' type="radio" th:name="${entr.getKey().getSubjectName()}"
+                           th:id="|${entr.getKey().getSubjectId()}optie1|"
+                           value=1> ik geef dit vak liever niet.
+                    <br>
+                    <input id='optie2' type="radio" th:name="${entr.getKey().getSubjectName()}"
+                           th:id="|${entr.getKey().getSubjectId()}optie2|"
+                           value=2> ja, dit vak wil ik geven.
+                    <br>
+                    <input id='optie3' type="radio" th:name="${entr.getKey().getSubjectName()}"
+                           th:id="|${entr.getKey().getSubjectId()}optie3|"
+                           value=3> ja, Ik heb het vak al eerder gegeven.
                 </td>
             </tr>
             </tbody>
@@ -94,5 +94,35 @@
     </form>
     <button type="submit" form="myForm" class="btn btn-lg btn-success">Sla je voorkeuren op</button>
 </div>
+
+<script th:inline="javascript">
+    var preference = document.getElementById('checked');
+    var subjectId = document.getElementById('subjectId');
+    var map = [[${showSubjectsWithPreference}]];
+
+    console.log(map);
+    console.log("scriptrunning");
+    console.log("subnectId" + subjectId);
+    console.log("preference" + preference);
+    console.log("Mapresult:");
+    var value = map[subjectId];
+
+    determineRadioChecked(preference);
+
+    function determineRadioChecked(value) {
+        console.log("checkedFunction aangeroepen");
+        if (value === 1) {
+            document.getElementById('1optie1').checked = true;
+        } else if (value === 2) {
+            document.getElementById('1optie2').checked = true;
+        } else if (value === 3) {
+            document.getElementById("1optie3").checked = true;
+        } else {
+            document.getElementById("1optie1").checked = false;
+            document.getElementById("1optie2").checked = false;
+            document.getElementById("1optie3").checked = false;// default
+        }
+    }
+</script>
 </body>
 </html>
