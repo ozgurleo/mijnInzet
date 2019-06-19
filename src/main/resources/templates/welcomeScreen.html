@@ -60,42 +60,34 @@
         <nav class="nav nav-masthead justify-content-center">
         </nav>
 
-        <div class="container">
-            <div class="row">
-                <div class="col" >
-                    <a th:id="ADMIN" href="/helloAdmin" class="btn  btn-primary" style="display:none;">ADMINISTRATEUR</a>
-                </div>
-                <div class="col">
-                    <a th:id="COORDINATOR" href="/helloCoordinator" class="btn btn-primary" style="display:none">COORDINATOR</a>
-                </div>
 
-                <div class="col">
-                    <a th:id="TEACHER" href="/helloTeacher" class="btn  btn-primary" style="display:none;">DOCENT</a>
-
-                </div>
-
-                <div class="col">
-
-                    <a th:id="SCHEDULER" href="/helloScheduler" class="btn  btn-primary" style="display:none;">ROOSTERAAR</a>
-
-                </div>
-            </div>
-
-
-        </div>
 
     </main>
 
 </div>
+<div class="container">
+    <div class="row">
+        <div id="ADMIN"  class="col" style="display:none;" >
+            <a href="/helloAdmin" class="btn  btn-primary" >ADMINISTRATEUR</a>
+        </div>
 
-<footer class="mastfoot mt-auto">
-    <div class="inner">
-        <br><br>
-        <p>
-        <address>voorjaar 2019<br>Team 3 NoPressure: Esther, Brahim, Semih, Ozgur, Hans</address>
-        </p>
+        <div  id="COORDINATOR" class="col" style="display:none">
+            <a  href="/helloCoordinator" class="btn btn-primary" >COORDINATOR</a>
+        </div>
+
+        <div id="TEACHER" class="col" style="display:none;">
+            <a  href="/helloTeacher" class="btn btn-primary" >DOCENT</a>
+
+        </div>
+        <div  id="SCHEDULER" class="col" style="display:none;">
+
+            <a  href="/helloScheduler" class="btn  btn-primary" >ROOSTERAAR</a>
+
+        </div>
     </div>
-</footer>
+
+</div>
+
 <script th:inline="javascript">
     var roleArray = [[${roles}]];
     var arrayLength = roleArray.length;
@@ -107,19 +99,19 @@
 
             if (roleArray[i] === "ADMIN") {
 
-                document.getElementById("ADMIN").style.display = "block";
+                document.getElementById("ADMIN").style.display = "inline-block";
 
             } else if (roleArray[i] === "SCHEDULER") {
 
-                document.getElementById("SCHEDULER").style.display = "block";
+                document.getElementById("SCHEDULER").style.display = "inline-block";
 
             } else if (roleArray[i] === "COORDINATOR" || roleArray[i] === "MANAGER") {
 
-                document.getElementById("COORDINATOR").style.display = "block";
+                document.getElementById("COORDINATOR").style.display = "inline-block";
 
             } else if (roleArray[i] === "TEACHER") {
 
-                document.getElementById("TEACHER").style.display = "block";
+                document.getElementById("TEACHER").style.display = "inline-block";
             }
         }
 
