@@ -18,7 +18,7 @@
 
     <hr>
 
-    <p class="h4 mb-4">Save Exception</p>
+    <p class="h4 mb-4">Geef een nieuw incident op</p>
 
     <form action="#" th:action="@{/exception/save}"
           th:object="${exception}" method="POST">
@@ -38,12 +38,12 @@
             <option value="NEE">NEE</option>
         </select>
 
-        <button type="submit" class="btn btn-success col-2">Toevoeg</button>
+        <button type="submit" class="btn btn-success col-2">Voeg toe</button>
 
     </form>
 
     <hr>
-    <a th:href="@{/exception/list}">Terug Naar Incident Lijst</a>
+    <a th:href="@{/exception/list}">Terug naar Incidentenlijst</a>
 
 </div>
 </body>
