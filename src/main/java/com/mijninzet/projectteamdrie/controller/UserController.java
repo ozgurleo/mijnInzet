@@ -47,40 +47,47 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/userDatatable")
-    public String gohome(){
+@RequestMapping("/userDatatable")
+public String goHome(Model model) {
+    List<Role> rolelist = roleRepository.findAll();
+    model.addAttribute("roles", rolelist);
+    model.addAttribute("users", userService.getAllUsers());
+    return "users2";
+}
 
-        return "userDatatables";
-    }
+//    @RequestMapping(value = "/update", method = RequestMethod.GET)
+//    public ModelAndView update(@ModelAttribute("user") User theUser) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        List<Role> rolelist = roleRepository.findAll();
+//        modelAndView.addObject("roles", rolelist);
+//        modelAndView.addObject("user", theUser);
+//        modelAndView.setViewName("updateUser"); // resources/template/newUser.html
+//        System.out.println("! ViewName from ModelandView from updatemethod: " + modelAndView.getViewName());
+//        return modelAndView;
+//    }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public ModelAndView update(@ModelAttribute("user") User theUser) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<Role> rolelist = roleRepository.findAll();
-        modelAndView.addObject("roles", rolelist);
-        modelAndView.addObject("user", theUser);
-        modelAndView.setViewName("updateUser"); // resources/template/newUser.html
-        System.out.println("! ViewName from ModelandView from updatemethod: " + modelAndView.getViewName());
-        return modelAndView;
-    }
 
-    @RequestMapping(value="/update", method=RequestMethod.POST)
-    public String registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
-        ModelAndView modelAndView = new ModelAndView();
-        // Check for the validations
-        if(bindingResult.hasErrors()) {
-            modelAndView.addObject("successMessage", "Please correct the errors in form!");
-            modelMap.addAttribute("bindingResult", bindingResult);
-        }
-        else if(userService.isUserAlreadyPresent(user)){
-            modelAndView.addObject("successMessage", "user already exists!");
-        }
-        // we will update the user if, no binding errors
-        else {
-            userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User is updated successfully!");
-        }
-        modelAndView.setViewName("updateUser");
+//    public String registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        // Check for the validations
+////        if(bindingResult.hasErrors()) {
+////            modelAndView.addObject("successMessage", "Please correct the errors in form!");
+////            modelMap.addAttribute("bindingResult", bindingResult);
+////        }
+////        else if(userService.isUserAlreadyPresent(user)){
+////            modelAndView.addObject("successMessage", "user already exists!");
+////        }
+////        // we will update the user if, no binding errors
+////        else {
+////            userService.saveUser(user);
+////            modelAndView.addObject("successMessage", "User is updated successfully!");
+////        }
+//        modelAndView.setViewName("updateUser");
+//        return "redirect:/users/list";
+//    }
+@RequestMapping(value="/update", method=RequestMethod.POST)
+    public String update(@ModelAttribute("user") User theUser){
+        userService.addUser(theUser);
         return "redirect:/users/list";
     }
 
@@ -118,8 +125,11 @@ public class UserController {
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("userId") int theId, Model model) {
+        List<Role> rolelist = roleRepository.findAll();
+        model.addAttribute("roles", rolelist);
         User theUser = userService.findById(theId);
         model.addAttribute("user", theUser);
+
         return "updateUser";
 
     }
