@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class SubjectPreference {
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne

@@ -2,20 +2,16 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.Subject;
-import com.mijninzet.projectteamdrie.model.entity.SubjectPreference;
 import com.mijninzet.projectteamdrie.repository.SubjectPreferenceRepository;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 @Controller
 //@RequestMapping(value = "/teacherPreferences")
@@ -27,19 +23,51 @@ public class SubjectPreferencesController {
     @Autowired
     private SubjectPreferenceRepository subjectPreferenceRepository;
 
+//    @RequestMapping(value = "/showSubjects")
+//    public String getSubjectList(Model model) {
+//        List<Subject> subjectList = subjectRepository.findAll();
+//        model.addAttribute("showSubjects", subjectList);
+//        return "teacherSubjectPreferences";
+//    }
+
     @RequestMapping(value = "/showSubjects")
     public String getSubjectList(Model model) {
+        Map<Subject, Integer> subjectAndPreferenceMap = new LinkedHashMap<>();
         List<Subject> subjectList = subjectRepository.findAll();
-        model.addAttribute("showSubjects", subjectList);
+        System.out.println("ongesorteerd");
+        System.out.println(subjectList);
+        Collections.sort(subjectList);
+        System.out.println("gesorteerd");
+        System.out.println(subjectList);
+        int userId = UserSingleton.getInstance().getId();
+        for (Subject subject : subjectList) {
+            int subjectId = subject.getSubjectId();
+            Integer preference = subjectPreferenceRepository.getPreferenceBySubjectIdAndUserId(subjectId, userId);
+            preference = preference != null ? preference : 0;
+            subjectAndPreferenceMap.put(subject, preference);
+        }
+
+        model.addAttribute("showSubjectsWithPreference", subjectAndPreferenceMap);
         return "teacherSubjectPreferences";
     }
 
+//    private List<Map.Entry<Subject, Integer>> getEntryList() {
+//        Map<Subject, Integer> subjectAndPreferenceMap = new HashMap<>();
+//        List<Subject> subjectList = subjectRepository.findAll();
+//        int userId = UserSingleton.getInstance().getId();
+//        for (Subject s : subjectList) {
+//            int subjectId = s.getSubjectId();
+//            int preference = subjectPreferenceRepository.getPreferenceBySubjectIdAndUserId(subjectId, userId);
+//            subjectAndPreferenceMap.put(s, preference);
+//        }
+//        return new ArrayList<>(subjectAndPreferenceMap.entrySet());
+//    }
 
-    @RequestMapping(value = "/submitPreferences", method = RequestMethod.PUT)
+    @RequestMapping(value = "/submitPreferences", method = RequestMethod.POST)
     public String submitPreferences(HttpServletRequest request, Model model) {
         Enumeration paramNames = request.getParameterNames();
         System.out.println("enums" + paramNames);
-//        test(request);
+//        preference(request);
         while (paramNames.hasMoreElements()) {
             String subjectName = (String) paramNames.nextElement();
             String[] paramValues = request.getParameterValues(subjectName);
@@ -50,9 +78,12 @@ public class SubjectPreferencesController {
             int subjectID = subjectRepository.getSubjectIdByName(subjectName);
             int userId = UserSingleton.getInstance().getId();
             System.out.printf("subjectpref: %d, subject id %d, user id: %d\n", subjectPreference, subjectID, userId);
-            subjectPreferenceRepository.insertPreference(subjectPreference, subjectID, userId);
+            if (subjectPreferenceRepository.getPreferenceBySubjectIdAndUserId(subjectID, userId) == null)
+                subjectPreferenceRepository.insertPreference(subjectPreference, subjectID, userId);
+            else subjectPreferenceRepository.updatePreference(subjectPreference, subjectID, userId);
         }
-        return "teacherSubjectPreferences";
+
+        return getSubjectList(model);
     }
 
 //    @RequestMapping(value = "/submitPreferences", method = RequestMethod.POST)

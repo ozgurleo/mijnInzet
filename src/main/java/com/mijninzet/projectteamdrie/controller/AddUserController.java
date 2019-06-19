@@ -15,12 +15,12 @@ public class AddUserController {
     public String addUser(Model model) {
 
 //        // Dit is een testje
-//        List<Integer> test = new ArrayList<>();
+//        List<Integer> preference = new ArrayList<>();
 //        for (int i = 0; i < 10; i++) {
-//            test.add(i);
+//            preference.add(i);
 //        }
-//        model.addAttribute("test", test);
-//        // einde test
+//        model.addAttribute("preference", preference);
+//        // einde preference
 
         return "addUsers";
     }

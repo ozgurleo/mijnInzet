@@ -26,8 +26,8 @@ public interface StaffAvailibilityRepository extends CrudRepository<StaffAvailab
     List<StaffAvailability> findByUserId(int id);
 
 
-    @Query(value = "SELECT cohort FROM mijn_inzet.staff_availability", nativeQuery = true)
-    List<Integer> getCohorts();
+    @Query(value = "SELECT cohort FROM mijn_inzet.staff_availability WHERE user_id=:teacherId", nativeQuery = true)
+    List<Integer> getCohorts(@Param("teacherId") Integer teacherId);
 
     //Brahim code: get specific Day/daypart availability maandagOchtend
     @Query(value = "SELECT maandag_ochtend FROM mijn_inzet.staff_availability WHERE cohort=:cohortId AND user_id=:teacherId", nativeQuery = true)
