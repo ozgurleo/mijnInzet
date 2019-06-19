@@ -94,7 +94,7 @@ public String goHome(Model model) {
 //    }
 @RequestMapping(value="/update", method=RequestMethod.POST)
     public String update(@ModelAttribute("user") User theUser){
-        userService.saveUser(theUser);
+        userService.updateUser(theUser);
         return "redirect:/users/list";
     }
 
