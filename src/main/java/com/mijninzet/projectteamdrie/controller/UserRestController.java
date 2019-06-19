@@ -19,11 +19,11 @@ public class UserRestController {
     private UserService userService;
 
     @RequestMapping(path="/userss", method= RequestMethod.GET)
-    public List<User> getAllEmployees(){
+    public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
     @RequestMapping(value = "/userss/{id}", method = RequestMethod.GET)
-    public Optional<User> getEmployeeById(@PathVariable("id") int id){
+    public Optional<User> getUserById(@PathVariable("id") int id){
         return userService.getUser(id);
     }
 

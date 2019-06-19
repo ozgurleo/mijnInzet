@@ -49,6 +49,7 @@ public class UserController {
 
     @RequestMapping("/userDatatable")
     public String gohome(){
+
         return "userDatatables";
     }
 
