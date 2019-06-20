@@ -240,11 +240,7 @@ public class CohortScheduleController {
         boolean experience = false;
 
         List<CohortSchedule> cohortScheduleList = cohortScheduleRepo.getAllByUserIdAndSubject_SubjectIdAndCohort_CohortIdIsNot(teacherId, subjectId, cohortId);
-        if (cohortScheduleList.size() > 0) {
-            experience = true;
-        } else {
-            experience = false;
-        }
+        experience = cohortScheduleList.size() > 0;
         return experience;
     }
 

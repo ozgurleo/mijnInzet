@@ -19,8 +19,7 @@ public class CohortService {
 
     public List<Cohort> findAll(){
         List<Cohort>cohorts=new ArrayList<>();
-        cohortRepository.findAll()
-                .forEach(cohorts::add);
+        cohorts.addAll(cohortRepository.findAll());
         return cohorts;
     }
 

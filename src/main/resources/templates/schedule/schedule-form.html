@@ -16,17 +16,17 @@
     <script type="text/javascript">
         $(function () {
             $('#vrijdagAvond').change(function () {
-                var aantwoord = $(this).val()
+                var aantwoord = $(this).val();
                 if (aantwoord == "JA") {
                     swal("Vrijdag Avond\n" + "SERIEUS??")
                 }
-            })
+            });
 
             $('#submit').on('click',function () {
-                var cohort = $('#cohort').val()
-                console.log(cohort)
+                var cohort = $('#cohort').val();
+                console.log(cohort);
                 if(cohort==="NA"){
-                    alert("U moet een cohort kiezen")
+                    alert("U moet een cohort kiezen");
                     return false
                 }else{
                     return true

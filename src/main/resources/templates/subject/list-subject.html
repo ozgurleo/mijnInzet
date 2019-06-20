@@ -21,10 +21,10 @@
 
 
             $('#cohortKopolen').on('click', function () {
-                var cohort = $('#cohort-dropdown').val()
-                console.log(cohort)
+                var cohort = $('#cohort-dropdown').val();
+                console.log(cohort);
                 if(cohort==="NA"){
-                    alert("U moet een cohort kiezen")
+                    alert("U moet een cohort kiezen");
                     return false
                 }else{
                     window.location.href='/subject/subjectCohortKopelen/'+cohort;

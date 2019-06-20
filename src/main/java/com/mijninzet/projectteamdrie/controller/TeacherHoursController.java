@@ -119,10 +119,10 @@ public class TeacherHoursController {
     @GetMapping("teacherFTE")
     public String getTeacherFte(User user, Model model) {
 
-        User currentUser = userService.findById(user.getCurrentUserId());
+        User currentUser = userService.findById(User.getCurrentUserId());
        // double availableHours = userServiceImp.calculateTotalAvailableHours(currentUser.getId());
         double userFTE = user.getFte();
-        int availableHours = teacherHoursRepository.getHoursLeft(user.getCurrentUserId());
+        int availableHours = teacherHoursRepository.getHoursLeft(User.getCurrentUserId());
         List<Cohort> cohorts = cohortRepository.findAllByCohortIdAfter(0);
         List<Integer> weeknrs = cohortScheduleRepository.getDistinctWeeknumbers();
         List<Subject> subjects = subjectRepository.findAll();

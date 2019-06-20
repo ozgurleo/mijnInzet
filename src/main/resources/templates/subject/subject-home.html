@@ -22,7 +22,7 @@
             var $hour=$('#hour');
             var tbody=$('#subjectBody');
             var table=$('#subjectTable');
-            var $revove=$('.gly')
+            var $revove=$('.gly');
             // var template=""+
             //         "<li>"+
             //         "<p>{{subjectName}}</p>"+
@@ -62,7 +62,7 @@
                  subjectName:$name.val(),
                  explanation:$explanation.val(),
                  estimatedHours:$hour.val()
-             }
+             };
              $.ajax({
                  headers: {
                      'Accept': 'application/json',
@@ -73,7 +73,7 @@
                  dataType:"json",
                  data:JSON.stringify(subject),
                  success:function (newSubject) {
-                     console.log(newSubject)
+                     console.log(newSubject);
                      tbody.append($("<tr>")
                          .append($("<td>").append(newSubject.subjectName))
                          .append($("<td>").append(newSubject.estimatedHours))
@@ -88,8 +88,8 @@
              })
          });
          tbody.delegate('.delete','click',function () {
-             alert("offf")
-             var $li =$(this).closest('li')
+             alert("offf");
+             var $li =$(this).closest('li');
 
              $.ajax({
                  type:'DELETE',

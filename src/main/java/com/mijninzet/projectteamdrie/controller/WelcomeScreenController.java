@@ -24,10 +24,10 @@ public class WelcomeScreenController {
 
     @RequestMapping("/welcomeScreen")
     public String welcome(Model model, User user){
-       User usercurrent = userRepo.findUserById(user.getCurrentUserId());
+       User usercurrent = userRepo.findUserById(User.getCurrentUserId());
 
-        if(roleRepo.findRoleNameByUserId(user.getCurrentUserId()).length>0){
-        model.addAttribute("roles",roleRepo.findRoleNameByUserId(user.getCurrentUserId()));}
+        if(roleRepo.findRoleNameByUserId(User.getCurrentUserId()).length>0){
+        model.addAttribute("roles",roleRepo.findRoleNameByUserId(User.getCurrentUserId()));}
         model.addAttribute("user", usercurrent);
         return "welcomeScreen";
     }
@@ -36,28 +36,28 @@ public class WelcomeScreenController {
 
     @RequestMapping(value = "/helloAdmin")
     public String welcomeAdmin(User user, Model model) {
-        User currentUser = userRepo.findUserById(user.getCurrentUserId());
+        User currentUser = userRepo.findUserById(User.getCurrentUserId());
         model.addAttribute("user", currentUser);
         return "helloAdmin";
     }
 
     @RequestMapping("/helloScheduler")
     public String welcomeScheduler(Model model, User user){
-        User usercurrent = userRepo.findUserById(user.getCurrentUserId());
+        User usercurrent = userRepo.findUserById(User.getCurrentUserId());
         model.addAttribute("user", usercurrent);
         return "helloScheduler";
     }
 
     @RequestMapping("/helloTeacher")
     public String welcomeTeacher(Model model, User user){
-        User usercurrent = userRepo.findUserById(user.getCurrentUserId());
+        User usercurrent = userRepo.findUserById(User.getCurrentUserId());
         model.addAttribute("user", usercurrent);
         return "helloTeacher";
     }
 
     @RequestMapping("/helloCoordinator")
     public String welcomeCoordinator(Model model, User user){
-        User usercurrent = userRepo.findUserById(user.getCurrentUserId());
+        User usercurrent = userRepo.findUserById(User.getCurrentUserId());
         model.addAttribute("user", usercurrent);
         return "helloCoordinator";
     }

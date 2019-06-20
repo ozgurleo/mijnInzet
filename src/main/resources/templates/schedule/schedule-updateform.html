@@ -16,13 +16,13 @@
 
         $(function(){
             $('#vrijdagAvond').change(function () {
-                var aantwoord = $(this).val()
+                var aantwoord = $(this).val();
                 if(aantwoord=="JA"){
                     alert("Vrijdag Avond\n"+"SERIEUS??")
                 }
-            })
+            });
             $('#cohort').onkeydown(function(){
-                var cohort = $(this).val()
+                var cohort = $(this).val();
                 if(isNaN(cohort)){
                     $('#numloc').innerText.text("Cohort moet nummer zijn")
 

@@ -19,15 +19,15 @@
             $('#update').on('click', function () {
                 var startdate = $('#startdate').val();
                 var enddaate= $('#enddate').val();
-                console.log("**** :"+enddaate)
+                console.log("**** :"+enddaate);
                 if(startdate===""|| enddaate===""){
-                    alert("De startdatum of einddatum kunnen niet laag zijn")
+                    alert("De startdatum of einddatum kunnen niet laag zijn");
                     return false
                 }else{
                     return true
                 }
 
-            })
+            });
 
             $("#enddate").change(function () {
                 var startDate = document.getElementById("startdate").value;

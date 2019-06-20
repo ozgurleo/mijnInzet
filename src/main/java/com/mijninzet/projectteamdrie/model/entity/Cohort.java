@@ -3,14 +3,9 @@ package com.mijninzet.projectteamdrie.model.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Cohort implements Comparable<Cohort> {
@@ -23,7 +18,8 @@ public class Cohort implements Comparable<Cohort> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
-    public Cohort() {}
+    public Cohort() {
+    }
 
     public Cohort(int cohortId, LocalDate beginDate, LocalDate endDate) {
         this.cohortId = cohortId;
@@ -65,7 +61,6 @@ public class Cohort implements Comparable<Cohort> {
 
     @Override
     public int compareTo(Cohort o) {
-       int result= (cohortId>o.cohortId) ? 1 : (cohortId<o.cohortId) ? -1 : 0;
-       return result;
+        return this.cohortId - o.cohortId;
     }
 }

@@ -16,15 +16,15 @@
 
                 var startdate = $('#beginDate').val();
                 var enddaate= $('#ëndDate').val();
-                console.log("**** :"+enddaate)
+                console.log("**** :"+enddaate);
                 if(startdate===""|| enddaate===""){
-                    alert("De startdatum of einddatum kunnen niet leeg zijn")
+                    alert("De startdatum of einddatum kunnen niet leeg zijn");
                     return false
                 }else{
                     return true
                 }
 
-            })
+            });
 
             $("#ëndDate").change(function () {
                 var startDate = document.getElementById("beginDate").value;

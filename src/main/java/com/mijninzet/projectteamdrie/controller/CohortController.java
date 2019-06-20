@@ -166,7 +166,6 @@ public class CohortController {
     @GetMapping("/deleteCohort")
     public String deleteSubject(@RequestParam("cohortId") int cohortId) {
         cohortRepository.deleteById(cohortId);
-        ;
         return ("redirect:/cohort/createCohort");
     }
 
