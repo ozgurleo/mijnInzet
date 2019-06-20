@@ -23,8 +23,8 @@
                 var endDate = document.getElementById("enddate").value;
 
                 if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                    alert("End date should be greater than Start date");
-                    document.getElementById("EndDate").value = "";
+                    alert("De einddatum kan niet vroeger dan de startdatum");
+                    document.getElementById("enddate").value = null;
                 }
 
             });
@@ -86,7 +86,7 @@
                class="form-control mb-4 col-4" placeholder="Start Datum">
 
         <input type="date" id="enddate" th:field="*{endDate}"
-               class="form-control mb-4 col-4" placeholder="End Datum">
+               class="form-control mb-4 col-4" placeholder="Eind Datum">
 
 
         <select class="mdb-select md-form" th:field="*{colorOption}" required="required">

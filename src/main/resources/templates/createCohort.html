@@ -8,6 +8,36 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#addButton').on('click', function () {
+
+                var startdate = $('#beginDate').val();
+                var enddaate= $('#ëndDate').val();
+                console.log("**** :"+enddaate)
+                if(startdate===""|| enddaate===""){
+                    alert("De startdatum of einddatum kunnen niet laag zijn")
+                    return false
+                }else{
+                    return true
+                }
+
+            })
+
+            $("#ëndDate").change(function () {
+                var startDate = document.getElementById("beginDate").value;
+                var endDate = document.getElementById("ëndDate").value;
+
+                if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                    alert("De einddatum kan niet vroeger dan de startdatum zijn");
+                    document.getElementById("ëndDate").value = null;
+                }
+
+            });
+        })
+    </script>
 
 </head>
 <body>
@@ -75,7 +105,7 @@
             </div>
         </label>
         <div class="form-group ">
-            <button class="btn btn-lg btn-primary" onclick="f()" name="submit" type="submit">
+            <button class="btn btn-lg btn-primary" onclick="f()" name="submit" type="submit" id="addButton">
                 Submit
             </button>
 
