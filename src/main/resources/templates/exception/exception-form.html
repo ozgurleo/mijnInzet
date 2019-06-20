@@ -13,6 +13,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <title>Save Exception</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#enddate").change(function () {
+                var startDate = document.getElementById("startdate").value;
+                var endDate = document.getElementById("enddate").value;
+
+                if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                    alert("End date should be greater than Start date");
+                    document.getElementById("EndDate").value = "";
+                }
+
+            });
+        })
+    </script>
 </head>
 
 <body>
@@ -66,10 +83,10 @@
         <input type="hidden" th:field="*{id}" />
 
         <input type="date" id="startdate" th:field="*{startDate}"
-               class="form-control mb-4 col-4" placeholder="Start Date">
+               class="form-control mb-4 col-4" placeholder="Start Datum">
 
         <input type="date" id="enddate" th:field="*{endDate}"
-               class="form-control mb-4 col-4" placeholder="End Date">
+               class="form-control mb-4 col-4" placeholder="End Datum">
 
 
         <select class="mdb-select md-form" th:field="*{colorOption}" required="required">
