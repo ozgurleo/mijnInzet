@@ -2,8 +2,6 @@ package com.mijninzet.projectteamdrie.service;
 
 import java.util.*;
 
-import com.mijninzet.projectteamdrie.model.entity.user.Role;
-import com.mijninzet.projectteamdrie.model.entity.user.RoleEnum;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.RoleRepository;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
