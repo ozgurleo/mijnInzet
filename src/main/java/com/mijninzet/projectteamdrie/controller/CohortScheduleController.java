@@ -12,7 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -259,7 +264,7 @@ public class CohortScheduleController {
 
     @PostMapping(value = "/generateCohortSchedule/check")
     public @ResponseBody
-    String checkSchedule(HttpServletRequest request) {
+    String checkSchedule(HttpServletRequest request) throws ParseException {
 
         System.out.println("!!!!!!!!! ajaxPOSTTest is aangeroepen !!!!!!");
         System.out.println("button clicked =" + request.getParameter("button"));
@@ -288,14 +293,23 @@ public class CohortScheduleController {
         String result = "";
         if (buttonClicked.equals("check")) {
             int previousTeacher;
-            String tempPreviousTeacher = cohortScheduleRepo.getTeacherAtDateAndDayPart(dayDate, dayPart, cohortId);
-            if (tempPreviousTeacher == null) {
+            ArrayList<Integer> teacherIDByCohort=cohortScheduleRepo.gettestbyCohortID(cohortId);
+            ArrayList<Integer> teacherbyDayPart=cohortScheduleRepo.gettestbyDaypartD(dayPart);
+            ArrayList<Integer> teacherbyDate=cohortScheduleRepo.gettestbyDayDate(dayDate);
+            System.out.println("lengte vd arraylist by cohort id = " + teacherIDByCohort.size());
+            System.out.println("lengte vd arraylist by daypart = " + teacherbyDayPart.size());
+            System.out.println("lengte vd arraylist by dayDATE = " + teacherbyDate.size());
+
+            Integer tempPreviousTeacher = cohortScheduleRepo.getTeacherAtRowId(scheduledId);
+            if (tempPreviousTeacher==null) {
+                System.out.println("TempPreviousTeacher == null");
                 previousTeacher = 0;
             } else {
-                previousTeacher = Integer.parseInt(tempPreviousTeacher);
+               previousTeacher=tempPreviousTeacher;//previousTeacher = Integer.parseInt(tempPreviousTeacher);
             }
 
             if (previousTeacher == teacherId) {
+                System.out.println("SAME TEACHER FOUND");
                 result = "sameTeacher";
             }else {
                 result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
@@ -310,14 +324,18 @@ public class CohortScheduleController {
             int previousTeacher;
             result = totalCheck(cohortId, teacherId, dayDate, dayPart, weekDay, subjectId);
 
-            String tempPreviousTeacher = cohortScheduleRepo.getTeacherAtDateAndDayPart(dayDate, dayPart, cohortId);
-            if (tempPreviousTeacher == null) {
+            Integer tempPreviousTeacher = cohortScheduleRepo.getTeacherAtRowId(scheduledId);
+            if (tempPreviousTeacher==null) {
+                System.out.println("TempPreviousTeacher == null");
                 previousTeacher = 0;
             } else {
-                previousTeacher = Integer.parseInt(tempPreviousTeacher);
+              previousTeacher=tempPreviousTeacher;  //previousTeacher = Integer.parseInt(tempPreviousTeacher);
+                System.out.println("previousteacher id = " + previousTeacher);
             }
 
             if (previousTeacher == teacherId) {
+                System.out.println("previousteacher id = " + previousTeacher);
+                System.out.println("SAME TEACHER FOUND");
                 result = "sameTeacher";
             } else if (result.equals("NOK") || result.equals("hourNOK_restOK") ||
                     result.equals("hoursNOK_availNOK_OK") || result.equals("hoursNOK_OK_prefNOK")) {
