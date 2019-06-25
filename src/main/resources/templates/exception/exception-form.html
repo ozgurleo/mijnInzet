@@ -22,7 +22,7 @@
                 var startDate = document.getElementById("startdate").value;
                 var endDate = document.getElementById("enddate").value;
 
-                if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                if ((Date.parse(startDate) > Date.parse(endDate))) {
                     alert("De einddatum kan niet vroeger dan de startdatum");
                     document.getElementById("enddate").value = null;
                 }

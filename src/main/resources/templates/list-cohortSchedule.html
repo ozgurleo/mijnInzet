@@ -54,7 +54,7 @@
                     <th>dagdeel</th>
                     <th>planning</th>
                     <th>planning opslaan</th>
-                    <th>resultaat</th>
+
                 </tr>
                 </thead>
             </tablehead>
@@ -97,7 +97,8 @@
                             <form>
                                 <div th:switch="${schedule.getSubject()}">
                                     <select th:id="subjectVariable" class="subjectField"
-                                            th:data-id="${schedule.getId()}">
+                                            th:data-id="${schedule.getId()}" th:value="opslaan" name="opslaan"
+                                            th:form="${schedule.getId()}">
                                         <option th:case="null" selected="selected">selecteer vak</option>
                                         <option th:case="*" th:text="${schedule.getSubject().subjectName}"
                                                 th:value="${schedule.getSubject().subjectId}" selected="selected">
@@ -107,15 +108,6 @@
                                 </div>
 
                             </form>
-                        </td>
-                        <td>
-
-                            <button th:id="saveButton" type="submit" th:data-id="${schedule.getId()}"
-                                    class="saveButton btn btn-success col-2"
-                                    th:value="opslaan" name="opslaan"
-                                    th:form="${schedule.getId()}">opslaan
-                            </button>
-
                         </td>
 
                         <td th:with="textBox=${schedule.getId()}" th:id="textBox" th:data-id="${schedule.getId()}"
@@ -164,7 +156,7 @@
     });
 
 
-    $(".saveButton").click(function (e) {
+    $(".subjectField").change(function (e) {
         console.log("DIT IS DE 2E STATIC VALUE : " + staticValue);
         e.preventDefault();
         thisId = $(this).data("id");
