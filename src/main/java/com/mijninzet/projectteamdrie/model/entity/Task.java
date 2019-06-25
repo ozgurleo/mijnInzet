@@ -9,13 +9,16 @@ import java.util.List;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int taskId;
     private String taskName;
     private int estimatedHours;
     private int yearsToExpiryDate;
- //   @OneToMany(mappedBy = "taskId")
+
+    @OneToMany(mappedBy = "task",fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, orphanRemoval = true)
 //   private TaskApplication taskApplication;
-//    private List<TaskApplication> taskApplication;
+    List<TaskApplication> taskApplication;
+
 
     public Task() {
         this(0, "", 0, 0);
