@@ -2,45 +2,35 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.CohortSchedule;
-import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.repository.CohortRepository;
 import com.mijninzet.projectteamdrie.repository.CohortScheduleRepository;
-import com.mijninzet.projectteamdrie.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
-import java.time.temporal.WeekFields;
-import java.util.*;
-
 import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 
 @Controller
 @RequestMapping(value = "/cohort")
 
-
 public class CohortController {
+    private final CohortRepository cohortRepository;
+    private final CohortScheduleRepository cohortSchedlRepo;
 
-    @Autowired
-    CohortRepository cohortRepository;
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    CohortScheduleRepository cohortSchedlRepo;
-
-    public static final int DAYS_IN_WEEK = 7;
+    public CohortController(CohortRepository cohortRepository, CohortScheduleRepository cohortSchedlRepo) {
+        this.cohortRepository = cohortRepository;
+        this.cohortSchedlRepo = cohortSchedlRepo;
+    }
 
     @RequestMapping(value = "/createCohort", method = RequestMethod.GET)
     public String getAllCohorts(Model model) {
-        List<Cohort> cohorts = new ArrayList<>();
-        cohorts = cohortRepository.findAll();
+        List<Cohort> cohorts = cohortRepository.findAll();
         Collections.sort(cohorts);
         Cohort cohort = new Cohort();
         model.addAttribute("allCohorts", cohorts);
@@ -52,12 +42,9 @@ public class CohortController {
     }
 
     @RequestMapping(value = "/createCohort/new/", method = RequestMethod.POST)
-    public String createCohort(@ModelAttribute("cohort") Cohort cohort, Model model) {
-
+    public String createCohort(@ModelAttribute("cohort") Cohort cohort) {
         boolean exists = cohortRepository.existsById(cohort.getCohortId());
-        if (exists) {
-            return "createCohortError";
-        }
+        if (exists) return "createCohortError";
         cohort.setBeginDate(cohort.getBeginDate());
         cohort.setEndDate(cohort.getEndDate());
         cohortRepository.save(cohort);
@@ -65,7 +52,6 @@ public class CohortController {
         System.out.println("De begindateum= " + cohort.getBeginDate());
         System.out.println("De begindateum= " + cohort.getEndDate());
         System.out.println("De cohort= " + cohort.getCohortId());
-
         System.out.println("De begindateum in de makeSchedule =  " + cohort.getBeginDate());
         System.out.println("De begindateum in de makeSchedule =  " + cohort.getEndDate());
         makeDefaultCohortSchedule(cohort.getBeginDate(), cohort.getEndDate(), cohort.getCohortId());
@@ -73,9 +59,8 @@ public class CohortController {
     }
 
     //hier cohortSchedule (default rooster) aangemaakt voor de nieuwe Cohort
-    public void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId) {
+    private void makeDefaultCohortSchedule(LocalDate beginDate, LocalDate endDate, int cohortId) {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
-
         for (LocalDate date = beginDate; date.isBefore(endDate); date = date.plusDays(1)) {
             CohortSchedule CsMorning = new CohortSchedule();
             CohortSchedule CsNoon = new CohortSchedule();
@@ -175,5 +160,4 @@ public class CohortController {
         model.addAttribute("cohort", cohort);
         return "cohortForm";
     }
-
 }

@@ -1,8 +1,7 @@
 package com.mijninzet.projectteamdrie.service;
 
-import com.mijninzet.projectteamdrie.UserSingleton;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.Exception;
-import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
 import com.mijninzet.projectteamdrie.repository.ExceptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

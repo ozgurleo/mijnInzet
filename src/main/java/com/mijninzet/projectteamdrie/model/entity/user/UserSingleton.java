@@ -1,4 +1,4 @@
-package com.mijninzet.projectteamdrie;
+package com.mijninzet.projectteamdrie.model.entity.user;
 
 public final class UserSingleton {
     private static UserSingleton singletonInstance;

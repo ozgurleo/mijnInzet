@@ -2,7 +2,6 @@ package com.mijninzet.projectteamdrie.service;
 
 import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,16 +9,14 @@ import java.util.List;
 
 @Service
 public class SubjectService {
-    @Autowired
-    private SubjectRepository subjectRepository;
+    private final SubjectRepository subjectRepository;
 
+    public SubjectService(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
 
     public List<Subject>findAll(){
-        List<Subject>subjects=new ArrayList<>();
-        subjectRepository.findAll()
-                .forEach(subjects::add);
-        return subjects;
-
+        return new ArrayList<>(subjectRepository.findAll());
     }
 
     public void addSubject(Subject subject){
@@ -33,5 +30,4 @@ public class SubjectService {
     public Subject findById(int id){
         return subjectRepository.findSubjectBySubjectId(id);
     }
-
 }

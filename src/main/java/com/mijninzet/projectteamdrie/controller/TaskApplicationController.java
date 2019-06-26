@@ -1,63 +1,53 @@
 package com.mijninzet.projectteamdrie.controller;
 
-
-import com.mijninzet.projectteamdrie.UserSingleton;
-import com.mijninzet.projectteamdrie.model.entity.Cohort;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
 import com.mijninzet.projectteamdrie.repository.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
-
-import static java.time.LocalDate.now;
 
 @Controller
 public class TaskApplicationController {
-    CohortScheduleController cohortSchedTest = new CohortScheduleController();
-    @Autowired
-    TaskApplicationRepository taskApplicationRepo;
-    @Autowired
-    TaskRepository taskRepository;
+    private final TaskApplicationRepository taskApplicationRepo;
+    private final TaskRepository taskRepository;
 
-    public void deleteApplication(int taskId, String fullName) {
+    public TaskApplicationController(TaskApplicationRepository taskApplicationRepo, TaskRepository taskRepository) {
+        this.taskApplicationRepo = taskApplicationRepo;
+        this.taskRepository = taskRepository;
     }
-
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
     public String insertTaskAppl(HttpServletRequest request, ModelMap model) {
-
         System.out.println("methode is aangeroepen!");
         //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
         LocalDate todaysDate = LocalDate.now();
-
         //get the data from httpservletRequest and put in variable
         String tempId = request.getParameter("taskId");
         String tempHours = request.getParameter("availableHours");
         if (tempHours.matches("^[0-9]+$")) {
-        //Convert variable to int
-        int taskId = Integer.parseInt(tempId);
-        int hours = Integer.parseInt(tempHours);
+            //Convert variable to int
+            int taskId = Integer.parseInt(tempId);
+            int hours = Integer.parseInt(tempHours);
+            //haal de userId op vd loggedin user uit de Singleton
+            final int userId = UserSingleton.getInstance().getId();
 
-        //haal de userId op vd loggedin user uit de Singleton
-        final int userId = UserSingleton.getInstance().getId();
-
-        System.out.println("de ingelezen taskid waarde is: " + taskId);
-        System.out.println("de ingelezen availableHours waarde is: " + hours);
+            System.out.println("de ingelezen taskid waarde is: " + taskId);
+            System.out.println("de ingelezen availableHours waarde is: " + hours);
 
 
-        // insert the data into database
-        taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent", taskId);
+            // insert the data into database
+            taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent", taskId);
 
-        // get latest data from db en send to showtasks.html
-        model.addAttribute("showTasks", taskRepository.getVacancies());
-        return "showtasks";
-        }else{
+            // get latest data from db en send to showtasks.html
+            model.addAttribute("showTasks", taskRepository.getVacancies());
+            return "showtasks";
+        } else {
             return "showTasksError";
         }
     }
@@ -120,6 +110,4 @@ public class TaskApplicationController {
         System.out.println("INHOUD VH OBJECT: ---> " + taskApplicationRepo.getApplicationOverview(userId).toString());
         return "applicationBasket";
     }
-
-
 }

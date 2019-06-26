@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
-import com.mijninzet.projectteamdrie.UserSingleton;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

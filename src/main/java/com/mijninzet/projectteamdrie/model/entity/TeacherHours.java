@@ -1,8 +1,5 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
-
-import com.mijninzet.projectteamdrie.model.entity.user.User;
-
 import javax.persistence.*;
 
 @Entity

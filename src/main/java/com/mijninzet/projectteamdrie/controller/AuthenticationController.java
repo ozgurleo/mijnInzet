@@ -1,7 +1,5 @@
 package com.mijninzet.projectteamdrie.controller;
 
-import javax.validation.Valid;
-
 import com.mijninzet.projectteamdrie.model.entity.ConfirmationToken;
 import com.mijninzet.projectteamdrie.model.entity.TeacherHours;
 import com.mijninzet.projectteamdrie.model.entity.user.Role;
@@ -11,8 +9,6 @@ import com.mijninzet.projectteamdrie.repository.RoleRepository;
 import com.mijninzet.projectteamdrie.repository.TeacherHoursRepository;
 import com.mijninzet.projectteamdrie.service.EmailSenderService;
 import com.mijninzet.projectteamdrie.service.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,38 +19,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
-
 
 @Controller
 public class AuthenticationController {
-    private static final int TOTAL_HOURS=1650;
-    private static final int EDUCATIONAL_PERCENTAGE=80;
-    private static final int DEFAULT_HOURS_USED=0;
-    private static final int DEFAULT_FTE=1;
+    private static final int TOTAL_HOURS = 1650;
+    private static final int EDUCATIONAL_PERCENTAGE = 80;
+    private static final int DEFAULT_HOURS_USED = 0;
+    private static final int DEFAULT_FTE = 1;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    TeacherHoursRepository teacherHoursRepo;
-
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private ConfirmationTokenRepository confirmationTokenRepository;
-
-    @Autowired
-    private EmailSenderService emailSenderService;
+    private final UserService userService;
+    private final TeacherHoursRepository teacherHoursRepo;
+    private final RoleRepository roleRepository;
+    private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final EmailSenderService emailSenderService;
 
     // https://stackabuse.com/password-encoding-with-spring-security/
     // to encode our password
-    @Autowired
-    BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder encoder;
+
+    public AuthenticationController(UserService userService, TeacherHoursRepository teacherHoursRepo, RoleRepository roleRepository, ConfirmationTokenRepository confirmationTokenRepository, EmailSenderService emailSenderService, BCryptPasswordEncoder encoder) {
+        this.userService = userService;
+        this.teacherHoursRepo = teacherHoursRepo;
+        this.roleRepository = roleRepository;
+        this.confirmationTokenRepository = confirmationTokenRepository;
+        this.emailSenderService = emailSenderService;
+        this.encoder = encoder;
+    }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login"); // resources/template/login.html
         return modelAndView;
@@ -78,23 +73,19 @@ public class AuthenticationController {
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("successMessage", "Please correct the errors in form!");
             modelMap.addAttribute("bindingResult", bindingResult);
-        } else if (userService.isUserAlreadyPresent(user)) {
+        } else if (userService.isUserAlreadyPresent(user))
             modelAndView.addObject("successMessage", "user already exists!");
-        }
-        // we will save the user if, no binding errors
+            // we will save the user if, no binding errors
         else {
             userService.saveUser(user);
 //            userServiceImp.saveUser(user);
             modelAndView.addObject("successMessage", "User is registered successfully!");
-            int userId=user.getId();
-            int totalHours=DEFAULT_FTE*TOTAL_HOURS*EDUCATIONAL_PERCENTAGE/100;
-            int hoursleft=totalHours;
-            int hoursUsed=DEFAULT_HOURS_USED;
-            TeacherHours newTeacherHours= new TeacherHours(userId,totalHours,hoursUsed,hoursleft);
+            int userId = user.getId();
+            int totalHours = DEFAULT_FTE * TOTAL_HOURS * EDUCATIONAL_PERCENTAGE / 100;
+            TeacherHours newTeacherHours = new TeacherHours(userId, totalHours, DEFAULT_HOURS_USED, totalHours);
             teacherHoursRepo.save(newTeacherHours);
             System.out.println("TEACHERHOURS FILL METHOD IS DONE");
             System.out.println("uderID new user = " + userId);
-
         }
         List<Role> rolelist = roleRepository.findAll();
         modelAndView.addObject("roles", rolelist);
@@ -121,7 +112,6 @@ public class AuthenticationController {
     @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
-
         if (token != null) {
             User user = userService.findByEmail(token.getUser().getEmail());
             user.setEnabled(true);
@@ -131,7 +121,6 @@ public class AuthenticationController {
             modelAndView.addObject("message", "The link is invalid or broken!");
             modelAndView.setViewName("error1");
         }
-
         return modelAndView;
     }
 
@@ -154,10 +143,8 @@ public class AuthenticationController {
         if (existingUser != null) {
             // create token
             ConfirmationToken confirmationToken = new ConfirmationToken(existingUser);
-
             // save it
             confirmationTokenRepository.save(confirmationToken);
-
             // create the email
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(existingUser.getEmail());
@@ -165,17 +152,13 @@ public class AuthenticationController {
             mailMessage.setFrom("nopressure532@gmail.com");
             mailMessage.setText("To complete the password reset process, please click here: "
                     + "http://localhost:8081/confirm-reset?token=" + confirmationToken.getConfirmationToken());
-
             emailSenderService.sendEmail(mailMessage);
-
             modelAndView.addObject("message", "Request to reset password received. Check your inbox for the reset link.");
             modelAndView.setViewName("successForgotPassword");
-
         } else {
             modelAndView.addObject("message", "This email does not exist!");
             modelAndView.setViewName("error1");
         }
-
         return modelAndView;
     }
 
@@ -183,7 +166,6 @@ public class AuthenticationController {
     @RequestMapping(value = "/confirm-reset", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView validateResetToken(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
-
         if (token != null) {
             User user = userService.findByEmail(token.getUser().getEmail());
             user.setEnabled(true);
@@ -205,7 +187,6 @@ public class AuthenticationController {
     @RequestMapping(value = "/reset-password", method = RequestMethod.POST)
     public ModelAndView resetUserPassword(ModelAndView modelAndView, User user) {
         // ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
-
         if (user.getEmail() != null) {
             // use email to find user
             User tokenUser = userService.findByEmail(user.getEmail());
@@ -219,18 +200,6 @@ public class AuthenticationController {
             modelAndView.addObject("message", "The link is invalid or broken!");
             modelAndView.setViewName("error1");
         }
-
         return modelAndView;
     }
-
 }
-
-
-
-
-
-
-
-
-
-

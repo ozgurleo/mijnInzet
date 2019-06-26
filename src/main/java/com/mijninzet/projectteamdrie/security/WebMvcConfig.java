@@ -9,22 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer{
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 }
 
 /* https://stackoverflow.com/questions/47552835/the-type-webmvcconfigureradapter-is-deprecated */
-/*
-	@Configuration
-	public class WebMvcConfig extends WebMvcConfigurerAdapter {
-
-		@Bean
-		public BCryptPasswordEncoder passwordEncoder() {
-			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-			return bCryptPasswordEncoder;
-		}
-
-	}
-
-*/

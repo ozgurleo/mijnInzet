@@ -1,12 +1,9 @@
 package com.mijninzet.projectteamdrie.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mijninzet.projectteamdrie.UserSingleton;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.user.User;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Exception implements Comparable<Exception>{

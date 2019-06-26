@@ -1,41 +1,34 @@
 package com.mijninzet.projectteamdrie.controller;
 
-import com.mijninzet.projectteamdrie.UserSingleton;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.Cohort;
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
-import com.mijninzet.projectteamdrie.repository.UserRepository;
 import com.mijninzet.projectteamdrie.service.CohortService;
 import com.mijninzet.projectteamdrie.service.StaffAvailibilityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-
-
 
 @Controller
 @RequestMapping("/schedule")
 
 public class StaffAvailibilityController {
-    @Autowired
-    private StaffAvailibilityService staffAvailibilityService;
+    private final StaffAvailibilityService staffAvailibilityService;
+    private final CohortService cohortService;
 
-    @Autowired
-    private CohortService cohortService;
-
-    private List<StaffAvailability>schedule;
+    public StaffAvailibilityController(StaffAvailibilityService staffAvailibilityService, CohortService cohortService) {
+        this.staffAvailibilityService = staffAvailibilityService;
+        this.cohortService = cohortService;
+    }
 
     @RequestMapping("/list/{cohort}")
     public String listStaffAvailibilityByCohort(Model model,@PathVariable int cohort){
         int userId=UserSingleton.getInstance().getId();
-        schedule=staffAvailibilityService.findStaffAvailibilityByUseridAndCohort(userId,cohort);
-        model.addAttribute("schedule",schedule);
+        List<StaffAvailability> schedule = staffAvailibilityService.findStaffAvailibilityByUseridAndCohort(userId, cohort);
+        model.addAttribute("schedule", schedule);
         return ("schedule/list-schedule");
     }
 
@@ -46,9 +39,8 @@ public class StaffAvailibilityController {
         List<Integer>cohortHavingSchedule = staffAvailibilityService.getAllCohorts();
         List<Integer>cohorts=new ArrayList<>(cohortsId);
         cohorts.removeAll(cohortHavingSchedule);
-        Iterator iterator= cohorts.iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
+        for (Integer cohort : cohorts) {
+            System.out.println(cohort);
         }
 
         model.addAttribute("schedules", theSA);
@@ -78,8 +70,4 @@ public class StaffAvailibilityController {
         model.addAttribute("cohorts", cohorts);
         return ("schedule/schedule-cohortlist");
     }
-
-
-
-
 }

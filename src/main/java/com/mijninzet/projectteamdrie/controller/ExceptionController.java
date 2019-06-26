@@ -2,7 +2,6 @@ package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Exception;
 import com.mijninzet.projectteamdrie.service.ExceptionServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +11,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/exception")
 public class ExceptionController {
-    @Autowired
-    private ExceptionServiceImp exceptionService;
+    private final ExceptionServiceImp exceptionService;
 
-    private List<Exception>exceptions;
+    public ExceptionController(ExceptionServiceImp exceptionService) {
+        this.exceptionService = exceptionService;
+    }
 
     @RequestMapping("/list")
     public String listException(Model model){
-        exceptions=exceptionService.findByUserId();
-        model.addAttribute("exceptions",exceptions);
+        List<Exception> exceptions = exceptionService.findByUserId();
+        model.addAttribute("exceptions", exceptions);
         return "exception/list-exceptions";
     }
 

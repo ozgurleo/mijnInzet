@@ -1,6 +1,6 @@
 package com.mijninzet.projectteamdrie.controller;
 
-import com.mijninzet.projectteamdrie.UserSingleton;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.Subject;
 import com.mijninzet.projectteamdrie.repository.SubjectPreferenceRepository;
 import com.mijninzet.projectteamdrie.repository.SubjectRepository;
@@ -14,7 +14,6 @@ import java.util.*;
 
 @Controller
 public class SubjectPreferencesController {
-
     private final SubjectRepository subjectRepository;
     private final SubjectPreferenceRepository subjectPreferenceRepository;
 

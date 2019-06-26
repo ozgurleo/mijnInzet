@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TaskController {
-    @Autowired
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
+
+    public TaskController(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @RequestMapping(value = "/showTasks")
     public String makeVacancyList(Model model) {

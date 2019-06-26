@@ -1,17 +1,13 @@
 package com.mijninzet.projectteamdrie.service;
 
-import com.mijninzet.projectteamdrie.UserSingleton;
-import com.mijninzet.projectteamdrie.model.entity.Cohort;
+import com.mijninzet.projectteamdrie.model.entity.user.UserSingleton;
 import com.mijninzet.projectteamdrie.model.entity.StaffAvailability;
-import com.mijninzet.projectteamdrie.model.entity.user.User;
 import com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository;
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StaffAvailibilityService {
