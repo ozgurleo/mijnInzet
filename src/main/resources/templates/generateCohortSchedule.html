@@ -212,27 +212,27 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                     x.innerHTML = "check:" + "<br>" + "OK.";
                 } else if (result == "NOK") {
                     x.style.background = "#ff8000";
-                    x.innerHTML ="check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                    x.innerHTML ="check:"+ "<br>"+ "*Docent is deze dag/dagdeel niet beschikbaar."+ "<br>" +
                         "*Docenturen overschreden."+ "<br>" +"*Docent geeft dit vak liever niet.";
                 } else if (result == "hourNOK_restOK") {
                     x.style.background = "#ff8000";
                     x.innerHTML ="check:"+ "<br>"+ "*Docenturen overschreden.";
                 } else if(result =="availNOK_restOK"){
                     x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar.";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is deze dag/dagdeel niet beschikbaar.";
 
                 }else if(result=="subjectNOK_restOK"){
                     x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent geeft dit vak liever niet beschikbaar.";
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent geeft deze vak liever niet beschikbaar.";
 
                 }else if(result=="hoursNOK_availNOK_OK"){
                     x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is deze dag/dagdeel niet beschikbaar."+ "<br>" +
                         "*Docenturen overschreden";}
 
                 else if(result=="OK_availNOK_prefNOK"){
                     x.style.background = "#ff8000";
-                    x.innerHTML = "check:"+ "<br>"+ "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                    x.innerHTML = "check:"+ "<br>"+ "*Docent is deze dag/dagdeel niet beschikbaar."+ "<br>" +
                         "*Docent geeft dit vak liever niet beschikbaar.";}
 
                 else if(result=="hoursNOK_OK_prefNOK"){
@@ -284,7 +284,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 } else if (result == "NOK") {
                     x.style.background = "#ff4000";
                     x.innerHTML = "OPGESLAGEN MET CONFLICT:" + "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent is deze dag/dagdeel niet beschikbaar."+ "<br>" +
                         "*Docenturen overschreden."+ "<br>" +
                         "*Docent geeft dit vak liever niet.";
                 } else if (result == "hourNOK_restOK") {
@@ -294,7 +294,7 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 } else if(result =="availNOK_restOK"){
                     x.style.background = "#ff4000";
                     x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar.";
+                        "*Docent is dezet dag/dagdeel niet beschikbaar.";
 
                 }else if(result=="subjectNOK_restOK"){
                     x.style.background = "#ff4000";
@@ -304,13 +304,13 @@ console.log("DIT IS DE STATIC VALUE : " + staticValue);
                 }else if(result=="hoursNOK_availNOK_OK"){
                     x.style.background = "#ff4000";
                     x.innerHTML = "OPGESLAGEN MET CONFLICT:" + "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent is deze dag/dagdeel niet beschikbaar."+ "<br>" +
                         "*Docenturen overschreden";}
 
                 else if(result=="OK_availNOK_prefNOK"){
                     x.style.background = "#ff4000";
                     x.innerHTML = "OPGESLAGEN MET CONFLICT:"+ "<br>"+
-                        "*Docent is dit dag/dagdeel niet beschikbaar."+ "<br>" +
+                        "*Docent is deze dag/dagdeel niet beschikbaar."+ "<br>" +
                         "*Docent geeft dit vak liever niet beschikbaar.";}
 
                 else if(result=="hoursNOK_OK_prefNOK"){
