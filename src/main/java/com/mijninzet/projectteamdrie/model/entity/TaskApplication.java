@@ -20,7 +20,7 @@ public class TaskApplication {
 //    private int task_task_id;
 
     @ManyToOne
-    @JoinColumn(name="task_task_id")
+    @JoinColumn(name="task_task_id" )
     private Task task;
 
     public TaskApplication() {
