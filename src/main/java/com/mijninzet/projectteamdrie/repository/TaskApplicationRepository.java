@@ -51,5 +51,12 @@ public interface TaskApplicationRepository extends JpaRepository<TaskApplication
             " JOIN user U ON (TA.user_id=U.user_id) WHERE U.user_id= :userId",nativeQuery =true)
     ArrayList<Object[]> getApplicationOverview(@Param("userId") Integer userId);
 
+    @Modifying
+    @Query(value = "DELETE FROM mijn_inzet.task_application  WHERE task_task_id = :taskId", nativeQuery = true)
+    @Transactional
+    void deleteTaskEnTaskApplication(@Param("taskId") Integer taskId);
+
+
+
 
 }

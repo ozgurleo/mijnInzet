@@ -16,23 +16,10 @@
 
     <script type="text/javascript">
         $(function(){
-            var $subjects = $('#new-subject');
             var $name = $('#name');
             var $explanation =$('#explanation');
             var $hour=$('#hour');
             var tbody=$('#subjectBody');
-            var table=$('#subjectTable');
-            var $revove=$('.gly')
-            // var template=""+
-            //         "<li>"+
-            //         "<p>{{subjectName}}</p>"+
-            //         "<button data-id='{{subjectId}}' class='remove'>X</button>"+
-            //         "<button data-id='{{subjectId}}' class='glyphicon glyphicon-pencil'></button>"+
-            //         "</li>";
-            // function addSubject(subject){
-            //     $subjects.append(Mustache.render(template,subject))
-            // }
-
          $.ajax({
              type:'GET',
              url:'/vak/lijst',

@@ -1,6 +1,7 @@
 package com.mijninzet.projectteamdrie.controller;
 
 import com.mijninzet.projectteamdrie.model.entity.Task;
+import com.mijninzet.projectteamdrie.repository.TaskApplicationRepository;
 import com.mijninzet.projectteamdrie.repository.TaskRepository;
 import com.mijninzet.projectteamdrie.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class TaskController {
     private TaskRepository taskRepository;
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private TaskApplicationRepository taskApplicationRepository;
+
 
     @RequestMapping(value = "/showTasks")
     public String makeVacancyList(Model model) {
@@ -52,6 +56,7 @@ public class TaskController {
 
     @GetMapping("task/deleteTask")
     public String deleteSubject(@RequestParam("taskId") int taskId, Model model) {
+        taskApplicationRepository.deleteTaskEnTaskApplication(taskId);
         taskService.deleteTask(taskId);
         return ("redirect:/taskList");
     }
